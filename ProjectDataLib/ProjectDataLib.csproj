@@ -16,6 +16,10 @@
     <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\ProjectDataLib.ViewContracts\Interfaces\ITreeViewModel.cs" Link="Interfaces\ITreeViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="5.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
