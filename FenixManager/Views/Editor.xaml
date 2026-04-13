@@ -9,33 +9,34 @@
              d:DesignHeight="300" d:DesignWidth="400">
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
-
-            <Button Click="saveFileClick" />
-            <Button Command="Cut">
-                <Image Source="/Images/Cut.png" Height="16" />
+            <Button Click="saveFileClick" ToolTip="Save">
+                <TextBlock Text="💾" FontSize="14" VerticalAlignment="Center" />
             </Button>
-            <Button Command="Copy">
-                <Image Source="/Images/Copy.png" Height="16" />
+            <Button Command="Cut" ToolTip="Cut">
+                <TextBlock Text="✂️" FontSize="14" VerticalAlignment="Center" />
             </Button>
-            <Button Command="Paste">
-                <Image Source="/Images/Paste.png" Height="16" />
+            <Button Command="Copy" ToolTip="Copy">
+                <TextBlock Text="📋" FontSize="14" VerticalAlignment="Center" />
             </Button>
-            <Button Command="Delete">
-                <Image Source="/Images/Delete.png" Height="16" />
+            <Button Command="Paste" ToolTip="Paste">
+                <TextBlock Text="📌" FontSize="14" VerticalAlignment="Center" />
             </Button>
-            <Separator />
-            <Button Click="Button_Click">
-                <Image Source="/Images/search-icon.png" Height="16" />
-            </Button>
-            <Button Command="Undo">
-                <Image Source="/Images/Undo.png" Height="16" />
-            </Button>
-            <Button Command="Redo">
-                <Image Source="/Images/Redo.png" Height="16" />
+            <Button Command="Delete" ToolTip="Delete">
+                <TextBlock Text="🗑️" FontSize="14" VerticalAlignment="Center" />
             </Button>
             <Separator />
-            <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}">
-                <Image Source="/Images/WordWrap.png" Height="16" />
+            <Button Click="Button_Click" ToolTip="Search">
+                <TextBlock Text="🔍" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Button Command="Undo" ToolTip="Undo">
+                <TextBlock Text="↩️" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Button Command="Redo" ToolTip="Redo">
+                <TextBlock Text="↪️" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Separator />
+            <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}" ToolTip="Word Wrap">
+                <TextBlock Text="↵" FontSize="14" VerticalAlignment="Center" />
             </CheckBox>
             <CheckBox IsChecked="{Binding ElementName=textEditor,Path=ShowLineNumbers}">
                 <TextBlock Width="16" TextAlignment="Center">#</TextBlock>

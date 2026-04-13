@@ -19,7 +19,7 @@
 
         <HierarchicalDataTemplate x:Key="Lev1" ItemsSource="{Binding Path=(PrCon:ITreeViewModel.Children)}">
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding Converter={StaticResource ImgConv}}"  Width="20" Height="20" />
+                <TextBlock Text="{Binding Converter={StaticResource ImgConv}}" FontSize="16" VerticalAlignment="Center" Margin="0,0,2,0" />
                 <Rectangle Width="10" Height="10" Margin="5,0,0,0" Fill="{Binding Path=(PrCon:ITreeViewModel.Clr) , Mode=TwoWay,Converter= {StaticResource Clr1}}" />
                 <TextBlock Text="{Binding Path=(PrCon:ITreeViewModel.Name) , Mode=TwoWay}"  Margin="8,5,5,5" />
                 <TextBlock Margin="8,5,5,5">

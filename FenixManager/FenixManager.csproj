@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
@@ -80,107 +80,7 @@
     <ProjectReference Include="..\S7-300-400 Ethernet\S7-300-400 Ethernet.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Copy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Cut.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Open.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Paste.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Redo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\search-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Undo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\WordWrap.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="soft.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\New.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\TableView.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ChartView.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\CommView.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Editor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Start.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ShowHelp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\About.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\Project.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\HttpServer.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\JsFile.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\HtmlFile.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\IcoFile.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\JpgFile.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\Scripts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\CsFile.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\IntTagFol.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\Connection.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\Device.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\Tag.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\IntTag.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\StartAll.png" />
-    <Resource Include="Images\StopAll.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -196,18 +96,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\File.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\Folder.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\Database.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TreeImage\Fenix.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AvalonEdit" Version="6.3.1.120" />

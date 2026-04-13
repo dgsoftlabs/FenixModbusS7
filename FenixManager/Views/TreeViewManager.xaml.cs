@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using io = System.IO;
 
 namespace FenixWPF
@@ -30,30 +29,30 @@ namespace FenixWPF
     internal class ImageConverter : IValueConverter
     {
         private static readonly Dictionary<Type, string> ImageMappings = new Dictionary<Type, string>()
-            {
-                { typeof(Project), "/TreeImage/Project.png" },
-                { typeof(WebServer), "/TreeImage/HttpServer.ico" },
-                { typeof(CusFile), "/TreeImage/Folder.ico" },
-                { typeof(DatabaseModel), "/TreeImage/Database.ico" },
-                { typeof(ScriptsDriver), "/TreeImage/Scripts.png" },
-                { typeof(ScriptFile), "/TreeImage/CsFile.ico" },
-                { typeof(InternalTagsDriver), "/TreeImage/IntTagFol.png" },
-                { typeof(InTag), "/TreeImage/IntTag.png" },
-                { typeof(Connection), "/TreeImage/Connection.png" },
-                { typeof(Device), "/TreeImage/Device.ico" },
-                { typeof(Tag), "/TreeImage/Tag.ico" }
-            };
+        {
+            { typeof(Project),            "📁" },
+            { typeof(WebServer),          "🌐" },
+            { typeof(CusFile),            "📂" },
+            { typeof(DatabaseModel),      "🗄️" },
+            { typeof(ScriptsDriver),      "📋" },
+            { typeof(ScriptFile),         "📄" },
+            { typeof(InternalTagsDriver), "🏷️" },
+            { typeof(InTag),              "🔖" },
+            { typeof(Connection),         "🔌" },
+            { typeof(Device),             "💻" },
+            { typeof(Tag),                "🏷️" }
+        };
 
         private static readonly Dictionary<string, string> ExtensionMappings = new Dictionary<string, string>()
-            {
-                { ".html", "/TreeImage/HtmlFile.ico" },
-                { ".js", "/TreeImage/JsFile.ico" },
-                { ".ico", "/TreeImage/IcoFile.ico" },
-                { ".jpg", "/TreeImage/JpgFile.ico" }
-            };
+        {
+            { ".html", "🌐" },
+            { ".js",   "📜" },
+            { ".ico",  "🖼️" },
+            { ".jpg",  "🖼️" }
+        };
 
         /// <summary>
-        /// Converts the specified value to an image.
+        /// Converts the specified value to an emoji string.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <param name="targetType">The type of the target property.</param>
@@ -64,26 +63,20 @@ namespace FenixWPF
         {
             if (value is CusFile file)
             {
-                if (file.IsFile && ExtensionMappings.TryGetValue(io.Path.GetExtension(file.FullName), out string extension))
-                {
-                    return new BitmapImage(new Uri(extension, UriKind.Relative));
-                }
+                if (file.IsFile && ExtensionMappings.TryGetValue(io.Path.GetExtension(file.FullName), out string ext))
+                    return ext;
                 else
-                {
-                    return new BitmapImage(new Uri("/TreeImage/Folder.ico", UriKind.Relative));
-                }
+                    return "📂";
             }
 
-            if (ImageMappings.TryGetValue(value.GetType(), out string imagePath))
-            {
-                return new BitmapImage(new Uri(imagePath, UriKind.Relative));
-            }
+            if (ImageMappings.TryGetValue(value.GetType(), out string emoji))
+                return emoji;
 
-            return new BitmapImage(new Uri("/TreeImage/File.ico", UriKind.Relative));
+            return "📄";
         }
 
         /// <summary>
-        /// Converts the specified image back to the original value.
+        /// Converts the specified value back to the original value.
         /// </summary>
         /// <param name="value">The image value to convert back.</param>
         /// <param name="targetType">The type of the target property.</param>

@@ -232,182 +232,48 @@
         </Menu>
 
         <ToolBar Grid.Row="1">
-            <Button Click="New0_Click" IsEnabled="{Binding mNew}">
-                <Image Source="/Images/New.png" Width="16" Height="16" ToolTip="New">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
+            <Button Click="New0_Click" IsEnabled="{Binding mNew}" ToolTip="New">
+                <TextBlock Text="📄" FontSize="14" VerticalAlignment="Center" />
             </Button>
-
-            <Button Click="Open0_Click" IsEnabled="{Binding mOpen}">
-                <Image Source="/Images/Open.png" Width="16" Height="16" ToolTip="Open">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
+            <Button Click="Open0_Click" IsEnabled="{Binding mOpen}" ToolTip="Open">
+                <TextBlock Text="📂" FontSize="14" VerticalAlignment="Center" />
             </Button>
-
-            <Button  Click="Save0_Click" IsEnabled="{Binding mSave}">
-                <Image Source="/Images/Save.png" Width="16" Height="16" ToolTip="Save">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>
-
-            <Separator />
-
-            <Button  Click="TableView0_Click" IsEnabled="{Binding mTable}">
-                <Image Source="/Images/TableView.png" Width="16" Height="16" ToolTip="TableView">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>
-
-            <Button  Click="ChartView0_Click" IsEnabled="{Binding mChart}">
-                <Image Source="/Images/ChartView.png" Width="16" Height="16" ToolTip="ChartView">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>
-
-            <Button  Click="CommView0_Click" IsEnabled="{Binding mCommView}">
-                <Image Source="/Images/CommView.png" Width="16" Height="16" ToolTip="CommunicationView" />
-            </Button>
-
-            <Button  Click="Editor0_Click" IsEnabled="{Binding mEditor}">
-                <Image Source="/Images/Editor.png" Width="16" Height="16" ToolTip="Editor">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>
-
-            <Separator />
-
-            <Button Click="Start0_Click" IsEnabled="{Binding mStart}">
-                <Image Source="/Images/Start.png" Width="16" Height="16" ToolTip="Start Selected Driver">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>
-
-            <Button  Click="Stop0_Click" IsEnabled="{Binding mStop}">
-                <Image Source="/Images/Stop.png" Width="16" Height="16" ToolTip="Stop Selected Driver">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>
-
-            <Separator />
-            <Button Click="StartAll_Click" IsEnabled="{Binding mStartAll}">
-                <Image Source="/Images/StartAll.png" Width="16" Height="16" ToolTip="Start All Driver">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>
-
-            <Button  Click="StopAll_Click" IsEnabled="{Binding mStopAll}">
-                <Image Source="/Images/StopAll.png" Width="16" Height="16" ToolTip="Stop All Driver">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
+            <Button Click="Save0_Click" IsEnabled="{Binding mSave}" ToolTip="Save">
+                <TextBlock Text="💾" FontSize="14" VerticalAlignment="Center" />
             </Button>
             <Separator />
-
-            <Button  Click="ShHelp0_Click" IsEnabled="{Binding mViewHelp}">
-                <Image Source="/Images/ShowHelp.png" Width="16" Height="16" ToolTip="Help">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
+            <Button Click="TableView0_Click" IsEnabled="{Binding mTable}" ToolTip="TableView">
+                <TextBlock Text="📊" FontSize="14" VerticalAlignment="Center" />
             </Button>
-
-            <Button  Click="About0_Click" IsEnabled="{Binding mAbout}">
-                <Image Source="/Images/About.png" Width="16" Height="16" ToolTip="About">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
+            <Button Click="ChartView0_Click" IsEnabled="{Binding mChart}" ToolTip="ChartView">
+                <TextBlock Text="📈" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Button Click="CommView0_Click" IsEnabled="{Binding mCommView}" ToolTip="CommunicationView">
+                <TextBlock Text="📡" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Button Click="Editor0_Click" IsEnabled="{Binding mEditor}" ToolTip="Editor">
+                <TextBlock Text="✏️" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Separator />
+            <Button Click="Start0_Click" IsEnabled="{Binding mStart}" ToolTip="Start Selected Driver">
+                <TextBlock Text="▶️" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Button Click="Stop0_Click" IsEnabled="{Binding mStop}" ToolTip="Stop Selected Driver">
+                <TextBlock Text="⏹️" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Separator />
+            <Button Click="StartAll_Click" IsEnabled="{Binding mStartAll}" ToolTip="Start All Drivers">
+                <TextBlock Text="⏩" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Button Click="StopAll_Click" IsEnabled="{Binding mStopAll}" ToolTip="Stop All Drivers">
+                <TextBlock Text="⏸️" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Separator />
+            <Button Click="ShHelp0_Click" IsEnabled="{Binding mViewHelp}" ToolTip="Help">
+                <TextBlock Text="❓" FontSize="14" VerticalAlignment="Center" />
+            </Button>
+            <Button Click="About0_Click" IsEnabled="{Binding mAbout}" ToolTip="About">
+                <TextBlock Text="ℹ️" FontSize="14" VerticalAlignment="Center" />
             </Button>
         </ToolBar>
 
