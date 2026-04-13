@@ -1,4 +1,5 @@
-﻿using CSScriptLibrary;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -125,9 +126,51 @@ namespace ProjectDataLib
             Timers_.Add(new CustomTimer());
 
             Enable_ = true;
+        }
 
-            CSScript.Evaluator.ReferenceAssembly(Assembly.GetAssembly(typeof(ProjectDataLib.Project)));
-            CSScript.Evaluator.ReferenceAssembly(Assembly.GetAssembly(typeof(System.Windows.Forms.MessageBox)));
+        private dynamic CompileAndLoadScript(string code)
+        {
+            var references = new List<MetadataReference>
+            {
+                MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(ProjectDataLib.Project).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(System.Windows.Forms.MessageBox).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(System.Linq.Enumerable).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(System.Collections.Generic.List<>).Assembly.Location),
+            };
+
+            // Add runtime assemblies
+            foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(asm.Location))
+                        references.Add(MetadataReference.CreateFromFile(asm.Location));
+                }
+                catch { }
+            }
+
+            var syntaxTree = CSharpSyntaxTree.ParseText(code);
+            var compilation = CSharpCompilation.Create(
+                "DynamicScript_" + Guid.NewGuid().ToString("N"),
+                new[] { syntaxTree },
+                references,
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
+
+            using var ms = new MemoryStream();
+            var result = compilation.Emit(ms);
+
+            if (!result.Success)
+            {
+                var errors = string.Join(Environment.NewLine,
+                    result.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error).Select(d => d.ToString()));
+                throw new InvalidOperationException("Script compilation failed:" + Environment.NewLine + errors);
+            }
+
+            ms.Seek(0, SeekOrigin.Begin);
+            var assembly = Assembly.Load(ms.ToArray());
+            var type = assembly.GetTypes().FirstOrDefault();
+            return type != null ? Activator.CreateInstance(type) : null;
         }
 
         public ScriptsDriver()
@@ -195,11 +238,6 @@ namespace ProjectDataLib
                 if (!Enable_)
                     return false;
 
-                CSScript.Evaluator.Reset();
-                CSScript.Evaluator.ReferenceAssembly(Assembly.GetAssembly(typeof(ProjectDataLib.Project)));
-                CSScript.Evaluator.ReferenceAssembly(Assembly.GetAssembly(typeof(System.Windows.Forms.MessageBox)));
-                CSScript.EvaluatorConfig.Engine = EvaluatorEngine.Mono;
-
                 scripts.Clear();
                 BckTimers.Clear();
                 foreach (ScriptFile f in Proj_.ScriptFileList)
@@ -207,12 +245,16 @@ namespace ProjectDataLib
                     if (f.Enable && !string.IsNullOrEmpty(f.TimerName))
                     {
                         string code = File.ReadAllText(f.FilePath);
-                        scripts.Add(CSScript.Evaluator.LoadCode(code));
-                        scripts.Last().Init(Proj_, f.Name);
-                        scripts.Last().Start();
+                        var script = CompileAndLoadScript(code);
+                        if (script != null)
+                        {
+                            scripts.Add(script);
+                            scripts.Last().Init(Proj_, f.Name);
+                            scripts.Last().Start();
 
-                        CustomTimer ti = Proj_.ScriptEng.Timers.Find(x => x.Name == f.TimerName);
-                        BckTimers.Add(new System.Threading.Timer(TimerTask, (object)scripts.Last(), ti.Delay, ti.Time));
+                            CustomTimer ti = Proj_.ScriptEng.Timers.Find(x => x.Name == f.TimerName);
+                            BckTimers.Add(new System.Threading.Timer(TimerTask, (object)scripts.Last(), ti.Delay, ti.Time));
+                        }
                     }
                 }
 
@@ -288,7 +330,7 @@ namespace ProjectDataLib
                 }
 
                 BckTimers.Clear();
-                CSScript.Evaluator.Reset();
+                scripts.Clear();
                 isLive = false;
                 return true;
             }

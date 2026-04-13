@@ -9,9 +9,17 @@ namespace ProjectDataLib
     {
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            IDriverModel idrv = ((Tag)context.Instance).idrv;
+            if (context?.Instance is not Tag tag)
+                return new StandardValuesCollection(Array.Empty<string>());
 
-            return new StandardValuesCollection(idrv.MemoryAreaInf.Select(x => x.Name).ToArray());
+            IDriverModel idrv = tag.idrv;
+            if (idrv?.MemoryAreaInf == null)
+                return new StandardValuesCollection(Array.Empty<string>());
+
+            return new StandardValuesCollection(idrv.MemoryAreaInf
+                .Where(x => x != null && !string.IsNullOrWhiteSpace(x.Name))
+                .Select(x => x.Name)
+                .ToArray());
         }
 
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)

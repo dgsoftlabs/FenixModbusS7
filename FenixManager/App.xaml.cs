@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Drawing;
 using System.IO;
@@ -43,7 +43,7 @@ namespace FenixWPF
 
             File.WriteAllText(Environment.CurrentDirectory + "\\Logs\\" + DateTime.Now.ToString("MM_dd_yy_H_mm_ss") + ".txt", e.StackTrace);
 
-            if (e.Source == "Xceed.Wpf.AvalonDock")
+            if (e.Source == "Xceed.Wpf.AvalonDock" || e.Source == "AvalonDock")
             {
                 string strp = (string)Registry.GetValue("HKEY_CURRENT_USER\\Software\\Fenix", "LastPath", "");
                 var layoutPath = Path.GetDirectoryName(strp) + "\\Layout_.xml";

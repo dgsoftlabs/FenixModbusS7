@@ -11,7 +11,7 @@ namespace ProjectDataLib
         { }
 
         public XMLVersion(Version c)
-        { ver_ = c; }
+        { ver_ = c ?? new Version(); }
 
         public Version ToVersion()
         {
@@ -25,23 +25,23 @@ namespace ProjectDataLib
 
         public static implicit operator Version(XMLVersion x)
         {
-            return x.ToVersion();
+            return x?.ToVersion() ?? new Version();
         }
 
         public static implicit operator XMLVersion(Version c)
         {
-            return new XMLVersion(c);
+            return c == null ? new XMLVersion(new Version()) : new XMLVersion(c);
         }
 
         [XmlAttribute]
         public string Ver
         {
-            get { return ver_.ToString(); }
+            get { return (ver_ ?? new Version()).ToString(); }
             set
             {
                 try
                 {
-                    ver_ = new Version(value);
+                    ver_ = string.IsNullOrWhiteSpace(value) ? new Version() : new Version(value);
                 }
                 catch (Exception)
                 {

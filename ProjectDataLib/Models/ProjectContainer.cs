@@ -5,8 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -18,7 +16,6 @@ using System.Xml;
 namespace ProjectDataLib
 {
 
-    [Synchronization]
     public class ProjectContainer : ITreeViewModel
     {
         #region Fields
@@ -226,45 +223,25 @@ namespace ProjectDataLib
                 if (!File.Exists(path))
                     return false;
 
-                Project buff = null;
-                Boolean IsXml = false;
-
-                #region PSF (BINARY)
-
-                if (Path.GetExtension(path).Contains("psf"))
+                var extension = Path.GetExtension(path);
+                if (!string.Equals(extension, ".psx", StringComparison.OrdinalIgnoreCase))
                 {
-                    BinaryFormatter binForm = new BinaryFormatter();
-                    FileStream fileStr = new FileStream(path, FileMode.OpenOrCreate);
-                    buff = (Project)binForm.Deserialize(fileStr);
-                    fileStr.Close();
-                    path = Path.ChangeExtension(path, "psx");
+                    throw new NotSupportedException(
+                        $"Unsupported project format '{extension}'. Only '.psx' is supported in .NET 10.");
                 }
 
-                #endregion PSF (BINARY)
-
-                #region PSX (XML)
-
-                else if (Path.GetExtension(path).Contains("psx"))
+                Project buff;
+                var xmlSer = new XmlSerializer(typeof(Project));
+                using (Stream fsream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
-                    XmlSerializer xmlSer = new XmlSerializer(typeof(Project));
-                    using (Stream fsream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                    {
-                        buff = (Project)xmlSer.Deserialize(fsream);
-                    }
-
-                    IsXml = true;
+                    buff = (Project)xmlSer.Deserialize(fsream);
                 }
-
-                #endregion PSX (XML)
 
                 buff.path = path;
                 buff.PrCon = this;
 
-                if (IsXml)
-                {
-                    buff.OnDeserializedXML();
-                    buff.ChartConf.OnDeserializedXML();
-                }
+                buff.OnDeserializedXML();
+                buff.ChartConf.OnDeserializedXML();
 
                 foreach (Project pr in projectList)
                     if (pr.objId.Equals(buff.objId))
@@ -316,8 +293,7 @@ namespace ProjectDataLib
 
                 foreach (Connection cn in buff.connectionList)
                 {
-                    if (IsXml)
-                        cn.OnDeserializedXML();
+                    cn.OnDeserializedXML();
 
                     cn.gConf = gConf;
 
@@ -335,8 +311,7 @@ namespace ProjectDataLib
                         tg.PrCon = this;
                         tg.Proj = buff;
 
-                        if (IsXml)
-                            tg.OnDeserializedXml();
+                        tg.OnDeserializedXml();
                     }
                 }
 
@@ -392,6 +367,13 @@ namespace ProjectDataLib
         {
             try
             {
+                var extension = Path.GetExtension(path);
+                if (!string.Equals(extension, ".psx", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new NotSupportedException(
+                        $"Unsupported project format '{extension}'. Only '.psx' is supported in .NET 10.");
+                }
+
                 proj.modMarks = false;
                 proj.modifeTime = DateTime.Now;
 

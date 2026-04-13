@@ -1,10 +1,14 @@
-﻿using Newtonsoft.Json;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -132,7 +136,7 @@ namespace ProjectDataLib
 
         [Category("02 Header"), DisplayName("Version"), Description("Version of files.")]
         [ComVisible(false)]
-        [XmlElement(ElementName = "FileVersion", Type = typeof(XMLVersion))]
+        [XmlIgnore]
         public Version fileVer
         {
             get { return fileVer_; }
@@ -142,6 +146,13 @@ namespace ProjectDataLib
                 propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(fileVer)));
                 modificationApear();
             }
+        }
+
+        [XmlElement(ElementName = "FileVersion")]
+        public XMLVersion fileVerXml
+        {
+            get => fileVer_;
+            set => fileVer_ = value;
         }
 
         private string autor_;
@@ -301,10 +312,19 @@ namespace ProjectDataLib
             set { PrCon_ = value; }
         }
 
-        [ComVisible(false)]
         [field: NonSerialized]
+        private LegacyScriptCompat scriptCon_;
+
+        [ComVisible(false)]
         [XmlIgnore]
-        public MSScriptControl.ScriptControl ScriptCon;
+        public dynamic ScriptCon
+        {
+            get
+            {
+                scriptCon_ ??= new LegacyScriptCompat(this);
+                return scriptCon_;
+            }
+        }
 
         private List<InFile> FileList_;
 
@@ -453,10 +473,6 @@ namespace ProjectDataLib
 
             this.PrCon_ = prcn;
 
-            ScriptCon = new MSScriptControl.ScriptControl();
-            ScriptCon.Language = "VBScript";
-            ScriptCon.AddObject("Project", this, true);
-
             WebServer1_ = new WebServer(null);
 
             ScriptFileList_ = new List<ScriptFile>();
@@ -518,10 +534,6 @@ namespace ProjectDataLib
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            ScriptCon = new MSScriptControl.ScriptControl();
-            ScriptCon.Language = "VBScript";
-            ScriptCon.AddObject("Project", this, true);
-
             InternalTags_.Proj = this;
 
             if (string.IsNullOrEmpty(longDT))
@@ -529,6 +541,8 @@ namespace ProjectDataLib
 
             if (ScriptEng_ == null)
                 ScriptEng_ = new ScriptsDriver(this);
+
+            ScriptEng_.Proj = this;
 
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
@@ -584,10 +598,6 @@ namespace ProjectDataLib
 
         public void OnDeserializedXML()
         {
-            ScriptCon = new MSScriptControl.ScriptControl();
-            ScriptCon.Language = "VBScript";
-            ScriptCon.AddObject("Project", this, true);
-
             InternalTags_.Proj = this;
 
             if (string.IsNullOrEmpty(longDT))
@@ -595,6 +605,8 @@ namespace ProjectDataLib
 
             if (ScriptEng_ == null)
                 ScriptEng_ = new ScriptsDriver(this);
+
+            ScriptEng_.Proj = this;
 
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
@@ -726,7 +738,8 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)]
+        [ComVisible(true)
+        ]
         public Object SetTag(string s, object val)
         {
             try
@@ -942,5 +955,57 @@ namespace ProjectDataLib
         #endregion IDisposable Support
 
         #endregion Scripts for Web
+
+        [Serializable]
+        public class LegacyScriptCompat
+        {
+            private readonly Project project;
+            private readonly ConcurrentDictionary<string, ScriptRunner<object>> csharpScripts = new ConcurrentDictionary<string, ScriptRunner<object>>();
+
+            private static readonly ScriptOptions scriptOptions = ScriptOptions.Default
+                .AddReferences(typeof(object).Assembly, typeof(Project).Assembly)
+                .AddImports("System", "System.Math", "ProjectDataLib");
+
+            public LegacyScriptCompat(Project project)
+            {
+                this.project = project;
+            }
+
+            public object Eval(string expression)
+            {
+                if (string.IsNullOrWhiteSpace(expression))
+                    return null;
+
+                string expr = expression.Trim().Replace(',', '.');
+
+                try
+                {
+                    return EvalAsDataExpression(expr);
+                }
+                catch
+                {
+                    return EvalAsCSharp(expr);
+                }
+            }
+
+            private static object EvalAsDataExpression(string expr)
+            {
+                var table = new DataTable { Locale = CultureInfo.InvariantCulture };
+                return table.Compute(expr, string.Empty);
+            }
+
+            private object EvalAsCSharp(string expr)
+            {
+                var runner = csharpScripts.GetOrAdd(expr, code =>
+                    CSharpScript.Create<object>(code, scriptOptions, typeof(ScriptGlobals)).CreateDelegate());
+
+                return runner(new ScriptGlobals { Project = project }).GetAwaiter().GetResult();
+            }
+
+            private class ScriptGlobals
+            {
+                public Project Project { get; set; }
+            }
+        }
     }
 }

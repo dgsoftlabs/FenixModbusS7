@@ -1,25 +1,21 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SQLite;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Data.Common;
+using ProjectDataLib.Data;
 
 namespace ProjectDataLib
 {
     [Serializable]
-    [Synchronization]
-    public class DatabaseModel : ContextBoundObject, ITreeViewModel, INotifyPropertyChanged
+    public class DatabaseModel : ITreeViewModel, INotifyPropertyChanged
     {
         [field: NonSerialized]
         private PropertyChangedEventHandler propChanged;
@@ -80,6 +76,9 @@ namespace ProjectDataLib
             set { }
         }
 
+        [Browsable(false), XmlIgnore()]
+        private ITagRepository _repository;
+
         public DatabaseModel()
         {
         }
@@ -89,30 +88,29 @@ namespace ProjectDataLib
             PrCon = prCon;
             Pr = pr;
 
-            DbConnection = new SQLiteConnection("Data Source=" + Path.GetDirectoryName(Pr.path) + PrCon.Database + ";Version=3;");
+            InitializeDatabaseAsync().GetAwaiter().GetResult();
+        }
 
-            if (!File.Exists(Path.GetDirectoryName(Pr.path) + PrCon.Database))
+        private async Task InitializeDatabaseAsync()
+        {
+            try
             {
-                if (!Directory.Exists(Path.GetDirectoryName(Pr.path) + "\\" + "Database"))
-                    Directory.CreateDirectory(Path.GetDirectoryName(Pr.path) + "\\" + "Database");
-
-                SQLiteConnection.CreateFile(Path.GetDirectoryName(Pr.path) + PrCon.Database);
-                DbConnection.Open();
+                var dbPath = Path.GetDirectoryName(Pr.path) + PrCon.Database;
+                
+                _repository = new TagRepository();
+                await _repository.InitializeAsync(dbPath);
 
                 Pr.Db.IsLive = false;
 
-                string sql = "create table tags (name varchar(100), stamp datetime, value real)";
-                SQLiteCommand command = new SQLiteCommand(sql, DbConnection);
-                command.ExecuteNonQuery();
-                DbConnection.Close();
+                ((ITableView)Pr).Children.CollectionChanged += ITags_CollectionChanged;
+
+                foreach (ITag tg in ((ITableView)Pr).Children)
+                    ((INotifyPropertyChanged)tg).PropertyChanged += ITag_PropertyChanged;
             }
-
-            DbConnection.Open();
-
-            ((ITableView)Pr).Children.CollectionChanged += ITags_CollectionChanged;
-
-            foreach (ITag tg in ((ITableView)Pr).Children)
-                ((INotifyPropertyChanged)tg).PropertyChanged += ITag_PropertyChanged;
+            catch (Exception ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(ex));
+            }
         }
 
         private void ITags_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -124,7 +122,7 @@ namespace ProjectDataLib
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
                 ((INotifyPropertyChanged)e.OldItems[0]).PropertyChanged -= ITag_PropertyChanged;
-                removeDataITagElement(((ITag)e.OldItems[0]).Name);
+                RemoveDataITagElementAsync(((ITag)e.OldItems[0]).Name).GetAwaiter().GetResult();
             }
         }
 
@@ -136,120 +134,103 @@ namespace ProjectDataLib
 
                 if (tg.TypeData_ == TypeData.CHAR)
                 {
-                    addDataElement(tg.Name, Char.GetNumericValue((char)tg.Value).ToString(), DateTime.Now);
+                    AddDataElementAsync(tg.Name, Char.GetNumericValue((char)tg.Value).ToString(), DateTime.Now).GetAwaiter().GetResult();
                 }
                 else if (tg.TypeData_ == TypeData.BIT)
                 {
-                    addDataElement(tg.Name, ((bool)tg.Value) ? "1.0" : "0.0", DateTime.Now);
+                    AddDataElementAsync(tg.Name, ((bool)tg.Value) ? "1.0" : "0.0", DateTime.Now).GetAwaiter().GetResult();
                 }
                 else
                 {
-                    addDataElement(tg.Name, tg.Value.ToString(), DateTime.Now);
+                    AddDataElementAsync(tg.Name, tg.Value.ToString(), DateTime.Now).GetAwaiter().GetResult();
                 }
             }
         }
 
-        private void addDataElement(string name, string value, DateTime tm)
+        private async Task AddDataElementAsync(string name, string value, DateTime tm)
         {
             try
             {
-                if (DbConnection != null)
+                if (_repository != null && double.TryParse(value.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out var numValue))
                 {
-                    string sql1 = String.Format("insert into tags (name, stamp, value) values ('{0}', '{1}' , {2:0.00})", name, tm.ToString("yyyy-MM-dd HH:mm:ss.fff"), value.ToString().Replace(',', '.'));
-                    SQLiteCommand command1 = new SQLiteCommand(sql1, DbConnection);
-                    command1.ExecuteNonQuery();
+                    await _repository.AddTagAsync(name, numValue, tm);
                 }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(ex));
             }
         }
 
-        private void removeDataITagElement(string name)
+        private async Task RemoveDataITagElementAsync(string name)
         {
             try
             {
-                if (DbConnection != null)
+                if (_repository != null)
                 {
-                    string sql1 = String.Format("delete from tags where name='{0}'", name);
-                    SQLiteCommand command1 = new SQLiteCommand(sql1, DbConnection);
-                    command1.ExecuteNonQuery();
+                    await _repository.RemoveTagByNameAsync(name);
                 }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(ex));
             }
         }
 
         public void Reset()
         {
-            if (DbConnection != null)
+            if (_repository != null)
             {
                 if (MessageBox.Show("Do you want to remove all records from database?",
                                     "Database",
                                       MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    string sql1 = "delete from tags";
-                    SQLiteCommand command1 = new SQLiteCommand(sql1, DbConnection);
-                    command1.ExecuteNonQuery();
-
+                    ResetDatabaseAsync().GetAwaiter().GetResult();
                     MessageBox.Show("All records removed!");
                 }
             }
         }
 
-        public DataTable GetAll()
+        private async Task ResetDatabaseAsync()
         {
-            string sql = "select * from tags";
-            SQLiteCommand command = new SQLiteCommand(sql, DbConnection);
-            SQLiteDataReader reader = command.ExecuteReader();
+            await _repository.ClearAllTagsAsync();
+        }
 
-            DataTable tb = new DataTable();
-            tb.Load(reader);
+        public List<TagDTO> GetAll()
+        {
+            return GetAllAsync().GetAwaiter().GetResult();
+        }
 
-            return tb;
+        public async Task<List<TagDTO>> GetAllAsync()
+        {
+            if (_repository == null)
+                return new List<TagDTO>();
+            
+            return await _repository.GetAllTagsAsync();
         }
 
         public ObservableCollection<TagDTO> GetAllObservableCollection()
         {
-            ObservableCollection<TagDTO> observableCollection = new ObservableCollection<TagDTO>();
-            string sql = "select * from tags";
-            SQLiteCommand command = new SQLiteCommand(sql, DbConnection);
-            SQLiteDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                TagDTO tag = new TagDTO()
-                {
-                    Name = reader["name"].ToString(),
-                    Stamp = DateTime.Parse(reader["stamp"].ToString()),
-                    Value = double.Parse(reader["value"].ToString())
-                };
-
-                observableCollection.Add(tag);
-            }
-
-            return observableCollection;
+            var tags = GetAllAsync().GetAwaiter().GetResult();
+            return new ObservableCollection<TagDTO>(tags);
         }
-
-
 
         public DatabaseValues GetRange(ITag tg, DateTime from, DateTime to)
         {
-            string sql = String.Format("select * from tags where stamp between '{0}' and '{1}' and name='{2}'", from.ToString("yyyy-MM-dd HH:mm:ss.fff"), to.ToString("yyyy-MM-dd HH:mm:ss.fff"), tg.Name);
-            SQLiteCommand command = new SQLiteCommand(sql, DbConnection);
-            SQLiteDataReader reader = command.ExecuteReader();
+            return GetRangeAsync(tg, from, to).GetAwaiter().GetResult();
+        }
 
-            DatabaseValues dbVls = new DatabaseValues();
+        public async Task<DatabaseValues> GetRangeAsync(ITag tg, DateTime from, DateTime to)
+        {
+            var tags = await _repository.GetTagsByNameAsync(tg.Name, from, to, descending: false);
+            var dbVls = new DatabaseValues();
 
-            while (reader.Read())
+            foreach (var tagDto in tags)
             {
-                double dtCurr = DateTime.ParseExact(reader.GetString(1), "yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture).ToOADate();
-                double value = Convert.ToDouble(reader["value"].ToString());
+                double dtCurr = tagDto.Stamp.ToOADate();
+                double value = tagDto.Value;
 
-                Boolean lastPoint = false;
+                bool lastPoint = false;
                 if (tg.TypeData_ == TypeData.BIT)
                 {
                     if (dbVls.ValPts.Count != 0)
@@ -332,111 +313,31 @@ namespace ProjectDataLib
             }
         }
 
-        [Browsable(false), XmlIgnore()]
-        private SQLiteConnection DbConnection;
-
         public void OnDeserializedXML()
         {
-            DbConnection = new SQLiteConnection("Data Source=" + Path.GetDirectoryName(Pr.path) + PrCon.Database + ";Version=3;");
-
-            if (!File.Exists(Path.GetDirectoryName(Pr.path) + PrCon.Database))
-            {
-                if (!Directory.Exists(Path.GetDirectoryName(Pr.path) + "\\" + "Database"))
-                    Directory.CreateDirectory(Path.GetDirectoryName(Pr.path) + "\\" + "Database");
-
-                SQLiteConnection.CreateFile(Path.GetDirectoryName(Pr.path) + PrCon.Database);
-                DbConnection.Open();
-
-                Pr.Db.IsLive = false;
-
-                string sql = "create table tags (name varchar(100), stamp datetime, value real)";
-                SQLiteCommand command = new SQLiteCommand(sql, DbConnection);
-                command.ExecuteNonQuery();
-                DbConnection.Close();
-            }
-
-            DbConnection.Open();
-
-            ((ITableView)Pr).Children.CollectionChanged += ITags_CollectionChanged;
-
-            foreach (ITag tg in ((ITableView)Pr).Children)
-                ((INotifyPropertyChanged)tg).PropertyChanged += ITag_PropertyChanged;
+            InitializeDatabaseAsync().GetAwaiter().GetResult();
         }
 
         public ObservableCollection<TagDTO> GetDataByStamp(DateTime from, DateTime to, bool descending = true)
         {
-            ObservableCollection<TagDTO> observableCollection = new ObservableCollection<TagDTO>();
-            string order = descending ? "DESC" : "ASC";
-            string sql = $"SELECT * FROM tags WHERE stamp BETWEEN @from AND @to ORDER BY stamp {order}";
-            SQLiteCommand command = new SQLiteCommand(sql, DbConnection);
-            command.Parameters.AddWithValue("@from", from.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-            command.Parameters.AddWithValue("@to", to.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-            SQLiteDataReader reader = command.ExecuteReader();
+            var tags = GetDataByStampAsync(from, to, descending).GetAwaiter().GetResult();
+            return new ObservableCollection<TagDTO>(tags);
+        }
 
-            while (reader.Read())
-            {
-                TagDTO tag = new TagDTO()
-                {
-                    Name = reader["name"].ToString(),
-                    Stamp = DateTime.Parse(reader["stamp"].ToString()),
-                    Value = double.Parse(reader["value"].ToString())
-                };
+        public async Task<List<TagDTO>> GetDataByStampAsync(DateTime from, DateTime to, bool descending = true)
+        {
+            if (_repository == null)
+                return new List<TagDTO>();
 
-                observableCollection.Add(tag);
-            }
-
-            return observableCollection;
+            return await _repository.GetTagsByStampAsync(from, to, descending);
         }
 
         public async Task<List<TagDTO>> GetAllTagsAsync(bool descending = true)
         {
-            List<TagDTO> tagList = new List<TagDTO>();
-            string order = descending ? "DESC" : "ASC";
-            string sql = $"SELECT * FROM tags ORDER BY stamp {order}";
-            SQLiteCommand command = new SQLiteCommand(sql, DbConnection);
+            if (_repository == null)
+                return new List<TagDTO>();
 
-            using (DbDataReader reader = await command.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
-                {
-                    TagDTO tag = new TagDTO()
-                    {
-                        Name = reader["name"].ToString(),
-                        Stamp = DateTime.Parse(reader["stamp"].ToString()),
-                        Value = double.Parse(reader["value"].ToString())
-                    };
-
-                    tagList.Add(tag);
-                }
-            }
-
-            return tagList;
-        }
-        public async Task<ObservableCollection<TagDTO>> GetDataByStampAsync(DateTime from, DateTime to, bool descending = true)
-        {
-            ObservableCollection<TagDTO> observableCollection = new ObservableCollection<TagDTO>();
-            string order = descending ? "DESC" : "ASC";
-            string sql = $"SELECT * FROM tags WHERE stamp BETWEEN @from AND @to ORDER BY stamp {order}";
-            SQLiteCommand command = new SQLiteCommand(sql, DbConnection);
-            command.Parameters.AddWithValue("@from", from.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-            command.Parameters.AddWithValue("@to", to.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-
-            using (DbDataReader reader = await command.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
-                {
-                    TagDTO tag = new TagDTO()
-                    {
-                        Name = reader["name"].ToString(),
-                        Stamp = DateTime.Parse(reader["stamp"].ToString()),
-                        Value = double.Parse(reader["value"].ToString())
-                    };
-
-                    observableCollection.Add(tag);
-                }
-            }
-
-            return observableCollection;
+            return await _repository.GetAllTagsAsync(descending);
         }
     }
 }

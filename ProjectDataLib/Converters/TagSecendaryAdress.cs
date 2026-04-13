@@ -11,25 +11,7 @@ namespace ProjectDataLib
     {
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            Tag tg = (Tag)context.Instance;
-
-            IDriverModel idrv = ((Tag)context.Instance).idrv;
-
-            MemoryAreaInfo mInf = idrv.MemoryAreaInf.Where(x => x.Name.Equals(tg.areaData)).ToArray()[0];
-
-            List<int> opcje = new List<int>();
-
-            if (mInf.AdresSize > tg.getSize())
-            {
-                for (int i = 0; i < mInf.AdresSize / tg.getSize(); i++)
-                    opcje.Add(i);
-            }
-            else
-            {
-                opcje.Add(0);
-            }
-
-            return new StandardValuesCollection(opcje.ToArray());
+            return new StandardValuesCollection(GetOptions(context).ToArray());
         }
 
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
@@ -49,22 +31,7 @@ namespace ProjectDataLib
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            Tag tg = (Tag)context.Instance;
-
-            IDriverModel idrv = ((Tag)context.Instance).idrv;
-
-            MemoryAreaInfo mInf = idrv.MemoryAreaInf.Where(x => x.Name.Equals(tg.areaData)).ToArray()[0];
-
-            List<int> opcje = new List<int>();
-            if (mInf.AdresSize > tg.getSize())
-            {
-                for (int i = 0; i < mInf.AdresSize / tg.getSize(); i++)
-                    opcje.Add(i);
-            }
-            else
-            {
-                opcje.Add(0);
-            }
+            List<int> opcje = GetOptions(context);
 
             if (value is string)
             {
@@ -84,6 +51,35 @@ namespace ProjectDataLib
             }
 
             return 0;
+        }
+
+        private static List<int> GetOptions(ITypeDescriptorContext context)
+        {
+            var opcje = new List<int> { 0 };
+
+            if (context?.Instance is not Tag tg)
+                return opcje;
+
+            IDriverModel idrv = tg.idrv;
+            if (idrv?.MemoryAreaInf == null)
+                return opcje;
+
+            MemoryAreaInfo mInf = idrv.MemoryAreaInf.FirstOrDefault(x => x != null && x.Name == tg.areaData);
+            if (mInf == null)
+                return opcje;
+
+            int tagSize = tg.getSize();
+            if (tagSize <= 0)
+                return opcje;
+
+            if (mInf.AdresSize > tagSize)
+            {
+                opcje.Clear();
+                for (int i = 0; i < mInf.AdresSize / tagSize; i++)
+                    opcje.Add(i);
+            }
+
+            return opcje;
         }
     }
 }

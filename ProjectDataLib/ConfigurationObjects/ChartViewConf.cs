@@ -118,7 +118,7 @@ namespace ProjectDataLib
         [OptionalField]
         private TimeSpan TrackSpan_;
 
-        [XmlElement(ElementName = "ChartShowLast", Type = typeof(XmlTimeSpan))]
+        [XmlIgnore]
         public TimeSpan TrackSpan
         {
             get { return TrackSpan_; }
@@ -127,6 +127,13 @@ namespace ProjectDataLib
                 TrackSpan_ = value;
                 propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TrackSpan)));
             }
+        }
+
+        [XmlElement(ElementName = "ChartShowLast")]
+        public XmlTimeSpan TrackSpanXml
+        {
+            get => TrackSpan_;
+            set => TrackSpan = value;
         }
 
         private DateTime From_;

@@ -1,0 +1,113 @@
+<UserControl x:Class="FenixWPF.ChartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:FenixWPF"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <local:BoolNegConverter x:Key="BoolNeg" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
+        <Style x:Key="ToolbarLabelStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,6,0" />
+        </Style>
+
+        <Style x:Key="ToolbarInputStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="28" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+        </Style>
+
+        <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+            <Setter Property="MinWidth" Value="90" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Padding" Value="12,0" />
+        </Style>
+
+        <Style x:Key="ToolbarClearButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="28" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Margin" Value="-4,0,10,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0" Margin="20,8,20,6" Padding="6" Header="Chart Controls">
+            <ToolBarTray IsLocked="True" Background="Transparent">
+                <ToolBar Background="Transparent" BorderThickness="0" Padding="0">
+                    <TextBlock Style="{StaticResource ToolbarLabelStyle}" Text="Visible Range [DD:HH:MM:SS]" />
+                    <TextBox x:Name="TrackSpanInput"
+                             Width="150"
+                             Style="{StaticResource ToolbarInputStyle}"
+                             IsEnabled="{Binding Path=Pr.ChartConf.histData, Converter={StaticResource BoolNeg}}"
+                             ToolTip="Set the time range displayed on the chart"
+                             Text="{Binding Path=Pr.ChartConf.TrackSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button x:Name="ClearTrackSpanButton"
+                            Style="{StaticResource ToolbarClearButtonStyle}"
+                            Content="X"
+                            Visibility="{Binding IsTrackSpanFilterActive, Converter={StaticResource BoolToVisibility}}"
+                            ToolTip="Reset visible range filter" />
+
+                    <Separator />
+
+                    <TextBlock Style="{StaticResource ToolbarLabelStyle}" Text="Y Min:" />
+                    <TextBox x:Name="Y0"
+                             Width="95"
+                             Style="{StaticResource ToolbarInputStyle}"
+                             ToolTip="Set the minimum value of the Y axis"
+                             TextChanged="Y0_ValueChanged"
+                             Text="{Binding Path=Pr.ChartConf.minimumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button x:Name="ClearYMinButton"
+                            Style="{StaticResource ToolbarClearButtonStyle}"
+                            Content="X"
+                            Visibility="{Binding IsYMinFilterActive, Converter={StaticResource BoolToVisibility}}"
+                            ToolTip="Clear Y min filter" />
+
+                    <TextBlock Style="{StaticResource ToolbarLabelStyle}" Text="Y Max:" />
+                    <TextBox x:Name="Y1"
+                             Width="95"
+                             Style="{StaticResource ToolbarInputStyle}"
+                             ToolTip="Set the maximum value of the Y axis"
+                             TextChanged="Y1_ValueChanged"
+                             Text="{Binding Path=Pr.ChartConf.maximumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button x:Name="ClearYMaxButton"
+                            Style="{StaticResource ToolbarClearButtonStyle}"
+                            Content="X"
+                            Visibility="{Binding IsYMaxFilterActive, Converter={StaticResource BoolToVisibility}}"
+                            ToolTip="Clear Y max filter" />
+
+                    <Separator />
+
+                    <Button Style="{StaticResource ToolbarButtonStyle}"
+                            Content="Reset View"
+                            Click="Button_Reset_Click"
+                            ToolTip="Restore default axis ranges" />
+                    <Button Style="{StaticResource ToolbarButtonStyle}"
+                            Margin="0"
+                            Content="Clear Data"
+                            Click="Button_Clear_Click"
+                            ToolTip="Remove all points from the chart" />
+                </ToolBar>
+            </ToolBarTray>
+        </GroupBox>
+
+        <oxy:PlotView x:Name="View" Grid.Row="1" />
+
+        <TextBlock Margin="5" Grid.Row="2" Text="{Binding InteractionDescription}" />
+
+    </Grid>
+</UserControl>
