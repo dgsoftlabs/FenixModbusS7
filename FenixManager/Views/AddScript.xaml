@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add Script" Height="270" Width="430" WindowStartupLocation="CenterScreen">
+        Title="Add New Script" Height="190" Width="430" WindowStartupLocation="CenterScreen">
     <Grid Margin="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -14,18 +14,8 @@
 
         <StackPanel Grid.Row="0">
             <Image Width="26" Height="26" Margin="0,0,0,10" Source="pack://application:,,,/TreeImage/CsFile.ico" HorizontalAlignment="Left" />
-            <RadioButton x:Name="Ch1" FontWeight="SemiBold" IsChecked="True" Content="Add New File(s)" />
-            <TextBox x:Name="TbNewFile" IsEnabled="{Binding ElementName=Ch1, Path=IsChecked}" />
-
-            <RadioButton x:Name="Ch2" FontWeight="SemiBold" Content="Add Existing File(s)" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBox x:Name="TbAddFile" Grid.Column="0" IsEnabled="{Binding ElementName=Ch2, Path=IsChecked}" Margin="0,0,6,8" />
-                <Button IsEnabled="{Binding ElementName=Ch2, Path=IsChecked}" Grid.Column="1" Content="Browse" Click="Button_File_Click" MinWidth="80" />
-            </Grid>
+            <Label FontWeight="SemiBold" Content="File name(s):" Padding="0,0,0,2" />
+            <TextBox x:Name="TbNewFile" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">

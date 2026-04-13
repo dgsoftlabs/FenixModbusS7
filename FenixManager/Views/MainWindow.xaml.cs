@@ -697,6 +697,19 @@ namespace FenixWPF
             }
         }
 
+        private void ScriptFileExisting_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AddExistingScript fr = new AddExistingScript(PrCon, Pr, SelGuid, actualKindElement);
+                fr.Show();
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
         private void ShLocation0_Click(object sender, RoutedEventArgs e)
         {
             try

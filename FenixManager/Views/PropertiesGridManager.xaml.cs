@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace FenixWPF
 {
@@ -137,12 +138,17 @@ namespace FenixWPF
 
         private void PropertyList_Loaded(object sender, RoutedEventArgs e)
         {
-            AdjustColumns();
+            ScheduleAdjustColumns();
         }
 
         private void PropertyList_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            AdjustColumns();
+            ScheduleAdjustColumns();
+        }
+
+        private void ScheduleAdjustColumns()
+        {
+            Dispatcher.BeginInvoke(new Action(AdjustColumns), DispatcherPriority.Loaded);
         }
 
         private void AdjustColumns()
@@ -150,14 +156,50 @@ namespace FenixWPF
             if (PropertyList?.View is not GridView gridView || gridView.Columns.Count < 2)
                 return;
 
-            var totalWidth = PropertyList.ActualWidth - 6;
+            var totalWidth = GetListViewportWidth(PropertyList);
             if (totalWidth <= 0)
                 return;
 
-            var nameColumn = gridView.Columns[0];
-            var valueColumn = gridView.Columns[1];
-            var nameWidth = nameColumn.ActualWidth > 0 ? nameColumn.ActualWidth : nameColumn.Width;
-            valueColumn.Width = Math.Max(120, totalWidth - nameWidth);
+            var nonLastWidth = 0d;
+            for (var i = 0; i < gridView.Columns.Count - 1; i++)
+            {
+                var col = gridView.Columns[i];
+                nonLastWidth += col.ActualWidth > 0 ? col.ActualWidth : col.Width;
+            }
+
+            var lastColumn = gridView.Columns[gridView.Columns.Count - 1];
+            var targetWidth = Math.Max(120, totalWidth - nonLastWidth - 2);
+            if (!double.IsNaN(targetWidth) && !double.IsInfinity(targetWidth))
+                lastColumn.Width = targetWidth;
+        }
+
+        private static double GetListViewportWidth(ListView listView)
+        {
+            var scrollViewer = FindVisualChild<ScrollViewer>(listView);
+            if (scrollViewer != null && scrollViewer.ViewportWidth > 0)
+                return scrollViewer.ViewportWidth;
+
+            return listView.ActualWidth - listView.BorderThickness.Left - listView.BorderThickness.Right;
+        }
+
+        private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            if (parent == null)
+                return null;
+
+            var count = VisualTreeHelper.GetChildrenCount(parent);
+            for (var i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T typed)
+                    return typed;
+
+                var result = FindVisualChild<T>(child);
+                if (result != null)
+                    return result;
+            }
+
+            return null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

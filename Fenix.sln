@@ -10,11 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Version", "Version", "{DD8B
 		version.xml = version.xml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{724A4760-A914-4184-AFFF-243944BD2B35}"
-	ProjectSection(SolutionItems) = preProject
-		Scripts\Script.cs = Scripts\Script.cs
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixManager", "FenixManager\FenixManager.csproj", "{3294D7E8-08B5-49F7-926F-2B4AC8ACF12F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{3076FA66-1BC1-44EA-8E80-2012302FB4BC}"

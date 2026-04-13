@@ -1,13 +1,11 @@
-<Window  x:Class="FenixWPF.AddCusFile"
-
+<Window x:Class="FenixWPF.AddExistingScript"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add File / Files" Height="260" Width="430" WindowStartupLocation="CenterScreen">
-
+        Title="Add Existing Script" Height="190" Width="430" WindowStartupLocation="CenterScreen">
     <Grid Margin="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -15,18 +13,15 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <Image Width="26" Height="26" Margin="0,0,0,10" Source="pack://application:,,,/TreeImage/HtmlFile.ico" HorizontalAlignment="Left" />
-            <RadioButton x:Name="Ch1" IsChecked="True" FontWeight="SemiBold" Content="Add New File(s)" />
-            <TextBox x:Name="TbNewFile" IsEnabled="{Binding IsChecked, ElementName=Ch1}" />
-
-            <RadioButton x:Name="Ch2" FontWeight="SemiBold" Content="Add Existing File(s)" />
+            <Image Width="26" Height="26" Margin="0,0,0,10" Source="pack://application:,,,/TreeImage/CsFile.ico" HorizontalAlignment="Left" />
+            <Label FontWeight="SemiBold" Content="File path(s):" Padding="0,0,0,2" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="TbAddFile" IsEnabled="{Binding IsChecked, ElementName=Ch2}" IsReadOnly="True" Margin="0,0,6,8" />
-                <Button IsEnabled="{Binding IsChecked, ElementName=Ch2}" Content="Browse" Click="Button_File_Click" Grid.Column="1" MinWidth="80" />
+                <TextBox x:Name="TbAddFile" Grid.Column="0" Margin="0,0,6,0" />
+                <Button Grid.Column="1" Content="Browse" Click="Button_File_Click" MinWidth="80" />
             </Grid>
         </StackPanel>
 

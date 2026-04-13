@@ -20,7 +20,7 @@ namespace ProjectDataLib
 
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
-            return false;
+            return true;
         }
 
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
@@ -30,7 +30,7 @@ namespace ProjectDataLib
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return false;
+            return sourceType == typeof(string);
         }
     }
 }

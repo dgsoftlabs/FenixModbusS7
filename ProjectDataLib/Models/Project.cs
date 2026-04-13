@@ -274,18 +274,6 @@ namespace ProjectDataLib
         [XmlElement(ElementName = "DatabaseConfiguration")]
         public DatabaseModel Db { get; set; }
 
-        [Browsable(false)]
-        private WebServer WebServer1_;
-
-        [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "WebServerConfiguration")]
-        public WebServer WebServer1
-        {
-            get { return WebServer1_; }
-            set { WebServer1_ = value; }
-        }
-
         private Boolean IsExpand_;
 
         [Browsable(false)]
@@ -473,8 +461,6 @@ namespace ProjectDataLib
 
             this.PrCon_ = prcn;
 
-            WebServer1_ = new WebServer(null);
-
             ScriptFileList_ = new List<ScriptFile>();
 
             ScriptEng_ = new ScriptsDriver(this);
@@ -485,16 +471,14 @@ namespace ProjectDataLib
             objId = Guid.NewGuid();
 
             InternalTags_ = new InternalTagsDriver(this);
-            FileList_ = new List<InFile>();
 
             TreeViewChildren_ = new ObservableCollection<object>();
-            TreeViewChildren_.Add(WebServer1_);
             TreeViewChildren_.Add(ScriptEng_);
             TreeViewChildren_.Add(InternalTags_);
+
             Db = new DatabaseModel();
             TreeViewChildren_.Add(Db);
 
-            ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(FileList_);
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
 
@@ -550,30 +534,11 @@ namespace ProjectDataLib
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             TreeViewChildren_ = new ObservableCollection<object>();
-            TreeViewChildren_.Add(this.WebServer1_);
             TreeViewChildren_.Add(this.ScriptEng_);
             TreeViewChildren_.Add(this.InternalTags_);
             if (Db == null)
                 Db = new DatabaseModel();
             TreeViewChildren_.Add(this.Db);
-
-            DirectoryInfo gt = new DirectoryInfo(Path.GetDirectoryName(this.path) + "\\Http");
-
-            if (gt.Exists)
-            {
-                var SubDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
-                SubDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
-                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(SubDir);
-                FileList.Clear();
-            }
-            else
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(this.path) + "\\Http");
-                var SubDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
-                SubDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
-                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(SubDir);
-                FileList.Clear();
-            }
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
@@ -614,30 +579,11 @@ namespace ProjectDataLib
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             TreeViewChildren_ = new ObservableCollection<object>();
-            TreeViewChildren_.Add(this.WebServer1_);
             TreeViewChildren_.Add(this.ScriptEng_);
             TreeViewChildren_.Add(this.InternalTags_);
             if (Db == null)
                 Db = new DatabaseModel();
             TreeViewChildren_.Add(this.Db);
-
-            DirectoryInfo gt = new DirectoryInfo(Path.GetDirectoryName(this.path) + "\\Http");
-
-            if (gt.Exists)
-            {
-                var SubDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
-                SubDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
-                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(SubDir);
-                FileList.Clear();
-            }
-            else
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(this.path) + "\\Http");
-                var SubDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
-                SubDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
-                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(SubDir);
-                FileList.Clear();
-            }
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
@@ -653,7 +599,7 @@ namespace ProjectDataLib
             foreach (var dev in DevicesList_)
             {
                 ((ITreeViewModel)dev).Children = new ObservableCollection<object>(from x in tagsList_ where x.parentId == dev.objId select x);
-                ((ITableView)dev).Children = new ObservableCollection<ITag>((from x in tagsList where x.parentId == dev.objId select x).Union<ITag>(InTagsList));
+                ((TableView)dev).Children = new ObservableCollection<ITag>((from x in tagsList where x.parentId == dev.objId select x).Union<ITag>(InTagsList));
             }
 
             var query = tagsList.Union<ITag>(InTagsList);
