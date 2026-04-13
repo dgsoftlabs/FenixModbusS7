@@ -4,7 +4,6 @@
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.dll" Value="C:\Users\giron\.nuget\packages\dirkster.avalondock\4.73.0\lib\net10.0-windows7.0"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixWPF.deps.json" Value="..\FenixManager\bin\Debug\net10.0-windows"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixWPF.exe" Value="..\FenixManager\bin\Debug\net10.0-windows"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixWPF.exe_1" Value="..\FenixManager\bin\Debug\net10.0-windows"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixWPF.runtimeconfig.json" Value="..\FenixManager\bin\Debug\net10.0-windows"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="C:\Users\giron\.nuget\packages\avalonedit\6.3.1.120\lib\net8.0-windows7.0"/>
@@ -44,7 +43,6 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.IO.Ports.dll" Value="C:\Users\giron\.nuget\packages\system.io.ports\10.0.5\lib\net10.0"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll" Value="AvalonDock.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.deps.json" Value="FenixWPF.deps.json"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe" Value="FenixWPF.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1" Value="FenixWPF.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.runtimeconfig.json" Value="FenixWPF.runtimeconfig.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="ICSharpCode.AvalonEdit.dll"/>
@@ -105,7 +103,6 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1" DirectoryOptions="3"/>
-    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="FenixManager_Dir" Directory_Parent="APPDIR" DefaultDir="FENIXM~1|FenixManager" DirectoryOptions="3"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
@@ -116,10 +113,10 @@
     <ROW Component="ProductInformation" Value="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1" ComponentId="{7A7F328C-643B-45C4-ABBF-73E62A7799A4}" Directory_="FenixManager_Dir" Attributes="256" KeyPath="FenixWPF.exe_1"/>
     <ROW Component="APPDIR" ComponentId="{B87DF860-8CBC-468C-B43B-8F9B149F2E38}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="FenixManager_ContentOutput" ComponentId="{DB934EC3-A20D-487A-97B8-FDFA66F33590}" Directory_="FenixManager_Dir" Attributes="0" KeyPath="FenixWPF.deps.json" Type="0"/>
     <ROW Component="FenixManager_ContentOutput_Template" ComponentId="{C1DFBD7C-93B7-495D-B6A4-1B39FBA0BBD7}" Directory_="Template_Dir" Attributes="0" KeyPath="Script.cs_1" Type="0"/>
-    <ROW Component="FenixManager_PrimaryOutput" ComponentId="{5C32CE8B-19C2-4169-8987-47EFE232157A}" Directory_="FenixManager_Dir" Attributes="0" KeyPath="FenixWPF.exe"/>
     <ROW Component="FenixManager_References" ComponentId="{C1AA98F5-44BC-414D-8325-56B331899D0B}" Directory_="FenixManager_Dir" Attributes="0" KeyPath="System.IO.Ports.dll"/>
     <ROW Component="ProductInformation" ComponentId="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{A85EA1E0-1D8C-40F3-A35C-B4F8F9516622}" Directory_="SHORTCUTDIR" Attributes="0"/>
@@ -135,10 +132,9 @@
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="FenixWPF.exe" Component_="FenixManager_PrimaryOutput" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixWPF.exe&gt;" SelfReg="false" DigSign="true"/>
     <ROW File="FenixWPF.deps.json" Component_="FenixManager_ContentOutput" FileName="FENIXW~2.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.deps.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixWPF.deps.json&gt;" SelfReg="false"/>
     <ROW File="FenixWPF.runtimeconfig.json" Component_="FenixManager_ContentOutput" FileName="FENIXW~3.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.runtimeconfig.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixWPF.runtimeconfig.json&gt;" SelfReg="false"/>
-    <ROW File="FenixWPF.exe_1" Component_="FenixManager_ContentOutput" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixWPF.exe_1&gt;" SelfReg="false" DigSign="true"/>
+    <ROW File="FenixWPF.exe_1" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixWPF.exe_1&gt;" SelfReg="false" DigSign="true"/>
     <ROW File="AvalonDock.dll" Component_="FenixManager_References" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.dll&gt;" SelfReg="false"/>
     <ROW File="ICSharpCode.AvalonEdit.dll" Component_="FenixManager_References" FileName="ICSHAR~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ICSharpCode.AvalonEdit.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.CodeAnalysis.CSharp.dll" Component_="FenixManager_References" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll&gt;" SelfReg="false"/>
@@ -180,7 +176,6 @@
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixWPF.deps.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixWPF.deps.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.deps.json]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_FenixWPF.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixWPF.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixWPF.exe_1" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixWPF.exe_1]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixWPF.runtimeconfig.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixWPF.runtimeconfig.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.runtimeconfig.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ICSharpCode.AvalonEdit.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll]" Type="2" Content="0"/>
@@ -290,7 +285,6 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
     <ROW Feature_="MainFeature" Component_="APPDIR"/>
     <ROW Feature_="MainFeature" Component_="ProductInformation"/>
-    <ROW Feature_="MainFeature" Component_="FenixManager_PrimaryOutput"/>
     <ROW Feature_="MainFeature" Component_="SHORTCUTDIR"/>
     <ROW Feature_="MainFeature" Component_="_"/>
     <ROW Feature_="MainFeature" Component_="__1"/>
@@ -301,6 +295,7 @@
     <ROW Feature_="MainFeature" Component_="FenixManager_ContentOutput_Template"/>
     <ROW Feature_="MainFeature" Component_="FenixManager_ContentOutput"/>
     <ROW Feature_="MainFeature" Component_="FenixManager_References"/>
+    <ROW Feature_="MainFeature" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="soft.exe" SourcePath="..\FenixManager\soft.ico" Index="0"/>
@@ -351,8 +346,7 @@
     <ROW Registry="psx" Root="1" Key="Software\Classes\.pse" Name="\"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="FenixManager" Directory_="DesktopFolder" Name="FENIXM~1|FenixManager" Component_="FenixManager_PrimaryOutput" Target="[#FenixWPF.exe]" Hotkey="0" IconIndex="0" ShowCmd="1"/>
-    <ROW Shortcut="FenixWPF" Directory_="SHORTCUTDIR" Name="FENIXM~1|FenixManager" Component_="FenixManager_PrimaryOutput" Target="[#FenixWPF.exe]" Hotkey="0" IconIndex="0" ShowCmd="1"/>
+    <ROW Shortcut="AI_PROPPATH_FILENAME_PERBUILD_Fenix" Directory_="SHORTCUTDIR" Name="[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1]" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1" Target="[#FenixWPF.exe_1]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="FenixManager_Dir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
@@ -362,7 +356,6 @@
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.VsProjectComponent">
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="PrimaryOutput" OutputFile="FenixWPF.exe" OutputFileShortcut="FenixWPF"/>
     <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="ContentOutput" OutputFile="FenixWPF.deps.json"/>
     <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="ContentOutput" OutputFile="FenixWPF.runtimeconfig.json"/>
     <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="ContentOutput" OutputFile="FenixWPF.exe_1"/>
