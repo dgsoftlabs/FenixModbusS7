@@ -224,10 +224,10 @@ namespace ProjectDataLib
                     return false;
 
                 var extension = Path.GetExtension(path);
-                if (!string.Equals(extension, ".psx", StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(extension, ".pse", StringComparison.OrdinalIgnoreCase))
                 {
                     throw new NotSupportedException(
-                        $"Unsupported project format '{extension}'. Only '.psx' is supported in .NET 10.");
+                        $"Unsupported project format '{extension}'. Only '.pse' is supported in .NET 10.");
                 }
 
                 Project buff;
@@ -365,19 +365,36 @@ namespace ProjectDataLib
             try
             {
                 var extension = Path.GetExtension(path);
-                if (!string.Equals(extension, ".psx", StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(extension, ".pse", StringComparison.OrdinalIgnoreCase))
                 {
                     throw new NotSupportedException(
-                        $"Unsupported project format '{extension}'. Only '.psx' is supported in .NET 10.");
+                        $"Unsupported project format '{extension}'. Only '.pse' is supported in .NET 10.");
                 }
 
                 proj.modMarks = false;
                 proj.modifeTime = DateTime.Now;
+                proj.fileVer = Assembly.GetExecutingAssembly().GetName().Version;
+
+                string directory = Path.GetDirectoryName(path);
+                if (!string.IsNullOrWhiteSpace(directory) && !Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+
+                string tempPath = path + ".tmp";
+                string backupPath = path + ".bak";
 
                 XmlSerializer xmlSer = new XmlSerializer(typeof(Project));
-                using (Stream fsream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (Stream fsream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                     xmlSer.Serialize(fsream, proj);
+                }
+
+                if (File.Exists(path))
+                {
+                    File.Replace(tempPath, path, backupPath, true);
+                }
+                else
+                {
+                    File.Move(tempPath, path, true);
                 }
 
                 saveProjectEv?.Invoke(proj, new ProjectEventArgs(proj));

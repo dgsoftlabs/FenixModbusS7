@@ -89,7 +89,9 @@ namespace FenixWPF
             {
                 //Dialog zapisu
                 wf.SaveFileDialog sfd = new wf.SaveFileDialog();
-                sfd.Filter = "Fenix files (*.psx)|*.psx|All files (*.*)|*.*";
+                sfd.Filter = "Fenix files (*.pse)|*.pse|All files (*.*)|*.*";
+                sfd.DefaultExt = "pse";
+                sfd.AddExtension = true;
                 if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     if (projectContainer.saveProject(currentProject, sfd.FileName))

@@ -695,8 +695,7 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)
-        ]
+        [ComVisible(true)]
         public Object SetTag(string s, object val)
         {
             try

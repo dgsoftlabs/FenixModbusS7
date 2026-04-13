@@ -449,10 +449,10 @@ namespace FenixWPF
                 }
 
                 string startupPath = io.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-                string strp = (string)Registry.GetValue(PrCon.RegUserRoot, PrCon.LastPathKey, startupPath + "\\Project.psf");
+                string strp = (string)Registry.GetValue(PrCon.RegUserRoot, PrCon.LastPathKey, startupPath + "\\Project.pse");
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.InitialDirectory = io.Path.GetDirectoryName(strp);
-                ofd.Filter = "XML Files (*.psx)|*.psx";
+                ofd.Filter = "Fenix project files (*.pse)|*.pse";
 
                 if (ofd.ShowDialog() == true)
                 {
@@ -670,7 +670,9 @@ namespace FenixWPF
                 if (String.IsNullOrEmpty(Pr.path))
                 {
                     wf.SaveFileDialog sfd = new wf.SaveFileDialog();
-                    sfd.Filter = "Fenix files (*.psx)|*.psx|All files (*.*)|*.*";
+                    sfd.Filter = "Fenix files (*.pse)|*.pse|All files (*.*)|*.*";
+                    sfd.DefaultExt = "pse";
+                    sfd.AddExtension = true;
                     if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         PrCon.saveProject(Pr, sfd.FileName);

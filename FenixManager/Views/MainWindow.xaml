@@ -13,9 +13,9 @@
         <ContextMenu x:Key="CtxProject">
             <MenuItem Header="Add Connection" Click="Connection0_Click" IsEnabled="{Binding mConnection}" />
             <Separator />
-            <MenuItem Header="TableView"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="ChartView"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
-            <MenuItem Header="CommunicationView"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
+            <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
+            <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
             <Separator />
             <MenuItem Header="Start All" Click="StartAll_Click" IsEnabled="{Binding mStartAll }" />
             <MenuItem Header="Stop All"  Click="StopAll_Click" IsEnabled="{Binding mStopAll }" />
@@ -61,7 +61,7 @@
             <MenuItem Header="Stop"  Click="Stop0_Click" IsEnabled="{Binding mStop }" />
             <Separator />
             <MenuItem Header="Block" Click="Block_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="UnBlock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Unblock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
             <Separator />
             <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
             <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
@@ -74,7 +74,7 @@
             <MenuItem Header="Open"  Click="Editor0_Click" IsEnabled="{Binding mEditor }" />
             <Separator />
             <MenuItem Header="Block" Click="Block_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="UnBlock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Unblock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
             <Separator />
             <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
             <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
@@ -89,7 +89,7 @@
             <MenuItem Header="Stop"  Click="Stop0_Click" IsEnabled="{Binding mStop }" />
             <Separator />
             <MenuItem Header="Block" Click="Block_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="UnBlock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Unblock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxDatabse">
@@ -112,15 +112,15 @@
         <ContextMenu x:Key="CtxConnection">
             <MenuItem Header="Add Device" Click="Device0_Click" IsEnabled="{Binding mDevice}" />
             <Separator />
-            <MenuItem Header="TableView"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="ChartView"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
-            <MenuItem Header="CommunicationView"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
+            <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
+            <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
             <Separator />
             <MenuItem Header="Start"  Click="Start0_Click" IsEnabled="{Binding mStart }" />
             <MenuItem Header="Stop"  Click="Stop0_Click" IsEnabled="{Binding mStop }" />
             <Separator />
             <MenuItem Header="Block" Click="Block_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="UnBlock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Unblock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
             <Separator />
             <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
             <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
@@ -131,9 +131,9 @@
         <ContextMenu x:Key="CtxDevice">
             <MenuItem Header="Add Tag" Click="Tag0_Click" IsEnabled="{Binding mTag}" />
             <Separator />
-            <MenuItem Header="TableView"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="ChartView"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
-            <MenuItem Header="CommunicationView"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
+            <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
+            <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
             <Separator />
             <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
             <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
@@ -167,7 +167,7 @@
                     <MenuItem Header="Connection" Click="Connection0_Click" IsEnabled="{Binding mConnection}" />
                     <MenuItem Header="Device"  Click="Device0_Click" IsEnabled="{Binding mDevice}" />
                     <MenuItem Header="Tag"  Click="Tag0_Click" IsEnabled="{Binding mTag}" />
-                    <MenuItem Header="IntTag"  Click="IntTag0_Click" IsEnabled="{Binding mIntTag}" />
+                    <MenuItem Header="Internal Tag"  Click="IntTag0_Click" IsEnabled="{Binding mIntTag}" />
                     <MenuItem Header="Folder"  Click="Folder_Click" IsEnabled="{Binding mFolder}" />
                     <MenuItem Header="File"  Click="File0_Click" IsEnabled="{Binding mInFile}" />
                 </MenuItem>
@@ -191,9 +191,9 @@
                 <MenuItem Header="Properties"  Click="Properties0_Click" IsEnabled="{Binding mProperties}" />
                 <MenuItem Header="Output"  Click="Output0_Click" IsEnabled="{Binding mOutput }" />
                 <Separator />
-                <MenuItem Header="TableView"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
-                <MenuItem Header="ChartView"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
-                <MenuItem Header="CommunicationView"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
+                <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
+                <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
+                <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
                 <MenuItem Header="Editor"  Click="Editor0_Click" IsEnabled="{Binding mEditor }" />
             </MenuItem>
 
@@ -213,7 +213,7 @@
                 <Separator />
                 <MenuItem Header="Show Location" Click="ShLocation0_Click" IsEnabled="{Binding mShowLoc }" />
                 <Separator />
-                <MenuItem Header="Drivers Configuration"  Click="DriveConf0_Click" IsEnabled="{Binding mDrivers }" />
+                <MenuItem Header="Driver Configuration"  Click="DriveConf0_Click" IsEnabled="{Binding mDrivers }" />
             </MenuItem>
 
             <MenuItem Header="Database" IsEnabled="{Binding mDatabase}">
@@ -243,13 +243,13 @@
                 <TextBlock Text="💾" FontSize="14" VerticalAlignment="Center" />
             </Button>
             <Separator />
-            <Button Click="TableView0_Click" IsEnabled="{Binding mTable}" ToolTip="TableView">
+            <Button Click="TableView0_Click" IsEnabled="{Binding mTable}" ToolTip="Table View">
                 <TextBlock Text="📊" FontSize="14" VerticalAlignment="Center" />
             </Button>
-            <Button Click="ChartView0_Click" IsEnabled="{Binding mChart}" ToolTip="ChartView">
+            <Button Click="ChartView0_Click" IsEnabled="{Binding mChart}" ToolTip="Chart View">
                 <TextBlock Text="📈" FontSize="14" VerticalAlignment="Center" />
             </Button>
-            <Button Click="CommView0_Click" IsEnabled="{Binding mCommView}" ToolTip="CommunicationView">
+            <Button Click="CommView0_Click" IsEnabled="{Binding mCommView}" ToolTip="Communication View">
                 <TextBlock Text="📡" FontSize="14" VerticalAlignment="Center" />
             </Button>
             <Button Click="Editor0_Click" IsEnabled="{Binding mEditor}" ToolTip="Editor">

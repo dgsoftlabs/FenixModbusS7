@@ -80,11 +80,6 @@
     <ProjectReference Include="..\S7-300-400 Ethernet\S7-300-400 Ethernet.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Template\Script.cs" Link="Template\Script.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="soft.ico" />
   </ItemGroup>
   <ItemGroup>

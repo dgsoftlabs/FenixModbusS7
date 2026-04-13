@@ -5,73 +5,106 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:FenixWPF"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{StaticResource Th.SurfaceBrush}">
 
     <UserControl.Resources>
         <local:BooleanNegationConverter x:Key="BooleanNegationConverter" />
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="12" Background="{StaticResource Th.SurfaceBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0" Header="Filters" Padding="12,10">
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" ItemHeight="30">
+                <CheckBox x:Name="BlockTimeFiltersCheckBox" Content="Block Time Filters" VerticalAlignment="Center" Margin="0,0,20,0" />
 
-        <GroupBox Grid.Row="0" Grid.Column="0" Margin="5" Height="45">
-            <StackPanel Orientation="Horizontal" >
-                <CheckBox x:Name="BlockTimeFiltersCheckBox" Content="Block Time Filters" VerticalAlignment="Center" Margin="0,0,15,0" />
-
-                <TextBlock Text="From:" VerticalAlignment="Center" Width="50" />
-                <DatePicker x:Name="FromDateCtrl" Margin="-15,0,15,0" Width="150"
-                            SelectedDate="{Binding FromDate, Mode=TwoWay}" 
+                <TextBlock Text="From:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                <DatePicker x:Name="FromDateCtrl"
+                            Width="160"
+                            Margin="0,0,14,0"
+                            SelectedDate="{Binding FromDate, Mode=TwoWay}"
                             IsEnabled="{Binding IsChecked, ElementName=BlockTimeFiltersCheckBox, Converter={StaticResource BooleanNegationConverter}}" />
 
-                <TextBlock Text="To:" VerticalAlignment="Center" Width="30" />
-                <DatePicker x:Name="ToDateCtrl" Margin="-15,0,15,0" Width="150"
-                            SelectedDate="{Binding ToDate, Mode=TwoWay}" 
+                <TextBlock Text="To:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                <DatePicker x:Name="ToDateCtrl"
+                            Width="160"
+                            Margin="0,0,14,0"
+                            SelectedDate="{Binding ToDate, Mode=TwoWay}"
                             IsEnabled="{Binding IsChecked, ElementName=BlockTimeFiltersCheckBox, Converter={StaticResource BooleanNegationConverter}}" />
 
-                <TextBlock Text="Last:" VerticalAlignment="Center" Width="40" />
-                <ComboBox x:Name="TimeIntervalComboBox" Margin="-15,0,15,0" 
-                          ItemsSource="{Binding TimeIntervals}" 
-                          SelectedItem="{Binding SelectedInterval, Mode=TwoWay}" Width="80" 
+                <TextBlock Text="Last:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                <ComboBox x:Name="TimeIntervalComboBox"
+                          Width="100"
+                          Margin="0,0,18,0"
+                          ItemsSource="{Binding TimeIntervals}"
+                          SelectedItem="{Binding SelectedInterval, Mode=TwoWay}"
                           IsEnabled="{Binding IsChecked, ElementName=BlockTimeFiltersCheckBox, Converter={StaticResource BooleanNegationConverter}}" />
 
-            </StackPanel>
-        </GroupBox>
-
-        <GroupBox Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" Height="45">
-            <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="Order:" VerticalAlignment="Center" Width="50" />
-                <ComboBox x:Name="OrderComboBox" Margin="-15,0,15,0" Width="100" 
-                          ItemsSource="{Binding OrderOptions}" 
+                <TextBlock Text="Order:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                <ComboBox x:Name="OrderComboBox"
+                          Width="160"
+                          Margin="0,0,14,0"
+                          ItemsSource="{Binding OrderOptions}"
                           SelectedItem="{Binding SelectedOrder, Mode=TwoWay}" />
-                <Button Content="Refresh" Width="80" Click="ResetButton_Click" />
 
-            </StackPanel>
+                <Button Content="Refresh" MinWidth="100" Click="ResetButton_Click" />
+            </WrapPanel>
         </GroupBox>
 
-        <DataGrid x:Name="myDataGrid" 
-                  Grid.Row="1"
-                  Grid.ColumnSpan="2"
-                  Margin="0,15,0,0" 
-                  AutoGenerateColumns="False" 
-                  HorizontalAlignment="Stretch" 
+        <DataGrid x:Name="myDataGrid"
+                  Grid.Row="2"
+                  AutoGenerateColumns="False"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
                   ItemsSource="{Binding YourDataCollection}"
                   EnableRowVirtualization="True"
-                  EnableColumnVirtualization="True">
+                  EnableColumnVirtualization="True"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  BorderBrush="{StaticResource Th.BorderBrush}"
+                  BorderThickness="1"
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="{StaticResource Th.BorderBrush}"
+                  VerticalGridLinesBrush="{StaticResource Th.BorderBrush}"
+                  Background="{StaticResource Th.SurfaceBrush}"
+                  RowBackground="{StaticResource Th.SurfaceBrush}"
+                  AlternatingRowBackground="{StaticResource Th.Surface2Brush}"
+                  Foreground="{StaticResource Th.TextBrush}"
+                  Margin="0,0,0,2"
+                  RowHeight="30"
+                  ColumnHeaderHeight="34">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="{StaticResource Th.Surface2Brush}" />
+                    <Setter Property="Foreground" Value="{StaticResource Th.TextBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource Th.BorderBrush}" />
+                    <Setter Property="BorderThickness" Value="0,0,1,1" />
+                    <Setter Property="Padding" Value="10,6" />
+                    <Setter Property="FontWeight" Value="SemiBold" />
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Padding" Value="8,2" />
+                    <Setter Property="Foreground" Value="{StaticResource Th.TextBrush}" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="5,0,0,0" />
+                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Margin="5,0,0,0" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -99,6 +132,10 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" Height="5" />
+        <ProgressBar Grid.Row="3"
+                     IsIndeterminate="True"
+                     Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Height="4"
+                     Margin="0,8,0,0" />
     </Grid>
 </UserControl>

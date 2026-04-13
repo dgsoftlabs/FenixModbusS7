@@ -137,48 +137,61 @@ namespace FenixWPF
 
         public async Task InitializeAsync(Project project)
         {
-            InitializeComponent();
-            DataContext = this;
             _project = project;
 
-            // Initialize PlotController
             PlotController = new PlotController();
-
-            // Set interaction descriptions
             InteractionDescription = "Left Click + Drag: Pan | Ctrl + Right Click + Drag: Zoom Rectangle | Mouse Wheel: Zoom | C: Copy to Clipboard";
 
-            // Axes
             AxY1 = new LinearAxis { Position = AxisPosition.Left, MajorGridlineStyle = LineStyle.Dash };
             AxX1 = new DateTimeAxis { Position = AxisPosition.Bottom, MajorGridlineStyle = LineStyle.Dash, StringFormat = "HH:mm:ss" };
 
-            // Plot
             PlotModel = new PlotModel();
             PlotModel.Axes.Add(AxX1);
             PlotModel.Axes.Add(AxY1);
             View.Model = PlotModel;
 
-            var data = await LoadDataFromDatabase(DateTime.Now.AddHours(-1), DateTime.Now, false);
-            await CreateSeriesAsync(data).ContinueWith(task => AddSeries(task.Result));
-            if (data.Count != 0)
-            {
-                YAxisMinimum = Math.Floor(data.Min(x => x.Value));
-                YAxisMaximum = Math.Floor(data.Max(x => x.Value));
-            }
-            else
-            {
-                YAxisMinimum = 0;
-                YAxisMaximum = 100;
-            }
+            await RefreshChartAsync(false);
         }
 
         public ChartViewDatabase(Project project)
         {
-            InitializeAsync(project);
+            InitializeComponent();
+            DataContext = this;
 
-            // Initialize default values
             TimeIntervals = new ObservableCollection<string> { "1h", "3h", "6h", "12h", "24h" };
             SelectedInterval = TimeIntervals.First();
+
+            YAxisMinimum = 0;
+            YAxisMaximum = 100;
             UpdatePlotYAxes();
+
+            Loaded += async (_, __) => await InitializeAsync(project);
+        }
+
+        private async Task RefreshChartAsync(bool blockFilters)
+        {
+            IsLoading = true;
+            try
+            {
+                var data = await LoadDataFromDatabase(FromDate, ToDate, blockFilters);
+                var series = await CreateSeriesAsync(data);
+                AddSeries(series);
+
+                if (data.Count != 0)
+                {
+                    YAxisMinimum = Math.Floor(data.Min(x => x.Value));
+                    YAxisMaximum = Math.Ceiling(data.Max(x => x.Value));
+                }
+                else
+                {
+                    YAxisMinimum = 0;
+                    YAxisMaximum = 100;
+                }
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         private async Task<List<TagDTO>> LoadDataFromDatabase(DateTime from, DateTime to, bool blockFilters)
@@ -266,23 +279,12 @@ namespace FenixWPF
                 AxY1.Maximum = YAxisMaximum;
             }
 
-            PlotModel.InvalidatePlot(false);
+            PlotModel?.InvalidatePlot(false);
         }
 
         private async void ShowAllButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            IsLoading = true;
-            if (DisableFormCheckBox.IsChecked is true)
-            {             
-                var data = await LoadDataFromDatabase(FromDate, ToDate, true);
-                await CreateSeriesAsync(data).ContinueWith(task => AddSeries(task.Result));
-            }
-            else
-            {
-                var data = await LoadDataFromDatabase(FromDate, ToDate, false);
-                await CreateSeriesAsync(data).ContinueWith(task => AddSeries(task.Result));
-            }
-            IsLoading = false;
+            await RefreshChartAsync(DisableFormCheckBox.IsChecked is true);
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
