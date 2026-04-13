@@ -110,8 +110,6 @@ namespace FenixWPF
 
         private ObservableCollection<CustomException> exList = new ObservableCollection<CustomException>();
 
-        private io.FileSystemWatcher FsWatcher;
-
         #region External Events
 
         private void AddProjectEvent(object sender, ProjectEventArgs ev)
@@ -209,16 +207,6 @@ namespace FenixWPF
                 TreeViewItem PrNode = FindTviFromObjectRecursive(tvMain.View, pr);
                 if (PrNode != null) PrNode.IsSelected = true;
 
-                if (!io.Directory.Exists(io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog))
-                    io.Directory.CreateDirectory(io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog);
-
-                FsWatcher = new io.FileSystemWatcher(io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog);
-                FsWatcher.IncludeSubdirectories = true;
-                FsWatcher.Created += FsWatch_Changed;
-                FsWatcher.Deleted += FsWatch_Changed;
-                FsWatcher.Renamed += FsWatch_Changed;
-                FsWatcher.EnableRaisingEvents = true;
-
                 lbPathProject.Content = Pr.path;
                 Registry.SetValue(PrCon.RegUserRoot, PrCon.LastPathKey, Pr.path);
 
@@ -228,111 +216,6 @@ namespace FenixWPF
             {
                 if (PrCon.ApplicationError != null)
                     PrCon.ApplicationError(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void FsWatch_Changed(object sender, io.FileSystemEventArgs e)
-        {
-            try
-            {
-                #region Renamed
-
-                if (e.ChangeType == io.WatcherChangeTypes.Renamed)
-                {
-                    io.RenamedEventArgs k = (io.RenamedEventArgs)e;
-                    ITreeViewModel m = Pr.WebServer1.DirSearch(k.OldFullPath, Pr.WebServer1);
-
-                    if (m != null)
-                        ((CusFile)m).FullName = k.FullPath;
-                }
-
-                #endregion Renamed
-
-                #region Creted
-
-                else if (e.ChangeType == io.WatcherChangeTypes.Created)
-                {
-                    if (io.File.Exists(e.FullPath))
-                    {
-                        string dir = io.Path.GetDirectoryName(e.FullPath);
-                        if (dir == io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog)
-                        {
-                            Dispatcher.Invoke(new Action(() =>
-                            {
-                                ((ITreeViewModel)Pr.WebServer1).Children.Add(new CusFile(new io.FileInfo(e.FullPath)));
-                            }));
-                        }
-                        else
-                        {
-                            ITreeViewModel tm = Pr.WebServer1.DirSearch(dir, Pr.WebServer1);
-                            if (tm != null)
-                            {
-                                Dispatcher.Invoke(new Action(() =>
-                                {
-                                    tm.Children.Add(new CusFile(new io.FileInfo(e.FullPath)));
-                                }));
-                            }
-                        }
-                    }
-                    else
-                    {
-                        string rDir = io.Directory.GetParent(e.FullPath).FullName;
-                        if (rDir == io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog)
-                        {
-                            Dispatcher.Invoke(new Action(() =>
-                            {
-                                ((ITreeViewModel)Pr.WebServer1).Children.Add(new CusFile(new io.DirectoryInfo(e.FullPath)));
-                            }));
-                        }
-                        else
-                        {
-                            ITreeViewModel tm = Pr.WebServer1.DirSearch(rDir, Pr.WebServer1);
-                            if (tm != null)
-                            {
-                                Dispatcher.Invoke(new Action(() =>
-                                {
-                                    tm.Children.Add(new CusFile(new io.DirectoryInfo(e.FullPath)));
-                                }));
-                            }
-                        }
-                    }
-                }
-
-                #endregion Creted
-
-                #region Delete
-
-                if (e.ChangeType == System.IO.WatcherChangeTypes.Deleted)
-                {
-                    string sDir = io.Directory.GetParent(e.FullPath).FullName;
-                    if (sDir == io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog)
-                    {
-                        Dispatcher.Invoke(new Action(() =>
-                        {
-                            var rem = ((ITreeViewModel)Pr.WebServer1).Children.ToList().Where(x => ((CusFile)x).FullName == e.FullPath).First();
-                            ((ITreeViewModel)Pr.WebServer1).Children.Remove(rem);
-                        }));
-                    }
-                    else
-                    {
-                        ITreeViewModel tm = Pr.WebServer1.DirSearch(e.FullPath, Pr.WebServer1);
-                        ITreeViewModel par = Pr.WebServer1.DirSearch(sDir, Pr.WebServer1);
-
-                        if (tm != null)
-                        {
-                            Dispatcher.Invoke(new Action(() =>
-                            {
-                                (par).Children.Remove((CusFile)tm);
-                            }));
-                        }
-                    }
-                }
-
-                #endregion Delete
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
             }
         }
 
@@ -651,7 +534,7 @@ namespace FenixWPF
                     AddFolder fr = new AddFolder(PrCon, Pr, ((CusFile)tvMain.View.SelectedItem).FullName, actualKindElement);
                     fr.Show();
                 }
-                else if (tvMain.View.SelectedItem is WebServer)
+                else if (tvMain.View.SelectedItem is Project)
                 {
                     AddFolder fr = new AddFolder(PrCon, Pr, io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog, actualKindElement);
                     fr.Show();
@@ -672,7 +555,7 @@ namespace FenixWPF
                     AddCusFile fr = new AddCusFile(PrCon, Pr, ((CusFile)tvMain.View.SelectedItem).FullName, actualKindElement);
                     fr.Show();
                 }
-                else if (tvMain.View.SelectedItem is WebServer)
+                else if (tvMain.View.SelectedItem is Project)
                 {
                     AddCusFile fr = new AddCusFile(PrCon, Pr, io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog, actualKindElement);
                     fr.Show();
@@ -718,17 +601,16 @@ namespace FenixWPF
                 {
                     Process.Start(io.Path.GetDirectoryName(Pr.path));
                 }
-                else if (actualKindElement == ElementKind.HttpConfig)
-                {
-                    Process.Start(io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog);
-                }
                 else if (actualKindElement == ElementKind.Scripts)
                 {
                     Process.Start(io.Path.GetDirectoryName(Pr.path) + PrCon.ScriptsCatalog);
                 }
                 else if (actualKindElement == ElementKind.InFile)
                 {
-                    Process.Start(((CusFile)tvMain.View.SelectedItem).FullName);
+                    if (tvMain.View.SelectedItem is CusFile selected && !string.IsNullOrWhiteSpace(selected.FullName))
+                        Process.Start(selected.FullName);
+                    else
+                        Process.Start(io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog);
                 }
             }
             catch (Exception Ex)
@@ -764,12 +646,6 @@ namespace FenixWPF
                 tvMain.View.ItemsSource = null;
 
                 actualKindElement = ElementKind.Empty;
-
-                FsWatcher.EnableRaisingEvents = false;
-                FsWatcher.Created -= FsWatch_Changed;
-                FsWatcher.Deleted -= FsWatch_Changed;
-                FsWatcher.Renamed -= FsWatch_Changed;
-                FsWatcher = null;
 
                 PrCon.closeAllProject(true);
 
@@ -1058,7 +934,7 @@ namespace FenixWPF
                     {
                         if (!string.IsNullOrEmpty(SelSrcPath))
                         {
-                            if (tvMain.View.SelectedItem is WebServer)
+                            if (tvMain.View.SelectedItem is Project)
                             {
                                 string dest = io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + io.Path.GetFileName(SelSrcPath);
                                 if (dest == SelSrcPath)
@@ -1091,7 +967,7 @@ namespace FenixWPF
                     {
                         if (!string.IsNullOrEmpty(SelSrcPath))
                         {
-                            if (tvMain.View.SelectedItem is WebServer)
+                            if (tvMain.View.SelectedItem is Project)
                             {
                                 string dest = io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + io.Path.GetFileName(SelSrcPath);
                                 if (dest == SelSrcPath)
@@ -1562,16 +1438,6 @@ namespace FenixWPF
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxProject"];
                     SelGuid = ((Project)e.NewValue).objId;
                     actualKindElement = ElementKind.Project;
-                }
-                else if (e.NewValue is WebServer)
-                {
-                    if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxHttpServer"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxHttpServer"];
-                    SelGuid = ((WebServer)e.NewValue).ObjId;
-                    actualKindElement = ElementKind.HttpConfig;
                 }
                 else if (e.NewValue is DatabaseModel)
                 {

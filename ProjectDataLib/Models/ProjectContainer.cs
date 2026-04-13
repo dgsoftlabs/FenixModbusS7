@@ -351,9 +351,6 @@ namespace ProjectDataLib
                     dev.PrCon = this;
                 }
 
-                buff.WebServer1.PrCon = this;
-                buff.WebServer1.Proj = buff;
-
                 return true;
             }
             catch (Exception Ex)
@@ -407,8 +404,6 @@ namespace ProjectDataLib
                         ((ITreeViewModel)conn).Children.Clear();
 
                     ((ITreeViewModel)proj.ScriptEng).Children.Clear();
-
-                    ((ITreeViewModel)proj.WebServer1).Children.Clear();
 
                     ((ITreeViewModel)proj).Children.Clear();
 
@@ -634,9 +629,6 @@ namespace ProjectDataLib
                 if (proj == name)
                     return pr;
 
-                if (name == ServerGuid)
-                    return pr.WebServer1;
-
                 if (name == ScriptGuid)
                     return pr.ScriptEng;
 
@@ -686,9 +678,6 @@ namespace ProjectDataLib
 
                     if (pr.objId == name)
                         return pr;
-
-                    if (name == ServerGuid)
-                        return pr.WebServer1;
 
                     if (name == ScriptGuid)
                         return pr.ScriptEng;
@@ -1470,7 +1459,6 @@ namespace ProjectDataLib
             try
             {
                 Project pr = getProject(projId);
-                ((ITreeViewModel)pr.WebServer1).Children.Add(file);
                 pr.FileList.Add(file);
 
                 if (addInFileEv != null)
@@ -1490,9 +1478,6 @@ namespace ProjectDataLib
             try
             {
                 Project pr = getProject(projId);
-
-                ((ITreeViewModel)pr.WebServer1).Children.Remove(GetInFile(projId, file));
-
                 pr.FileList.RemoveAll(x => x.objId == file);
 
                 if (removeInFileEv != null)

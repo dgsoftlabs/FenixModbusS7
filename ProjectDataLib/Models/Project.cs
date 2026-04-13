@@ -109,6 +109,7 @@ namespace ProjectDataLib
         }
 
         [Category("06 Formats"), DisplayName("DateTime Long"), Description("Format for display")]
+        [Browsable(true)]
         [XmlElement(ElementName = "DBDateTimeFormat")]
         public string longDT { get; set; }
 
@@ -149,6 +150,7 @@ namespace ProjectDataLib
         }
 
         [XmlElement(ElementName = "FileVersion")]
+        [Browsable(false)]
         public XMLVersion fileVerXml
         {
             get => fileVer_;
@@ -303,6 +305,7 @@ namespace ProjectDataLib
         [field: NonSerialized]
         private LegacyScriptCompat scriptCon_;
 
+        [Browsable(false)]
         [ComVisible(false)]
         [XmlIgnore]
         public dynamic ScriptCon
@@ -461,6 +464,7 @@ namespace ProjectDataLib
 
             this.PrCon_ = prcn;
 
+            FileList_ = new List<InFile>();
             ScriptFileList_ = new List<ScriptFile>();
 
             ScriptEng_ = new ScriptsDriver(this);
@@ -531,6 +535,9 @@ namespace ProjectDataLib
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
 
+            if (FileList_ == null)
+                FileList_ = new List<InFile>();
+
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             TreeViewChildren_ = new ObservableCollection<object>();
@@ -542,6 +549,7 @@ namespace ProjectDataLib
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
+
 
             foreach (var cn in connectionList_)
             {
@@ -576,6 +584,9 @@ namespace ProjectDataLib
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
 
+            if (FileList_ == null)
+                FileList_ = new List<InFile>();
+
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             TreeViewChildren_ = new ObservableCollection<object>();
@@ -599,7 +610,7 @@ namespace ProjectDataLib
             foreach (var dev in DevicesList_)
             {
                 ((ITreeViewModel)dev).Children = new ObservableCollection<object>(from x in tagsList_ where x.parentId == dev.objId select x);
-                ((TableView)dev).Children = new ObservableCollection<ITag>((from x in tagsList where x.parentId == dev.objId select x).Union<ITag>(InTagsList));
+                ((ITableView)dev).Children = new ObservableCollection<ITag>((from x in tagsList where x.parentId == dev.objId select x).Union<ITag>(InTagsList));
             }
 
             var query = tagsList.Union<ITag>(InTagsList);
@@ -874,13 +885,12 @@ namespace ProjectDataLib
             {
                 if (disposing)
                 {
-                    WebServer1_.Dispose();
                     connectionList_.Clear();
                     DevicesList_.Clear();
                     tagsList_.Clear();
                     InTagsList_.Clear();
-                    FileList_.Clear();
-                    ScriptFileList_.Clear();
+                    FileList_?.Clear();
+                    ScriptFileList_?.Clear();
                 }
 
                 disposedValue = true;

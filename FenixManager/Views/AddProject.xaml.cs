@@ -1,7 +1,5 @@
 using ProjectDataLib;
 using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using io = System.IO;
 using wf = System.Windows.Forms;
@@ -101,11 +99,6 @@ namespace FenixWPF
 
                         if ((bool)ChkHttpTemplates.IsChecked)
                             DirectoryCopy(AppDomain.CurrentDomain.BaseDirectory + projectContainer.HttpCatalog, io.Path.GetDirectoryName(currentProject.path) + projectContainer.HttpCatalog, true);
-
-                        io.DirectoryInfo gt = new io.DirectoryInfo(io.Path.GetDirectoryName(currentProject.path) + "\\Http");
-                        var SubDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
-                        SubDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
-                        ((ITreeViewModel)currentProject.WebServer1).Children = new ObservableCollection<object>(SubDir);
 
                         string[] files1 = io.Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + projectContainer.TemplateCatalog);
                         foreach (string f in files1)

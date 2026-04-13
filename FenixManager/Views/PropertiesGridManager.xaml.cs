@@ -14,7 +14,7 @@ using System.Windows.Threading;
 
 namespace FenixWPF
 {
-    public partial class PropertiesGridManager : UserControl
+    public partial class PropertiesGridManager : UserControl, INotifyPropertyChanged
     {
         private readonly ObservableCollection<PropertyRow> _rows = new ObservableCollection<PropertyRow>();
         private object _selectedObject;

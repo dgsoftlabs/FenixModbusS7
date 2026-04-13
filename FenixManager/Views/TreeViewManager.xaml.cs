@@ -31,7 +31,6 @@ namespace FenixWPF
         private static readonly Dictionary<Type, string> ImageMappings = new Dictionary<Type, string>()
         {
             { typeof(Project),            "📁" },
-            { typeof(WebServer),          "🌐" },
             { typeof(CusFile),            "📂" },
             { typeof(DatabaseModel),      "🗄️" },
             { typeof(ScriptsDriver),      "📋" },
