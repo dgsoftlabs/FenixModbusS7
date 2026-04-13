@@ -10,18 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Version", "Version", "{DD8B
 		version.xml = version.xml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{F86A3F70-26A8-456D-96C4-3091AE7201D8}"
-	ProjectSection(SolutionItems) = preProject
-		Http\auth.html = Http\auth.html
-		Http\favicon.ico = Http\favicon.ico
-		Http\fenixlib.js = Http\fenixlib.js
-		Http\index.html = Http\index.html
-		Http\jquery-2.1.4.js = Http\jquery-2.1.4.js
-		Http\jquery.flot.js = Http\jquery.flot.js
-		Http\jquery.flot.time.js = Http\jquery.flot.time.js
-		Http\script.js = Http\script.js
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{724A4760-A914-4184-AFFF-243944BD2B35}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\Script.cs = Scripts\Script.cs
