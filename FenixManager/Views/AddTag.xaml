@@ -7,8 +7,8 @@
         xmlns:PrCon="clr-namespace:ProjectDataLib;assembly=ProjectDataLib"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add Tag" Height="520" Width="360"
-                   WindowStartupLocation="CenterScreen"
+        Title="Add Tag" Height="530" Width="360"
+                   WindowStartupLocation="CenterOwner"
                    >
 
     <Window.Resources>

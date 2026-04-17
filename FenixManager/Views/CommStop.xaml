@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
         Title="Stop" Height="150" Width="400"
-                   WindowStartupLocation="CenterScreen"
+                   WindowStartupLocation="CenterOwner"
                    >
     <StackPanel>
         <TextBlock FontWeight="Bold" FontSize="20" Margin="10">Comunication Stopping...</TextBlock>

@@ -7,3 +7,6 @@
 - User does not want `WebServer` brought back; it was intentionally removed and should stay removed.
 - In this project, do not keep or reintroduce Http tree nodes based on `CusFile`/folder entries (no `WebServer` in the tree).
 - Support only the .pse project format; do not support legacy .psx/.psf formats.
+
+## Code Style
+- Style definitions should only be placed in the style file (Themes/Default.xaml), not inline in views.

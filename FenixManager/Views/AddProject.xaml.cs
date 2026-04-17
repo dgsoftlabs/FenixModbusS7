@@ -1,5 +1,6 @@
 using ProjectDataLib;
 using System;
+using System.Runtime.Versioning;
 using System.Windows;
 using io = System.IO;
 using wf = System.Windows.Forms;
@@ -83,6 +84,7 @@ namespace FenixWPF
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event arguments.</param>
+        [SupportedOSPlatform("windows")]
         private void Button_Save_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -98,9 +100,6 @@ namespace FenixWPF
                     {
                         currentProject.path = sfd.FileName;
                         projectContainer.addProject(currentProject);
-
-                        if ((bool)ChkHttpTemplates.IsChecked)
-                            DirectoryCopy(AppDomain.CurrentDomain.BaseDirectory + projectContainer.HttpCatalog, io.Path.GetDirectoryName(currentProject.path) + projectContainer.HttpCatalog, true);
 
                         string[] files1 = io.Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + projectContainer.TemplateCatalog);
                         foreach (string f in files1)

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add Project" Height="420" Width="320" WindowStartupLocation="CenterScreen">
+        Title="Add Project" Height="420" Width="320" WindowStartupLocation="CenterOwner">
 
     <Grid Margin="14">
         <Grid.RowDefinitions>
@@ -27,8 +27,6 @@
 
             <TextBlock Text="Description" FontWeight="SemiBold" />
             <TextBox Text="{Binding describe}" />
-
-            <CheckBox x:Name="ChkHttpTemplates" IsChecked="True" FontWeight="SemiBold" Content="Apply Http Templates" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">

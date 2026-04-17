@@ -7,7 +7,7 @@
          xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add InTag" Height="460" Width="330" WindowStartupLocation="CenterScreen">
+        Title="Add InTag" Height="460" Width="330" WindowStartupLocation="CenterOwner">
     <Window.Resources>
 
         <ObjectDataProvider x:Key="TypeDataProvider" MethodName="GetValues"  ObjectType="{x:Type sys:Enum}">

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
         Title="Check Version" Height="220" Width="420"
-                   WindowStartupLocation="CenterScreen">
+                   WindowStartupLocation="CenterOwner">
     <Grid Margin="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

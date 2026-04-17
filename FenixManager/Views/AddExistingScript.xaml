@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add Existing Script" Height="190" Width="430" WindowStartupLocation="CenterScreen">
+        Title="Add Existing Script" Height="190" Width="430" WindowStartupLocation="CenterOwner">
     <Grid Margin="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

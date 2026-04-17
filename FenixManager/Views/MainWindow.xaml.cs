@@ -1,4 +1,8 @@
+using AvalonDock.Layout;
+using AvalonDock.Layout.Serialization;
+using FenixWPF.ViewModels;
 using Microsoft.Win32;
+using System.Windows.Interop;
 using ProjectDataLib;
 using System;
 using System.Collections.Generic;
@@ -14,9 +18,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using AvalonDock.Layout;
-using AvalonDock.Layout.Serialization;
-using FenixWPF.ViewModels;
 using io = System.IO;
 using wf = System.Windows.Forms;
 
@@ -415,7 +416,7 @@ namespace FenixWPF
             }
             else if (automatic)
             {
-                MessageBox.Show("Your version is up to date.");
+                MessageBox.Show(this, "Your version is up to date.");
             }
         }
 
@@ -429,6 +430,7 @@ namespace FenixWPF
             {
                 //dodanie projektu
                 AddProject fr = new AddProject(PrCon);
+                fr.Owner = this;
                 fr.ShowDialog();
             }
             catch (Exception Ex)
@@ -444,7 +446,7 @@ namespace FenixWPF
             {
                 if (Pr != null)
                 {
-                    MessageBox.Show("Project is already load. Please close project and try again!");
+                    MessageBox.Show(this, "Project is already load. Please close project and try again!");
                     return;
                 }
 
@@ -454,7 +456,7 @@ namespace FenixWPF
                 ofd.InitialDirectory = io.Path.GetDirectoryName(strp);
                 ofd.Filter = "Fenix project files (*.pse)|*.pse";
 
-                if (ofd.ShowDialog() == true)
+                if (ofd.ShowDialog(this) == true)
                 {
                     PrCon.openProjects(ofd.FileName);
                     Pr = PrCon.projectList.First();
@@ -471,6 +473,7 @@ namespace FenixWPF
             try
             {
                 AddConnection addConnection_ = new AddConnection(PrCon, PrCon.gConf, Pr.objId);
+                addConnection_.Owner = this;
                 addConnection_.ShowDialog();
             }
             catch (Exception Ex)
@@ -485,6 +488,7 @@ namespace FenixWPF
             try
             {
                 AddDevice addTagFolder_ = new FenixWPF.AddDevice(PrCon, Pr.objId, SelGuid);
+                addTagFolder_.Owner = this;
                 addTagFolder_.ShowDialog();
             }
             catch (Exception Ex)
@@ -500,6 +504,7 @@ namespace FenixWPF
             {
 
                 AddTag addTag_ = new FenixWPF.AddTag(ref PrCon, Pr.objId, SelGuid);
+                addTag_.Owner = this;
 
                 //reakcja USERA
                 addTag_.ShowDialog();
@@ -516,6 +521,7 @@ namespace FenixWPF
             try
             {
                 FenixWPF.AddInTag aTag = new FenixWPF.AddInTag(Pr.objId, PrCon);
+                aTag.Owner = this;
                 aTag.ShowDialog();
             }
             catch (Exception Ex)
@@ -532,11 +538,13 @@ namespace FenixWPF
                 if (tvMain.View.SelectedItem is CusFile)
                 {
                     AddFolder fr = new AddFolder(PrCon, Pr, ((CusFile)tvMain.View.SelectedItem).FullName, actualKindElement);
+                    fr.Owner = this;
                     fr.Show();
                 }
                 else if (tvMain.View.SelectedItem is Project)
                 {
                     AddFolder fr = new AddFolder(PrCon, Pr, io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog, actualKindElement);
+                    fr.Owner = this;
                     fr.Show();
                 }
             }
@@ -553,11 +561,13 @@ namespace FenixWPF
                 if (tvMain.View.SelectedItem is CusFile)
                 {
                     AddCusFile fr = new AddCusFile(PrCon, Pr, ((CusFile)tvMain.View.SelectedItem).FullName, actualKindElement);
+                    fr.Owner = this;
                     fr.Show();
                 }
                 else if (tvMain.View.SelectedItem is Project)
                 {
                     AddCusFile fr = new AddCusFile(PrCon, Pr, io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog, actualKindElement);
+                    fr.Owner = this;
                     fr.Show();
                 }
             }
@@ -572,6 +582,7 @@ namespace FenixWPF
             try
             {
                 AddScript fr = new AddScript(PrCon, Pr, SelGuid, actualKindElement);
+                fr.Owner = this;
                 fr.Show();
             }
             catch (Exception Ex)
@@ -585,6 +596,7 @@ namespace FenixWPF
             try
             {
                 AddExistingScript fr = new AddExistingScript(PrCon, Pr, SelGuid, actualKindElement);
+                fr.Owner = this;
                 fr.Show();
             }
             catch (Exception Ex)
@@ -749,6 +761,7 @@ namespace FenixWPF
                     if (((IDriverModel)SelObj).isAlive)
                     {
                         CommStop fr = new CommStop((IDriverModel)SelObj);
+                        fr.Owner = this;
                         fr.ShowDialog();
                     }
 
@@ -815,6 +828,7 @@ namespace FenixWPF
                     if (id.isAlive)
                     {
                         CommStop fr = new CommStop(id);
+                        fr.Owner = this;
                         fr.ShowDialog();
                     }
                 }
@@ -1018,7 +1032,7 @@ namespace FenixWPF
                     if (f == null)
                         return;
 
-                    if (wf.MessageBox.Show("Do you want to remove this file or directory?", "Attention", wf.MessageBoxButtons.OKCancel) == wf.DialogResult.OK)
+                    if (wf.MessageBox.Show( "Do you want to remove this file or directory?", "Attention", wf.MessageBoxButtons.OKCancel) == wf.DialogResult.OK)
                     {
                         if (f.IsFile)
                             io.File.Delete(f.FullName);
@@ -1285,6 +1299,7 @@ namespace FenixWPF
             try
             {
                 DriverConfigurator dConf = new DriverConfigurator(PrCon.gConf, PrCon);
+                dConf.Owner = this;
                 dConf.ShowDialog();
             }
             catch (Exception Ex)
@@ -1299,6 +1314,7 @@ namespace FenixWPF
             try
             {
                 About about = new About();
+                about.Owner = this;
                 about.Show();
             }
             catch (Exception Ex)
@@ -1313,6 +1329,7 @@ namespace FenixWPF
             try
             {
                 CheckVersion frVersion = new CheckVersion(PrCon);
+                frVersion.Owner = this;
                 frVersion.Show();
             }
             catch (Exception Ex)
@@ -1653,7 +1670,7 @@ namespace FenixWPF
 
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "CSV files (*.csv)|*.csv";
-                if (sfd.ShowDialog() == true)
+                if (sfd.ShowDialog(this) == true)
                     io.File.WriteAllText(sfd.FileName, sb.ToString());
             }
             catch (Exception Ex)

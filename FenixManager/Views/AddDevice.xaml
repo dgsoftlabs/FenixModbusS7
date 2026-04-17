@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add Device" Height="320" Width="320" WindowStartupLocation="CenterScreen">
+        Title="Add Device" Height="320" Width="320" WindowStartupLocation="CenterOwner">
     <DockPanel Margin="14">
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
             <Button MinWidth="80" IsEnabled="{Binding ElementName=TbName,Path=Text.Length}" Click="Button_Ok_Click" Content="OK" Margin="0,0,6,0" />

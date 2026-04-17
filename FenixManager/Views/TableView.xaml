@@ -43,12 +43,65 @@
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="DataGridRow" x:Key="rwStyle">
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource Th.Surface2Brush}" />
+            <Setter Property="Foreground" Value="{StaticResource Th.TextBrush}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="8,5" />
+            <Setter Property="BorderBrush" Value="{StaticResource Th.BorderBrush}" />
+            <Setter Property="BorderThickness" Value="0,0,1,1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="4,2" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="White" />
-                    <Setter Property="BorderBrush" Value="Black" />
-                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Background" Value="{StaticResource Th.SelBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource Th.TextBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="CellTextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Padding" Value="4,2" />
+            <Setter Property="MinHeight" Value="22" />
+        </Style>
+
+        <Style TargetType="ComboBox" x:Key="CellComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Padding" Value="4,2" />
+            <Setter Property="MinHeight" Value="22" />
+        </Style>
+
+        <Style TargetType="DataGridRow" x:Key="rwStyle">
+            <Setter Property="MinHeight" Value="26" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Th.HoverBrush}" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Th.SelBrush}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource Th.AccentBrush}" />
+                    <Setter Property="BorderThickness" Value="0,1" />
+                </Trigger>
+                <Trigger Property="AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="{StaticResource Th.Surface2Brush}" />
                 </Trigger>
                 <DataTrigger Binding="{Binding Path=(PrCon:ITag.GrVisibleTab)}"  Value="False">
                     <Setter Property="Visibility" Value="Collapsed" />
@@ -57,7 +110,8 @@
         </Style>
 
         <Style TargetType="ProgressBar" x:Key="ProgBr">
-            <Setter Property="Height" Value="7" />
+            <Setter Property="Height" Value="10" />
+            <Setter Property="Margin" Value="4,2" />
             <Setter Property="Value" Value="0" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=(PrCon:IDriverModel.isAlive)}" Value="True">
@@ -79,7 +133,7 @@
 
         <DataTemplate x:Key="BinaryField">
             <StackPanel>
-                <Button x:Name="bin" Content="Switch" Click="Button_Click">
+                <Button x:Name="bin" Content="Switch" Click="Button_Click" Padding="8,2" MinHeight="22">
                 </Button>
             </StackPanel>
             <DataTemplate.Triggers>
@@ -106,7 +160,7 @@
 
         <DataTemplate x:Key="ByteField">
             <StackPanel>
-                <TextBox x:Name="bttxt" TextChanged="bttxt_ValueChanged" />
+                <TextBox x:Name="bttxt" Style="{StaticResource CellTextBox}" TextChanged="bttxt_ValueChanged" />
             </StackPanel>
             <DataTemplate.Triggers>
                 <MultiDataTrigger>
@@ -132,7 +186,7 @@
 
         <DataTemplate x:Key="TextField">
             <StackPanel>
-                <TextBox x:Name="txt" TextChanged="txt_ValueChanged" />
+                <TextBox x:Name="txt" Style="{StaticResource CellTextBox}" TextChanged="txt_ValueChanged" />
             </StackPanel>
             <DataTemplate.Triggers>
                 <MultiDataTrigger>
@@ -158,7 +212,7 @@
 
         <DataTemplate x:Key="DoubleField">
             <StackPanel>
-                <TextBox x:Name="doubtxt" TextChanged="doubtxt_ValueChanged" />
+                <TextBox x:Name="doubtxt" Style="{StaticResource CellTextBox}" TextChanged="doubtxt_ValueChanged" />
             </StackPanel>
             <DataTemplate.Triggers>
                 <MultiDataTrigger>
@@ -184,7 +238,7 @@
 
         <DataTemplate x:Key="SingleField">
             <StackPanel>
-                <TextBox x:Name="sntxt" TextChanged="sntxt_ValueChanged" />
+                <TextBox x:Name="sntxt" Style="{StaticResource CellTextBox}" TextChanged="sntxt_ValueChanged" />
             </StackPanel>
             <DataTemplate.Triggers>
                 <MultiDataTrigger>
@@ -210,7 +264,7 @@
 
         <DataTemplate x:Key="IntField">
             <StackPanel>
-                <TextBox x:Name="intxt" TextChanged="intxt_ValueChanged" />
+                <TextBox x:Name="intxt" Style="{StaticResource CellTextBox}" TextChanged="intxt_ValueChanged" />
             </StackPanel>
             <DataTemplate.Triggers>
                 <MultiDataTrigger>
@@ -236,7 +290,7 @@
 
         <DataTemplate x:Key="ShortField">
             <StackPanel>
-                <TextBox x:Name="shtxt" TextChanged="shtxt_ValueChanged" />
+                <TextBox x:Name="shtxt" Style="{StaticResource CellTextBox}" TextChanged="shtxt_ValueChanged" />
             </StackPanel>
             <DataTemplate.Triggers>
                 <MultiDataTrigger>
@@ -303,12 +357,21 @@
     </UserControl.Resources>
 
     <Grid>
-        <DataGrid Name="View" AutoGenerateColumns="False" EnableRowVirtualization="False" RowStyle="{StaticResource rwStyle}" SelectionMode="Single">
+        <DataGrid Name="View" AutoGenerateColumns="False" EnableRowVirtualization="False"
+                  RowStyle="{StaticResource rwStyle}" SelectionMode="Single"
+                  AlternationCount="2"
+                  ColumnHeaderHeight="30"
+                  BorderThickness="1"
+                  BorderBrush="{StaticResource Th.BorderBrush}"
+                  Background="{StaticResource Th.SurfaceBrush}"
+                  RowBackground="{StaticResource Th.SurfaceBrush}"
+                  AlternatingRowBackground="{StaticResource Th.Surface2Brush}"
+                  GridLinesVisibility="Horizontal">
             <DataGrid.VerticalGridLinesBrush>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}" />
+                <SolidColorBrush Color="{StaticResource Th.BorderColor}" />
             </DataGrid.VerticalGridLinesBrush>
             <DataGrid.HorizontalGridLinesBrush>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}" />
+                <SolidColorBrush Color="{StaticResource Th.BorderColor}" />
             </DataGrid.HorizontalGridLinesBrush>
 
             <DataGrid.ContextMenu>
@@ -355,7 +418,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBox Text="{Binding Path=(PrCon:ITag.Width),Mode=TwoWay}" TextChanged="IntegerUpDown_ValueChanged" />
+                                <TextBox Style="{StaticResource CellTextBox}" Text="{Binding Path=(PrCon:ITag.Width),Mode=TwoWay}" TextChanged="IntegerUpDown_ValueChanged" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -365,7 +428,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBox  VerticalAlignment="Stretch" x:Name="NameTemp"  Text="{Binding Path=(PrCon:ITag.Name),Mode=TwoWay, ValidatesOnDataErrors=True}" IsEnabled="{Binding Path=(PrCon:ITag.ActName)}"
+                                <TextBox Style="{StaticResource CellTextBox}" VerticalAlignment="Stretch" x:Name="NameTemp"  Text="{Binding Path=(PrCon:ITag.Name),Mode=TwoWay, ValidatesOnDataErrors=True}" IsEnabled="{Binding Path=(PrCon:ITag.ActName)}"
                                           TextChanged="NameTemp_TextChanged">
                                 </TextBox>
                             </StackPanel>
@@ -393,7 +456,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBox x:Name="DBTemp" Text="{Binding Path=(PrCon:ITag.BlockAdress),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActBlockAdress)}"
+                                <TextBox x:Name="DBTemp" Style="{StaticResource CellTextBox}" Text="{Binding Path=(PrCon:ITag.BlockAdress),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActBlockAdress)}"
                                          TextChanged="TextBox_TextChanged" />
                             </StackPanel>
                             <DataTemplate.Triggers>
@@ -420,7 +483,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBox x:Name="stData" Text="{Binding Path=(PrCon:ITag.Adress),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActAdress)}"
+                                <TextBox x:Name="stData" Style="{StaticResource CellTextBox}" Text="{Binding Path=(PrCon:ITag.Adress),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActAdress)}"
                                          TextChanged="TextBox_TextChanged" />
                             </StackPanel>
                             <DataTemplate.Triggers>
@@ -447,7 +510,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <ComboBox x:Name="scAd" SelectedItem="{Binding Path=(PrCon:ITag.BitByte), Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActBitByte)}"
+                                <ComboBox x:Name="scAd" Style="{StaticResource CellComboBox}" SelectedItem="{Binding Path=(PrCon:ITag.BitByte), Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActBitByte)}"
                                           ItemsSource="{Binding Converter={StaticResource BitByteConv}}"
                                             SelectionChanged="ComboBox_SelectionChanged" DropDownOpened="ComboBox_DropDownOpened">
                                 </ComboBox>
@@ -476,7 +539,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <ComboBox x:Name="Dt" SelectedItem="{Binding Path=(PrCon:ITag.TypeData_),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActTypeData_)}"
+                                <ComboBox x:Name="Dt" Style="{StaticResource CellComboBox}" SelectedItem="{Binding Path=(PrCon:ITag.TypeData_),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActTypeData_)}"
                                          ItemsSource="{Binding Source={StaticResource TypeDataProvider}}" SelectionChanged="ComboBox_SelectionChanged">
                                 </ComboBox>
                             </StackPanel>
@@ -504,7 +567,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <ComboBox x:Name="aD" SelectedItem="{Binding Path=(PrCon:ITag.AreaData),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActAreaData)}"
+                                <ComboBox x:Name="aD" Style="{StaticResource CellComboBox}" SelectedItem="{Binding Path=(PrCon:ITag.AreaData),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActAreaData)}"
                                           SelectionChanged="ComboBox_SelectionChanged">
                                     <ComboBox.ItemsSource>
                                         <Binding Converter="{StaticResource AreaDataConv}"></Binding>
@@ -535,7 +598,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <ComboBox x:Name="bO" SelectedItem="{Binding Path=(PrCon:ITag.BytesOrder_),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActBytesOrder_)}"
+                                <ComboBox x:Name="bO" Style="{StaticResource CellComboBox}" SelectedItem="{Binding Path=(PrCon:ITag.BytesOrder_),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActBytesOrder_)}"
                                           ItemsSource="{Binding Source={StaticResource BytesOrderProvider}}" SelectionChanged="ComboBox_SelectionChanged">
                                 </ComboBox>
                             </StackPanel>
@@ -563,10 +626,11 @@
                                         Visibility="{Binding Path=DataContext.Pr.ChartConf.TvCol11, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock  x:Name="Val" Height="15"
+                            <TextBlock x:Name="Val"
                                         IsEnabled="{Binding Path=(PrCon:ITag.ActValue)}"
                                         Background="{Binding Path=(PrCon:ITag.Value), Mode=TwoWay, Converter={StaticResource ValueMarkConv}}"
-                                        FontWeight="Bold" TextAlignment="Center">
+                                        FontWeight="SemiBold" FontSize="12" TextAlignment="Center"
+                                        Padding="4,2" VerticalAlignment="Center">
 
                                 <TextBlock.Text>
                                     <MultiBinding Converter="{StaticResource ValueConv}">
@@ -608,7 +672,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBox x:Name="des" Text="{Binding Path=(PrCon:ITag.Description),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActDscription)}"
+                                <TextBox x:Name="des" Style="{StaticResource CellTextBox}" Text="{Binding Path=(PrCon:ITag.Description),Mode=TwoWay}" IsEnabled="{Binding Path=(PrCon:ITag.ActDscription)}"
                                          TextChanged="TextBox_TextChanged" />
                             </StackPanel>
                             <DataTemplate.Triggers>
