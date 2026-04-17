@@ -449,6 +449,19 @@ namespace ProjectDataLib
             }
         }
 
+        private bool TvCol15_;
+
+        [XmlElement(ElementName = "TableColumn15Visibility")]
+        public bool TvCol15
+        {
+            get { return TvCol15_; }
+            set
+            {
+                TvCol15_ = value;
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TvCol15)));
+            }
+        }
+
         [OnDeserializing]
         private void OnDeserialized(StreamingContext context)
         {

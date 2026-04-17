@@ -7,7 +7,8 @@
          xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add InTag" Height="460" Width="330" WindowStartupLocation="CenterOwner">
+        Title="Add InTag" Height="460" Width="330" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource Th.SurfaceBrush}">
     <Window.Resources>
 
         <ObjectDataProvider x:Key="TypeDataProvider" MethodName="GetValues"  ObjectType="{x:Type sys:Enum}">
@@ -19,23 +20,23 @@
         <local:ValueConv x:Key="ValueConv" />
     </Window.Resources>
 
-    <DockPanel Margin="14">
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
-            <Button MinWidth="80" Margin="0,0,6,0" Content="OK" Click="Button_Ok_Click" />
-            <Button MinWidth="80" Content="Cancel" Click="Button_Cancel_Click" />
+    <DockPanel Style="{StaticResource Th.DialogRootDockPanel}">
+        <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource Th.DialogBottomActionsPanel}">
+            <Button Style="{StaticResource Th.DialogBottomPrimaryActionButton}" Content="OK" Click="Button_Ok_Click" />
+            <Button Style="{StaticResource Th.DialogBottomActionButton}" Content="Cancel" Click="Button_Cancel_Click" />
         </StackPanel>
 
         <StackPanel>
-            <Image Width="26" Height="26" Margin="0,0,0,10" Source="pack://application:,,,/TreeImage/IntTag.png" HorizontalAlignment="Left" />
+            <Image Style="{StaticResource Th.DialogHeaderIcon}" Source="pack://application:,,,/TreeImage/IntTag.png" />
 
-            <TextBlock FontWeight="SemiBold" Text="Name" />
+            <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Name" />
             <TextBox Text="{Binding tagName, Mode=TwoWay}" />
 
-            <TextBlock FontWeight="SemiBold" Text="Data Type" />
+            <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Data Type" />
             <ComboBox ItemsSource="{Binding Source={StaticResource TypeDataProvider}}"
                       SelectedItem="{Binding TypeData,Mode=TwoWay}" />
 
-            <TextBlock FontWeight="SemiBold" Text="Initial Value" />
+            <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Initial Value" />
             <TextBox>
                 <TextBox.Text>
                     <MultiBinding Converter="{StaticResource ValueConv}">
@@ -45,8 +46,8 @@
                 </TextBox.Text>
             </TextBox>
 
-            <TextBlock FontWeight="SemiBold" Text="Description" />
-            <TextBox Height="100" Text="{Binding describe , Mode=TwoWay}" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+            <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Description" Margin="0,0,0,2" />
+            <TextBox Style="{StaticResource Th.DialogMultilineTextBox}" Height="100" Text="{Binding describe , Mode=TwoWay}" />
         </StackPanel>
     </DockPanel>
 </Window>

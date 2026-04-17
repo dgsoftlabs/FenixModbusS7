@@ -14,6 +14,7 @@
             <MenuItem Header="Add Connection" Click="Connection0_Click" IsEnabled="{Binding mConnection}" />
             <Separator />
             <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Table View (Read Only)"  Click="TableViewRO0_Click" IsEnabled="{Binding mTable }" />
             <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
             <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
             <Separator />
@@ -113,6 +114,7 @@
             <MenuItem Header="Add Device" Click="Device0_Click" IsEnabled="{Binding mDevice}" />
             <Separator />
             <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Table View (Read Only)"  Click="TableViewRO0_Click" IsEnabled="{Binding mTable }" />
             <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
             <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
             <Separator />
@@ -132,6 +134,7 @@
             <MenuItem Header="Add Tag" Click="Tag0_Click" IsEnabled="{Binding mTag}" />
             <Separator />
             <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Table View (Read Only)"  Click="TableViewRO0_Click" IsEnabled="{Binding mTable }" />
             <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
             <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
             <Separator />
@@ -159,122 +162,253 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">
-            <MenuItem Header="File" IsEnabled="{Binding mFile}">
-                <MenuItem Header="New" Click="New0_Click" IsEnabled="{Binding mNew}" />
-                <MenuItem Header="Open" Click="Open0_Click" IsEnabled="{Binding mOpen}" />
-                <Separator />
-                <MenuItem Header="Add" Name="Add0" IsEnabled="{Binding mAdd}">
-                    <MenuItem Header="Connection" Click="Connection0_Click" IsEnabled="{Binding mConnection}" />
-                    <MenuItem Header="Device"  Click="Device0_Click" IsEnabled="{Binding mDevice}" />
-                    <MenuItem Header="Tag"  Click="Tag0_Click" IsEnabled="{Binding mTag}" />
-                    <MenuItem Header="Internal Tag"  Click="IntTag0_Click" IsEnabled="{Binding mIntTag}" />
-                    <MenuItem Header="Folder"  Click="Folder_Click" IsEnabled="{Binding mFolder}" />
-                    <MenuItem Header="File"  Click="File0_Click" IsEnabled="{Binding mInFile}" />
+            <MenuItem Header="_File" IsEnabled="{Binding mFile}">
+                <MenuItem Header="_New" Click="New0_Click" IsEnabled="{Binding mNew}" InputGestureText="Ctrl+N">
+                    <MenuItem.Icon><TextBlock Text="📄" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Open..." Click="Open0_Click" IsEnabled="{Binding mOpen}" InputGestureText="Ctrl+O">
+                    <MenuItem.Icon><TextBlock Text="📂" FontSize="12"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Close Project" Click="ClProject0_Click" IsEnabled="{Binding mClosePr}" />
+                <MenuItem Header="_Add" Name="Add0" IsEnabled="{Binding mAdd}">
+                    <MenuItem.Icon><TextBlock Text="➕" FontSize="12"/></MenuItem.Icon>
+                    <MenuItem Header="Connection" Click="Connection0_Click" IsEnabled="{Binding mConnection}">
+                        <MenuItem.Icon><TextBlock Text="🔗" FontSize="12"/></MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Device"  Click="Device0_Click" IsEnabled="{Binding mDevice}">
+                        <MenuItem.Icon><TextBlock Text="🖥️" FontSize="12"/></MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Tag"  Click="Tag0_Click" IsEnabled="{Binding mTag}">
+                        <MenuItem.Icon><TextBlock Text="🏷️" FontSize="12"/></MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Internal Tag"  Click="IntTag0_Click" IsEnabled="{Binding mIntTag}">
+                        <MenuItem.Icon><TextBlock Text="🔖" FontSize="12"/></MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Folder"  Click="Folder_Click" IsEnabled="{Binding mFolder}">
+                        <MenuItem.Icon><TextBlock Text="📁" FontSize="12"/></MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="File"  Click="File0_Click" IsEnabled="{Binding mInFile}">
+                        <MenuItem.Icon><TextBlock Text="📄" FontSize="12"/></MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Save"  Click="Save0_Click" IsEnabled="{Binding mSave}" />
+                <MenuItem Header="_Close Project" Click="ClProject0_Click" IsEnabled="{Binding mClosePr}">
+                    <MenuItem.Icon><TextBlock Text="❎" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Exit" Click="Exit0_Click" IsEnabled="{Binding mExit}" />
+                <MenuItem Header="_Save"  Click="Save0_Click" IsEnabled="{Binding mSave}" InputGestureText="Ctrl+S">
+                    <MenuItem.Icon><TextBlock Text="💾" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="E_xit" Click="Exit0_Click" IsEnabled="{Binding mExit}" InputGestureText="Alt+F4">
+                    <MenuItem.Icon><TextBlock Text="🚪" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Edit" IsEnabled="{Binding mEdit}">
-                <MenuItem Header="Cut"  Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-                <MenuItem Header="Copy"  Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-                <MenuItem Header="Paste"  Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-                <MenuItem Header="Delete"  Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="_Edit" IsEnabled="{Binding mEdit}">
+                <MenuItem Header="Cu_t"  Click="Cut0_Click" IsEnabled="{Binding mCut}" InputGestureText="Ctrl+X">
+                    <MenuItem.Icon><TextBlock Text="✂️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Copy"  Click="Copy0_Click" IsEnabled="{Binding mCopy}" InputGestureText="Ctrl+C">
+                    <MenuItem.Icon><TextBlock Text="📋" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Paste"  Click="Paste0_Click" IsEnabled="{Binding mPaste}" InputGestureText="Ctrl+V">
+                    <MenuItem.Icon><TextBlock Text="📌" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Delete"  Click="Delete0_Click" IsEnabled="{Binding mDelete}" InputGestureText="Del">
+                    <MenuItem.Icon><TextBlock Text="🗑️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="View" IsEnabled="{Binding mView}">
-                <MenuItem Header="Solution"  Click="Solution0_Click" IsEnabled="{Binding mSolution }" />
-                <MenuItem Header="Properties"  Click="Properties0_Click" IsEnabled="{Binding mProperties}" />
-                <MenuItem Header="Output"  Click="Output0_Click" IsEnabled="{Binding mOutput }" />
+            <MenuItem Header="_View" IsEnabled="{Binding mView}">
+                <MenuItem Header="_Solution Explorer"  Click="Solution0_Click" IsEnabled="{Binding mSolution }">
+                    <MenuItem.Icon><TextBlock Text="🗂️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Properties Panel"  Click="Properties0_Click" IsEnabled="{Binding mProperties}">
+                    <MenuItem.Icon><TextBlock Text="⚙️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Output"  Click="Output0_Click" IsEnabled="{Binding mOutput }">
+                    <MenuItem.Icon><TextBlock Text="📋" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
-                <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
-                <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
-                <MenuItem Header="Editor"  Click="Editor0_Click" IsEnabled="{Binding mEditor }" />
+                <MenuItem Header="_Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }">
+                    <MenuItem.Icon><TextBlock Text="📊" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Table View (Read Only)"  Click="TableViewRO0_Click" IsEnabled="{Binding mTable }">
+                    <MenuItem.Icon><TextBlock Text="📋" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }">
+                    <MenuItem.Icon><TextBlock Text="📈" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Co_mmunication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }">
+                    <MenuItem.Icon><TextBlock Text="📡" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Editor"  Click="Editor0_Click" IsEnabled="{Binding mEditor }">
+                    <MenuItem.Icon><TextBlock Text="✏️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Drivers" IsEnabled="{Binding mDriversSt }">
-                <MenuItem Header="Start"  Click="Start0_Click" IsEnabled="{Binding mStart }" />
-                <MenuItem Header="Stop"  Click="Stop0_Click" IsEnabled="{Binding mStop }" />
+            <MenuItem Header="_Drivers" IsEnabled="{Binding mDriversSt }">
+                <MenuItem Header="_Start"  Click="Start0_Click" IsEnabled="{Binding mStart }" InputGestureText="F5">
+                    <MenuItem.Icon><TextBlock Text="▶️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="St_op"  Click="Stop0_Click" IsEnabled="{Binding mStop }" InputGestureText="Shift+F5">
+                    <MenuItem.Icon><TextBlock Text="⏹️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Start All" Click="StartAll_Click" IsEnabled="{Binding mStartAll }" />
-                <MenuItem Header="Stop All"  Click="StopAll_Click" IsEnabled="{Binding mStopAll }" />
+                <MenuItem Header="Start _All" Click="StartAll_Click" IsEnabled="{Binding mStartAll }">
+                    <MenuItem.Icon><TextBlock Text="⏩" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Stop A_ll"  Click="StopAll_Click" IsEnabled="{Binding mStopAll }">
+                    <MenuItem.Icon><TextBlock Text="⏸️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Tools" IsEnabled="{Binding mTools }">
-                <MenuItem Header="Block"  Click="Block_Click" IsEnabled="{Binding mBlock }" />
-                <MenuItem Header="Unblock"   Click="Unblock_Click" IsEnabled="{Binding mUnBlock }" />
+            <MenuItem Header="_Tools" IsEnabled="{Binding mTools }">
+                <MenuItem Header="_Block"  Click="Block_Click" IsEnabled="{Binding mBlock }">
+                    <MenuItem.Icon><TextBlock Text="🔒" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Unblock"   Click="Unblock_Click" IsEnabled="{Binding mUnBlock }">
+                    <MenuItem.Icon><TextBlock Text="🔓" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Simulation"  Click="Simulation0_Click" IsEnabled="{Binding mSimulate }" />
+                <MenuItem Header="_Simulation"  Click="Simulation0_Click" IsEnabled="{Binding mSimulate }">
+                    <MenuItem.Icon><TextBlock Text="🧪" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Show Location" Click="ShLocation0_Click" IsEnabled="{Binding mShowLoc }" />
+                <MenuItem Header="Show _Location" Click="ShLocation0_Click" IsEnabled="{Binding mShowLoc }">
+                    <MenuItem.Icon><TextBlock Text="📍" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Driver Configuration"  Click="DriveConf0_Click" IsEnabled="{Binding mDrivers }" />
+                <MenuItem Header="Driver _Configuration"  Click="DriveConf0_Click" IsEnabled="{Binding mDrivers }">
+                    <MenuItem.Icon><TextBlock Text="🔧" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Database" IsEnabled="{Binding mDatabase}">
-                <MenuItem Header="Show File" IsEnabled="{Binding mDbShowFile}" Click="MenuItem_ShowDbFile_Click" />
-                <MenuItem Header="Show Database" IsEnabled="{Binding mShowDb}" Click="MenuItem_ShowDatabse_Click" />
+            <MenuItem Header="Data_base" IsEnabled="{Binding mDatabase}">
+                <MenuItem Header="Show _File" IsEnabled="{Binding mDbShowFile}" Click="MenuItem_ShowDbFile_Click">
+                    <MenuItem.Icon><TextBlock Text="📄" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Show Database" IsEnabled="{Binding mShowDb}" Click="MenuItem_ShowDatabse_Click">
+                    <MenuItem.Icon><TextBlock Text="🗄️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Show _Trend" IsEnabled="{Binding mShowTrendDb}" Click="MenuItem_ShowTrendDb_Click">
+                    <MenuItem.Icon><TextBlock Text="📉" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Save CSV" IsEnabled="{Binding mSaveCSV}"     Click="MenuItem_SaveDatabeCSV_Click" />
+                <MenuItem Header="_Export CSV" IsEnabled="{Binding mSaveCSV}" Click="MenuItem_SaveDatabeCSV_Click">
+                    <MenuItem.Icon><TextBlock Text="📤" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Database Reset" IsEnabled="{Binding mDbReset}" Click="MenuItem_DbReset_Click" />
+                <MenuItem Header="_Reset Database" IsEnabled="{Binding mDbReset}" Click="MenuItem_DbReset_Click">
+                    <MenuItem.Icon><TextBlock Text="♻️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Help" IsEnabled="{Binding mHelp }">
-                <MenuItem Header="Updates"  Click="Updates0_Click" IsEnabled="{Binding mUpdates }" />
-                <MenuItem Header="About"  Click="About0_Click" IsEnabled="{Binding mAbout}" />
-                <MenuItem Header="Show Help"  Click="ShHelp0_Click" IsEnabled="{Binding mViewHelp }" />
+            <MenuItem Header="_Help" IsEnabled="{Binding mHelp }">
+                <MenuItem Header="Check for _Updates"  Click="Updates0_Click" IsEnabled="{Binding mUpdates }">
+                    <MenuItem.Icon><TextBlock Text="🔄" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Documentation"  Click="ShHelp0_Click" IsEnabled="{Binding mViewHelp }" InputGestureText="F1">
+                    <MenuItem.Icon><TextBlock Text="📖" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_About FenixManager"  Click="About0_Click" IsEnabled="{Binding mAbout}">
+                    <MenuItem.Icon><TextBlock Text="ℹ️" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
 
-        <ToolBar Grid.Row="1">
-            <Button Click="New0_Click" IsEnabled="{Binding mNew}" ToolTip="New">
-                <TextBlock Text="📄" FontSize="14" VerticalAlignment="Center" />
+        <ToolBar Grid.Row="1"
+                 Background="{StaticResource Th.SurfaceBrush}"
+                 Foreground="{StaticResource Th.TextBrush}">
+            <Button Click="New0_Click" IsEnabled="{Binding mNew}" ToolTip="New Project (Ctrl+N)">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="📄" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="New" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
-            <Button Click="Open0_Click" IsEnabled="{Binding mOpen}" ToolTip="Open">
-                <TextBlock Text="📂" FontSize="14" VerticalAlignment="Center" />
+            <Button Click="Open0_Click" IsEnabled="{Binding mOpen}" ToolTip="Open Project (Ctrl+O)">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="📂" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Open" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
-            <Button Click="Save0_Click" IsEnabled="{Binding mSave}" ToolTip="Save">
-                <TextBlock Text="💾" FontSize="14" VerticalAlignment="Center" />
+            <Button Click="Save0_Click" IsEnabled="{Binding mSave}" ToolTip="Save Project (Ctrl+S)">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="💾" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Save" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
             <Separator />
             <Button Click="TableView0_Click" IsEnabled="{Binding mTable}" ToolTip="Table View">
-                <TextBlock Text="📊" FontSize="14" VerticalAlignment="Center" />
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="📊" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Table" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
+            </Button>
+            <Button Click="TableViewRO0_Click" IsEnabled="{Binding mTable}" ToolTip="Table View (Read Only)">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="📋" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Table RO" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
             <Button Click="ChartView0_Click" IsEnabled="{Binding mChart}" ToolTip="Chart View">
-                <TextBlock Text="📈" FontSize="14" VerticalAlignment="Center" />
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="📈" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Chart" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
             <Button Click="CommView0_Click" IsEnabled="{Binding mCommView}" ToolTip="Communication View">
-                <TextBlock Text="📡" FontSize="14" VerticalAlignment="Center" />
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="📡" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Comm" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
-            <Button Click="Editor0_Click" IsEnabled="{Binding mEditor}" ToolTip="Editor">
-                <TextBlock Text="✏️" FontSize="14" VerticalAlignment="Center" />
+            <Button Click="Editor0_Click" IsEnabled="{Binding mEditor}" ToolTip="Script Editor">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="✏️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Editor" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
             <Separator />
-            <Button Click="Start0_Click" IsEnabled="{Binding mStart}" ToolTip="Start Selected Driver">
-                <TextBlock Text="▶️" FontSize="14" VerticalAlignment="Center" />
+            <Button Click="Start0_Click" IsEnabled="{Binding mStart}" ToolTip="Start Selected Driver (F5)">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="▶️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Start" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
-            <Button Click="Stop0_Click" IsEnabled="{Binding mStop}" ToolTip="Stop Selected Driver">
-                <TextBlock Text="⏹️" FontSize="14" VerticalAlignment="Center" />
+            <Button Click="Stop0_Click" IsEnabled="{Binding mStop}" ToolTip="Stop Selected Driver (Shift+F5)">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="⏹️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Stop" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
             <Separator />
             <Button Click="StartAll_Click" IsEnabled="{Binding mStartAll}" ToolTip="Start All Drivers">
-                <TextBlock Text="⏩" FontSize="14" VerticalAlignment="Center" />
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="⏩" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Start All" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
             <Button Click="StopAll_Click" IsEnabled="{Binding mStopAll}" ToolTip="Stop All Drivers">
-                <TextBlock Text="⏸️" FontSize="14" VerticalAlignment="Center" />
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="⏸️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Stop All" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
             <Separator />
-            <Button Click="ShHelp0_Click" IsEnabled="{Binding mViewHelp}" ToolTip="Help">
-                <TextBlock Text="❓" FontSize="14" VerticalAlignment="Center" />
+            <Button Click="ShHelp0_Click" IsEnabled="{Binding mViewHelp}" ToolTip="Documentation (F1)">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="📖" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Docs" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
-            <Button Click="About0_Click" IsEnabled="{Binding mAbout}" ToolTip="About">
-                <TextBlock Text="ℹ️" FontSize="14" VerticalAlignment="Center" />
+            <Button Click="About0_Click" IsEnabled="{Binding mAbout}" ToolTip="About FenixManager">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
+                    <TextBlock Text="ℹ️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
+                    <TextBlock Text="About" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                </StackPanel>
             </Button>
         </ToolBar>
 
@@ -302,12 +436,12 @@
             </adl:LayoutRoot>
         </ad:DockingManager>
 
-        <StatusBar Grid.Row="3">
-            <StatusBarItem Name="lbPathProject" FontWeight="Bold">
+        <StatusBar Grid.Row="3" Background="{StaticResource Th.Surface2Brush}" Foreground="{StaticResource Th.TextBrush}">
+            <StatusBarItem Name="lbPathProject" FontWeight="Bold" FontSize="{StaticResource Th.FontMd}">
                 -
             </StatusBarItem>
             <Separator />
-            <StatusBarItem Name="lbInfo">
+            <StatusBarItem Name="lbInfo" FontSize="{StaticResource Th.FontMd}">
                 -
             </StatusBarItem>
         </StatusBar>

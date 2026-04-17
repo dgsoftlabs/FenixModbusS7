@@ -10,35 +10,35 @@
         <ToolBar DockPanel.Dock="Top">
             <!-- Save -->
             <Button Click="saveFileClick" ToolTip="Save (Ctrl+S)">
-                <TextBlock Text="💾" FontSize="14" VerticalAlignment="Center" />
+                <TextBlock Text="💾" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" />
             </Button>
             <Separator />
             <!-- Clipboard -->
-            <Button Command="Cut"    ToolTip="Cut">    <TextBlock Text="✂️"  FontSize="14" VerticalAlignment="Center" /></Button>
-            <Button Command="Copy"   ToolTip="Copy">   <TextBlock Text="📋"  FontSize="14" VerticalAlignment="Center" /></Button>
-            <Button Command="Paste"  ToolTip="Paste">  <TextBlock Text="📌"  FontSize="14" VerticalAlignment="Center" /></Button>
-            <Button Command="Delete" ToolTip="Delete"> <TextBlock Text="🗑️" FontSize="14" VerticalAlignment="Center" /></Button>
+            <Button Command="Cut"    ToolTip="Cut">    <TextBlock Text="✂️"  FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" /></Button>
+            <Button Command="Copy"   ToolTip="Copy">   <TextBlock Text="📋"  FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" /></Button>
+            <Button Command="Paste"  ToolTip="Paste">  <TextBlock Text="📌"  FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" /></Button>
+            <Button Command="Delete" ToolTip="Delete"> <TextBlock Text="🗑️" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" /></Button>
             <Separator />
             <!-- History -->
-            <Button Command="Undo" ToolTip="Undo"><TextBlock Text="↩️" FontSize="14" VerticalAlignment="Center" /></Button>
-            <Button Command="Redo" ToolTip="Redo"><TextBlock Text="↪️" FontSize="14" VerticalAlignment="Center" /></Button>
+            <Button Command="Undo" ToolTip="Undo"><TextBlock Text="↩️" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" /></Button>
+            <Button Command="Redo" ToolTip="Redo"><TextBlock Text="↪️" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" /></Button>
             <Separator />
             <!-- Search -->
-            <Button Click="Button_FindClick"    ToolTip="Find (Ctrl+F)">             <TextBlock Text="🔍" FontSize="14" VerticalAlignment="Center" /></Button>
-            <Button Click="Button_ReplaceClick" ToolTip="Find &amp; Replace (Ctrl+H)"><TextBlock Text="🔄" FontSize="14" VerticalAlignment="Center" /></Button>
+            <Button Click="Button_FindClick"    ToolTip="Find (Ctrl+F)">             <TextBlock Text="🔍" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" /></Button>
+            <Button Click="Button_ReplaceClick" ToolTip="Find &amp; Replace (Ctrl+H)"><TextBlock Text="🔄" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" /></Button>
             <Separator />
             <!-- View toggles -->
             <ToggleButton IsChecked="{Binding ElementName=textEditor, Path=WordWrap,             Mode=TwoWay}" ToolTip="Word Wrap">
-                <TextBlock Text="↵" FontSize="14" VerticalAlignment="Center" />
+                <TextBlock Text="↵" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" />
             </ToggleButton>
             <ToggleButton IsChecked="{Binding ElementName=textEditor, Path=ShowLineNumbers,      Mode=TwoWay}" ToolTip="Line Numbers">
-                <TextBlock Text="#" FontSize="12" VerticalAlignment="Center" />
+                <TextBlock Text="#" FontSize="{StaticResource Th.FontMd}" VerticalAlignment="Center" />
             </ToggleButton>
             <ToggleButton IsChecked="{Binding ElementName=textEditor, Path=Options.ShowEndOfLine, Mode=TwoWay}" ToolTip="Show End of Line">
-                <TextBlock Text="¶" FontSize="14" VerticalAlignment="Center" />
+                <TextBlock Text="¶" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" />
             </ToggleButton>
             <ToggleButton x:Name="btnShowCatalog" ToolTip="Script API Catalog (F2)" Click="BtnCatalog_Click">
-                <TextBlock Text="📖" FontSize="14" VerticalAlignment="Center" />
+                <TextBlock Text="📖" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" />
             </ToggleButton>
             <Separator />
             <!-- Syntax highlighting -->
@@ -49,11 +49,11 @@
                       SelectionChanged="HighlightingComboBox_SelectionChanged" />
             <Separator />
             <!-- Font size spinner -->
-            <TextBlock Text="A" FontSize="9"  VerticalAlignment="Center" Margin="4,0,3,0"
+            <TextBlock Text="A" FontSize="{StaticResource Th.FontXs}"  VerticalAlignment="Center" Margin="4,0,3,0"
                        Foreground="{DynamicResource Th.TextSecBrush}" />
             <Button Content="−" Width="22" Padding="0" ToolTip="Decrease font size" Click="FontSizeDec_Click" />
             <TextBlock x:Name="tbFontSize" Width="38" TextAlignment="Center"
-                       VerticalAlignment="Center" FontSize="11"
+                       VerticalAlignment="Center" FontSize="{StaticResource Th.FontSm}"
                        Foreground="{DynamicResource Th.TextBrush}" />
             <Button Content="+" Width="22" Padding="0" ToolTip="Increase font size" Click="FontSizeInc_Click" />
             <TextBlock Text="A" FontSize="16" VerticalAlignment="Center" Margin="3,0,4,0"
@@ -66,12 +66,12 @@
                    BorderThickness="0,1,0,0">
             <StatusBarItem>
                 <TextBlock x:Name="tbCaretInfo" Text="Ln 1  Col 1"
-                           Foreground="{DynamicResource Th.TextSecBrush}" FontSize="11" />
+                           Foreground="{DynamicResource Th.TextSecBrush}" FontSize="{StaticResource Th.FontSm}" />
             </StatusBarItem>
             <Separator />
             <StatusBarItem>
                 <TextBlock x:Name="tbEncoding" Text="UTF-8"
-                           Foreground="{DynamicResource Th.TextSecBrush}" FontSize="11" />
+                           Foreground="{DynamicResource Th.TextSecBrush}" FontSize="{StaticResource Th.FontSm}" />
             </StatusBarItem>
         </StatusBar>
 
@@ -109,7 +109,7 @@
                         ToolTip="Next (Enter)" Click="FindNextClick" />
                 <TextBlock x:Name="tbSearchStatus" Grid.Row="0" Grid.Column="4"
                            VerticalAlignment="Center" Margin="6,0"
-                           Foreground="{DynamicResource Th.TextSecBrush}" FontSize="11" />
+                           Foreground="{DynamicResource Th.TextSecBrush}" FontSize="{StaticResource Th.FontSm}" />
                 <Button Grid.Row="0" Grid.Column="6" Content="✕" Width="26" Margin="4,2,0,2"
                         ToolTip="Close (Escape)" Click="CloseSearch_Click" />
 
@@ -207,7 +207,7 @@
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Signature}"
                                                    FontFamily="Consolas"
-                                                   FontSize="11"
+                                                   FontSize="{StaticResource Th.FontSm}"
                                                    Margin="0,1"
                                                    ToolTip="{Binding Description}" />
                                     </DataTemplate>

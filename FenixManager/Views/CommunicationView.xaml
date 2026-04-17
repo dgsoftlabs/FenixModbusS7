@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FenixWPF"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             Background="White">
+             Background="{StaticResource Th.BgBrush}">
 
     <UserControl.Resources>
         <local:DataBytes x:Key="DataBytesConv" />
@@ -26,7 +26,7 @@
         <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}" />
     </UserControl.Resources>
 
-    <Grid Background="White">
+    <Grid Background="{StaticResource Th.BgBrush}">
 
         <Grid.RowDefinitions>
             <RowDefinition  Height="40" />
@@ -34,7 +34,7 @@
             <RowDefinition  Height="30" />
         </Grid.RowDefinitions>
 
-        <ToolBar Grid.Row="0" Background="White">
+        <ToolBar Grid.Row="0" Background="{StaticResource Th.SurfaceBrush}">
             <ToggleButton  Content="Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
             <Separator />
             <Button Content="Save CSV" Click="SaveCSV" />
@@ -49,7 +49,16 @@
                   AutoGenerateColumns="False"
                   Grid.Row="1"
                   RowStyle="{StaticResource rwStyle}"
-                  CanUserSortColumns="False">
+                  CanUserSortColumns="False"
+                  Background="{StaticResource Th.SurfaceBrush}"
+                  BorderBrush="{StaticResource Th.BorderBrush}"
+                  BorderThickness="0"
+                  Foreground="{StaticResource Th.TextBrush}"
+                  RowBackground="{StaticResource Th.SurfaceBrush}"
+                  AlternatingRowBackground="{StaticResource Th.Surface2Brush}"
+                  HorizontalGridLinesBrush="{StaticResource Th.BorderBrush}"
+                  VerticalGridLinesBrush="{StaticResource Th.BorderBrush}"
+                  FontSize="{StaticResource Th.FontMd}">
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -157,7 +166,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StatusBar Grid.Row="2" Background="White">
+        <StatusBar Grid.Row="2" Background="{StaticResource Th.SurfaceBrush}">
             <Label >Records:</Label>
             <Label Content="{Binding ElementName=View , Path=Items.Count}" />
         </StatusBar>

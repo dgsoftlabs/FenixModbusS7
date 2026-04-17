@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:FenixWPF"
              xmlns:PrCon="clr-namespace:ProjectDataLib;assembly=ProjectDataLib"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="{StaticResource Th.BgBrush}">
 
     <UserControl.Resources>
 
@@ -19,10 +20,13 @@
 
         <HierarchicalDataTemplate x:Key="Lev1" ItemsSource="{Binding Path=(PrCon:ITreeViewModel.Children)}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Converter={StaticResource ImgConv}}" FontSize="16" VerticalAlignment="Center" Margin="0,0,2,0" />
+                <TextBlock Text="{Binding Converter={StaticResource ImgConv}}" FontSize="{StaticResource Th.FontLg}" VerticalAlignment="Center" Margin="0,0,2,0" />
                 <Rectangle Width="10" Height="10" Margin="5,0,0,0" Fill="{Binding Path=(PrCon:ITreeViewModel.Clr) , Mode=TwoWay,Converter= {StaticResource Clr1}}" />
-                <TextBlock Text="{Binding Path=(PrCon:ITreeViewModel.Name) , Mode=TwoWay}"  Margin="8,5,5,5" />
-                <TextBlock Margin="8,5,5,5">
+                <TextBlock Text="{Binding Path=(PrCon:ITreeViewModel.Name) , Mode=TwoWay}"
+                           FontSize="{StaticResource Th.FontMd}"
+                           Foreground="{StaticResource Th.TextBrush}"
+                           Margin="8,5,5,5" />
+                <TextBlock FontSize="{StaticResource Th.FontSm}" Foreground="{StaticResource Th.TextSecBrush}" Margin="4,5,5,5">
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource StRunConv}">
                             <Binding Path="(PrCon:ITreeViewModel.IsLive)" />
@@ -30,15 +34,21 @@
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
-                <TextBlock Text="{Binding Path=(PrCon:ITreeViewModel.IsBlocked),  Converter={StaticResource StBlockConv}}" Margin="8,5,5,5" />
+                <TextBlock Text="{Binding Path=(PrCon:ITreeViewModel.IsBlocked), Converter={StaticResource StBlockConv}}"
+                           FontSize="{StaticResource Th.FontSm}"
+                           Foreground="{StaticResource Th.TextSecBrush}"
+                           Margin="4,5,5,5" />
             </StackPanel>
         </HierarchicalDataTemplate>
     </UserControl.Resources>
 
     <Grid>
-        <TreeView Name="View" ItemTemplate="{StaticResource Lev1}">
+        <TreeView Name="View" ItemTemplate="{StaticResource Lev1}"
+                  Background="{StaticResource Th.BgBrush}"
+                  Foreground="{StaticResource Th.TextBrush}"
+                  BorderBrush="{StaticResource Th.BorderBrush}">
             <TreeView.ItemContainerStyle>
-                <Style TargetType="TreeViewItem">
+                <Style TargetType="TreeViewItem" BasedOn="{StaticResource Th.TreeViewItem}">
                     <Setter Property="IsExpanded" Value="{Binding Path=(PrCon:ITreeViewModel.IsExpand), Mode=TwoWay}" />
                 </Style>
             </TreeView.ItemContainerStyle>

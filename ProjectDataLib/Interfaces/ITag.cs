@@ -39,6 +39,9 @@ namespace ProjectDataLib
         string Description { get; set; }
         Boolean ActDscription { get; }
 
+        string TagVersion { get; set; }
+        Boolean ActVersion { get; }
+
         Boolean ActParam { get; }
 
         Boolean ActSetValue { get; }

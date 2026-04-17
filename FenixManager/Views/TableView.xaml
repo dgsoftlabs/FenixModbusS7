@@ -390,6 +390,7 @@
                     <CheckBox Content="Progress" IsChecked="{Binding Pr.ChartConf.TvCol12, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Set Value" IsChecked="{Binding Pr.ChartConf.TvCol13, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Description" IsChecked="{Binding Pr.ChartConf.TvCol14, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Version" IsChecked="{Binding Pr.ChartConf.TvCol15, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
 
@@ -399,13 +400,13 @@
                         <DataTemplate>
                             <Grid>
                                 <Border Width="18"
-                                        Height="18"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        BorderBrush="#666"
-                                        BorderThickness="1"
-                                        Background="{Binding Path=(PrCon:ITag.Clr), Converter={StaticResource ColorConv}}"
-                                        ToolTip="{Binding Path=(PrCon:ITag.Clr)}" />
+                                            Height="18"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            BorderBrush="{StaticResource Th.BorderBrush}"
+                                            BorderThickness="1"
+                                            Background="{Binding Path=(PrCon:ITag.Clr), Converter={StaticResource ColorConv}}"
+                                            ToolTip="{Binding Path=(PrCon:ITag.Clr)}" />
                             </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -696,7 +697,17 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                    <DataGridTemplateColumn Width="*" x:Name="tagVersion" Header="Version" Visibility="{Binding Path=DataContext.Pr.ChartConf.TvCol15, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement}, Mode=TwoWay}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBox x:Name="ver" Style="{StaticResource CellTextBox}" Text="{Binding Path=(PrCon:ITag.TagVersion), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=(PrCon:ITag.ActVersion)}"
+                                             TextChanged="TextBox_TextChanged" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
     </Grid>
 </UserControl>

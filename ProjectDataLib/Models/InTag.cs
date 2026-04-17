@@ -209,6 +209,21 @@ namespace ProjectDataLib
             }
         }
 
+        private string tagVersion_;
+
+        [Category("01 Design"), DisplayName("Version")]
+        [JsonIgnore]
+        [XmlElement(ElementName = "Version")]
+        public string tagVersion
+        {
+            get { return tagVersion_; }
+            set
+            {
+                tagVersion_ = value;
+                propChanged?.Invoke(this, new PropertyChangedEventArgs("TagVersion"));
+            }
+        }
+
         private string TimerName_;
 
         [TypeConverter(typeof(InTagsTimers))]
@@ -737,6 +752,14 @@ namespace ProjectDataLib
         }
 
         Boolean ITag.ActDscription { get { return true; } }
+
+        string ITag.TagVersion
+        {
+            get { return tagVersion; }
+            set { tagVersion = value; }
+        }
+
+        Boolean ITag.ActVersion { get { return true; } }
 
         Boolean ITag.ActParam
         {

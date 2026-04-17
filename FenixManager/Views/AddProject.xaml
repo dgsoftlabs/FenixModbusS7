@@ -5,33 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add Project" Height="420" Width="320" WindowStartupLocation="CenterOwner">
+        Title="Add Project" Height="420" Width="320" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource Th.SurfaceBrush}">
 
-    <Grid Margin="14">
+    <Grid Style="{StaticResource Th.DialogRootGrid}" Margin="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <Image Width="26" Height="26" Margin="0,0,0,10" Source="pack://application:,,,/TreeImage/Project.png" HorizontalAlignment="Left" />
+            <Image Style="{StaticResource Th.DialogHeaderIcon}" Source="pack://application:,,,/TreeImage/Project.png" />
 
-            <TextBlock Text="Project Name *" FontWeight="SemiBold" />
+            <TextBlock Text="Project Name *" Style="{StaticResource Th.DialogSectionTitle}" />
             <TextBox Text="{Binding projectName}" x:Name="tbPrName" />
 
-            <TextBlock Text="Author" FontWeight="SemiBold" />
+            <TextBlock Text="Author" Style="{StaticResource Th.DialogSectionTitle}" />
             <TextBox Text="{Binding autor}" />
 
-            <TextBlock Text="Company" FontWeight="SemiBold" />
+            <TextBlock Text="Company" Style="{StaticResource Th.DialogSectionTitle}" />
             <TextBox Text="{Binding company}" />
 
-            <TextBlock Text="Description" FontWeight="SemiBold" />
+            <TextBlock Text="Description" Style="{StaticResource Th.DialogSectionTitle}" />
             <TextBox Text="{Binding describe}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
-            <Button Content="Save" Click="Button_Save_Click" MinWidth="80" Margin="0,0,6,0" IsEnabled="{Binding ElementName=tbPrName,Path=Text.Length}" />
-            <Button Content="Close" Click="Button_Close_Click" MinWidth="80" />
+        <StackPanel Grid.Row="1" Style="{StaticResource Th.DialogBottomActionsPanel}">
+            <Button Content="Save" Style="{StaticResource Th.DialogBottomPrimaryActionButton}" Click="Button_Save_Click" IsEnabled="{Binding ElementName=tbPrName,Path=Text.Length}" />
+            <Button Content="Close" Style="{StaticResource Th.DialogBottomActionButton}" Click="Button_Close_Click" />
         </StackPanel>
     </Grid>
 </Window>

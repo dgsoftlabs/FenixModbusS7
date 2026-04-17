@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace FenixWPF
 {
-    public partial class DbExplorer : UserControl, INotifyPropertyChanged
+    public partial class DBTableView : UserControl, INotifyPropertyChanged
     {
         private DateTime _fromDate;
         private DateTime _toDate;
@@ -67,6 +67,8 @@ namespace FenixWPF
             }
         }
 
+        public bool IsDateRangeEditable => _selectedInterval == "Custom";
+
         public string SelectedInterval
         {
             get => _selectedInterval;
@@ -76,6 +78,7 @@ namespace FenixWPF
                 {
                     _selectedInterval = value;
                     OnPropertyChanged();
+                    OnPropertyChanged(nameof(IsDateRangeEditable));
                     UpdateDateRange();
                 }
             }
@@ -94,14 +97,14 @@ namespace FenixWPF
             }
         }
 
-        public DbExplorer(Project project)
+        public DBTableView(Project project)
         {
             InitializeComponent();
             DataContext = this;
             _project = project;
 
             // Initialize default values
-            TimeIntervals = ["1h", "3h", "6h", "12h", "24h"];
+            TimeIntervals = ["1h", "3h", "6h", "12h", "24h", "Custom"];
             OrderOptions = ["Descending", "Ascending"];
             SelectedInterval = TimeIntervals.First();
             SelectedOrder = OrderOptions.First();
@@ -112,15 +115,18 @@ namespace FenixWPF
 
         private void UpdateDateRange()
         {
+            if (_selectedInterval == "Custom")
+                return;
+
             DateTime now = DateTime.Now;
             FromDate = SelectedInterval switch
             {
-                "1h" => now.AddHours(-1),
-                "3h" => now.AddHours(-3),
-                "6h" => now.AddHours(-6),
+                "1h"  => now.AddHours(-1),
+                "3h"  => now.AddHours(-3),
+                "6h"  => now.AddHours(-6),
                 "12h" => now.AddHours(-12),
                 "24h" => now.AddHours(-24),
-                _ => FromDate
+                _     => FromDate
             };
             ToDate = now;
         }
@@ -130,14 +136,7 @@ namespace FenixWPF
             if (SelectedOrder == null || OrderOptions == null) return;
 
             bool descending = SelectedOrder == OrderOptions[0];
-            if (BlockTimeFiltersCheckBox.IsChecked is true)
-            {
-                myDataGrid.ItemsSource = await _project.Db.GetAllTagsAsync(descending);
-            }
-            else
-            {
-                myDataGrid.ItemsSource = await _project.Db.GetDataByStampAsync(FromDate, ToDate, descending);
-            }                
+            myDataGrid.ItemsSource = await _project.Db.GetDataByStampAsync(FromDate, ToDate, descending);
         }
 
         private async void ResetButton_Click(object sender, System.Windows.RoutedEventArgs e)

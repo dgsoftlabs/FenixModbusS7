@@ -6,108 +6,134 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:FenixWPF"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="800">
+             d:DesignHeight="294.667" d:DesignWidth="998.667"
+             Background="{StaticResource Th.SurfaceBrush}">
 
     <UserControl.Resources>
         <local:BoolNegConverter x:Key="BoolNeg" />
-        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-
-        <Style x:Key="ToolbarLabelStyle" TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,6,0" />
-        </Style>
-
-        <Style x:Key="ToolbarInputStyle" TargetType="TextBox">
-            <Setter Property="Height" Value="28" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,10,0" />
-        </Style>
-
-        <Style x:Key="ToolbarButtonStyle" TargetType="Button">
-            <Setter Property="MinWidth" Value="90" />
-            <Setter Property="Height" Value="28" />
-            <Setter Property="Margin" Value="0,0,8,0" />
-            <Setter Property="Padding" Value="12,0" />
-        </Style>
-
-        <Style x:Key="ToolbarClearButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="28" />
-            <Setter Property="Height" Value="28" />
-            <Setter Property="Margin" Value="-4,0,10,0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
+        <local:BooleanToVisibilityConverter x:Key="BoolToVisibility" />
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="12" Background="{StaticResource Th.SurfaceBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <GroupBox Grid.Row="0" Margin="20,8,20,6" Padding="6" Header="Chart Controls">
-            <ToolBarTray IsLocked="True" Background="Transparent">
-                <ToolBar Background="Transparent" BorderThickness="0" Padding="0">
-                    <TextBlock Style="{StaticResource ToolbarLabelStyle}" Text="Visible Range [DD:HH:MM:SS]" />
-                    <TextBox x:Name="TrackSpanInput"
-                             Width="150"
-                             Style="{StaticResource ToolbarInputStyle}"
-                             IsEnabled="{Binding Path=Pr.ChartConf.histData, Converter={StaticResource BoolNeg}}"
-                             ToolTip="Set the time range displayed on the chart"
-                             Text="{Binding Path=Pr.ChartConf.TrackSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Button x:Name="ClearTrackSpanButton"
-                            Style="{StaticResource ToolbarClearButtonStyle}"
-                            Content="X"
-                            Visibility="{Binding IsTrackSpanFilterActive, Converter={StaticResource BoolToVisibility}}"
-                            ToolTip="Reset visible range filter" />
+        <GroupBox Grid.Row="0" Padding="12,10">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="🔍" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" />
+                    <TextBlock Text="Controls" VerticalAlignment="Center" />
+                </StackPanel>
+            </GroupBox.Header>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Height="30">
 
-                    <Separator />
+                <TextBlock Text="⏱️" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                <TextBlock Text="Range:" Style="{StaticResource Th.FilterLabel}" Margin="0,0,4,0" />
+                <TextBox x:Name="TrackSpanInput"
+                         Width="120"
+                         Style="{StaticResource Th.FilterTextBox}"
+                         IsEnabled="{Binding Path=Pr.ChartConf.histData, Converter={StaticResource BoolNeg}}"
+                         ToolTip="Set the time range displayed on the chart [DD:HH:MM:SS]"
+                         Text="{Binding Path=Pr.ChartConf.TrackSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button x:Name="ClearTrackSpanButton"
+                        Width="22" MinWidth="22" Margin="2,0,8,0"
+                        Style="{StaticResource Th.FilterButton}"
+                        Padding="0" Content="✕"
+                        Visibility="{Binding IsTrackSpanFilterActive, Converter={StaticResource BoolToVisibility}}"
+                        ToolTip="Reset visible range filter" />
 
-                    <TextBlock Style="{StaticResource ToolbarLabelStyle}" Text="Y Min:" />
-                    <TextBox x:Name="Y0"
-                             Width="95"
-                             Style="{StaticResource ToolbarInputStyle}"
-                             ToolTip="Set the minimum value of the Y axis"
-                             TextChanged="Y0_ValueChanged"
-                             Text="{Binding Path=Pr.ChartConf.minimumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Button x:Name="ClearYMinButton"
-                            Style="{StaticResource ToolbarClearButtonStyle}"
-                            Content="X"
-                            Visibility="{Binding IsYMinFilterActive, Converter={StaticResource BoolToVisibility}}"
-                            ToolTip="Clear Y min filter" />
+                <TextBlock Text="📉" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                <TextBlock Text="Y Min:" Style="{StaticResource Th.FilterLabel}" Margin="0,0,4,0" />
+                <TextBox x:Name="Y0"
+                         Width="70"
+                         Style="{StaticResource Th.FilterTextBox}"
+                         ToolTip="Set the minimum value of the Y axis"
+                         TextChanged="Y0_ValueChanged"
+                         Text="{Binding Path=Pr.ChartConf.minimumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button x:Name="ClearYMinButton"
+                        Width="22" MinWidth="22" Margin="2,0,8,0"
+                        Style="{StaticResource Th.FilterButton}"
+                        Padding="0" Content="✕"
+                        Visibility="{Binding IsYMinFilterActive, Converter={StaticResource BoolToVisibility}}"
+                        ToolTip="Clear Y min filter" />
 
-                    <TextBlock Style="{StaticResource ToolbarLabelStyle}" Text="Y Max:" />
-                    <TextBox x:Name="Y1"
-                             Width="95"
-                             Style="{StaticResource ToolbarInputStyle}"
-                             ToolTip="Set the maximum value of the Y axis"
-                             TextChanged="Y1_ValueChanged"
-                             Text="{Binding Path=Pr.ChartConf.maximumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Button x:Name="ClearYMaxButton"
-                            Style="{StaticResource ToolbarClearButtonStyle}"
-                            Content="X"
-                            Visibility="{Binding IsYMaxFilterActive, Converter={StaticResource BoolToVisibility}}"
-                            ToolTip="Clear Y max filter" />
+                <TextBlock Text="📈" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                <TextBlock Text="Y Max:" Style="{StaticResource Th.FilterLabel}" Margin="0,0,4,0" />
+                <TextBox x:Name="Y1"
+                         Width="70"
+                         Style="{StaticResource Th.FilterTextBox}"
+                         ToolTip="Set the maximum value of the Y axis"
+                         TextChanged="Y1_ValueChanged"
+                         Text="{Binding Path=Pr.ChartConf.maximumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button x:Name="ClearYMaxButton"
+                        Width="22" MinWidth="22" Margin="2,0,8,0"
+                        Style="{StaticResource Th.FilterButton}"
+                        Padding="0" Content="✕"
+                        Visibility="{Binding IsYMaxFilterActive, Converter={StaticResource BoolToVisibility}}"
+                        ToolTip="Clear Y max filter" />
 
-                    <Separator />
+                <Button Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
+                        Click="Button_Reset_Click"
+                        ToolTip="Restore default axis ranges">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="↺" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <TextBlock Text="Reset" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
 
-                    <Button Style="{StaticResource ToolbarButtonStyle}"
-                            Content="Reset View"
-                            Click="Button_Reset_Click"
-                            ToolTip="Restore default axis ranges" />
-                    <Button Style="{StaticResource ToolbarButtonStyle}"
-                            Margin="0"
-                            Content="Clear Data"
-                            Click="Button_Clear_Click"
-                            ToolTip="Remove all points from the chart" />
-                </ToolBar>
-            </ToolBarTray>
+                <Button Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
+                        Click="Button_Clear_Click"
+                        ToolTip="Remove all points from the chart">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🗑️" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <TextBlock Text="Clear" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="PauseResumeButton"
+                        Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
+                        Click="Button_PauseResume_Click"
+                        ToolTip="Pause or resume live data collection">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="PauseResumeIcon" Text="⏸️" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <TextBlock x:Name="PauseResumeLabel" Text="Pause" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
+                        Click="Button_CopyToClipboard_Click"
+                        ToolTip="Copy chart to clipboard">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📋" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <TextBlock Text="Copy" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource Th.FilterButton}"
+                        Click="Button_ExportPng_Click"
+                        ToolTip="Export chart as PNG image">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="💾" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <TextBlock Text="Export" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
         </GroupBox>
 
-        <oxy:PlotView x:Name="View" Grid.Row="1" />
+        <oxy:PlotView x:Name="View"
+                      Grid.Row="2"
+                      Background="{StaticResource Th.SurfaceBrush}"
+                      Margin="0,0,0,2" />
 
-        <TextBlock Margin="5" Grid.Row="2" Text="{Binding InteractionDescription}" />
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="2,8,2,0">
+            <TextBlock Text="ℹ️" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="{StaticResource Th.TextSecBrush}" />
+            <TextBlock Text="{Binding StatusText}" Foreground="{StaticResource Th.TextSecBrush}" VerticalAlignment="Center" />
+        </StackPanel>
 
     </Grid>
 </UserControl>

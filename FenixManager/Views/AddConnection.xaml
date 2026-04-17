@@ -6,23 +6,24 @@
         xmlns:pr="clr-namespace:ProjectDataLib;assembly=ProjectDataLib"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add Connection" Height="470" Width="320" WindowStartupLocation="CenterOwner">
-    <DockPanel Margin="14">
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
-            <Button MinWidth="80" IsEnabled="{Binding ElementName=TbConnName, Path=Text.Length}" Click="Button_Save_Click" Content="OK" Margin="0,0,6,0" />
-            <Button MinWidth="80" Click="Button_Close_Click" Content="Close" />
+        Title="Add Connection" Height="470" Width="320" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource Th.SurfaceBrush}">
+    <DockPanel Style="{StaticResource Th.DialogRootDockPanel}">
+        <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource Th.DialogBottomActionsPanel}">
+            <Button IsEnabled="{Binding ElementName=TbConnName, Path=Text.Length}" Click="Button_Save_Click" Content="OK" Style="{StaticResource Th.DialogBottomPrimaryActionButton}" />
+            <Button Click="Button_Close_Click" Content="Close" Style="{StaticResource Th.DialogBottomActionButton}" />
         </StackPanel>
 
         <StackPanel>
-            <Image Width="26" Height="26" Margin="0,0,0,10" Source="pack://application:,,,/TreeImage/Connection.png" HorizontalAlignment="Left" />
+            <Image Source="pack://application:,,,/TreeImage/Connection.png" Style="{StaticResource Th.DialogHeaderIcon}" />
 
-            <TextBlock FontWeight="SemiBold" Text="Connection Name" />
+            <TextBlock Text="Connection Name" Style="{StaticResource Th.DialogSectionTitle}" />
             <TextBox Name="TbConnName" Text="{Binding connectionName }" />
 
-            <TextBlock FontWeight="SemiBold" Text="Driver Name" />
+            <TextBlock Text="Driver Name" Style="{StaticResource Th.DialogSectionTitle}" />
             <ComboBox x:Name="CbDrivers" SelectionChanged="CbDrivers_SelectionChanged" />
 
-            <local:PropertiesGridManager Margin="0,4,0,0" x:Name="PgDrvProps" Height="220" />
+            <local:PropertiesGridManager x:Name="PgDrvProps" Margin="0,4,0,0" Height="220" />
         </StackPanel>
     </DockPanel>
 </Window>

@@ -101,8 +101,9 @@
                                              Text="{Binding ValueText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                              IsReadOnly="{Binding IsReadOnly}">
                                         <TextBox.Style>
-                                            <Style TargetType="TextBox">
+                                            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                                                 <Setter Property="Visibility" Value="Collapsed" />
+                                                <Setter Property="Margin"     Value="0" />
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding IsTextEditorVisible}" Value="True">
                                                         <Setter Property="Visibility" Value="Visible" />
@@ -134,8 +135,9 @@
                                               SelectedItem="{Binding EnumValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                               IsEnabled="{Binding IsEditable}">
                                         <ComboBox.Style>
-                                            <Style TargetType="ComboBox">
+                                            <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
                                                 <Setter Property="Visibility" Value="Collapsed" />
+                                                <Setter Property="Margin"     Value="0" />
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding IsEnumEditorVisible}" Value="True">
                                                         <Setter Property="Visibility" Value="Visible" />
@@ -150,8 +152,9 @@
                                               SelectedItem="{Binding StandardValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                               IsEnabled="{Binding IsEditable}">
                                         <ComboBox.Style>
-                                            <Style TargetType="ComboBox">
+                                            <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
                                                 <Setter Property="Visibility" Value="Collapsed" />
+                                                <Setter Property="Margin"     Value="0" />
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding IsStandardValuesEditorVisible}" Value="True">
                                                         <Setter Property="Visibility" Value="Visible" />

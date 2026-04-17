@@ -19,7 +19,7 @@ namespace FenixWPF
     /// <summary>
     /// Interaction logic for ChartViewDatabase.xaml
     /// </summary>
-    public partial class ChartViewDatabase : UserControl, INotifyPropertyChanged
+    public partial class DBChartView : UserControl, INotifyPropertyChanged
     {
         private DateTime _fromDate;
         private DateTime _toDate;
@@ -68,6 +68,8 @@ namespace FenixWPF
             }
         }
 
+        public bool IsDateRangeEditable => _selectedInterval == "Custom";
+
         public string SelectedInterval
         {
             get => _selectedInterval;
@@ -77,6 +79,7 @@ namespace FenixWPF
                 {
                     _selectedInterval = value;
                     OnPropertyChanged();
+                    OnPropertyChanged(nameof(IsDateRangeEditable));
                     UpdateDateXRangeBasedOnInterval();
                 }
             }
@@ -150,15 +153,15 @@ namespace FenixWPF
             PlotModel.Axes.Add(AxY1);
             View.Model = PlotModel;
 
-            await RefreshChartAsync(false);
+            await RefreshChartAsync();
         }
 
-        public ChartViewDatabase(Project project)
+        public DBChartView(Project project)
         {
             InitializeComponent();
             DataContext = this;
 
-            TimeIntervals = new ObservableCollection<string> { "1h", "3h", "6h", "12h", "24h" };
+            TimeIntervals = new ObservableCollection<string> { "1h", "3h", "6h", "12h", "24h", "Custom" };
             SelectedInterval = TimeIntervals.First();
 
             YAxisMinimum = 0;
@@ -168,12 +171,12 @@ namespace FenixWPF
             Loaded += async (_, __) => await InitializeAsync(project);
         }
 
-        private async Task RefreshChartAsync(bool blockFilters)
+        private async Task RefreshChartAsync()
         {
             IsLoading = true;
             try
             {
-                var data = await LoadDataFromDatabase(FromDate, ToDate, blockFilters);
+                var data = await LoadDataFromDatabase(FromDate, ToDate);
                 var series = await CreateSeriesAsync(data);
                 AddSeries(series);
 
@@ -194,19 +197,11 @@ namespace FenixWPF
             }
         }
 
-        private async Task<List<TagDTO>> LoadDataFromDatabase(DateTime from, DateTime to, bool blockFilters)
+        private async Task<List<TagDTO>> LoadDataFromDatabase(DateTime from, DateTime to)
         {
             return await Task.Run(() =>
             {
-                ObservableCollection<TagDTO> data = new ObservableCollection<TagDTO>();
-                if (blockFilters)
-                {
-                    data = _project.Db.GetAllObservableCollection() ?? new ObservableCollection<TagDTO>();
-                }
-                else
-                {
-                    data = _project.Db.GetDataByStamp(from, to) ?? new ObservableCollection<TagDTO>();
-                }
+                var data = _project.Db.GetDataByStamp(from, to) ?? new ObservableCollection<TagDTO>();
                 return data.ToList();
             });
         }
@@ -258,15 +253,18 @@ namespace FenixWPF
 
         private void UpdateDateXRangeBasedOnInterval()
         {
+            if (_selectedInterval == "Custom")
+                return;
+
             DateTime now = DateTime.Now;
             FromDate = SelectedInterval switch
             {
-                "1h" => now.AddHours(-1),
-                "3h" => now.AddHours(-3),
-                "6h" => now.AddHours(-6),
+                "1h"  => now.AddHours(-1),
+                "3h"  => now.AddHours(-3),
+                "6h"  => now.AddHours(-6),
                 "12h" => now.AddHours(-12),
                 "24h" => now.AddHours(-24),
-                _ => FromDate
+                _     => FromDate
             };
             ToDate = now;
         }
@@ -284,7 +282,7 @@ namespace FenixWPF
 
         private async void ShowAllButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            await RefreshChartAsync(DisableFormCheckBox.IsChecked is true);
+            await RefreshChartAsync();
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

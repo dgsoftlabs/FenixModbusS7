@@ -290,6 +290,21 @@ namespace ProjectDataLib
             }
         }
 
+        private string tagVersion_;
+
+        [Category("01 Design"), DisplayName("Version")]
+        [JsonIgnore]
+        [XmlElement(ElementName = "Version")]
+        public string tagVersion
+        {
+            get { return tagVersion_; }
+            set
+            {
+                tagVersion_ = value;
+                propChanged?.Invoke(this, new PropertyChangedEventArgs("TagVersion"));
+            }
+        }
+
         private Object value_;
 
         [Browsable(false)]
@@ -1481,10 +1496,15 @@ namespace ProjectDataLib
 
         Boolean ITag.ActDscription { get { return true; } }
 
-        Boolean ITag.ActParam
+        string ITag.TagVersion
         {
-            get { return true; }
+            get { return tagVersion; }
+            set { tagVersion = value; }
         }
+
+        Boolean ITag.ActVersion { get { return true; } }
+
+        Boolean ITag.ActParam { get { return false; } }
 
         Type ITag.getOwnType()
         {

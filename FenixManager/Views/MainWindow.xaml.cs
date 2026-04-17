@@ -233,7 +233,7 @@ namespace FenixWPF
                 else
                     exList.Add(new CustomException(sender, new Exception(e.element1.ToString())));
 
-                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.Title == "Output").First();
+                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Output").First();
                 lpAnchor.IsActive = true;
             });
         }
@@ -269,7 +269,7 @@ namespace FenixWPF
             //PropertyGrid
 
             laPropGrid.Content = propManag;
-            laPropGrid.Title = "Properties";
+            laPropGrid.Title = "\u2699\ufe0f Properties";
             laPropGrid.ContentId = "Properties";
             RightPan.Children.Add(laPropGrid);
 
@@ -278,13 +278,13 @@ namespace FenixWPF
             tvMain.View.SelectedItemChanged += View_SelectedItemChanged;
 
             laTvMain.Content = tvMain;
-            laTvMain.Title = "Solution";
+            laTvMain.Title = "\ud83d\uddc2\ufe0f Solution Explorer";
             laTvMain.ContentId = "Solution";
             LeftPan.Children.Add(laTvMain);
 
             //Exceptions
             frOutput = new Output(PrCon, exList);
-            laOutput.Title = "Output";
+            laOutput.Title = "\ud83d\udccb Output";
             laOutput.Content = frOutput;
             laOutput.ContentId = "Output";
             laGrOutput.Children.Add(laOutput);
@@ -646,7 +646,7 @@ namespace FenixWPF
                 //Zamkniecie edytorow
                 var docs = dockManager.Layout.Descendents()
                     .OfType<LayoutAnchorable>()
-                    .Where(x => x.Title != "Output" && x.Title != "Properties" && x.Title != "Solution")
+                    .Where(x => x.ContentId != "Output" && x.ContentId != "Properties" && x.ContentId != "Solution")
                     .Select(x => x).ToList();
 
                 for (int i = 0; i < docs.Count(); i++)
@@ -1059,7 +1059,7 @@ namespace FenixWPF
         {
             try
             {
-                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.Title == "Solution").First();
+                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Solution").First();
                 lpAnchor.IsVisible = true;
             }
             catch (Exception Ex)
@@ -1072,7 +1072,7 @@ namespace FenixWPF
         {
             try
             {
-                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.Title == "Properties").First();
+                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Properties").First();
                 lpAnchor.IsVisible = true;
             }
             catch (Exception Ex)
@@ -1086,7 +1086,7 @@ namespace FenixWPF
         {
             try
             {
-                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.Title == "Output").First();
+                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Output").First();
                 lpAnchor.IsVisible = true;
             }
             catch (Exception Ex)
@@ -1106,6 +1106,7 @@ namespace FenixWPF
                 var laTableViewAnchorable = new LayoutAnchorable
                 {
                     CanClose = true,
+                    Title = $"\ud83d\udcca {((ITreeViewModel)SelObj)?.Name ?? "Table View"}",
                     ContentId = $"TableView;{SelGuid};{actualKindElement}"
                 };
 
@@ -1132,6 +1133,39 @@ namespace FenixWPF
             }
         }
 
+        private void TableViewRO0_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (Pr == null)
+                    return;
+
+                var laAnchorable = new LayoutAnchorable
+                {
+                    CanClose = true,
+                    Title = $"\ud83d\udccb {((ITreeViewModel)SelObj)?.Name ?? "Table View RO"}",
+                    ContentId = $"TableViewRO;{SelGuid};{actualKindElement}"
+                };
+
+                var tbViewRO = new TableViewRO(PrCon, Pr.objId, SelGuid, actualKindElement, laAnchorable);
+                laAnchorable.Closed += LaCtrl_Closed;
+                laAnchorable.Content = tbViewRO;
+
+                var middlePan1 = dockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
+                if (middlePan1 != null)
+                    middlePan1.Children.Add(laAnchorable);
+                else
+                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(laAnchorable));
+
+                laAnchorable.IsActive = true;
+                CheckAccessForNodes();
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
         private void ChartView0_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1139,6 +1173,7 @@ namespace FenixWPF
                 var laChartView = new LayoutAnchorable
                 {
                     CanClose = true,
+                    Title = $"\ud83d\udcc8 {((ITreeViewModel)SelObj)?.Name ?? "Chart View"}",
                     ContentId = $"ChartView;{SelGuid};{actualKindElement}"
                 };
 
@@ -1172,6 +1207,7 @@ namespace FenixWPF
                 var laCommunicationView = new LayoutAnchorable
                 {
                     CanClose = true,
+                    Title = $"\ud83d\udce1 {((ITreeViewModel)SelObj)?.Name ?? "Comm View"}",
                     ContentId = $"CommView;{SelGuid};{actualKindElement}"
                 };
 
@@ -1605,7 +1641,7 @@ namespace FenixWPF
                 LayoutAnchorable laTableView = new LayoutAnchorable();
                 laTableView.CanClose = true;
                 laTableView.ContentId = "Database";
-                DbExplorer db = new DbExplorer(Pr);
+                DBTableView db = new DBTableView(Pr);
                 laTableView.Closed += LaCtrl_Closed;
                 laTableView.Content = db;
 
@@ -1613,7 +1649,7 @@ namespace FenixWPF
 
                 MiddlePan1.Children.Add(laTableView);
                 laTableView.IsActive = true;
-                laTableView.Title = "Database";
+                laTableView.Title = "\ud83d\uddc4\ufe0f Database";
 
                 CheckAccessForNodes();
             }
@@ -1631,7 +1667,7 @@ namespace FenixWPF
                 LayoutAnchorable laTableView = new LayoutAnchorable();
                 laTableView.CanClose = true;
                 laTableView.ContentId = "TrendDatabase";
-                ChartViewDatabase chart = new ChartViewDatabase(Pr);
+                DBChartView chart = new DBChartView(Pr);
                 laTableView.Closed += LaCtrl_Closed;
                 laTableView.Content = chart;
 
@@ -1639,7 +1675,7 @@ namespace FenixWPF
 
                 MiddlePan1.Children.Add(laTableView);
                 laTableView.IsActive = true;
-                laTableView.Title = "Chart Database";
+                laTableView.Title = "\ud83d\udcc9 Chart Database";
 
                 CheckAccessForNodes();
             }

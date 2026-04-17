@@ -5,20 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="Add Device" Height="320" Width="320" WindowStartupLocation="CenterOwner">
-    <DockPanel Margin="14">
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
-            <Button MinWidth="80" IsEnabled="{Binding ElementName=TbName,Path=Text.Length}" Click="Button_Ok_Click" Content="OK" Margin="0,0,6,0" />
-            <Button MinWidth="80" Click="Button_Close_Click" Content="Close" />
+        Title="Add Device" Height="320" Width="320" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource Th.SurfaceBrush}">
+    <DockPanel Style="{StaticResource Th.DialogRootDockPanel}">
+        <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource Th.DialogBottomActionsPanel}">
+            <Button IsEnabled="{Binding ElementName=TbName,Path=Text.Length}" Click="Button_Ok_Click" Content="OK" Style="{StaticResource Th.DialogBottomPrimaryActionButton}" />
+            <Button Click="Button_Close_Click" Content="Close" Style="{StaticResource Th.DialogBottomActionButton}" />
         </StackPanel>
 
         <StackPanel>
-            <Image Width="26" Height="26" Margin="0,0,0,10" Source="pack://application:,,,/TreeImage/Device.ico" HorizontalAlignment="Left" />
+            <Image Source="pack://application:,,,/TreeImage/Device.ico" Style="{StaticResource Th.DialogHeaderIcon}" />
 
-            <TextBlock FontWeight="SemiBold" Text="Name" />
+            <TextBlock Text="Name" Style="{StaticResource Th.DialogSectionTitle}" />
             <TextBox Name="TbName" Text="{Binding name}" />
 
-            <TextBlock FontWeight="SemiBold" Text="Device Address" />
+            <TextBlock Text="Device Address" Style="{StaticResource Th.DialogSectionTitle}" />
             <TextBox Name="TbAdress" Text="{Binding adress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </DockPanel>

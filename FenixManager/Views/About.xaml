@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FenixWPF"
         mc:Ignorable="d"
-        Title="About" Height="240" Width="420" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+        Title="About" Height="240" Width="420" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{StaticResource Th.SurfaceBrush}">
     <Grid Margin="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -13,19 +14,19 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
-            <Border Width="110" Height="110" Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="8" Padding="8" Margin="0,0,14,0">
+            <Border Width="110" Height="110" Background="{StaticResource Th.SurfaceBrush}" BorderBrush="{StaticResource Th.BorderBrush}" BorderThickness="1" CornerRadius="8" Padding="8" Margin="0,0,14,0">
                 <Image Width="90" Height="90" Source="pack://application:,,,/soft.ico" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Border>
 
             <StackPanel VerticalAlignment="Center">
-                <TextBlock FontWeight="Bold" FontSize="18" Margin="0,0,0,8" Text="Fenix" />
+                <TextBlock Text="Fenix" FontWeight="Bold" FontSize="{StaticResource Th.FontXl}" Foreground="{StaticResource Th.TextBrush}" Margin="0,0,0,8" />
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock FontWeight="SemiBold" Margin="0,0,6,0" Text="Version:" />
-                    <TextBlock Name="TbVer" />
+                    <TextBlock Text="Version:" FontWeight="SemiBold" FontSize="{StaticResource Th.FontMd}" Foreground="{StaticResource Th.TextBrush}" Margin="0,0,6,0" />
+                    <TextBlock Name="TbVer" FontSize="{StaticResource Th.FontMd}" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
 
-        <Button Grid.Row="1" Content="Close" MinWidth="90" HorizontalAlignment="Right" Click="Button_Click" />
+        <Button Grid.Row="1" Content="Close" Click="Button_Click" MinWidth="90" HorizontalAlignment="Right" />
     </Grid>
 </Window>
