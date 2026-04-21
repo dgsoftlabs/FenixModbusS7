@@ -34,6 +34,14 @@
     <sys:Double x:Key="Th.FontXl">18</sys:Double>
     <sys:Double x:Key="Th.FontXxl">24</sys:Double>
 
+    <!-- EFFECTS -->
+    <DropShadowEffect x:Key="Th.ShadowEffect"
+                      BlurRadius="12"
+                      ShadowDepth="2"
+                      Direction="270"
+                      Color="#22000000"
+                      Opacity="0.5" />
+
     <!-- BRUSHES -->
 
     <SolidColorBrush x:Key="Th.BgBrush"         Color="{StaticResource Th.BgColor}" />
@@ -642,6 +650,168 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- IMPLICIT: Window -->
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="{StaticResource Th.BgBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource Th.TextBrush}" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize"   Value="{StaticResource Th.FontMd}" />
+    </Style>
+
+    <!-- IMPLICIT: Menu -->
+    <Style TargetType="Menu">
+        <Setter Property="Background"      Value="{StaticResource Th.SurfaceBrush}" />
+        <Setter Property="Foreground"      Value="{StaticResource Th.TextBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="BorderBrush"     Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="FontSize"        Value="{StaticResource Th.FontMd}" />
+        <Setter Property="Padding"         Value="4,2" />
+    </Style>
+
+    <!-- IMPLICIT: MenuItem -->
+    <Style TargetType="MenuItem">
+        <Setter Property="Background"       Value="Transparent" />
+        <Setter Property="Foreground"       Value="{StaticResource Th.TextBrush}" />
+        <Setter Property="BorderThickness"  Value="0" />
+        <Setter Property="Padding"          Value="10,5" />
+        <Setter Property="FontSize"         Value="{StaticResource Th.FontMd}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.45" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- IMPLICIT: ContextMenu -->
+    <Style TargetType="ContextMenu">
+        <Setter Property="Background"      Value="{StaticResource Th.SurfaceBrush}" />
+        <Setter Property="Foreground"      Value="{StaticResource Th.TextBrush}" />
+        <Setter Property="BorderBrush"     Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding"         Value="4" />
+        <Setter Property="FontSize"        Value="{StaticResource Th.FontMd}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContextMenu">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6"
+                            Padding="{TemplateBinding Padding}"
+                            Effect="{StaticResource Th.ShadowEffect}">
+                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- IMPLICIT: Separator -->
+    <Style TargetType="Separator">
+        <Setter Property="Background" Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="Height"     Value="1" />
+        <Setter Property="Margin"     Value="6,3" />
+    </Style>
+
+    <!-- IMPLICIT: StatusBar -->
+    <Style TargetType="StatusBar">
+        <Setter Property="Background"      Value="{StaticResource Th.Surface2Brush}" />
+        <Setter Property="Foreground"      Value="{StaticResource Th.TextBrush}" />
+        <Setter Property="BorderBrush"     Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,1,0,0" />
+        <Setter Property="Padding"         Value="8,3" />
+        <Setter Property="FontSize"        Value="{StaticResource Th.FontSm}" />
+    </Style>
+
+    <!-- IMPLICIT: DataGrid column header -->
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Background"      Value="{StaticResource Th.Surface2Brush}" />
+        <Setter Property="Foreground"      Value="{StaticResource Th.TextBrush}" />
+        <Setter Property="BorderBrush"     Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="Padding"         Value="8,0" />
+        <Setter Property="FontSize"        Value="{StaticResource Th.FontSm}" />
+        <Setter Property="FontWeight"      Value="SemiBold" />
+        <Setter Property="Height"          Value="34" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SeparatorBrush"  Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Border x:Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter Grid.Column="0"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left" />
+                            <Path x:Name="SortArrow"
+                                  Grid.Column="1"
+                                  Visibility="Collapsed"
+                                  Stretch="None"
+                                  Stroke="{StaticResource Th.AccentBrush}"
+                                  StrokeThickness="1.5"
+                                  Margin="4,0,2,0"
+                                  VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Th.HoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SortArrow" Property="Data" Value="M 5 8 L 8 5 L 11 8" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SortArrow" Property="Data" Value="M 5 5 L 8 8 L 11 5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- IMPLICIT: DataGridRow -->
+    <Style TargetType="DataGridRow">
+        <Setter Property="Background"       Value="{StaticResource Th.SurfaceBrush}" />
+        <Setter Property="Foreground"       Value="{StaticResource Th.TextBrush}" />
+        <Setter Property="BorderBrush"      Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="BorderThickness"  Value="0" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource Th.HoverBrush}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource Th.SelBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- IMPLICIT: DataGridCell -->
+    <Style TargetType="DataGridCell">
+        <Setter Property="BorderThickness"  Value="0" />
+        <Setter Property="Padding"          Value="0" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background"       Value="Transparent" />
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{StaticResource Th.TextBrush}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- Filter toolbar shared styles (DBChartView / DBTableView) -->

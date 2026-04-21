@@ -6,7 +6,10 @@
                       xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
                       xmlns:adl="clr-namespace:AvalonDock.Layout;assembly=AvalonDock"
                       mc:Ignorable="d"
-        Title="FenixManager" Height="398.202" Width="639.928" Loaded="Window_Loaded" Closed="Window_Closed" WindowState="Maximized">
+        Title="FenixManager" Height="398.202" Width="639.928" Loaded="Window_Loaded" Closed="Window_Closed" WindowState="Maximized"
+        Background="{StaticResource Th.BgBrush}"
+        FontFamily="Segoe UI"
+        FontSize="{StaticResource Th.FontMd}">
 
     <Window.Resources>
 
