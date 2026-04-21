@@ -84,7 +84,7 @@
 
         <DataGrid x:Name="myDataGrid"
                   Grid.Row="2"
-                  AutoGenerateColumns="False"
+                  AutoGenerateColumns="True"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   ItemsSource="{Binding YourDataCollection}"
@@ -103,38 +103,7 @@
                   Foreground="{StaticResource Th.TextBrush}"
                   Margin="0,0,0,2"
                   RowHeight="30"
-                  ColumnHeaderHeight="34">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Name" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Margin="5,0,0,0" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Date" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Stamp, StringFormat={}{0:MM/dd/yyyy}}" Margin="5,0,0,0" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Time" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Stamp, StringFormat={}{0:HH:mm:ss.fff}}" Margin="5,0,0,0" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Value" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Value}" Margin="5,0,0,0" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                  ColumnHeaderHeight="34" />
 
         <ProgressBar Grid.Row="3"
                      IsIndeterminate="True"

@@ -98,6 +98,7 @@
             <MenuItem Header="Show Database" IsEnabled="{Binding mShowDb}" Click="MenuItem_ShowDatabse_Click" />
             <MenuItem Header="Show Trend" IsEnabled="{Binding mShowTrendDb}" Click="MenuItem_ShowTrendDb_Click" />
             <Separator />
+            <MenuItem Header="Save Snapshot" IsEnabled="{Binding mDbReset}" Click="MenuItem_SaveSnapshot_Click" />
             <MenuItem Header="Save CSV" IsEnabled="{Binding mSaveCSV}" Click="MenuItem_SaveDatabeCSV_Click" />
             <Separator />
             <MenuItem Header="Database Reset" IsEnabled="{Binding mDbReset}" Click="MenuItem_DbReset_Click" />
@@ -296,6 +297,9 @@
                     <MenuItem.Icon><TextBlock Text="📉" FontSize="12"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
+                <MenuItem Header="_Save Snapshot" IsEnabled="{Binding mDbReset}" Click="MenuItem_SaveSnapshot_Click">
+                    <MenuItem.Icon><TextBlock Text="📸" FontSize="12"/></MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Header="_Export CSV" IsEnabled="{Binding mSaveCSV}" Click="MenuItem_SaveDatabeCSV_Click">
                     <MenuItem.Icon><TextBlock Text="📤" FontSize="12"/></MenuItem.Icon>
                 </MenuItem>

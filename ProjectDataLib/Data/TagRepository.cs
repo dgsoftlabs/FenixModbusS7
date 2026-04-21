@@ -14,6 +14,7 @@ namespace ProjectDataLib.Data
     {
         Task InitializeAsync(string databasePath);
         Task AddTagAsync(string name, double value, DateTime stamp);
+        Task AddTagsBatchAsync(IEnumerable<(string Name, double Value)> tags, DateTime stamp);
         Task RemoveTagByNameAsync(string name);
         Task<List<TagDTO>> GetAllTagsAsync(bool descending = true);
         Task<List<TagDTO>> GetTagsByStampAsync(DateTime from, DateTime to, bool descending = true);
@@ -174,6 +175,21 @@ namespace ProjectDataLib.Data
                 };
 
                 context.Tags.Add(entity);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task AddTagsBatchAsync(IEnumerable<(string Name, double Value)> tags, DateTime stamp)
+        {
+            if (string.IsNullOrEmpty(_databasePath))
+                throw new InvalidOperationException("Repository not initialized. Call InitializeAsync first.");
+
+            using (var context = new TagDbContext(_databasePath))
+            {
+                foreach (var (name, value) in tags)
+                {
+                    context.Tags.Add(new TagEntity { Name = name, Value = value, Stamp = stamp });
+                }
                 await context.SaveChangesAsync();
             }
         }

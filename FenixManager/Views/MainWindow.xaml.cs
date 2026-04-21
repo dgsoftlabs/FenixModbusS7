@@ -129,6 +129,9 @@ namespace FenixWPF
 
                     serializer.LayoutSerializationCallback += (s, args) =>
                     {
+                        if (string.IsNullOrEmpty(args.Model.ContentId))
+                            return;
+
                         string[] param = args.Model.ContentId.Split(';');
                         switch (param[0])
                         {
@@ -145,7 +148,19 @@ namespace FenixWPF
                                 break;
 
                             case "Database":
-                                //args.Content = new DbExplorer(null);
+                                LayoutAnchorable laDatabase = (LayoutAnchorable)args.Model;
+                                laDatabase.CanClose = true;
+                                DBTableView dbView = new DBTableView(pr);
+                                laDatabase.Closed += LaCtrl_Closed;
+                                args.Content = dbView;
+                                break;
+
+                            case "TrendDatabase":
+                                LayoutAnchorable laTrendDb = (LayoutAnchorable)args.Model;
+                                laTrendDb.CanClose = true;
+                                DBChartView trendDbView = new DBChartView(pr);
+                                laTrendDb.Closed += LaCtrl_Closed;
+                                args.Content = trendDbView;
                                 break;
 
                             case "TableView":
@@ -154,6 +169,14 @@ namespace FenixWPF
                                 TableView tbView = new TableView(PrCon, pp.objId, Guid.Parse(param[1]), (ElementKind)Enum.Parse(typeof(ElementKind), param[2]), laTableView);
                                 laTableView.Closed += LaCtrl_Closed;
                                 args.Content = tbView;
+                                break;
+
+                            case "TableViewRO":
+                                LayoutAnchorable laTableViewRO = (LayoutAnchorable)args.Model;
+                                laTableViewRO.CanClose = true;
+                                TableViewRO tbViewRO = new TableViewRO(PrCon, pp.objId, Guid.Parse(param[1]), (ElementKind)Enum.Parse(typeof(ElementKind), param[2]), laTableViewRO);
+                                laTableViewRO.Closed += LaCtrl_Closed;
+                                args.Content = tbViewRO;
                                 break;
 
                             case "ChartView":
@@ -176,10 +199,19 @@ namespace FenixWPF
                                 LayoutAnchorable laEditorView = (LayoutAnchorable)args.Model;
                                 laEditorView.CanClose = true;
 
-                                //Zabezpieczenie
-                                if (io.File.Exists(param[1]))
+                                ElementKind editorKind = (ElementKind)Enum.Parse(typeof(ElementKind), param[2]);
+                                string editorPath = param[1];
+
+                                // For ScriptFile the ContentId stores a GUID, resolve it to a file path
+                                if (editorKind == ElementKind.ScriptFile && Guid.TryParse(param[1], out Guid scriptGuid))
                                 {
-                                    Editor edView = new Editor(PrCon, pp.objId, param[1], (ElementKind)Enum.Parse(typeof(ElementKind), param[2]), laEditorView);
+                                    var scriptFile = PrCon.GetScriptFile(pp.objId, scriptGuid);
+                                    editorPath = scriptFile?.FilePath ?? string.Empty;
+                                }
+
+                                if (io.File.Exists(editorPath))
+                                {
+                                    Editor edView = new Editor(PrCon, pp.objId, editorPath, editorKind, laEditorView);
                                     laEditorView.Closed += LaCtrl_Closed;
                                     args.Content = edView;
                                 }
@@ -1470,6 +1502,18 @@ namespace FenixWPF
             try
             {
                 Pr.Db.Reset();
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
+        private async void MenuItem_SaveSnapshot_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await Pr.Db.SaveSnapshotAsync();
             }
             catch (Exception Ex)
             {

@@ -147,6 +147,45 @@ namespace ProjectDataLib
             }
         }
 
+        public void SaveSnapshot()
+        {
+            SaveSnapshotAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task SaveSnapshotAsync()
+        {
+            try
+            {
+                if (_repository == null)
+                    return;
+
+                DateTime stamp = DateTime.Now;
+
+                var batch = new List<(string Name, double Value)>();
+
+                foreach (ITag tg in ((ITableView)Pr).Children)
+                {
+                    string raw;
+                    if (tg.TypeData_ == TypeData.CHAR)
+                        raw = Char.GetNumericValue((char)tg.Value).ToString();
+                    else if (tg.TypeData_ == TypeData.BIT)
+                        raw = ((bool)tg.Value) ? "1.0" : "0.0";
+                    else
+                        raw = tg.Value.ToString();
+
+                    if (double.TryParse(raw.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double numValue))
+                        batch.Add((tg.Name, numValue));
+                }
+
+                if (batch.Count > 0)
+                    await _repository.AddTagsBatchAsync(batch, stamp);
+            }
+            catch (Exception ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(ex));
+            }
+        }
+
         private async Task AddDataElementAsync(string name, string value, DateTime tm)
         {
             try

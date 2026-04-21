@@ -1,6 +1,7 @@
 using OxyPlot.Series;
 using OxyPlot;
 using ProjectDataLib;
+using System.Data;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -136,7 +137,36 @@ namespace FenixWPF
             if (SelectedOrder == null || OrderOptions == null) return;
 
             bool descending = SelectedOrder == OrderOptions[0];
-            myDataGrid.ItemsSource = await _project.Db.GetDataByStampAsync(FromDate, ToDate, descending);
+            var tags = await _project.Db.GetDataByStampAsync(FromDate, ToDate, descending);
+            myDataGrid.ItemsSource = BuildPivotTable(tags, descending).DefaultView;
+        }
+
+        private DataTable BuildPivotTable(System.Collections.Generic.List<TagDTO> tags, bool descending)
+        {
+            var table = new DataTable();
+            var tagNames = tags.Select(t => t.Name).Distinct().ToList();
+
+            table.Columns.Add("Stamp", typeof(string));
+            foreach (var name in tagNames)
+                table.Columns.Add(name, typeof(string));
+
+            // Group by second-precision to merge tags from the same scan cycle
+            var groups = tags.GroupBy(t => new DateTime(t.Stamp.Year, t.Stamp.Month, t.Stamp.Day,
+                                                         t.Stamp.Hour, t.Stamp.Minute, t.Stamp.Second));
+            var ordered = descending
+                ? groups.OrderByDescending(g => g.Key)
+                : groups.OrderBy(g => g.Key);
+
+            foreach (var group in ordered)
+            {
+                var row = table.NewRow();
+                row["Stamp"] = group.Key.ToString("yyyy-MM-dd HH:mm:ss");
+                foreach (var tag in group)
+                    row[tag.Name] = tag.Value.ToString();
+                table.Rows.Add(row);
+            }
+
+            return table;
         }
 
         private async void ResetButton_Click(object sender, System.Windows.RoutedEventArgs e)
