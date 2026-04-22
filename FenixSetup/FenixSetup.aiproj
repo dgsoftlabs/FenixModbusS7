@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">All</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
@@ -21,20 +21,6 @@
     <Compile Include="FenixSetup.aip">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FenixManager\FenixManager.csproj">
-      <Name>FenixManager</Name>
-      <Project>{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}</Project>
-      <Private>True</Private>
-      <OutputsToImport>PrimaryOutput;References;ContentOutput</OutputsToImport>
-    </ProjectReference>
-    <ProjectReference Include="..\FenixServer\FenixServer.csproj">
-      <Name>FenixServer</Name>
-      <Project>{199cd70e-43ee-47cd-a1d2-6d1b63efe1ec}</Project>
-      <Private>True</Private>
-      <OutputsToImport>PrimaryOutput;References</OutputsToImport>
-    </ProjectReference>
   </ItemGroup>
   <Target Name="Build">
     <Error Text="This project requires Advanced Installer tool. Please download it from https://www.advancedinstaller.com/download.html" />

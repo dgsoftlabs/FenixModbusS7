@@ -1,0 +1,109 @@
+<UserControl x:Class="Fenix.DBChartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:local="clr-namespace:Fenix"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{StaticResource Th.SurfaceBrush}">
+
+    <UserControl.Resources>
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid Margin="12" Background="{StaticResource Th.SurfaceBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0" Padding="12,10">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="🔍" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" />
+                    <TextBlock Text="Filters" VerticalAlignment="Center" />
+                </StackPanel>
+            </GroupBox.Header>
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" ItemHeight="30">
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+                    <TextBlock Text="⏱️" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                    <TextBlock Text="Last:" Style="{StaticResource Th.FilterLabel}" />
+                </StackPanel>
+                <ComboBox x:Name="TimeIntervalComboBox"
+                          Width="110"
+                          Style="{StaticResource Th.FilterComboBox}"
+                          ItemsSource="{Binding TimeIntervals}"
+                          SelectedItem="{Binding SelectedInterval, Mode=TwoWay}"
+                          ToolTip="Show data from the last selected interval" />
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+                    <TextBlock Text="📅" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                    <TextBlock Text="From:" Style="{StaticResource Th.FilterLabel}" />
+                </StackPanel>
+                <DatePicker x:Name="FromDateCtrl"
+                            Width="160"
+                            Style="{StaticResource Th.FilterDatePicker}"
+                            SelectedDate="{Binding FromDate, Mode=TwoWay}"
+                            ToolTip="Start date (available in Custom mode)"
+                            IsEnabled="{Binding IsDateRangeEditable}" />
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+                    <TextBlock Text="📅" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                    <TextBlock Text="To:" Style="{StaticResource Th.FilterLabel}" />
+                </StackPanel>
+                <DatePicker x:Name="ToDateCtrl"
+                            Width="160"
+                            Style="{StaticResource Th.FilterDatePicker}"
+                            SelectedDate="{Binding ToDate, Mode=TwoWay}"
+                            ToolTip="End date (available in Custom mode)"
+                            IsEnabled="{Binding IsDateRangeEditable}" />
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+                    <TextBlock Text="📉" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                    <TextBlock Text="Y Min:" Style="{StaticResource Th.FilterLabel}" />
+                </StackPanel>
+                <TextBox Text="{Binding YAxisMinimum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Width="90" Style="{StaticResource Th.FilterTextBox}" ToolTip="Y-Axis minimum value" />
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+                    <TextBlock Text="📈" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                    <TextBlock Text="Y Max:" Style="{StaticResource Th.FilterLabel}" />
+                </StackPanel>
+                <TextBox Text="{Binding YAxisMaximum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Width="90" Style="{StaticResource Th.FilterTextBox}" ToolTip="Y-Axis maximum value" />
+
+                <Button Style="{StaticResource Th.FilterButton}" Click="ShowAllButton_Click" ToolTip="Reload chart data">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🔄" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Text="Refresh" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
+        </GroupBox>
+
+        <oxy:PlotView Grid.Row="2"
+                      x:Name="View"
+                      Controller="{Binding PlotController}"
+                      Background="{StaticResource Th.SurfaceBrush}"
+                      Margin="0,0,0,2" />
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="2,8,2,0">
+            <TextBlock Text="ℹ️" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="{StaticResource Th.TextSecBrush}" />
+            <TextBlock Text="{Binding InteractionDescription}" Foreground="{StaticResource Th.TextSecBrush}" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <ProgressBar Grid.Row="2"
+                     IsIndeterminate="True"
+                     Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Width="220"
+                     Height="24" />
+    </Grid>
+</UserControl>

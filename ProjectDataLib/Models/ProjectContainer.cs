@@ -48,7 +48,7 @@ namespace ProjectDataLib
 
         public string TaskName = "FenixServer";
 
-        public string HelpWebSite = "https://github.com/DanielSan1000/Fenix-Modbus/wiki";
+        public string HelpWebSite = "https://github.com/dgsoftlabs/FenixModbusS7/wiki";
 
         public string LayoutFile = "Layout_.xml";
 
@@ -1599,7 +1599,7 @@ namespace ProjectDataLib
 
         public static async Task<string> GetVersionFromGitHub()
         {
-            string fileUrl = "https://raw.githubusercontent.com/DanielSan1000/Fenix-Modbus/master/version.xml";
+            string fileUrl = "https://raw.githubusercontent.com/dgsoftlabs/FenixModbusS7/master/version.xml";
 
             using (HttpClient client = new HttpClient())
             {

@@ -2,88 +2,10 @@
 <DOCUMENT Type="Advanced Installer" CreateVersion="22.4" version="23.6" Modules="simple" RootPath="." Language="en" Id="{18B9E293-60CC-4D60-B764-2966A559A180}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.dll" Value="C:\Users\giron\.nuget\packages\dirkster.avalondock\4.73.0\lib\net10.0-windows7.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixWPF.deps.json" Value="..\FenixManager\bin\Debug\net10.0-windows"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixWPF.exe_1" Value="..\FenixManager\bin\Debug\net10.0-windows"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixWPF.runtimeconfig.json" Value="..\FenixManager\bin\Debug\net10.0-windows"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="C:\Users\giron\.nuget\packages\avalonedit\6.3.1.120\lib\net8.0-windows7.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll" Value="C:\Users\giron\.nuget\packages\microsoft.codeanalysis.csharp.scripting\5.3.0\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll" Value="C:\Users\giron\.nuget\packages\microsoft.codeanalysis.csharp\5.3.0\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll" Value="C:\Users\giron\.nuget\packages\microsoft.codeanalysis.scripting.common\5.3.0\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.dll" Value="C:\Users\giron\.nuget\packages\microsoft.codeanalysis.common\5.3.0\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Data.Sqlite.dll" Value="C:\Users\giron\.nuget\packages\microsoft.data.sqlite.core\10.0.5\lib\net8.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll" Value="C:\Users\giron\.nuget\packages\microsoft.entityframeworkcore.abstractions\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll" Value="C:\Users\giron\.nuget\packages\microsoft.entityframeworkcore.relational\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll" Value="C:\Users\giron\.nuget\packages\microsoft.entityframeworkcore.sqlite.core\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.dll" Value="C:\Users\giron\.nuget\packages\microsoft.entityframeworkcore\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.caching.abstractions\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Caching.Memory.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.caching.memory\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.configuration.abstractions\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyInjection.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.dependencyinjection\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyModel.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.dependencymodel\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.logging.abstractions\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.logging\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Options.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.options\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Primitives.dll" Value="C:\Users\giron\.nuget\packages\microsoft.extensions.primitives\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Xaml.Behaviors.dll" Value="C:\Users\giron\.nuget\packages\microsoft.xaml.behaviors.wpf\1.1.142\lib\net8.0-windows7.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ModbusMasterASCII.dll" Value="..\ModbusMasterASCII\bin\Debug\net10.0-windows"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ModbusMasterRTU.dll" Value="..\ModbusMasterRTU\bin\Debug\net10.0-windows"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ModbusMasterTCP.dll" Value="..\ModbusMasterTCP\bin\Debug\net10.0-windows"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll" Value="C:\Users\giron\.nuget\packages\newtonsoft.json\13.0.4\lib\net6.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_OxyPlot.Wpf.Shared.dll" Value="C:\Users\giron\.nuget\packages\oxyplot.wpf.shared\2.2.0\lib\net8.0-windows7.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_OxyPlot.Wpf.dll" Value="C:\Users\giron\.nuget\packages\oxyplot.wpf\2.2.0\lib\net8.0-windows7.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_OxyPlot.dll" Value="C:\Users\giron\.nuget\packages\oxyplot.core\2.2.0\lib\net8.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.dll" Value="..\ProjectDataLib\bin\Debug\net10.0-windows"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_S7300400Ethernet.dll" Value="..\S7-300-400 Ethernet\bin\Debug\net10.0-windows"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.batteries_v2.dll" Value="C:\Users\giron\.nuget\packages\sqlitepclraw.bundle_e_sqlite3\2.1.11\lib\netstandard2.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.core.dll" Value="C:\Users\giron\.nuget\packages\sqlitepclraw.core\2.1.11\lib\netstandard2.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll" Value="C:\Users\giron\.nuget\packages\sqlitepclraw.provider.e_sqlite3\2.1.11\lib\net6.0-windows7.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Sharp7.dll" Value="C:\Users\giron\.nuget\packages\sharp7\1.1.84\lib\netstandard2.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.IO.Ports.dll" Value="C:\Users\giron\.nuget\packages\system.io.ports\10.0.5\lib\net10.0"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll" Value="AvalonDock.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.deps.json" Value="FenixWPF.deps.json"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1" Value="FenixWPF.exe"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.runtimeconfig.json" Value="FenixWPF.runtimeconfig.json"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="ICSharpCode.AvalonEdit.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll" Value="Microsoft.CodeAnalysis.CSharp.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll" Value="Microsoft.CodeAnalysis.Scripting.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.dll" Value="Microsoft.CodeAnalysis.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.Sqlite.dll" Value="Microsoft.Data.Sqlite.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll" Value="Microsoft.EntityFrameworkCore.Abstractions.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll" Value="Microsoft.EntityFrameworkCore.Relational.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll" Value="Microsoft.EntityFrameworkCore.Sqlite.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.dll" Value="Microsoft.EntityFrameworkCore.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll" Value="Microsoft.Extensions.Caching.Abstractions.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Memory.dll" Value="Microsoft.Extensions.Caching.Memory.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll" Value="Microsoft.Extensions.Configuration.Abstractions.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll" Value="Microsoft.Extensions.DependencyInjection.Abstractions.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.dll" Value="Microsoft.Extensions.DependencyInjection.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyModel.dll" Value="Microsoft.Extensions.DependencyModel.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll" Value="Microsoft.Extensions.Logging.Abstractions.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.dll" Value="Microsoft.Extensions.Logging.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll" Value="Microsoft.Extensions.Options.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll" Value="Microsoft.Extensions.Primitives.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Xaml.Behaviors.dll" Value="Microsoft.Xaml.Behaviors.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterASCII.dll" Value="ModbusMasterASCII.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterRTU.dll" Value="ModbusMasterRTU.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterTCP.dll" Value="ModbusMasterTCP.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll" Value="Newtonsoft.Json.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.Shared.dll" Value="OxyPlot.Wpf.Shared.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.dll" Value="OxyPlot.Wpf.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.dll" Value="OxyPlot.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll" Value="ProjectDataLib.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_S7300400Ethernet.dll" Value="S7-300-400 Ethernet.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.batteries_v2.dll" Value="SQLitePCLRaw.batteries_v2.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.core.dll" Value="SQLitePCLRaw.core.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll" Value="SQLitePCLRaw.provider.e_sqlite3.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Sharp7.dll" Value="Sharp7.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll" Value="System.IO.Ports.dll"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPPRODUCTICON" Value="soft.exe" Type="8"/>
-    <ROW Property="Manufacturer" Value="DGSoft"/>
+    <ROW Property="Manufacturer" Value="DGSoftLabs"/>
     <ROW Property="ProductCode" Value="1033:{645BDD50-4B26-4ADF-A448-99D396D1174E} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="FenixModbusS7"/>
@@ -103,8 +25,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1" DirectoryOptions="3"/>
-    <ROW Directory="FenixManager_Dir" Directory_Parent="APPDIR" DefaultDir="FENIXM~1|FenixManager" DirectoryOptions="3"/>
-    <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
+    <ROW Directory="FenixManager_Dir" Directory_Parent="APPDIR" DefaultDir="FENIXM~2|FenixModbusS7" DirectoryOptions="3"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
     <ROW Directory="Template_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="Template" DirectoryOptions="3"/>
   </COMPONENT>
@@ -113,13 +34,9 @@
     <ROW Component="ProductInformation" Value="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1" ComponentId="{7A7F328C-643B-45C4-ABBF-73E62A7799A4}" Directory_="FenixManager_Dir" Attributes="256" KeyPath="FenixWPF.exe_1"/>
     <ROW Component="APPDIR" ComponentId="{B87DF860-8CBC-468C-B43B-8F9B149F2E38}" Directory_="APPDIR" Attributes="0"/>
-    <ROW Component="FenixManager_ContentOutput" ComponentId="{DB934EC3-A20D-487A-97B8-FDFA66F33590}" Directory_="FenixManager_Dir" Attributes="0" KeyPath="FenixWPF.deps.json" Type="0"/>
     <ROW Component="FenixManager_ContentOutput_Template" ComponentId="{C1DFBD7C-93B7-495D-B6A4-1B39FBA0BBD7}" Directory_="Template_Dir" Attributes="0" KeyPath="Script.cs_1" Type="0"/>
-    <ROW Component="FenixManager_References" ComponentId="{C1AA98F5-44BC-414D-8325-56B331899D0B}" Directory_="FenixManager_Dir" Attributes="0" KeyPath="System.IO.Ports.dll"/>
     <ROW Component="ProductInformation" ComponentId="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
-    <ROW Component="SHORTCUTDIR" ComponentId="{A85EA1E0-1D8C-40F3-A35C-B4F8F9516622}" Directory_="SHORTCUTDIR" Attributes="0"/>
     <ROW Component="_" ComponentId="{CC4C29E9-D905-462C-9A4F-A3F5EC3B2E1A}" Directory_="APPDIR" Attributes="4" KeyPath="_"/>
     <ROW Component="__1" ComponentId="{0966780B-833E-415E-B721-23B3351FEC08}" Directory_="APPDIR" Attributes="4" KeyPath="__1"/>
     <ROW Component="__2" ComponentId="{BDAD1853-461A-494B-BE03-EA329B2E02CF}" Directory_="APPDIR" Attributes="4" KeyPath="__2"/>
@@ -132,87 +49,7 @@
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="FenixWPF.deps.json" Component_="FenixManager_ContentOutput" FileName="FENIXW~2.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.deps.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixWPF.deps.json&gt;" SelfReg="false"/>
-    <ROW File="FenixWPF.runtimeconfig.json" Component_="FenixManager_ContentOutput" FileName="FENIXW~3.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.runtimeconfig.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixWPF.runtimeconfig.json&gt;" SelfReg="false"/>
-    <ROW File="FenixWPF.exe_1" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixWPF.exe_1&gt;" SelfReg="false" DigSign="true"/>
-    <ROW File="AvalonDock.dll" Component_="FenixManager_References" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.dll&gt;" SelfReg="false"/>
-    <ROW File="ICSharpCode.AvalonEdit.dll" Component_="FenixManager_References" FileName="ICSHAR~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ICSharpCode.AvalonEdit.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.CodeAnalysis.CSharp.dll" Component_="FenixManager_References" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.CodeAnalysis.CSharp.Scripting.dll" Component_="FenixManager_References" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.CodeAnalysis.dll" Component_="FenixManager_References" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.CodeAnalysis.Scripting.dll" Component_="FenixManager_References" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Data.Sqlite.dll" Component_="FenixManager_References" FileName="MICROS~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.Sqlite.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Data.Sqlite.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.EntityFrameworkCore.Abstractions.dll" Component_="FenixManager_References" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.EntityFrameworkCore.dll" Component_="FenixManager_References" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.EntityFrameworkCore.Relational.dll" Component_="FenixManager_References" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.EntityFrameworkCore.Sqlite.dll" Component_="FenixManager_References" FileName="MICRO~10.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.Caching.Abstractions.dll" Component_="FenixManager_References" FileName="MICRO~11.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.Caching.Memory.dll" Component_="FenixManager_References" FileName="MICRO~12.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Memory.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Caching.Memory.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.Configuration.Abstractions.dll" Component_="FenixManager_References" FileName="MICRO~13.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.DependencyInjection.Abstractions.dll" Component_="FenixManager_References" FileName="MICRO~14.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.DependencyInjection.dll" Component_="FenixManager_References" FileName="MICRO~15.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyInjection.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.DependencyModel.dll" Component_="FenixManager_References" FileName="MICRO~16.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyModel.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyModel.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.Logging.Abstractions.dll" Component_="FenixManager_References" FileName="MICRO~17.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.Logging.dll" Component_="FenixManager_References" FileName="MICRO~18.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Logging.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.Options.dll" Component_="FenixManager_References" FileName="MICRO~19.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Options.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Extensions.Primitives.dll" Component_="FenixManager_References" FileName="MICRO~20.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Primitives.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Xaml.Behaviors.dll" Component_="FenixManager_References" FileName="MICRO~21.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Xaml.Behaviors.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Xaml.Behaviors.dll&gt;" SelfReg="false"/>
-    <ROW File="ModbusMasterASCII.dll" Component_="FenixManager_References" FileName="MODBUS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterASCII.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ModbusMasterASCII.dll&gt;" SelfReg="false"/>
-    <ROW File="ModbusMasterRTU.dll" Component_="FenixManager_References" FileName="MODBUS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterRTU.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ModbusMasterRTU.dll&gt;" SelfReg="false"/>
-    <ROW File="ModbusMasterTCP.dll" Component_="FenixManager_References" FileName="MODBUS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterTCP.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ModbusMasterTCP.dll&gt;" SelfReg="false"/>
-    <ROW File="Newtonsoft.Json.dll" Component_="FenixManager_References" FileName="NEWTON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Newtonsoft.Json.dll&gt;" SelfReg="false"/>
-    <ROW File="OxyPlot.dll" Component_="FenixManager_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_OxyPlot.dll&gt;" SelfReg="false"/>
-    <ROW File="OxyPlot.Wpf.dll" Component_="FenixManager_References" FileName="OXYPLO~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_OxyPlot.Wpf.dll&gt;" SelfReg="false"/>
-    <ROW File="OxyPlot.Wpf.Shared.dll" Component_="FenixManager_References" FileName="OXYPLO~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.Shared.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_OxyPlot.Wpf.Shared.dll&gt;" SelfReg="false"/>
-    <ROW File="ProjectDataLib.dll" Component_="FenixManager_References" FileName="PROJEC~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ProjectDataLib.dll&gt;" SelfReg="false"/>
-    <ROW File="S7300400Ethernet.dll" Component_="FenixManager_References" FileName="S7-300~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_S7300400Ethernet.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_S7300400Ethernet.dll&gt;" SelfReg="false"/>
-    <ROW File="Sharp7.dll" Component_="FenixManager_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Sharp7.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Sharp7.dll&gt;" SelfReg="false"/>
-    <ROW File="SQLitePCLRaw.batteries_v2.dll" Component_="FenixManager_References" FileName="SQLITE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.batteries_v2.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_SQLitePCLRaw.batteries_v2.dll&gt;" SelfReg="false"/>
-    <ROW File="SQLitePCLRaw.core.dll" Component_="FenixManager_References" FileName="SQLITE~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.core.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_SQLitePCLRaw.core.dll&gt;" SelfReg="false"/>
-    <ROW File="SQLitePCLRaw.provider.e_sqlite3.dll" Component_="FenixManager_References" FileName="SQLITE~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll&gt;" SelfReg="false"/>
-    <ROW File="System.IO.Ports.dll" Component_="FenixManager_References" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.IO.Ports.dll&gt;" SelfReg="false"/>
     <ROW File="Script.cs_1" Component_="FenixManager_ContentOutput_Template" FileName="Script.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\Script.cs" SelfReg="false"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
-    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_FenixWPF.deps.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixWPF.deps.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.deps.json]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_FenixWPF.exe_1" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixWPF.exe_1]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_FenixWPF.runtimeconfig.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixWPF.runtimeconfig.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.runtimeconfig.json]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_ICSharpCode.AvalonEdit.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Data.Sqlite.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Data.Sqlite.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.Sqlite.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Caching.Memory.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Caching.Memory.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Memory.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyInjection.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyInjection.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyModel.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyModel.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyModel.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Logging.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Options.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Options.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Primitives.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Primitives.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Xaml.Behaviors.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Xaml.Behaviors.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Xaml.Behaviors.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_ModbusMasterASCII.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ModbusMasterASCII.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterASCII.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_ModbusMasterRTU.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ModbusMasterRTU.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterRTU.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_ModbusMasterTCP.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ModbusMasterTCP.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterTCP.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Newtonsoft.Json.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_OxyPlot.Wpf.Shared.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_OxyPlot.Wpf.Shared.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.Shared.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_OxyPlot.Wpf.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_OxyPlot.Wpf.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_OxyPlot.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_OxyPlot.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_ProjectDataLib.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_S7300400Ethernet.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_S7300400Ethernet.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_S7300400Ethernet.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_SQLitePCLRaw.batteries_v2.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.batteries_v2.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.batteries_v2.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_SQLitePCLRaw.core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.core.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Sharp7.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Sharp7.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Sharp7.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_System.IO.Ports.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.IO.Ports.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll]" Type="2" Content="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
     <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" Languages="en" InstallationType="4" UseLargeSchema="true"/>
@@ -265,7 +102,6 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
-    <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
@@ -285,7 +121,6 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
     <ROW Feature_="MainFeature" Component_="APPDIR"/>
     <ROW Feature_="MainFeature" Component_="ProductInformation"/>
-    <ROW Feature_="MainFeature" Component_="SHORTCUTDIR"/>
     <ROW Feature_="MainFeature" Component_="_"/>
     <ROW Feature_="MainFeature" Component_="__1"/>
     <ROW Feature_="MainFeature" Component_="__2"/>
@@ -293,9 +128,6 @@
     <ROW Feature_="MainFeature" Component_="__4"/>
     <ROW Feature_="MainFeature" Component_="__5"/>
     <ROW Feature_="MainFeature" Component_="FenixManager_ContentOutput_Template"/>
-    <ROW Feature_="MainFeature" Component_="FenixManager_ContentOutput"/>
-    <ROW Feature_="MainFeature" Component_="FenixManager_References"/>
-    <ROW Feature_="MainFeature" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="soft.exe" SourcePath="..\FenixManager\soft.ico" Index="0"/>
@@ -345,55 +177,11 @@
     <ROW Registry="__5" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\Shell\OpenWithFenix\Command" Value="&quot;[ProgramFilesFolder]DGSoft\FenixModbusS7\FenixManager\FenixWPF.exe&quot; &quot;%1&quot;" Component_="__5"/>
     <ROW Registry="psx" Root="1" Key="Software\Classes\.pse" Name="\"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="AI_PROPPATH_FILENAME_PERBUILD_Fenix" Directory_="SHORTCUTDIR" Name="[|AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1]" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixWPF.exe_1" Target="[#FenixWPF.exe_1]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="FenixManager_Dir"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.VsProjectComponent">
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="ContentOutput" OutputFile="FenixWPF.deps.json"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="ContentOutput" OutputFile="FenixWPF.runtimeconfig.json"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="ContentOutput" OutputFile="FenixWPF.exe_1"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="AvalonDock.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="ICSharpCode.AvalonEdit.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.CodeAnalysis.CSharp.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.CodeAnalysis.CSharp.Scripting.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.CodeAnalysis.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.CodeAnalysis.Scripting.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Data.Sqlite.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.EntityFrameworkCore.Abstractions.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.EntityFrameworkCore.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.EntityFrameworkCore.Relational.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.EntityFrameworkCore.Sqlite.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.Caching.Abstractions.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.Caching.Memory.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.Configuration.Abstractions.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.DependencyInjection.Abstractions.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.DependencyInjection.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.DependencyModel.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.Logging.Abstractions.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.Logging.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.Options.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Extensions.Primitives.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Microsoft.Xaml.Behaviors.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="ModbusMasterASCII.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="ModbusMasterRTU.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="ModbusMasterTCP.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Newtonsoft.Json.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="OxyPlot.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="OxyPlot.Wpf.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="OxyPlot.Wpf.Shared.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="ProjectDataLib.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="S7300400Ethernet.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="Sharp7.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="SQLitePCLRaw.batteries_v2.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="SQLitePCLRaw.core.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="SQLitePCLRaw.provider.e_sqlite3.dll"/>
-    <ROW ProjectId="{3294d7e8-08b5-49f7-926f-2b4ac8acf12f}" ProjectName="FenixManager" OutputGroup="References" OutputFile="System.IO.Ports.dll"/>
   </COMPONENT>
 </DOCUMENT>

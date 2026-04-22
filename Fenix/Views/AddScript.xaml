@@ -1,0 +1,27 @@
+<Window x:Class="Fenix.AddScript"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fenix"
+        mc:Ignorable="d"
+        Title="Add New Script" Height="190" Width="430" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource Th.SurfaceBrush}">
+    <Grid Style="{StaticResource Th.DialogRootGrid}" Margin="14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Image Style="{StaticResource Th.DialogHeaderIcon}" Source="pack://application:,,,/TreeImage/CsFile.ico" />
+            <Label Content="File name(s):" FontWeight="SemiBold" Padding="0,0,0,2" />
+            <TextBox x:Name="TbNewFile" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Style="{StaticResource Th.DialogBottomActionsPanel}">
+            <Button Style="{StaticResource Th.DialogBottomPrimaryActionButton}" Content="OK" Click="Button_OK_Click" />
+            <Button Style="{StaticResource Th.DialogBottomActionButton}" Content="Cancel" Click="Button_Cancel_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

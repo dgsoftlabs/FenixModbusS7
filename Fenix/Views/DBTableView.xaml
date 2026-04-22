@@ -1,0 +1,114 @@
+<UserControl x:Class="Fenix.DBTableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Fenix"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{StaticResource Th.SurfaceBrush}">
+
+    <UserControl.Resources>
+        <local:BooleanNegationConverter x:Key="BooleanNegationConverter" />
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid Margin="12" Background="{StaticResource Th.SurfaceBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0" Padding="12,10">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="🔍" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" />
+                    <TextBlock Text="Filters" VerticalAlignment="Center" />
+                </StackPanel>
+            </GroupBox.Header>
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" ItemHeight="30">
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+                    <TextBlock Text="⏱️" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                    <TextBlock Text="Last:" Style="{StaticResource Th.FilterLabel}" />
+                </StackPanel>
+                <ComboBox x:Name="TimeIntervalComboBox"
+                          Width="100"
+                          Style="{StaticResource Th.FilterComboBox}"
+                          ItemsSource="{Binding TimeIntervals}"
+                          SelectedItem="{Binding SelectedInterval, Mode=TwoWay}"
+                          ToolTip="Show data from the last selected interval" />
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+                    <TextBlock Text="📅" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                    <TextBlock Text="From:" Style="{StaticResource Th.FilterLabel}" />
+                </StackPanel>
+                <DatePicker x:Name="FromDateCtrl"
+                            Width="160"
+                            Style="{StaticResource Th.FilterDatePicker}"
+                            SelectedDate="{Binding FromDate, Mode=TwoWay}"
+                            IsEnabled="{Binding IsDateRangeEditable}"
+                            ToolTip="Start date (available in Custom mode)" />
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+                    <TextBlock Text="📅" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                    <TextBlock Text="To:" Style="{StaticResource Th.FilterLabel}" />
+                </StackPanel>
+                <DatePicker x:Name="ToDateCtrl"
+                            Width="160"
+                            Style="{StaticResource Th.FilterDatePicker}"
+                            SelectedDate="{Binding ToDate, Mode=TwoWay}"
+                            IsEnabled="{Binding IsDateRangeEditable}"
+                            ToolTip="End date (available in Custom mode)" />
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+                    <TextBlock Text="&#x2195;" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
+                    <TextBlock Text="Order:" Style="{StaticResource Th.FilterLabel}" />
+                </StackPanel>
+                <ComboBox x:Name="OrderComboBox"
+                          Width="160"
+                          Style="{StaticResource Th.FilterComboBox}"
+                          ItemsSource="{Binding OrderOptions}"
+                          SelectedItem="{Binding SelectedOrder, Mode=TwoWay}" />
+
+                <Button Style="{StaticResource Th.FilterButton}" Click="ResetButton_Click" ToolTip="Reload table data">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🔄" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Text="Refresh" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="myDataGrid"
+                  Grid.Row="2"
+                  AutoGenerateColumns="True"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  ItemsSource="{Binding YourDataCollection}"
+                  EnableRowVirtualization="True"
+                  EnableColumnVirtualization="True"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  BorderBrush="{StaticResource Th.BorderBrush}"
+                  BorderThickness="1"
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="{StaticResource Th.BorderBrush}"
+                  VerticalGridLinesBrush="{StaticResource Th.BorderBrush}"
+                  Background="{StaticResource Th.SurfaceBrush}"
+                  RowBackground="{StaticResource Th.SurfaceBrush}"
+                  AlternatingRowBackground="{StaticResource Th.Surface2Brush}"
+                  Foreground="{StaticResource Th.TextBrush}"
+                  Margin="0,0,0,2"
+                  RowHeight="30"
+                  ColumnHeaderHeight="34" />
+
+        <ProgressBar Grid.Row="3"
+                     IsIndeterminate="True"
+                     Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Height="4"
+                     Margin="0,8,0,0" />
+    </Grid>
+</UserControl>
