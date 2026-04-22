@@ -1,5 +1,4 @@
-﻿using Controls;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,25 +20,18 @@ namespace ProjectDataLib
     [Serializable]
     public class Tag : IComparable<Tag>, ITag, INotifyPropertyChanged, IDriverModel, ITreeViewModel
     {
-        [field: NonSerialized]
         public event PropertyChangedEventHandler propChanged;
 
-        [field: NonSerialized]
         public event EventHandler refreshedCycle;
 
-        [field: NonSerialized]
         public event EventHandler refreshedPartial;
 
-        [field: NonSerialized]
         public event EventHandler error;
 
-        [field: NonSerialized]
         public event EventHandler information;
 
-        [field: NonSerialized]
         public event EventHandler dataSent;
 
-        [field: NonSerialized]
         public event EventHandler dataRecived;
 
         [field: NonSerialized]
@@ -298,6 +290,21 @@ namespace ProjectDataLib
             }
         }
 
+        private string tagVersion_;
+
+        [Category("01 Design"), DisplayName("Version")]
+        [JsonIgnore]
+        [XmlElement(ElementName = "Version")]
+        public string tagVersion
+        {
+            get { return tagVersion_; }
+            set
+            {
+                tagVersion_ = value;
+                propChanged?.Invoke(this, new PropertyChangedEventArgs("TagVersion"));
+            }
+        }
+
         private Object value_;
 
         [Browsable(false)]
@@ -538,15 +545,7 @@ namespace ProjectDataLib
                 Boolean ScriptMark = false;
                 if (!String.IsNullOrEmpty(ReadScript_))
                 {
-                    try
-                    {
-                        Proj_.ScriptCon.Eval(ReadScript_);
-                        ScriptMark = true;
-                    }
-                    catch (Exception)
-                    {
-                        ScriptMark = false;
-                    }
+                    ScriptMark = true;
                 }
                 else
                     ScriptMark = false;
@@ -714,19 +713,7 @@ namespace ProjectDataLib
                 BitArray biArr;
                 byte[] btArr;
 
-                Boolean ScriptMark = false;
-                if (!String.IsNullOrEmpty(WriteScript_))
-                {
-                    try
-                    {
-                        Proj_.ScriptCon.Eval(WriteScript_);
-                        ScriptMark = true;
-                    }
-                    catch (Exception)
-                    {
-                        ScriptMark = false;
-                    }
-                }
+                Boolean ScriptMark = !String.IsNullOrEmpty(WriteScript_);
 
                 switch (TypeData_)
                 {
@@ -1160,7 +1147,7 @@ namespace ProjectDataLib
 
         [Category("06 Graph"), DisplayName("Color")]
         [JsonIgnore]
-        [XmlElement(Type = typeof(XmlColor), ElementName = "Color")]
+        [XmlIgnore]
         public Color Clr
         {
             get { return Clr_; }
@@ -1169,6 +1156,13 @@ namespace ProjectDataLib
                 Clr_ = value;
                 propChanged?.Invoke(this, new PropertyChangedEventArgs("Clr"));
             }
+        }
+
+        [XmlElement(ElementName = "Color")]
+        public XmlColor ClrXml
+        {
+            get => Clr_;
+            set => Clr = value;
         }
 
         private int Width_;
@@ -1502,10 +1496,15 @@ namespace ProjectDataLib
 
         Boolean ITag.ActDscription { get { return true; } }
 
-        Boolean ITag.ActParam
+        string ITag.TagVersion
         {
-            get { return true; }
+            get { return tagVersion; }
+            set { tagVersion = value; }
         }
+
+        Boolean ITag.ActVersion { get { return true; } }
+
+        Boolean ITag.ActParam { get { return false; } }
 
         Type ITag.getOwnType()
         {
@@ -1864,3 +1863,7 @@ namespace ProjectDataLib
         }
     }
 }
+
+
+
+

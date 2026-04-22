@@ -32,7 +32,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Build app for release
-        run: msbuild ${{ github.workspace }}\Fenix.sln -p:Configuration=Release
+        run: msbuild ${{ github.workspace }}\FenixModbusS7.sln -p:Configuration=Release
 
       - name: Get software version from XML
         id: get_version
@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
             name: Fenix-Modbus-Installer
-            path: ${{ github.workspace }}\FenixSetup\FenixSetup-SetupFiles\FenixSetup.msi
+            path: ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\FenixModbusS7Setup.msi
 
       - name: Create GitHub Release
         id: create_release
@@ -64,6 +64,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}\FenixSetup\FenixSetup-SetupFiles\FenixSetup.msi
-          asset_name: FenixSetup.msi
+          asset_path: ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\FenixModbusS7Setup.msi
+          asset_name: FenixModbusS7Setup.msi
           asset_content_type: application/octet-stream

@@ -1,136 +1,132 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace ProjectDataLib
 {
+    [Serializable]
     public class CusFile : ITreeViewModel, INotifyPropertyChanged
     {
+        [field: NonSerialized]
         private PropertyChangedEventHandler propChanged;
 
         event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
         {
-            add
-            {
-                propChanged += value;
-            }
-
-            remove
-            {
-                propChanged -= value;
-            }
+            add { propChanged += value; }
+            remove { propChanged -= value; }
         }
+
+        [field: NonSerialized]
+        private ObservableCollection<object> children_ = new ObservableCollection<object>();
 
         [Browsable(false)]
-        public bool IsFile { get; set; }
+        [XmlIgnore]
+        public Guid ObjId { get; set; } = Guid.NewGuid();
 
-        private string FullName_;
+        [Browsable(false)]
+        [XmlElement(ElementName = "Name")]
+        public string Name { get; set; }
 
-        [DisplayName("File Path")]
-        [Category("01 Design"), ReadOnly(true)]
+        [Browsable(false)]
+        [XmlElement(ElementName = "FullName")]
         public string FullName
         {
-            get { return FullName_; }
+            get => fullName_;
             set
             {
-                FullName_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+                fullName_ = value;
+                Name = IsFile ? Path.GetFileName(value) : Path.GetFileName(value.TrimEnd(Path.DirectorySeparatorChar));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullName)));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
             }
         }
 
-        public CusFile(DirectoryInfo d)
-        {
-            FullName = d.FullName;
-            var SubDir = (from x in d.GetDirectories() select new CusFile(x)).ToList();
-            SubDir.AddRange(from x in d.GetFiles() select new CusFile(x));
-            Children_ = new ObservableCollection<object>(SubDir);
-        }
+        private string fullName_ = string.Empty;
 
-        public CusFile(FileInfo f)
-        {
-            IsFile = true;
-            Children_ = new ObservableCollection<object>();
-            FullName = f.FullName;
-        }
+        [Browsable(false)]
+        [XmlElement(ElementName = "IsFile")]
+        public bool IsFile { get; set; }
 
-        private ObservableCollection<Object> Children_;
+        [Browsable(false)]
+        [XmlIgnore]
+        public ObservableCollection<object> Children
+        {
+            get => children_;
+            set => children_ = value ?? new ObservableCollection<object>();
+        }
 
         ObservableCollection<object> ITreeViewModel.Children
         {
-            get
-            {
-                return Children_;
-            }
-
-            set
-            {
-                Children_ = value;
-            }
-        }
-
-        private bool IsBlocked_;
-
-        [Browsable(false)]
-        public bool IsBlocked
-        {
-            get
-            {
-                return IsBlocked_;
-            }
-            set
-            {
-                IsBlocked_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBlocked)));
-            }
-        }
-
-        private bool IsExpand_;
-
-        [Browsable(false)]
-        public bool IsExpand
-        {
-            get { return IsExpand_; }
-            set
-            {
-                IsExpand_ = value;
-                propChanged.Invoke(this, new PropertyChangedEventArgs(nameof(IsExpand)));
-            }
-        }
-
-        bool ITreeViewModel.IsLive
-        {
-            get
-            {
-                return false;
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get => children_;
+            set => children_ = value;
         }
 
         string ITreeViewModel.Name
         {
-            get
-            {
-                return Path.GetFileName(FullName);
-            }
+            get => Name;
+            set => Name = value;
+        }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
+        bool ITreeViewModel.IsExpand
+        {
+            get => true;
+            set { }
+        }
+
+        bool ITreeViewModel.IsLive
+        {
+            get => false;
+            set { }
+        }
+
+        bool ITreeViewModel.IsBlocked
+        {
+            get => false;
+            set { }
         }
 
         Color ITreeViewModel.Clr
         {
-            get { return Color.White; }
+            get => Color.White;
             set { }
+        }
+
+        public CusFile()
+        {
+        }
+
+        public CusFile(FileInfo file)
+        {
+            IsFile = true;
+            FullName = file.FullName;
+        }
+
+        public CusFile(DirectoryInfo directory)
+        {
+            IsFile = false;
+            FullName = directory.FullName;
+        }
+
+        public ITreeViewModel DirSearch(string path, ITreeViewModel root)
+        {
+            if (root is not CusFile rootFile)
+                return null;
+
+            if (string.Equals(rootFile.FullName, path, StringComparison.OrdinalIgnoreCase))
+                return rootFile;
+
+            foreach (var child in root.Children.OfType<CusFile>())
+            {
+                var found = DirSearch(path, child);
+                if (found != null)
+                    return found;
+            }
+
+            return null;
         }
     }
 }

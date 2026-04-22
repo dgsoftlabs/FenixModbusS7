@@ -5,8 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -18,7 +16,6 @@ using System.Xml;
 namespace ProjectDataLib
 {
 
-    [Synchronization]
     public class ProjectContainer : ITreeViewModel
     {
         #region Fields
@@ -51,7 +48,7 @@ namespace ProjectDataLib
 
         public string TaskName = "FenixServer";
 
-        public string HelpWebSite = "https://github.com/DanielSan1000/Fenix-Modbus/wiki";
+        public string HelpWebSite = "https://github.com/dgsoftlabs/FenixModbusS7/wiki";
 
         public string LayoutFile = "Layout_.xml";
 
@@ -226,45 +223,25 @@ namespace ProjectDataLib
                 if (!File.Exists(path))
                     return false;
 
-                Project buff = null;
-                Boolean IsXml = false;
-
-                #region PSF (BINARY)
-
-                if (Path.GetExtension(path).Contains("psf"))
+                var extension = Path.GetExtension(path);
+                if (!string.Equals(extension, ".pse", StringComparison.OrdinalIgnoreCase))
                 {
-                    BinaryFormatter binForm = new BinaryFormatter();
-                    FileStream fileStr = new FileStream(path, FileMode.OpenOrCreate);
-                    buff = (Project)binForm.Deserialize(fileStr);
-                    fileStr.Close();
-                    path = Path.ChangeExtension(path, "psx");
+                    throw new NotSupportedException(
+                        $"Unsupported project format '{extension}'. Only '.pse' is supported in .NET 10.");
                 }
 
-                #endregion PSF (BINARY)
-
-                #region PSX (XML)
-
-                else if (Path.GetExtension(path).Contains("psx"))
+                Project buff;
+                var xmlSer = new XmlSerializer(typeof(Project));
+                using (Stream fsream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
-                    XmlSerializer xmlSer = new XmlSerializer(typeof(Project));
-                    using (Stream fsream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                    {
-                        buff = (Project)xmlSer.Deserialize(fsream);
-                    }
-
-                    IsXml = true;
+                    buff = (Project)xmlSer.Deserialize(fsream);
                 }
-
-                #endregion PSX (XML)
 
                 buff.path = path;
                 buff.PrCon = this;
 
-                if (IsXml)
-                {
-                    buff.OnDeserializedXML();
-                    buff.ChartConf.OnDeserializedXML();
-                }
+                buff.OnDeserializedXML();
+                buff.ChartConf.OnDeserializedXML();
 
                 foreach (Project pr in projectList)
                     if (pr.objId.Equals(buff.objId))
@@ -316,8 +293,7 @@ namespace ProjectDataLib
 
                 foreach (Connection cn in buff.connectionList)
                 {
-                    if (IsXml)
-                        cn.OnDeserializedXML();
+                    cn.OnDeserializedXML();
 
                     cn.gConf = gConf;
 
@@ -335,8 +311,7 @@ namespace ProjectDataLib
                         tg.PrCon = this;
                         tg.Proj = buff;
 
-                        if (IsXml)
-                            tg.OnDeserializedXml();
+                        tg.OnDeserializedXml();
                     }
                 }
 
@@ -376,9 +351,6 @@ namespace ProjectDataLib
                     dev.PrCon = this;
                 }
 
-                buff.WebServer1.PrCon = this;
-                buff.WebServer1.Proj = buff;
-
                 return true;
             }
             catch (Exception Ex)
@@ -392,13 +364,37 @@ namespace ProjectDataLib
         {
             try
             {
+                var extension = Path.GetExtension(path);
+                if (!string.Equals(extension, ".pse", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new NotSupportedException(
+                        $"Unsupported project format '{extension}'. Only '.pse' is supported in .NET 10.");
+                }
+
                 proj.modMarks = false;
                 proj.modifeTime = DateTime.Now;
+                proj.fileVer = Assembly.GetExecutingAssembly().GetName().Version;
+
+                string directory = Path.GetDirectoryName(path);
+                if (!string.IsNullOrWhiteSpace(directory) && !Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+
+                string tempPath = path + ".tmp";
+                string backupPath = path + ".bak";
 
                 XmlSerializer xmlSer = new XmlSerializer(typeof(Project));
-                using (Stream fsream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (Stream fsream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                     xmlSer.Serialize(fsream, proj);
+                }
+
+                if (File.Exists(path))
+                {
+                    File.Replace(tempPath, path, backupPath, true);
+                }
+                else
+                {
+                    File.Move(tempPath, path, true);
                 }
 
                 saveProjectEv?.Invoke(proj, new ProjectEventArgs(proj));
@@ -425,8 +421,6 @@ namespace ProjectDataLib
                         ((ITreeViewModel)conn).Children.Clear();
 
                     ((ITreeViewModel)proj.ScriptEng).Children.Clear();
-
-                    ((ITreeViewModel)proj.WebServer1).Children.Clear();
 
                     ((ITreeViewModel)proj).Children.Clear();
 
@@ -652,9 +646,6 @@ namespace ProjectDataLib
                 if (proj == name)
                     return pr;
 
-                if (name == ServerGuid)
-                    return pr.WebServer1;
-
                 if (name == ScriptGuid)
                     return pr.ScriptEng;
 
@@ -704,9 +695,6 @@ namespace ProjectDataLib
 
                     if (pr.objId == name)
                         return pr;
-
-                    if (name == ServerGuid)
-                        return pr.WebServer1;
 
                     if (name == ScriptGuid)
                         return pr.ScriptEng;
@@ -1488,7 +1476,6 @@ namespace ProjectDataLib
             try
             {
                 Project pr = getProject(projId);
-                ((ITreeViewModel)pr.WebServer1).Children.Add(file);
                 pr.FileList.Add(file);
 
                 if (addInFileEv != null)
@@ -1508,9 +1495,6 @@ namespace ProjectDataLib
             try
             {
                 Project pr = getProject(projId);
-
-                ((ITreeViewModel)pr.WebServer1).Children.Remove(GetInFile(projId, file));
-
                 pr.FileList.RemoveAll(x => x.objId == file);
 
                 if (removeInFileEv != null)
@@ -1615,7 +1599,7 @@ namespace ProjectDataLib
 
         public static async Task<string> GetVersionFromGitHub()
         {
-            string fileUrl = "https://raw.githubusercontent.com/DanielSan1000/Fenix-Modbus/master/version.xml";
+            string fileUrl = "https://raw.githubusercontent.com/dgsoftlabs/FenixModbusS7/master/version.xml";
 
             using (HttpClient client = new HttpClient())
             {

@@ -5,6 +5,12 @@ using System.Windows.Forms;
 
 namespace ProjectDataLib
 {
+    public enum S7CpuSeries
+    {
+        S7300,
+        S7400
+    }
+
     [Serializable]
     public class S7DriverParam
     {
@@ -72,6 +78,46 @@ namespace ProjectDataLib
             set { ReplyTime_ = value; }
         }
 
+        private S7CpuSeries CpuSeries_;
+
+        [Category("Target")]
+        [DisplayName("CPU Series")]
+        public S7CpuSeries CpuSeries
+        {
+            get { return CpuSeries_; }
+            set { CpuSeries_ = value; }
+        }
+
+        private int ReconnectAttempts_;
+
+        [Category("Time")]
+        [DisplayName("Reconnect Attempts")]
+        public int ReconnectAttempts
+        {
+            get { return ReconnectAttempts_; }
+            set { ReconnectAttempts_ = value < 1 ? 1 : value; }
+        }
+
+        private int ReadTimeout_;
+
+        [Category("Time")]
+        [DisplayName("Read Timeout [ms]")]
+        public int ReadTimeout
+        {
+            get { return ReadTimeout_; }
+            set { ReadTimeout_ = value < 1 ? 1 : value; }
+        }
+
+        private int WriteTimeout_;
+
+        [Category("Time")]
+        [DisplayName("Write Timeout [ms]")]
+        public int WriteTimeout
+        {
+            get { return WriteTimeout_; }
+            set { WriteTimeout_ = value < 1 ? 1 : value; }
+        }
+
         public S7DriverParam()
         {
             Ip_ = IPAddress.Parse("127.0.0.1");
@@ -80,6 +126,10 @@ namespace ProjectDataLib
             Slot_ = 2;
             Timeout_ = 1000000;
             ReplyTime_ = 1500;
+            CpuSeries_ = S7CpuSeries.S7300;
+            ReconnectAttempts_ = 3;
+            ReadTimeout_ = 2000;
+            WriteTimeout_ = 2000;
         }
     }
 }

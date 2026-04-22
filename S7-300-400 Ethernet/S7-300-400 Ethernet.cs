@@ -1,4 +1,5 @@
 ﻿using ProjectDataLib;
+using Sharp7;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,9 +31,8 @@ namespace nmDriver
 
         private S7DriverParam DriverParam_;
         private Boolean isLive = false;
-        private static libnodave.daveOSserialType fds;
-        private static libnodave.daveInterface di;
-        private static libnodave.daveConnection dc;
+        private static readonly S7Client dc = new S7Client();
+        private static readonly object commLock = new object();
 
         private List<Tag> tagList = new List<Tag>();
         private List<PO> MPoints = new List<PO>();
@@ -97,44 +97,36 @@ namespace nmDriver
         /// <returns></returns>
         bool IDriverModel.activateCycle(List<ITag> tagsList2)
         {
-            if (bWorker.IsBusy)
-                return false;
-
-            //Przypisanie danych
-            this.tagList.Clear();
-            this.tagList = (from c in tagsList2 where c is Tag select (Tag)c).ToList();
-
-            ConfigData(this.tagList);
-
-            //Otwarcie danych
-            fds.rfd = libnodave.openSocket(DriverParam_.Port, DriverParam_.Ip);
-            fds.wfd = fds.rfd;
-
-            //Sprawdznie czy nie ma bledu
-            if (fds.rfd > 0)
+            try
             {
-                //Parametry
-                di = new libnodave.daveInterface(fds, "IF1", 0, libnodave.daveProtoISOTCP, libnodave.daveSpeed187k);
-                di.setTimeout(DriverParam_.Timeout);
-                dc = new libnodave.daveConnection(di, 0, DriverParam_.Rack, DriverParam_.Slot);
+                if (bWorker.IsBusy)
+                    return false;
 
-                //Worker
-                if (dc.connectPLC() == 0)
+                this.tagList.Clear();
+                this.tagList = (from c in tagsList2 where c is Tag select (Tag)c).ToList();
+
+                ConfigData(this.tagList);
+
+                int connResult = ConnectWithRetry();
+                if (connResult == 0)
                 {
                     bWorker.RunWorkerAsync();
                     isLive = true;
 
                     foreach (IDriverModel it in this.tagList)
                         it.isAlive = true;
+
+                    sendInfoEv?.Invoke(this, new ProjectEventArgs(DateTime.Now, "S7 connected: " + DriverParam_.Ip + ":" + DriverParam_.Port + " CPU=" + DriverParam_.CpuSeries));
+                    return true;
                 }
 
-                return true;
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now,
+                    "Couldn't open TCP connection. code=" + connResult + " " + dc.ErrorText(connResult)));
+                return false;
             }
-            else
+            catch (Exception Ex)
             {
-                if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "Couldn't open TCP connaction"));
-
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, Ex.Message, Ex));
                 return false;
             }
         }
@@ -223,18 +215,29 @@ namespace nmDriver
         /// <returns></returns>
         bool IDriverModel.deactivateCycle()
         {
-            //Rozlaczenie
-            if (isLive)
+            try
             {
-                dc.disconnectPLC();
-                libnodave.closeSocket(fds.rfd);
-                isLive = false;
+                if (isLive)
+                {
+                    isLive = false;
 
-                foreach (IDriverModel it in this.tagList)
-                    it.isAlive = false;
+                    lock (commLock)
+                    {
+                        if (dc.Connected)
+                            dc.Disconnect();
+                    }
+
+                    foreach (IDriverModel it in this.tagList)
+                        it.isAlive = false;
+                }
+
+                return true;
             }
-
-            return true;
+            catch (Exception Ex)
+            {
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, Ex.Message, Ex));
+                return false;
+            }
         }
 
         /// <summary>
@@ -246,282 +249,27 @@ namespace nmDriver
         {
             try
             {
-                #region Area M
+                if (!isLive)
+                    return;
 
-                foreach (PO p in MPoints)
-                {
-                    byte[] data = new byte[((p.Y - p.X) + 1)];
-                    sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)libnodave.daveFlags }, DateTime.Now, "M.READ.REQUEST"));
-                    if (dc.readBytes(libnodave.daveFlags, 0, p.X, ((p.Y - p.X) + 1), data) == 0)
-                    {
-                        BitArray btArr = new BitArray(data);
+                if (!EnsureConnected())
+                    return;
 
-                        reciveLogInfoEv?.Invoke(this, new ProjectEventArgs(data, DateTime.Now, "M.READ.RESPONSE"));
-
-                        Boolean[] bitArray = new Boolean[btArr.Length];
-                        btArr.CopyTo(bitArray, 0);
-
-                        //Obszar pamiecie
-                        MemoryAreaInfo mInfo = ((IDriverModel)this).MemoryAreaInf.Where(x => x.fctCode == 1).ToArray()[0];
-
-                        //Selekcja tagow do przeslania do odswierzenia
-                        var zm = from n in tagList
-                                 where n.areaData == mInfo.Name
-                                 && n.bitAdres >= p.X * mInfo.AdresSize
-                                 && n.bitAdres + n.coreData.Length <= (p.X + ((p.Y - p.X) + 1)) * mInfo.AdresSize
-                                 select n;
-
-                        //Lista
-                        List<Tag> refDataTag = zm.ToList();
-
-                        //Przypisane danych do tagow
-                        for (int i = 0; i < refDataTag.Count; i++)
-                        {
-                            Array.Copy(bitArray, refDataTag[i].bitAdres - p.X * mInfo.AdresSize, refDataTag[i].coreData, 0, refDataTag[i].coreData.Length);
-                            refDataTag[i].refreshData();
-                        }
-
-                        //Odswierzenie danych informacja. Delegat do pozostałych klass
-                        if (refreshCycleEv != null)
-                            refreshCycleEv(this, new ProjectEventArgs(refDataTag));
-                    }
-                    else
-                    {
-                        if (errorSendEv != null)
-                            errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "Communication error. Problem with reading M area"));
-                    }
-                }
-
-                #endregion Area M
-
-                #region Area DB
+                ReadConfiguredArea(MPoints, S7Consts.S7AreaMK, 0, 1, "M");
 
                 foreach (List<PO> pp in DBPoints)
-                {
-                    foreach (PO p in pp)
-                    {
-                        byte[] data = new byte[((p.Y - p.X) + 1)];
+                    ReadConfiguredArea(pp, S7Consts.S7AreaDB, 0, 4, "DB", true);
 
-                        sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)libnodave.daveDB }, DateTime.Now, "DB.READ.REQUEST"));
+                ReadConfiguredArea(IPoints, S7Consts.S7AreaPE, 0, 2, "I");
+                ReadConfiguredArea(QPoints, S7Consts.S7AreaPA, 0, 3, "Q");
 
-                        if (dc.readBytes(libnodave.daveDB, p.BlockNum, p.X, ((p.Y - p.X) + 1), data) == 0)
-                        {
-                            BitArray btArr = new BitArray(data);
-
-                            //Zdarzenia
-                            reciveLogInfoEv?.Invoke(this, new ProjectEventArgs(data, DateTime.Now, "DB.READ.RESPONSE"));
-
-                            Boolean[] bitArray = new Boolean[btArr.Length];
-                            btArr.CopyTo(bitArray, 0);
-
-                            //Obszar pamiecie
-                            MemoryAreaInfo mInfo = ((IDriverModel)this).MemoryAreaInf.Where(x => x.fctCode == 4).ToArray()[0];
-
-                            //Selekcja tagow do przeslania do odswierzenia
-                            var zm = from n in tagList
-                                     where n.areaData == mInfo.Name
-                                     && n.BlockAdress == p.BlockNum
-                                     && n.bitAdres >= p.X * mInfo.AdresSize
-                                     && n.bitAdres + n.coreData.Length <= (p.X + ((p.Y - p.X) + 1)) * mInfo.AdresSize
-                                     select n;
-
-                            //Lista
-                            List<Tag> refDataTag = zm.ToList();
-
-                            //Przypisane danych do tagow
-                            for (int i = 0; i < refDataTag.Count; i++)
-                            {
-                                Array.Copy(bitArray, refDataTag[i].bitAdres - p.X * mInfo.AdresSize, refDataTag[i].coreData, 0, refDataTag[i].coreData.Length);
-                                refDataTag[i].refreshData();
-                            }
-
-                            //Odswierzenie danych informacja. Delegat do pozostałych klass
-                            if (refreshCycleEv != null)
-                                refreshCycleEv(this, new ProjectEventArgs(refDataTag));
-                        }
-                        else
-                        {
-                            if (errorSendEv != null)
-                                errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "Communication error. Problem with reading DB area"));
-                        }
-                    }
-                }
-
-                #endregion Area DB
-
-                #region Area I
-
-                foreach (PO p in IPoints)
-                {
-                    byte[] data = new byte[((p.Y - p.X) + 1)];
-
-                    sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)libnodave.daveInputs }, DateTime.Now, "I.READ.REQUEST"));
-
-                    if (dc.readBytes(libnodave.daveInputs, 0, p.X, ((p.Y - p.X) + 1), data) == 0)
-                    {
-                        BitArray btArr = new BitArray(data);
-
-                        reciveLogInfoEv?.Invoke(this, new ProjectEventArgs(data, DateTime.Now, "I.READ.RESPONSE"));
-
-                        Boolean[] bitArray = new Boolean[btArr.Length];
-                        btArr.CopyTo(bitArray, 0);
-
-                        //Obszar pamiecie
-                        MemoryAreaInfo mInfo = ((IDriverModel)this).MemoryAreaInf.Where(x => x.fctCode == 2).ToArray()[0];
-
-                        //Selekcja tagow do przeslania do odswierzenia
-                        var zm = from n in tagList
-                                 where n.areaData == mInfo.Name
-                                 && n.bitAdres >= p.X * mInfo.AdresSize
-                                 && n.bitAdres + n.coreData.Length <= (p.X + ((p.Y - p.X) + 1)) * mInfo.AdresSize
-                                 select n;
-
-                        //Lista
-                        List<Tag> refDataTag = zm.ToList();
-
-                        //Przypisane danych do tagow
-                        for (int i = 0; i < refDataTag.Count; i++)
-                        {
-                            Array.Copy(bitArray, refDataTag[i].bitAdres - p.X * mInfo.AdresSize, refDataTag[i].coreData, 0, refDataTag[i].coreData.Length);
-                            refDataTag[i].refreshData();
-                        }
-
-                        //Odswierzenie danych informacja. Delegat do pozostałych klass
-                        if (refreshCycleEv != null)
-                            refreshCycleEv(this, new ProjectEventArgs(refDataTag));
-                    }
-                    else
-                    {
-                        if (errorSendEv != null)
-                            errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "Communication error. Problem with reading I area"));
-                    }
-                }
-
-                #endregion Area I
-
-                #region Area Q
-
-                foreach (PO p in QPoints)
-                {
-                    byte[] data = new byte[((p.Y - p.X) + 1)];
-
-                    sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)libnodave.daveOutputs }, DateTime.Now, "Q.READ.REQUEST"));
-
-                    if (dc.readBytes(libnodave.daveOutputs, 0, p.X, ((p.Y - p.X) + 1), data) == 0)
-                    {
-                        BitArray btArr = new BitArray(data);
-
-                        reciveLogInfoEv?.Invoke(this, new ProjectEventArgs(data, DateTime.Now, "Q.READ.RESPONSE"));
-
-                        Boolean[] bitArray = new Boolean[btArr.Length];
-                        btArr.CopyTo(bitArray, 0);
-
-                        //Obszar pamiecie
-                        MemoryAreaInfo mInfo = ((IDriverModel)this).MemoryAreaInf.Where(x => x.fctCode == 3).ToArray()[0];
-
-                        //Selekcja tagow do przeslania do odswierzenia
-                        var zm = from n in tagList
-                                 where n.areaData == mInfo.Name
-                                 && n.bitAdres >= p.X * mInfo.AdresSize
-                                 && n.bitAdres + n.coreData.Length <= (p.X + ((p.Y - p.X) + 1)) * mInfo.AdresSize
-                                 select n;
-
-                        //Lista
-                        List<Tag> refDataTag = zm.ToList();
-
-                        //Przypisane danych do tagow
-                        for (int i = 0; i < refDataTag.Count; i++)
-                        {
-                            Array.Copy(bitArray, refDataTag[i].bitAdres - p.X * mInfo.AdresSize, refDataTag[i].coreData, 0, refDataTag[i].coreData.Length);
-                            refDataTag[i].refreshData();
-                        }
-
-                        //Odswierzenie danych informacja. Delegat do pozostałych klass
-                        if (refreshCycleEv != null)
-                            refreshCycleEv(this, new ProjectEventArgs(refDataTag));
-                    }
-                    else
-                    {
-                        if (errorSendEv != null)
-                            errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "Communication error. Problem with reading Q area"));
-                    }
-                }
-
-                #endregion Area Q
-
-                #region Zapisz dane na porcie
-
-                //Tagi z obszaru Coils do zapisu
-                List<Tag> TgWrite = tagList.Where(x => x.setMod).ToList();
-                if (TgWrite.Count > 0)
-                {
-                    try
-                    {
-                        //Próba zapisu Taga
-                        foreach (Tag tg in TgWrite)
-                        {
-                            //Utworzenie do wyslania
-                            BitArray btArray = new BitArray(tg.coreDataSend);
-
-                            //Utworzenie tablicy byte
-                            Byte[] buffByteArr = new byte[tg.coreDataSend.Length / 8 == 0 ? 1 : tg.coreDataSend.Length / 8];
-
-                            //Konwersja i przeniesienie
-                            btArray.CopyTo(buffByteArr, 0);
-
-                            //Zapis
-                            if (tg.areaData == M)
-                            {
-                                dc.writeBytes(libnodave.daveFlags, 0, tg.startData, tg.coreDataSend.Length / 8, buffByteArr);
-                                tg.setMod = false;
-
-                                sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)libnodave.daveFlags }, DateTime.Now, "M.WRITE.REQUEST"));
-                            }
-
-                            //Zapis
-                            if (tg.areaData == DB)
-                            {
-                                dc.writeBytes(libnodave.daveDB, tg.BlockAdress, tg.startData, tg.coreDataSend.Length / 8, buffByteArr);
-                                tg.setMod = false;
-
-                                sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)libnodave.daveDB }, DateTime.Now, "DB.WRITE.REQUEST"));
-                            }
-
-                            //Zapis
-                            if (tg.areaData == I)
-                            {
-                                dc.writeBytes(libnodave.daveInputs, 0, tg.startData, tg.coreDataSend.Length / 8, buffByteArr);
-                                tg.setMod = false;
-
-                                sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)libnodave.daveInputs }, DateTime.Now, "I.WRITE.REQUEST"));
-                            }
-
-                            //Zapis
-                            if (tg.areaData == Q)
-                            {
-                                dc.writeBytes(libnodave.daveOutputs, 0, tg.startData, tg.coreDataSend.Length / 8, buffByteArr);
-                                tg.setMod = false;
-
-                                sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)libnodave.daveOutputs }, DateTime.Now, "Q.WRITE.REQUEST"));
-                            }
-                        }
-                    }
-                    catch (Exception Ex)
-                    {
-                        if (errorSendEv != null)
-                            errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "SiemensS7.bWorker_DoWork.Write :" + Ex.Message));
-                    }
-                }
-
-                #endregion Zapisz dane na porcie
+                WriteModifiedTags();
             }
             catch (Exception Ex)
             {
-                if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "S7-300/400.bWorker_DoWork :" + Ex.Message, Ex));
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "S7-300/400.bWorker_DoWork :" + Ex.Message, Ex));
             }
 
-            //Opoznienie wątku o dany czas
             Thread.Sleep(DriverParam_.ReplyTime);
         }
 
@@ -534,21 +282,233 @@ namespace nmDriver
         {
             try
             {
-                //Reaktywacja pobierania danych
                 if (isLive)
                 {
                     bWorker.RunWorkerAsync();
                 }
                 else
                 {
-                    dc.disconnectPLC();
-                    libnodave.closeSocket(fds.rfd);
+                    lock (commLock)
+                    {
+                        if (dc.Connected)
+                            dc.Disconnect();
+                    }
                 }
             }
             catch (Exception Ex)
             {
-                if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "S7-300/400.bWorker_RunWorkerCompleted :" + Ex.Message, Ex));
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "S7-300/400.bWorker_RunWorkerCompleted :" + Ex.Message, Ex));
+            }
+        }
+
+        private bool EnsureConnected()
+        {
+            lock (commLock)
+            {
+                if (dc.Connected)
+                    return true;
+            }
+
+            int result = ConnectWithRetry();
+            if (result != 0)
+            {
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now,
+                    "Reconnect failed. code=" + result + " " + dc.ErrorText(result)));
+                return false;
+            }
+
+            sendInfoEv?.Invoke(this, new ProjectEventArgs(DateTime.Now, "Reconnect successful."));
+            return true;
+        }
+
+        private int ConnectWithRetry()
+        {
+            int attempts = DriverParam_.ReconnectAttempts;
+            int lastResult = 0;
+
+            for (int i = 0; i < attempts; i++)
+            {
+                lastResult = ConnectOnce();
+                if (lastResult == 0)
+                    return 0;
+
+                Thread.Sleep(200);
+            }
+
+            return lastResult;
+        }
+
+        private int ConnectOnce()
+        {
+            lock (commLock)
+            {
+                if (dc.Connected)
+                    dc.Disconnect();
+
+                int timeout = DriverParam_.Timeout < 1 ? 1 : DriverParam_.Timeout;
+                dc.ConnTimeout = timeout;
+                dc.RecvTimeout = timeout;
+                dc.SendTimeout = timeout;
+
+                int result = dc.ConnectTo(DriverParam_.Ip, DriverParam_.Rack, DriverParam_.Slot);
+                if (result == 0)
+                    return 0;
+
+                if (DriverParam_.CpuSeries == S7CpuSeries.S7400 && DriverParam_.Slot != 3)
+                    return dc.ConnectTo(DriverParam_.Ip, DriverParam_.Rack, 3);
+
+                if (DriverParam_.CpuSeries == S7CpuSeries.S7300 && DriverParam_.Slot != 2)
+                    return dc.ConnectTo(DriverParam_.Ip, DriverParam_.Rack, 2);
+
+                return result;
+            }
+        }
+
+        private void ApplyOperationTimeout(int timeout)
+        {
+            int effectiveTimeout = timeout < 1 ? 1 : timeout;
+            lock (commLock)
+            {
+                dc.RecvTimeout = effectiveTimeout;
+                dc.SendTimeout = effectiveTimeout;
+            }
+        }
+
+        private void ReadConfiguredArea(List<PO> points, int area, int blockNum, int fctCode, string areaName, bool usePointBlock = false)
+        {
+            if (points == null || points.Count == 0)
+                return;
+
+            MemoryAreaInfo mInfo = ((IDriverModel)this).MemoryAreaInf.First(x => x.fctCode == fctCode);
+
+            foreach (PO p in points)
+            {
+                int size = (p.Y - p.X) + 1;
+                byte[] data = new byte[size];
+                int dbNumber = usePointBlock ? p.BlockNum : blockNum;
+
+                sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)area }, DateTime.Now, areaName + ".READ.REQUEST"));
+
+                ApplyOperationTimeout(DriverParam_.ReadTimeout);
+
+                int readResult;
+                lock (commLock)
+                {
+                    readResult = dc.ReadArea(area, dbNumber, p.X, size, S7Consts.S7WLByte, data);
+                }
+
+                if (readResult == S7Consts.ResultOK)
+                {
+                    BitArray btArr = new BitArray(data);
+
+                    reciveLogInfoEv?.Invoke(this, new ProjectEventArgs(data, DateTime.Now, areaName + ".READ.RESPONSE"));
+
+                    Boolean[] bitArray = new Boolean[btArr.Length];
+                    btArr.CopyTo(bitArray, 0);
+
+                    var zm = from n in tagList
+                             where n.areaData == mInfo.Name
+                             && (!usePointBlock || n.BlockAdress == p.BlockNum)
+                             && n.bitAdres >= p.X * mInfo.AdresSize
+                             && n.bitAdres + n.coreData.Length <= (p.X + size) * mInfo.AdresSize
+                             select n;
+
+                    List<Tag> refDataTag = zm.ToList();
+
+                    for (int i = 0; i < refDataTag.Count; i++)
+                    {
+                        Array.Copy(bitArray, refDataTag[i].bitAdres - p.X * mInfo.AdresSize, refDataTag[i].coreData, 0, refDataTag[i].coreData.Length);
+                        refDataTag[i].refreshData();
+                    }
+
+                    if (refDataTag.Count > 0)
+                        refreshCycleEv?.Invoke(this, new ProjectEventArgs(refDataTag));
+                }
+                else
+                {
+                    errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now,
+                        "READ ERROR area=" + areaName + " block=" + dbNumber + " start=" + p.X + " size=" + size + " code=" + readResult + " " + dc.ErrorText(readResult)));
+
+                    if (readResult == S7Consts.errTCPNotConnected || readResult == S7Consts.errTCPConnectionReset || readResult == S7Consts.errTCPConnectionTimeout)
+                        EnsureConnected();
+                }
+            }
+        }
+
+        private void WriteModifiedTags()
+        {
+            List<Tag> tgWrite = tagList.Where(x => x.setMod).ToList();
+            if (tgWrite.Count == 0)
+                return;
+
+            foreach (Tag tg in tgWrite)
+            {
+                try
+                {
+                    BitArray btArray = new BitArray(tg.coreDataSend);
+                    int byteLen = Math.Max(1, (tg.coreDataSend.Length + 7) / 8);
+                    byte[] buffByteArr = new byte[byteLen];
+                    btArray.CopyTo(buffByteArr, 0);
+
+                    int area;
+                    int dbNumber;
+                    string logArea;
+
+                    if (tg.areaData == M)
+                    {
+                        area = S7Consts.S7AreaMK;
+                        dbNumber = 0;
+                        logArea = "M";
+                    }
+                    else if (tg.areaData == DB)
+                    {
+                        area = S7Consts.S7AreaDB;
+                        dbNumber = tg.BlockAdress;
+                        logArea = "DB";
+                    }
+                    else if (tg.areaData == I)
+                    {
+                        area = S7Consts.S7AreaPE;
+                        dbNumber = 0;
+                        logArea = "I";
+                    }
+                    else if (tg.areaData == Q)
+                    {
+                        area = S7Consts.S7AreaPA;
+                        dbNumber = 0;
+                        logArea = "Q";
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                    ApplyOperationTimeout(DriverParam_.WriteTimeout);
+
+                    int writeResult;
+                    lock (commLock)
+                    {
+                        writeResult = dc.WriteArea(area, dbNumber, tg.startData, byteLen, S7Consts.S7WLByte, buffByteArr);
+                    }
+
+                    if (writeResult == S7Consts.ResultOK)
+                    {
+                        tg.setMod = false;
+                        sendLogInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { (byte)area }, DateTime.Now, logArea + ".WRITE.REQUEST"));
+                    }
+                    else
+                    {
+                        errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now,
+                            "WRITE ERROR area=" + logArea + " block=" + dbNumber + " start=" + tg.startData + " size=" + byteLen + " code=" + writeResult + " " + dc.ErrorText(writeResult)));
+
+                        if (writeResult == S7Consts.errTCPNotConnected || writeResult == S7Consts.errTCPConnectionReset || writeResult == S7Consts.errTCPConnectionTimeout)
+                            EnsureConnected();
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "SiemensS7.bWorker_DoWork.Write :" + Ex.Message));
+                }
             }
         }
 
@@ -863,6 +823,7 @@ namespace nmDriver
         {
             try
             {
+                DBPoints.Clear();
                 IEnumerable<IGrouping<int, Tag>> tagi = tags.Where(x => x.areaData == type).GroupBy(x => x.BlockAdress, x => x).ToList();
                 foreach (IGrouping<int, Tag> xx in tagi)
                 {
@@ -1130,12 +1091,14 @@ namespace nmDriver
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
+                    lock (commLock)
+                    {
+                        if (dc.Connected)
+                            dc.Disconnect();
+                    }
+
                     bWorker.Dispose();
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
 
                 disposedValue = true;
             }

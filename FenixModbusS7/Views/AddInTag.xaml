@@ -1,0 +1,53 @@
+<Window  x:Class="Fenix.AddInTag"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:PrCon="clr-namespace:ProjectDataLib;assembly=ProjectDataLib"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Fenix"
+        mc:Ignorable="d"
+        Title="Add InTag" Height="460" Width="330" WindowStartupLocation="CenterOwner"
+        Background="{StaticResource Th.SurfaceBrush}">
+    <Window.Resources>
+
+        <ObjectDataProvider x:Key="TypeDataProvider" MethodName="GetValues"  ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="PrCon:TypeData" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <local:ValueConv x:Key="ValueConv" />
+    </Window.Resources>
+
+    <DockPanel Style="{StaticResource Th.DialogRootDockPanel}">
+        <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource Th.DialogBottomActionsPanel}">
+            <Button Style="{StaticResource Th.DialogBottomPrimaryActionButton}" Content="OK" Click="Button_Ok_Click" />
+            <Button Style="{StaticResource Th.DialogBottomActionButton}" Content="Cancel" Click="Button_Cancel_Click" />
+        </StackPanel>
+
+        <StackPanel>
+            <Image Style="{StaticResource Th.DialogHeaderIcon}" Source="pack://application:,,,/TreeImage/IntTag.png" />
+
+            <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Name" />
+            <TextBox Text="{Binding tagName, Mode=TwoWay}" />
+
+            <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Data Type" />
+            <ComboBox ItemsSource="{Binding Source={StaticResource TypeDataProvider}}"
+                      SelectedItem="{Binding TypeData,Mode=TwoWay}" />
+
+            <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Initial Value" />
+            <TextBox>
+                <TextBox.Text>
+                    <MultiBinding Converter="{StaticResource ValueConv}">
+                        <Binding Path="value" />
+                        <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Window}" Path="DataContext" />
+                    </MultiBinding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Description" Margin="0,0,0,2" />
+            <TextBox Style="{StaticResource Th.DialogMultilineTextBox}" Height="100" Text="{Binding describe , Mode=TwoWay}" />
+        </StackPanel>
+    </DockPanel>
+</Window>

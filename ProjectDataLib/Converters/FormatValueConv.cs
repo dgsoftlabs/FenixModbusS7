@@ -8,8 +8,6 @@ namespace ProjectDataLib
     {
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            ITag tg = (ITag)context.Instance;
-
             List<String> lista = new List<string>();
             lista.Add("{0:0.0}");
             lista.Add("{0:0.00}");
@@ -19,7 +17,7 @@ namespace ProjectDataLib
             lista.Add("{0:0000.0000}");
             lista.Add("{0:ASCII}");
 
-            if (tg.TypeData_ == TypeData.BYTE)
+            if (context?.Instance is ITag tg && tg.TypeData_ == TypeData.BYTE)
                 lista.Add("{0:X4}");
 
             return new StandardValuesCollection(lista.ToArray());
@@ -27,22 +25,18 @@ namespace ProjectDataLib
 
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
-            ITag tg = (ITag)context.Instance;
+            if (context?.Instance is ITag tg)
+                return tg.TypeData_ == TypeData.BIT;
 
-            if (tg.TypeData_ == TypeData.BIT)
-                return true;
-            else
-                return false;
+            return false;
         }
 
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
-            ITag tg = (ITag)context.Instance;
+            if (context?.Instance is ITag tg)
+                return tg.TypeData_ != TypeData.BIT;
 
-            if (tg.TypeData_ == TypeData.BIT)
-                return false;
-            else
-                return true;
+            return true;
         }
     }
 }

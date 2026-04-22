@@ -1,5 +1,4 @@
-﻿using Controls;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -207,6 +206,21 @@ namespace ProjectDataLib
             {
                 describe_ = value;
                 propChanged?.Invoke(this, new PropertyChangedEventArgs("Description"));
+            }
+        }
+
+        private string tagVersion_;
+
+        [Category("01 Design"), DisplayName("Version")]
+        [JsonIgnore]
+        [XmlElement(ElementName = "Version")]
+        public string tagVersion
+        {
+            get { return tagVersion_; }
+            set
+            {
+                tagVersion_ = value;
+                propChanged?.Invoke(this, new PropertyChangedEventArgs("TagVersion"));
             }
         }
 
@@ -465,7 +479,7 @@ namespace ProjectDataLib
 
         [Category("05 Graph"), DisplayName("Color")]
         [JsonIgnore]
-        [XmlElement(ElementName = "Color", Type = typeof(XmlColor))]
+        [XmlIgnore]
         public Color Clr
         {
             get { return Clr_; }
@@ -474,6 +488,13 @@ namespace ProjectDataLib
                 Clr_ = value;
                 propChanged?.Invoke(this, new PropertyChangedEventArgs("Clr"));
             }
+        }
+
+        [XmlElement(ElementName = "Color")]
+        public XmlColor ClrXml
+        {
+            get => Clr_;
+            set => Clr = value;
         }
 
         private int Width_;
@@ -731,6 +752,14 @@ namespace ProjectDataLib
         }
 
         Boolean ITag.ActDscription { get { return true; } }
+
+        string ITag.TagVersion
+        {
+            get { return tagVersion; }
+            set { tagVersion = value; }
+        }
+
+        Boolean ITag.ActVersion { get { return true; } }
 
         Boolean ITag.ActParam
         {

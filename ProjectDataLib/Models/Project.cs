@@ -1,10 +1,14 @@
-﻿using Newtonsoft.Json;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -105,6 +109,7 @@ namespace ProjectDataLib
         }
 
         [Category("06 Formats"), DisplayName("DateTime Long"), Description("Format for display")]
+        [Browsable(true)]
         [XmlElement(ElementName = "DBDateTimeFormat")]
         public string longDT { get; set; }
 
@@ -132,7 +137,7 @@ namespace ProjectDataLib
 
         [Category("02 Header"), DisplayName("Version"), Description("Version of files.")]
         [ComVisible(false)]
-        [XmlElement(ElementName = "FileVersion", Type = typeof(XMLVersion))]
+        [XmlIgnore]
         public Version fileVer
         {
             get { return fileVer_; }
@@ -142,6 +147,14 @@ namespace ProjectDataLib
                 propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(fileVer)));
                 modificationApear();
             }
+        }
+
+        [XmlElement(ElementName = "FileVersion")]
+        [Browsable(false)]
+        public XMLVersion fileVerXml
+        {
+            get => fileVer_;
+            set => fileVer_ = value;
         }
 
         private string autor_;
@@ -263,18 +276,6 @@ namespace ProjectDataLib
         [XmlElement(ElementName = "DatabaseConfiguration")]
         public DatabaseModel Db { get; set; }
 
-        [Browsable(false)]
-        private WebServer WebServer1_;
-
-        [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "WebServerConfiguration")]
-        public WebServer WebServer1
-        {
-            get { return WebServer1_; }
-            set { WebServer1_ = value; }
-        }
-
         private Boolean IsExpand_;
 
         [Browsable(false)]
@@ -301,10 +302,20 @@ namespace ProjectDataLib
             set { PrCon_ = value; }
         }
 
-        [ComVisible(false)]
         [field: NonSerialized]
+        private LegacyScriptCompat scriptCon_;
+
+        [Browsable(false)]
+        [ComVisible(false)]
         [XmlIgnore]
-        public MSScriptControl.ScriptControl ScriptCon;
+        public dynamic ScriptCon
+        {
+            get
+            {
+                scriptCon_ ??= new LegacyScriptCompat(this);
+                return scriptCon_;
+            }
+        }
 
         private List<InFile> FileList_;
 
@@ -453,12 +464,7 @@ namespace ProjectDataLib
 
             this.PrCon_ = prcn;
 
-            ScriptCon = new MSScriptControl.ScriptControl();
-            ScriptCon.Language = "VBScript";
-            ScriptCon.AddObject("Project", this, true);
-
-            WebServer1_ = new WebServer(null);
-
+            FileList_ = new List<InFile>();
             ScriptFileList_ = new List<ScriptFile>();
 
             ScriptEng_ = new ScriptsDriver(this);
@@ -469,16 +475,14 @@ namespace ProjectDataLib
             objId = Guid.NewGuid();
 
             InternalTags_ = new InternalTagsDriver(this);
-            FileList_ = new List<InFile>();
 
             TreeViewChildren_ = new ObservableCollection<object>();
-            TreeViewChildren_.Add(WebServer1_);
             TreeViewChildren_.Add(ScriptEng_);
             TreeViewChildren_.Add(InternalTags_);
+
             Db = new DatabaseModel();
             TreeViewChildren_.Add(Db);
 
-            ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(FileList_);
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
 
@@ -518,10 +522,6 @@ namespace ProjectDataLib
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            ScriptCon = new MSScriptControl.ScriptControl();
-            ScriptCon.Language = "VBScript";
-            ScriptCon.AddObject("Project", this, true);
-
             InternalTags_.Proj = this;
 
             if (string.IsNullOrEmpty(longDT))
@@ -530,39 +530,26 @@ namespace ProjectDataLib
             if (ScriptEng_ == null)
                 ScriptEng_ = new ScriptsDriver(this);
 
+            ScriptEng_.Proj = this;
+
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
+
+            if (FileList_ == null)
+                FileList_ = new List<InFile>();
 
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             TreeViewChildren_ = new ObservableCollection<object>();
-            TreeViewChildren_.Add(this.WebServer1_);
             TreeViewChildren_.Add(this.ScriptEng_);
             TreeViewChildren_.Add(this.InternalTags_);
             if (Db == null)
                 Db = new DatabaseModel();
             TreeViewChildren_.Add(this.Db);
 
-            DirectoryInfo gt = new DirectoryInfo(Path.GetDirectoryName(this.path) + "\\Http");
-
-            if (gt.Exists)
-            {
-                var SubDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
-                SubDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
-                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(SubDir);
-                FileList.Clear();
-            }
-            else
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(this.path) + "\\Http");
-                var SubDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
-                SubDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
-                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(SubDir);
-                FileList.Clear();
-            }
-
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
+
 
             foreach (var cn in connectionList_)
             {
@@ -584,10 +571,6 @@ namespace ProjectDataLib
 
         public void OnDeserializedXML()
         {
-            ScriptCon = new MSScriptControl.ScriptControl();
-            ScriptCon.Language = "VBScript";
-            ScriptCon.AddObject("Project", this, true);
-
             InternalTags_.Proj = this;
 
             if (string.IsNullOrEmpty(longDT))
@@ -596,36 +579,22 @@ namespace ProjectDataLib
             if (ScriptEng_ == null)
                 ScriptEng_ = new ScriptsDriver(this);
 
+            ScriptEng_.Proj = this;
+
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
+
+            if (FileList_ == null)
+                FileList_ = new List<InFile>();
 
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             TreeViewChildren_ = new ObservableCollection<object>();
-            TreeViewChildren_.Add(this.WebServer1_);
             TreeViewChildren_.Add(this.ScriptEng_);
             TreeViewChildren_.Add(this.InternalTags_);
             if (Db == null)
                 Db = new DatabaseModel();
             TreeViewChildren_.Add(this.Db);
-
-            DirectoryInfo gt = new DirectoryInfo(Path.GetDirectoryName(this.path) + "\\Http");
-
-            if (gt.Exists)
-            {
-                var SubDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
-                SubDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
-                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(SubDir);
-                FileList.Clear();
-            }
-            else
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(this.path) + "\\Http");
-                var SubDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
-                SubDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
-                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(SubDir);
-                FileList.Clear();
-            }
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
@@ -915,13 +884,12 @@ namespace ProjectDataLib
             {
                 if (disposing)
                 {
-                    WebServer1_.Dispose();
                     connectionList_.Clear();
                     DevicesList_.Clear();
                     tagsList_.Clear();
                     InTagsList_.Clear();
-                    FileList_.Clear();
-                    ScriptFileList_.Clear();
+                    FileList_?.Clear();
+                    ScriptFileList_?.Clear();
                 }
 
                 disposedValue = true;
@@ -942,5 +910,57 @@ namespace ProjectDataLib
         #endregion IDisposable Support
 
         #endregion Scripts for Web
+
+        [Serializable]
+        public class LegacyScriptCompat
+        {
+            private readonly Project project;
+            private readonly ConcurrentDictionary<string, ScriptRunner<object>> csharpScripts = new ConcurrentDictionary<string, ScriptRunner<object>>();
+
+            private static readonly ScriptOptions scriptOptions = ScriptOptions.Default
+                .AddReferences(typeof(object).Assembly, typeof(Project).Assembly)
+                .AddImports("System", "System.Math", "ProjectDataLib");
+
+            public LegacyScriptCompat(Project project)
+            {
+                this.project = project;
+            }
+
+            public object Eval(string expression)
+            {
+                if (string.IsNullOrWhiteSpace(expression))
+                    return null;
+
+                string expr = expression.Trim().Replace(',', '.');
+
+                try
+                {
+                    return EvalAsDataExpression(expr);
+                }
+                catch
+                {
+                    return EvalAsCSharp(expr);
+                }
+            }
+
+            private static object EvalAsDataExpression(string expr)
+            {
+                var table = new DataTable { Locale = CultureInfo.InvariantCulture };
+                return table.Compute(expr, string.Empty);
+            }
+
+            private object EvalAsCSharp(string expr)
+            {
+                var runner = csharpScripts.GetOrAdd(expr, code =>
+                    CSharpScript.Create<object>(code, scriptOptions, typeof(ScriptGlobals)).CreateDelegate());
+
+                return runner(new ScriptGlobals { Project = project }).GetAwaiter().GetResult();
+            }
+
+            private class ScriptGlobals
+            {
+                public Project Project { get; set; }
+            }
+        }
     }
 }

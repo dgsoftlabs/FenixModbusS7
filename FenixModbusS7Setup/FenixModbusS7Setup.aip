@@ -1,0 +1,1139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="22.4" version="23.6" Modules="simple" RootPath="." Language="en" Id="{18B9E293-60CC-4D60-B764-2966A559A180}">
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
+    <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ca-ES"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_1" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\cs-CZ"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_10" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pl"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_11" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pt"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_12" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ro"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_13" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_14" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\sv"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_15" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hans"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_16" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hant"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_2" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\de"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_3" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\es"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_4" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\fr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_5" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\hu"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_6" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\it"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_7" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ja"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_8" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ko"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_9" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\nl-BE"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.deps.json" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.exe" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.runtimeconfig.json" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\tr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hans"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_12_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hant"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_1_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\de"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_2_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\es"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_3_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\fr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_4_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\it"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_5_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ja"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_6_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ko"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_7_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pl"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_8_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pt-BR"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_9_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\cs"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_10_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\tr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_11_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hans"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_12_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hant"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_1_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\de"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_2_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\es"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_3_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\fr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_4_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\it"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_5_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ja"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_6_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ko"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_7_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pl"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_8_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pt-BR"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_9_urces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\cs"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_10_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\tr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_11_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hans"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_12_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hant"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_1_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\de"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_2_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\es"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_3_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\fr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_4_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\it"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_5_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ja"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_6_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ko"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_7_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pl"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_8_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pt-BR"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_9_esources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\cs"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\cs"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_1" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\de"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_10" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\tr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_11" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hans"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_12" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hant"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_2" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\es"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_3" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\fr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_4" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\it"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_5" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ja"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_6" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ko"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_7" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pl"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_8" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pt-BR"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_9" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Data.Sqlite.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Caching.Memory.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyInjection.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyModel.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Options.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Primitives.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Xaml.Behaviors.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ModbusMasterASCII.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ModbusMasterRTU.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ModbusMasterTCP.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_OxyPlot.Wpf.Shared.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_OxyPlot.Wpf.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_OxyPlot.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_S7300400Ethernet.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.batteries_v2.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.core.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Sharp7.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.IO.Ports.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.IO.Ports.dll_1" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\unix\lib\net10.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.IO.Ports.dll_2" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\win\lib\net10.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_e_sqlite3.a" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\browser-wasm\nativeassets\net9.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_e_sqlite3.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\win-arm\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_e_sqlite3.dll_1" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\win-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_e_sqlite3.dll_2" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\win-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_e_sqlite3.dll_3" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\win-x86\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.dylib" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\maccatalyst-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.dylib_1" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\maccatalyst-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.dylib_2" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\osx-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.dylib_3" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\osx-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\android-arm\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_1" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\android-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_10" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-musl-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_11" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_2" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\android-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_3" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\android-x86\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_4" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-arm\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_5" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_6" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-bionic-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_7" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-bionic-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_8" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-musl-arm\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_9" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-musl-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.dylib" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\maccatalyst-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.dylib_1" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\maccatalyst-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.dylib_2" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\osx-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.dylib_3" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\osx-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-arm\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_1" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_10" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-riscv64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_11" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-s390x\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_12" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_13" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-x86\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_2" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-armel\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_3" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-mips64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_4" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-musl-arm\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_5" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-musl-arm64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_6" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-musl-riscv64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_7" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-musl-s390x\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_8" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-musl-x64\native"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_9" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\runtimes\linux-ppc64le\native"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll" Value="AvalonDock.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_1" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_10" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_11" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_12" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_13" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_14" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_15" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_16" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_2" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_3" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_4" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_5" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_6" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_7" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_8" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_9" Value="AvalonDock.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.deps.json" Value="FenixModbusS7.deps.json"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.dll" Value="FenixModbusS7.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe" Value="FenixModbusS7.exe"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.runtimeconfig.json" Value="FenixModbusS7.runtimeconfig.json"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="ICSharpCode.AvalonEdit.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_12_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_1_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_2_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_3_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_4_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_5_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_6_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_7_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_8_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_9_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll" Value="Microsoft.CodeAnalysis.CSharp.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_10_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_11_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_12_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_1_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_2_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_3_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_4_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_5_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_6_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_7_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_8_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_9_urces.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll" Value="Microsoft.CodeAnalysis.Scripting.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_10_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_11_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_12_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_1_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_2_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_3_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_4_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_5_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_6_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_7_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_8_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_9_esources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.resources.dll" Value="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.dll" Value="Microsoft.CodeAnalysis.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_1" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_10" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_11" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_12" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_2" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_3" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_4" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_5" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_6" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_7" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_8" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_9" Value="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.Sqlite.dll" Value="Microsoft.Data.Sqlite.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll" Value="Microsoft.EntityFrameworkCore.Abstractions.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll" Value="Microsoft.EntityFrameworkCore.Relational.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll" Value="Microsoft.EntityFrameworkCore.Sqlite.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.dll" Value="Microsoft.EntityFrameworkCore.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll" Value="Microsoft.Extensions.Caching.Abstractions.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Memory.dll" Value="Microsoft.Extensions.Caching.Memory.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll" Value="Microsoft.Extensions.Configuration.Abstractions.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll" Value="Microsoft.Extensions.DependencyInjection.Abstractions.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.dll" Value="Microsoft.Extensions.DependencyInjection.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyModel.dll" Value="Microsoft.Extensions.DependencyModel.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll" Value="Microsoft.Extensions.Logging.Abstractions.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.dll" Value="Microsoft.Extensions.Logging.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll" Value="Microsoft.Extensions.Options.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll" Value="Microsoft.Extensions.Primitives.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Xaml.Behaviors.dll" Value="Microsoft.Xaml.Behaviors.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterASCII.dll" Value="ModbusMasterASCII.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterRTU.dll" Value="ModbusMasterRTU.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterTCP.dll" Value="ModbusMasterTCP.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll" Value="Newtonsoft.Json.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.Shared.dll" Value="OxyPlot.Wpf.Shared.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.dll" Value="OxyPlot.Wpf.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.dll" Value="OxyPlot.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll" Value="ProjectDataLib.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_S7300400Ethernet.dll" Value="S7-300-400 Ethernet.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.batteries_v2.dll" Value="SQLitePCLRaw.batteries_v2.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.core.dll" Value="SQLitePCLRaw.core.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll" Value="SQLitePCLRaw.provider.e_sqlite3.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Sharp7.dll" Value="Sharp7.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll" Value="System.IO.Ports.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_1" Value="System.IO.Ports.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_2" Value="System.IO.Ports.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.a" Value="e_sqlite3.a"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll" Value="e_sqlite3.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll_1" Value="e_sqlite3.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll_2" Value="e_sqlite3.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll_3" Value="e_sqlite3.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib" Value="libSystem.IO.Ports.Native.dylib"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib_1" Value="libSystem.IO.Ports.Native.dylib"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib_2" Value="libSystem.IO.Ports.Native.dylib"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib_3" Value="libSystem.IO.Ports.Native.dylib"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_1" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_10" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_11" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_2" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_3" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_4" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_5" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_6" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_7" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_8" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_9" Value="libSystem.IO.Ports.Native.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib" Value="libe_sqlite3.dylib"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib_1" Value="libe_sqlite3.dylib"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib_2" Value="libe_sqlite3.dylib"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib_3" Value="libe_sqlite3.dylib"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_1" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_10" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_11" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_12" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_13" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_2" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_3" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_4" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_5" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_6" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_7" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_8" Value="libe_sqlite3.so"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_9" Value="libe_sqlite3.so"/>
+    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
+    <ROW Property="ARPPRODUCTICON" Value="soft.exe" Type="8"/>
+    <ROW Property="Manufacturer" Value="DGSoftLabs"/>
+    <ROW Property="ProductCode" Value="1033:{645BDD50-4B26-4ADF-A448-99D396D1174E} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
+    <ROW Property="ProductName" Value="FenixModbusS7"/>
+    <ROW Property="ProductVersion" Value="3.4.0" Options="32"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
+    <ROW Property="UpgradeCode" Value="{288A4594-D6A7-4215-BB19-EB4A8DB3AA54}"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT60" MultiBuildValue="DefaultBuild:Windows Vista/Server 2008" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT60Display" MultiBuildValue="DefaultBuild:Windows Vista/Server 2008" ValueLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
+    <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1" DirectoryOptions="3"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
+    <ROW Directory="FenixManager_Dir" Directory_Parent="APPDIR" DefaultDir="FENIXM~2|FenixModbusS7" DirectoryOptions="3"/>
+    <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="Template_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="Template" DirectoryOptions="3"/>
+    <ROW Directory="androidarm64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="ANDROI~2|android-arm64" DirectoryOptions="3"/>
+    <ROW Directory="androidarm_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="ANDROI~1|android-arm" DirectoryOptions="3"/>
+    <ROW Directory="androidx64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="ANDROI~3|android-x64" DirectoryOptions="3"/>
+    <ROW Directory="androidx86_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="ANDROI~4|android-x86" DirectoryOptions="3"/>
+    <ROW Directory="browserwasm_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="BROWSE~1|browser-wasm" DirectoryOptions="3"/>
+    <ROW Directory="caES_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="ca-ES" DirectoryOptions="3"/>
+    <ROW Directory="csCZ_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="cs-CZ" DirectoryOptions="3"/>
+    <ROW Directory="cs_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="cs" DirectoryOptions="3"/>
+    <ROW Directory="de_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="de" DirectoryOptions="3"/>
+    <ROW Directory="es_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="es" DirectoryOptions="3"/>
+    <ROW Directory="fr_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="fr" DirectoryOptions="3"/>
+    <ROW Directory="hu_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="hu" DirectoryOptions="3"/>
+    <ROW Directory="it_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="it" DirectoryOptions="3"/>
+    <ROW Directory="ja_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="ja" DirectoryOptions="3"/>
+    <ROW Directory="ko_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="ko" DirectoryOptions="3"/>
+    <ROW Directory="lib_2_Dir" Directory_Parent="unix_1_Dir" DefaultDir="lib" DirectoryOptions="3"/>
+    <ROW Directory="lib_3_Dir" Directory_Parent="win_1_Dir" DefaultDir="lib" DirectoryOptions="3"/>
+    <ROW Directory="linuxarm64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX-~2|linux-arm64" DirectoryOptions="3"/>
+    <ROW Directory="linuxarm_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX-~1|linux-arm" DirectoryOptions="3"/>
+    <ROW Directory="linuxarmel_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX-~3|linux-armel" DirectoryOptions="3"/>
+    <ROW Directory="linuxbionicarm64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX-~4|linux-bionic-arm64" DirectoryOptions="3"/>
+    <ROW Directory="linuxbionicx64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX-~5|linux-bionic-x64" DirectoryOptions="3"/>
+    <ROW Directory="linuxmips64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX-~6|linux-mips64" DirectoryOptions="3"/>
+    <ROW Directory="linuxmuslarm64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX-~8|linux-musl-arm64" DirectoryOptions="3"/>
+    <ROW Directory="linuxmuslarm_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX-~7|linux-musl-arm" DirectoryOptions="3"/>
+    <ROW Directory="linuxmuslriscv64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX-~9|linux-musl-riscv64" DirectoryOptions="3"/>
+    <ROW Directory="linuxmusls390x_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX~10|linux-musl-s390x" DirectoryOptions="3"/>
+    <ROW Directory="linuxmuslx64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX~11|linux-musl-x64" DirectoryOptions="3"/>
+    <ROW Directory="linuxppc64le_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX~12|linux-ppc64le" DirectoryOptions="3"/>
+    <ROW Directory="linuxriscv64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX~13|linux-riscv64" DirectoryOptions="3"/>
+    <ROW Directory="linuxs390x_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX~14|linux-s390x" DirectoryOptions="3"/>
+    <ROW Directory="linuxx64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX~15|linux-x64" DirectoryOptions="3"/>
+    <ROW Directory="linuxx86_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="LINUX~16|linux-x86" DirectoryOptions="3"/>
+    <ROW Directory="maccatalystarm64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="MACCAT~1|maccatalyst-arm64" DirectoryOptions="3"/>
+    <ROW Directory="maccatalystx64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="MACCAT~2|maccatalyst-x64" DirectoryOptions="3"/>
+    <ROW Directory="native_10_Dir" Directory_Parent="linuxmuslarm_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_11_Dir" Directory_Parent="linuxmuslarm64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_12_Dir" Directory_Parent="linuxmuslriscv64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_13_Dir" Directory_Parent="linuxmusls390x_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_14_Dir" Directory_Parent="linuxmuslx64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_15_Dir" Directory_Parent="linuxppc64le_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_16_Dir" Directory_Parent="linuxriscv64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_17_Dir" Directory_Parent="linuxs390x_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_18_Dir" Directory_Parent="linuxx64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_19_Dir" Directory_Parent="linuxx86_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_1_Dir" Directory_Parent="androidarm64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_20_Dir" Directory_Parent="maccatalystarm64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_21_Dir" Directory_Parent="maccatalystx64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_22_Dir" Directory_Parent="osxarm64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_23_Dir" Directory_Parent="osxx64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_24_Dir" Directory_Parent="winarm_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_25_Dir" Directory_Parent="winarm64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_26_Dir" Directory_Parent="winx64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_27_Dir" Directory_Parent="winx86_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_2_Dir" Directory_Parent="androidx64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_3_Dir" Directory_Parent="androidx86_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_4_Dir" Directory_Parent="linuxarm_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_5_Dir" Directory_Parent="linuxarm64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_6_Dir" Directory_Parent="linuxarmel_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_7_Dir" Directory_Parent="linuxbionicarm64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_8_Dir" Directory_Parent="linuxbionicx64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_9_Dir" Directory_Parent="linuxmips64_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="native_Dir" Directory_Parent="androidarm_1_Dir" DefaultDir="native" DirectoryOptions="3"/>
+    <ROW Directory="nativeassets_1_Dir" Directory_Parent="browserwasm_1_Dir" DefaultDir="NATIVE~1|nativeassets" DirectoryOptions="3"/>
+    <ROW Directory="net10.0_1_Dir" Directory_Parent="lib_3_Dir" DefaultDir="net10.0" DirectoryOptions="3"/>
+    <ROW Directory="net10.0_Dir" Directory_Parent="lib_2_Dir" DefaultDir="net10.0" DirectoryOptions="3"/>
+    <ROW Directory="net9.0_Dir" Directory_Parent="nativeassets_1_Dir" DefaultDir="net9.0" DirectoryOptions="3"/>
+    <ROW Directory="nlBE_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="nl-BE" DirectoryOptions="3"/>
+    <ROW Directory="osxarm64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="OSX-AR~1|osx-arm64" DirectoryOptions="3"/>
+    <ROW Directory="osxx64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="osx-x64" DirectoryOptions="3"/>
+    <ROW Directory="pl_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="pl" DirectoryOptions="3"/>
+    <ROW Directory="ptBR_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="pt-BR" DirectoryOptions="3"/>
+    <ROW Directory="pt_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="pt" DirectoryOptions="3"/>
+    <ROW Directory="ro_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="ro" DirectoryOptions="3"/>
+    <ROW Directory="ru_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="ru" DirectoryOptions="3"/>
+    <ROW Directory="runtimes_1_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="runtimes" DirectoryOptions="3"/>
+    <ROW Directory="sv_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="sv" DirectoryOptions="3"/>
+    <ROW Directory="tr_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="tr" DirectoryOptions="3"/>
+    <ROW Directory="unix_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="unix" DirectoryOptions="3"/>
+    <ROW Directory="win_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="win" DirectoryOptions="3"/>
+    <ROW Directory="winarm64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="WIN-AR~1|win-arm64" DirectoryOptions="3"/>
+    <ROW Directory="winarm_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="win-arm" DirectoryOptions="3"/>
+    <ROW Directory="winx64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="win-x64" DirectoryOptions="3"/>
+    <ROW Directory="winx86_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="win-x86" DirectoryOptions="3"/>
+    <ROW Directory="zhHans_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="zh-Hans" DirectoryOptions="3"/>
+    <ROW Directory="zhHant_Dir" Directory_Parent="FenixManager_Dir" DefaultDir="zh-Hant" DirectoryOptions="3"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.SideBySideGuidComponent">
+    <ROW Component="APPDIR" Value="{B87DF860-8CBC-468C-B43B-8F9B149F2E38}"/>
+    <ROW Component="ProductInformation" Value="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe" ComponentId="{82C10852-D903-4B99-8E92-E9DCE9F107EA}" Directory_="FenixManager_Dir" Attributes="256" KeyPath="FenixModbusS7.exe"/>
+    <ROW Component="APPDIR" ComponentId="{B87DF860-8CBC-468C-B43B-8F9B149F2E38}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="FenixManager_ContentOutput_Template" ComponentId="{C1DFBD7C-93B7-495D-B6A4-1B39FBA0BBD7}" Directory_="Template_Dir" Attributes="0" KeyPath="Script.cs_1" Type="0"/>
+    <ROW Component="FenixModbusS7_PrimaryOutput" ComponentId="{E46B04F3-7EB0-4970-A738-3F9AE7564D16}" Directory_="FenixManager_Dir" Attributes="0" KeyPath="FenixModbusS7.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput" ComponentId="{B63ED85D-F73D-483A-BD29-BD54B0C5B81E}" Directory_="FenixManager_Dir" Attributes="0" KeyPath="System.IO.Ports.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_caES" ComponentId="{401FA422-3BA7-4721-A381-9EC3F9863BB9}" Directory_="caES_Dir" Attributes="0" KeyPath="AvalonDock.resources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_cs" ComponentId="{EA962CA4-30DF-4CD3-B759-F486D1EEB62A}" Directory_="cs_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_csCZ" ComponentId="{B71BA127-045F-477D-A33E-3B3D9DFAC524}" Directory_="csCZ_Dir" Attributes="0" KeyPath="AvalonDock.resources.dll_1"/>
+    <ROW Component="FenixModbusS7_PublishOutput_de" ComponentId="{C2BC3D09-E384-425A-9788-204F2C6B7E9A}" Directory_="de_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_1_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_es" ComponentId="{DA11DCC6-78FF-46AA-835A-4978F8F48515}" Directory_="es_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_2_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_fr" ComponentId="{E95C8F72-6D36-4E92-8EE2-4CFC9CFDEDAB}" Directory_="fr_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_3_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_hu" ComponentId="{9D91474F-0A18-4AB4-8854-A6C2A5CD0844}" Directory_="hu_Dir" Attributes="0" KeyPath="AvalonDock.resources.dll_5"/>
+    <ROW Component="FenixModbusS7_PublishOutput_it" ComponentId="{FD4FD37F-D3E0-4D12-9970-6A6938B36A82}" Directory_="it_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_4_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_ja" ComponentId="{96ACB215-DA51-471B-AF5D-CF436F768B12}" Directory_="ja_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_5_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_ko" ComponentId="{9563DC0F-AEB6-4474-B5BF-ED0A0CFBDDFB}" Directory_="ko_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_6_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_nlBE" ComponentId="{A7AC90D1-4E6A-448C-BDF6-85D83B8CF45D}" Directory_="nlBE_Dir" Attributes="0" KeyPath="AvalonDock.resources.dll_9"/>
+    <ROW Component="FenixModbusS7_PublishOutput_pl" ComponentId="{EEA62AB3-2EE3-43A8-B956-A9D81629FFBB}" Directory_="pl_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_7_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_pt" ComponentId="{22E9D7E6-E175-4D76-A887-C63AB7D2900C}" Directory_="pt_Dir" Attributes="0" KeyPath="AvalonDock.resources.dll_11"/>
+    <ROW Component="FenixModbusS7_PublishOutput_ptBR" ComponentId="{4A1DE1B5-DC41-470E-97FC-5B5A637EF93C}" Directory_="ptBR_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_8_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_ro" ComponentId="{685A4538-EAAB-44E2-B506-2056F217B372}" Directory_="ro_Dir" Attributes="0" KeyPath="AvalonDock.resources.dll_12"/>
+    <ROW Component="FenixModbusS7_PublishOutput_ru" ComponentId="{94673A91-5BAE-4AEA-8D13-1340DDB9F43B}" Directory_="ru_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_9_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_androidarm64_native" ComponentId="{DE9893EA-BB70-4165-A9F4-741A469DF827}" Directory_="native_1_Dir" Attributes="0" KeyPath="libSystem.IO.Ports.Native.so_1" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_androidarm_native" ComponentId="{BDF7C462-53CA-49B3-BF35-9EE54DA2A632}" Directory_="native_Dir" Attributes="0" KeyPath="libSystem.IO.Ports.Native.so" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_androidx64_native" ComponentId="{D988FD35-C887-4ED0-BE99-71C239F59C8E}" Directory_="native_2_Dir" Attributes="0" KeyPath="libSystem.IO.Ports.Native.so_2" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_androidx86_native" ComponentId="{1B6419FB-4EF1-469C-BACD-0BF1F8EBDEFA}" Directory_="native_3_Dir" Attributes="0" KeyPath="libSystem.IO.Ports.Native.so_3" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_browserwasm_nativeassets_net9.0" ComponentId="{35A6E300-4C07-44D5-8945-E509F1B273D3}" Directory_="net9.0_Dir" Attributes="0" KeyPath="e_sqlite3.a" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxarm64_native" ComponentId="{D0C2CAEA-CE79-4431-ACDB-17FAC716BD88}" Directory_="native_5_Dir" Attributes="0" KeyPath="libe_sqlite3.so_1" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxarm_native" ComponentId="{F88CACC5-8B45-4B13-953A-FAB41EBFEA90}" Directory_="native_4_Dir" Attributes="0" KeyPath="libe_sqlite3.so" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxarmel_native" ComponentId="{EE12BC8C-B5C0-43C4-AB74-68E19C52866D}" Directory_="native_6_Dir" Attributes="0" KeyPath="libe_sqlite3.so_2" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxbionicarm64_native" ComponentId="{B95857B6-A2D4-4E7A-9DCB-ACB0D90E7120}" Directory_="native_7_Dir" Attributes="0" KeyPath="libSystem.IO.Ports.Native.so_6" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxbionicx64_native" ComponentId="{41803FEB-AF0D-4F20-B670-D47FB66E243C}" Directory_="native_8_Dir" Attributes="0" KeyPath="libSystem.IO.Ports.Native.so_7" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxmips64_native" ComponentId="{3FE5BBC5-E088-42E0-BCD2-059941A65FBE}" Directory_="native_9_Dir" Attributes="0" KeyPath="libe_sqlite3.so_3" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxmuslarm64_native" ComponentId="{B82EF7C2-C393-4165-ADFA-EB180B7A1827}" Directory_="native_11_Dir" Attributes="0" KeyPath="libe_sqlite3.so_5" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxmuslarm_native" ComponentId="{6EAB5966-B450-4151-9468-64D491BCC4EA}" Directory_="native_10_Dir" Attributes="0" KeyPath="libe_sqlite3.so_4" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxmuslriscv64_native" ComponentId="{30BAE7D7-ED8D-4722-821A-86C6D6B03A01}" Directory_="native_12_Dir" Attributes="0" KeyPath="libe_sqlite3.so_6" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxmusls390x_native" ComponentId="{8AC3EF1A-818B-45FE-9E93-C40D78AFEF87}" Directory_="native_13_Dir" Attributes="0" KeyPath="libe_sqlite3.so_7" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxmuslx64_native" ComponentId="{73FB859C-5EE6-4928-8A97-9B7303407039}" Directory_="native_14_Dir" Attributes="0" KeyPath="libe_sqlite3.so_8" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxppc64le_native" ComponentId="{405015E0-1469-47B0-8051-DC075005F13E}" Directory_="native_15_Dir" Attributes="0" KeyPath="libe_sqlite3.so_9" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxriscv64_native" ComponentId="{B078EDFA-412B-4AA8-B52C-DBBDEE009919}" Directory_="native_16_Dir" Attributes="0" KeyPath="libe_sqlite3.so_10" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxs390x_native" ComponentId="{58D92C54-9079-44D9-A043-CB0661B6C1FE}" Directory_="native_17_Dir" Attributes="0" KeyPath="libe_sqlite3.so_11" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxx64_native" ComponentId="{B6B16776-FE36-4208-A4D7-FDA30669AF51}" Directory_="native_18_Dir" Attributes="0" KeyPath="libe_sqlite3.so_12" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_linuxx86_native" ComponentId="{68469CB7-7288-423D-9A96-1BF8B0ED83B1}" Directory_="native_19_Dir" Attributes="0" KeyPath="libe_sqlite3.so_13" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_maccatalystarm64_native" ComponentId="{43B83461-E912-4EE1-A454-7DA4F325AC38}" Directory_="native_20_Dir" Attributes="0" KeyPath="libe_sqlite3.dylib" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_maccatalystx64_native" ComponentId="{15CCF4FD-9D1E-4FE5-ABD0-C5E6742D4830}" Directory_="native_21_Dir" Attributes="0" KeyPath="libe_sqlite3.dylib_1" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_osxarm64_native" ComponentId="{D8CA08B8-6157-4106-BFF8-7AD3078F8777}" Directory_="native_22_Dir" Attributes="0" KeyPath="libe_sqlite3.dylib_2" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_osxx64_native" ComponentId="{49D604B2-9753-49FD-8041-33100122CF70}" Directory_="native_23_Dir" Attributes="0" KeyPath="libe_sqlite3.dylib_3" Type="0"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_unix_lib_net10.0" ComponentId="{EDDC7D1C-B254-4589-97AF-6EE774B68A31}" Directory_="net10.0_Dir" Attributes="0" KeyPath="System.IO.Ports.dll_1"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_win_lib_net10.0" ComponentId="{10F80887-A52D-4654-A1A6-A41BCB00DFAE}" Directory_="net10.0_1_Dir" Attributes="0" KeyPath="System.IO.Ports.dll_2"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_winarm64_native" ComponentId="{40ACA4E6-B163-4355-BF54-5D0ECC6AB5F8}" Directory_="native_25_Dir" Attributes="256" KeyPath="e_sqlite3.dll_1"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_winarm_native" ComponentId="{F3475DC2-CC07-4C82-963A-4F6B1EAE0858}" Directory_="native_24_Dir" Attributes="0" KeyPath="e_sqlite3.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_winx64_native" ComponentId="{884F6A94-44BC-4D73-8477-FC55DCFE8483}" Directory_="native_26_Dir" Attributes="256" KeyPath="e_sqlite3.dll_2"/>
+    <ROW Component="FenixModbusS7_PublishOutput_runtimes_winx86_native" ComponentId="{BB079A1E-335A-4895-8B61-403C41576E43}" Directory_="native_27_Dir" Attributes="0" KeyPath="e_sqlite3.dll_3"/>
+    <ROW Component="FenixModbusS7_PublishOutput_sv" ComponentId="{CF0C4FA0-41F2-4AB4-842C-23F32216E012}" Directory_="sv_Dir" Attributes="0" KeyPath="AvalonDock.resources.dll_14"/>
+    <ROW Component="FenixModbusS7_PublishOutput_tr" ComponentId="{BCFF0706-B704-4D10-982F-4926CBE8C6EF}" Directory_="tr_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_10_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_zhHans" ComponentId="{B7B7C268-5021-4D74-8B78-C83E9DFB137A}" Directory_="zhHans_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_11_esources.dll"/>
+    <ROW Component="FenixModbusS7_PublishOutput_zhHant" ComponentId="{621F3040-A7F5-4C1A-A728-50F18DA387F3}" Directory_="zhHant_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_12_esources.dll"/>
+    <ROW Component="ProductInformation" ComponentId="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="_" ComponentId="{CC4C29E9-D905-462C-9A4F-A3F5EC3B2E1A}" Directory_="APPDIR" Attributes="4" KeyPath="_"/>
+    <ROW Component="__1" ComponentId="{0966780B-833E-415E-B721-23B3351FEC08}" Directory_="APPDIR" Attributes="4" KeyPath="__1"/>
+    <ROW Component="__2" ComponentId="{BDAD1853-461A-494B-BE03-EA329B2E02CF}" Directory_="APPDIR" Attributes="4" KeyPath="__2"/>
+    <ROW Component="__3" ComponentId="{69D00F5F-7F95-4879-BBAE-9660930D4FC9}" Directory_="APPDIR" Attributes="4" KeyPath="__3"/>
+    <ROW Component="__4" ComponentId="{59515CD0-8769-42C6-B3BA-43001C659D14}" Directory_="APPDIR" Attributes="4" KeyPath="__4"/>
+    <ROW Component="__5" ComponentId="{A9D1316E-9F31-4D53-A017-5FEDE9286504}" Directory_="APPDIR" Attributes="4" KeyPath="__5"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
+    <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="Script.cs_1" Component_="FenixManager_ContentOutput_Template" FileName="Script.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\Script.cs" SelfReg="false"/>
+    <ROW File="FenixModbusS7.dll" Component_="FenixModbusS7_PrimaryOutput" FileName="FENIXM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixModbusS7.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.dll" Component_="FenixModbusS7_PublishOutput" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.dll&gt;" SelfReg="false"/>
+    <ROW File="FenixModbusS7.deps.json" Component_="FenixModbusS7_PublishOutput" FileName="FENIXM~2.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.deps.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixModbusS7.deps.json&gt;" SelfReg="false"/>
+    <ROW File="FenixModbusS7.exe" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe" FileName="FENIXM~2.EXE|[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixModbusS7.exe&gt;" SelfReg="false" DigSign="true"/>
+    <ROW File="FenixModbusS7.runtimeconfig.json" Component_="FenixModbusS7_PublishOutput" FileName="FENIXM~3.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.runtimeconfig.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixModbusS7.runtimeconfig.json&gt;" SelfReg="false"/>
+    <ROW File="ICSharpCode.AvalonEdit.dll" Component_="FenixModbusS7_PublishOutput" FileName="ICSHAR~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ICSharpCode.AvalonEdit.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scripting.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Data.Sqlite.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICROS~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.Sqlite.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Data.Sqlite.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Abstractions.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.EntityFrameworkCore.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Relational.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Sqlite.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~10.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.Caching.Abstractions.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~11.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.Caching.Memory.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~12.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Memory.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Caching.Memory.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.Configuration.Abstractions.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~13.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.DependencyInjection.Abstractions.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~14.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.DependencyInjection.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~15.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyInjection.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.DependencyModel.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~16.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyModel.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyModel.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.Logging.Abstractions.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~17.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.Logging.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~18.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Logging.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.Options.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~19.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Options.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Extensions.Primitives.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~20.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Extensions.Primitives.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Xaml.Behaviors.dll" Component_="FenixModbusS7_PublishOutput" FileName="MICRO~21.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Xaml.Behaviors.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Xaml.Behaviors.dll&gt;" SelfReg="false"/>
+    <ROW File="ModbusMasterASCII.dll" Component_="FenixModbusS7_PublishOutput" FileName="MODBUS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterASCII.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ModbusMasterASCII.dll&gt;" SelfReg="false"/>
+    <ROW File="ModbusMasterRTU.dll" Component_="FenixModbusS7_PublishOutput" FileName="MODBUS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterRTU.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ModbusMasterRTU.dll&gt;" SelfReg="false"/>
+    <ROW File="ModbusMasterTCP.dll" Component_="FenixModbusS7_PublishOutput" FileName="MODBUS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterTCP.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ModbusMasterTCP.dll&gt;" SelfReg="false"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="FenixModbusS7_PublishOutput" FileName="NEWTON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Newtonsoft.Json.dll&gt;" SelfReg="false"/>
+    <ROW File="OxyPlot.dll" Component_="FenixModbusS7_PublishOutput" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_OxyPlot.dll&gt;" SelfReg="false"/>
+    <ROW File="OxyPlot.Wpf.dll" Component_="FenixModbusS7_PublishOutput" FileName="OXYPLO~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_OxyPlot.Wpf.dll&gt;" SelfReg="false"/>
+    <ROW File="OxyPlot.Wpf.Shared.dll" Component_="FenixModbusS7_PublishOutput" FileName="OXYPLO~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.Shared.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_OxyPlot.Wpf.Shared.dll&gt;" SelfReg="false"/>
+    <ROW File="ProjectDataLib.dll" Component_="FenixModbusS7_PublishOutput" FileName="PROJEC~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ProjectDataLib.dll&gt;" SelfReg="false"/>
+    <ROW File="S7300400Ethernet.dll" Component_="FenixModbusS7_PublishOutput" FileName="S7-300~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_S7300400Ethernet.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_S7300400Ethernet.dll&gt;" SelfReg="false"/>
+    <ROW File="Sharp7.dll" Component_="FenixModbusS7_PublishOutput" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Sharp7.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Sharp7.dll&gt;" SelfReg="false"/>
+    <ROW File="SQLitePCLRaw.batteries_v2.dll" Component_="FenixModbusS7_PublishOutput" FileName="SQLITE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.batteries_v2.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_SQLitePCLRaw.batteries_v2.dll&gt;" SelfReg="false"/>
+    <ROW File="SQLitePCLRaw.core.dll" Component_="FenixModbusS7_PublishOutput" FileName="SQLITE~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.core.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_SQLitePCLRaw.core.dll&gt;" SelfReg="false"/>
+    <ROW File="SQLitePCLRaw.provider.e_sqlite3.dll" Component_="FenixModbusS7_PublishOutput" FileName="SQLITE~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll&gt;" SelfReg="false"/>
+    <ROW File="System.IO.Ports.dll" Component_="FenixModbusS7_PublishOutput" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.IO.Ports.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll" Component_="FenixModbusS7_PublishOutput_caES" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.resources.dll" Component_="FenixModbusS7_PublishOutput_cs" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll" Component_="FenixModbusS7_PublishOutput_cs" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll" Component_="FenixModbusS7_PublishOutput_cs" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.resources.dll" Component_="FenixModbusS7_PublishOutput_cs" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_1" Component_="FenixModbusS7_PublishOutput_csCZ" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_1&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_2" Component_="FenixModbusS7_PublishOutput_de" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_2&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_1_urces.dll" Component_="FenixModbusS7_PublishOutput_de" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_1_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_1_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_1_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_de" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_1_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_1_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_1" Component_="FenixModbusS7_PublishOutput_de" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_1&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_1_esources.dll" Component_="FenixModbusS7_PublishOutput_de" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_1_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_1_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_3" Component_="FenixModbusS7_PublishOutput_es" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_3]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_3&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_2_urces.dll" Component_="FenixModbusS7_PublishOutput_es" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_2_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_2_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_2_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_es" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_2_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_2_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_2" Component_="FenixModbusS7_PublishOutput_es" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_2&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_2_esources.dll" Component_="FenixModbusS7_PublishOutput_es" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_2_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_2_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_4" Component_="FenixModbusS7_PublishOutput_fr" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_4]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_4&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_3_urces.dll" Component_="FenixModbusS7_PublishOutput_fr" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_3_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_3_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_3_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_fr" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_3_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_3_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_3" Component_="FenixModbusS7_PublishOutput_fr" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_3]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_3&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_3_esources.dll" Component_="FenixModbusS7_PublishOutput_fr" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_3_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_3_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_5" Component_="FenixModbusS7_PublishOutput_hu" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_5]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_5&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_6" Component_="FenixModbusS7_PublishOutput_it" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_6]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_6&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_4_urces.dll" Component_="FenixModbusS7_PublishOutput_it" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_4_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_4_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_4_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_it" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_4_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_4_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_4" Component_="FenixModbusS7_PublishOutput_it" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_4]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_4&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_4_esources.dll" Component_="FenixModbusS7_PublishOutput_it" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_4_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_4_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_7" Component_="FenixModbusS7_PublishOutput_ja" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_7]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_7&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_5_urces.dll" Component_="FenixModbusS7_PublishOutput_ja" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_5_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_5_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_5_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_ja" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_5_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_5_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_5" Component_="FenixModbusS7_PublishOutput_ja" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_5]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_5&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_5_esources.dll" Component_="FenixModbusS7_PublishOutput_ja" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_5_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_5_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_8" Component_="FenixModbusS7_PublishOutput_ko" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_8]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_8&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_6_urces.dll" Component_="FenixModbusS7_PublishOutput_ko" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_6_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_6_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_6_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_ko" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_6_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_6_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_6" Component_="FenixModbusS7_PublishOutput_ko" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_6]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_6&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_6_esources.dll" Component_="FenixModbusS7_PublishOutput_ko" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_6_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_6_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_9" Component_="FenixModbusS7_PublishOutput_nlBE" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_9]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_9&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_10" Component_="FenixModbusS7_PublishOutput_pl" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_10]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_10&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_7_urces.dll" Component_="FenixModbusS7_PublishOutput_pl" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_7_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_7_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_7_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_pl" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_7_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_7_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_7" Component_="FenixModbusS7_PublishOutput_pl" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_7]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_7&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_7_esources.dll" Component_="FenixModbusS7_PublishOutput_pl" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_7_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_7_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_11" Component_="FenixModbusS7_PublishOutput_pt" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_11]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_11&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_8_urces.dll" Component_="FenixModbusS7_PublishOutput_ptBR" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_8_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_8_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_8_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_ptBR" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_8_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_8_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_8" Component_="FenixModbusS7_PublishOutput_ptBR" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_8]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_8&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_8_esources.dll" Component_="FenixModbusS7_PublishOutput_ptBR" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_8_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_8_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_12" Component_="FenixModbusS7_PublishOutput_ro" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_12]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_12&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_13" Component_="FenixModbusS7_PublishOutput_ru" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_13]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_13&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_9_urces.dll" Component_="FenixModbusS7_PublishOutput_ru" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_9_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_9_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_9_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_ru" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_9_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_9_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_9" Component_="FenixModbusS7_PublishOutput_ru" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_9]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_9&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_9_esources.dll" Component_="FenixModbusS7_PublishOutput_ru" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_9_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_9_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_14" Component_="FenixModbusS7_PublishOutput_sv" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_14]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_14&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_10_urces.dll" Component_="FenixModbusS7_PublishOutput_tr" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_10_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_10_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_tr" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_10" Component_="FenixModbusS7_PublishOutput_tr" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_10]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_10&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_10_esources.dll" Component_="FenixModbusS7_PublishOutput_tr" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_10_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_10_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_15" Component_="FenixModbusS7_PublishOutput_zhHans" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_15]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_15&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_11_urces.dll" Component_="FenixModbusS7_PublishOutput_zhHans" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_11_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_11_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_zhHans" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_11" Component_="FenixModbusS7_PublishOutput_zhHans" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_11]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_11&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_11_esources.dll" Component_="FenixModbusS7_PublishOutput_zhHans" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_11_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_11_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="AvalonDock.resources.dll_16" Component_="FenixModbusS7_PublishOutput_zhHant" FileName="AVALON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_16]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AvalonDock.resources.dll_16&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.reso_12_urces.dll" Component_="FenixModbusS7_PublishOutput_zhHant" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_12_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_12_urces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_12_pting.resources.dll" Component_="FenixModbusS7_PublishOutput_zhHant" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_12_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_12_pting.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.resources.dll_12" Component_="FenixModbusS7_PublishOutput_zhHant" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_12]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_12&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.r_12_esources.dll" Component_="FenixModbusS7_PublishOutput_zhHant" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_12_esources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_12_esources.dll&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so" Component_="FenixModbusS7_PublishOutput_runtimes_androidarm_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_1" Component_="FenixModbusS7_PublishOutput_runtimes_androidarm64_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_1&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_2" Component_="FenixModbusS7_PublishOutput_runtimes_androidx64_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_2&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_3" Component_="FenixModbusS7_PublishOutput_runtimes_androidx86_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_3]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_3&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so" Component_="FenixModbusS7_PublishOutput_runtimes_linuxarm_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_4" Component_="FenixModbusS7_PublishOutput_runtimes_linuxarm_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_4]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_4&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_1" Component_="FenixModbusS7_PublishOutput_runtimes_linuxarm64_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_1&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_5" Component_="FenixModbusS7_PublishOutput_runtimes_linuxarm64_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_5]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_5&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_2" Component_="FenixModbusS7_PublishOutput_runtimes_linuxarmel_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_2&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_6" Component_="FenixModbusS7_PublishOutput_runtimes_linuxbionicarm64_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_6]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_6&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_7" Component_="FenixModbusS7_PublishOutput_runtimes_linuxbionicx64_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_7]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_7&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_3" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmips64_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_3]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_3&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_4" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslarm_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_4]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_4&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_8" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslarm_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_8]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_8&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_5" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslarm64_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_5]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_5&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_9" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslarm64_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_9]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_9&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_6" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslriscv64_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_6]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_6&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_7" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmusls390x_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_7]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_7&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_8" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslx64_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_8]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_8&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_10" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslx64_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_10]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_10&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_9" Component_="FenixModbusS7_PublishOutput_runtimes_linuxppc64le_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_9]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_9&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_10" Component_="FenixModbusS7_PublishOutput_runtimes_linuxriscv64_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_10]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_10&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_11" Component_="FenixModbusS7_PublishOutput_runtimes_linuxs390x_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_11]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_11&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_12" Component_="FenixModbusS7_PublishOutput_runtimes_linuxx64_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_12]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_12&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.so_11" Component_="FenixModbusS7_PublishOutput_runtimes_linuxx64_native" FileName="LIBSYS~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_11]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_11&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.so_13" Component_="FenixModbusS7_PublishOutput_runtimes_linuxx86_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_13]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_13&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.dylib" Component_="FenixModbusS7_PublishOutput_runtimes_maccatalystarm64_native" FileName="LIBE_S~2.DYL|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.dylib&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.dylib" Component_="FenixModbusS7_PublishOutput_runtimes_maccatalystarm64_native" FileName="LIBSYS~2.DYL|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.dylib&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.dylib_1" Component_="FenixModbusS7_PublishOutput_runtimes_maccatalystx64_native" FileName="LIBE_S~2.DYL|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.dylib_1&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.dylib_1" Component_="FenixModbusS7_PublishOutput_runtimes_maccatalystx64_native" FileName="LIBSYS~2.DYL|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.dylib_1&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.dylib_2" Component_="FenixModbusS7_PublishOutput_runtimes_osxarm64_native" FileName="LIBE_S~2.DYL|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.dylib_2&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.dylib_2" Component_="FenixModbusS7_PublishOutput_runtimes_osxarm64_native" FileName="LIBSYS~2.DYL|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.dylib_2&gt;" SelfReg="false"/>
+    <ROW File="libe_sqlite3.dylib_3" Component_="FenixModbusS7_PublishOutput_runtimes_osxx64_native" FileName="LIBE_S~2.DYL|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib_3]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.dylib_3&gt;" SelfReg="false"/>
+    <ROW File="libSystem.IO.Ports.Native.dylib_3" Component_="FenixModbusS7_PublishOutput_runtimes_osxx64_native" FileName="LIBSYS~2.DYL|[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib_3]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.dylib_3&gt;" SelfReg="false"/>
+    <ROW File="e_sqlite3.dll" Component_="FenixModbusS7_PublishOutput_runtimes_winarm_native" FileName="E_SQLI~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_e_sqlite3.dll&gt;" SelfReg="false"/>
+    <ROW File="e_sqlite3.dll_1" Component_="FenixModbusS7_PublishOutput_runtimes_winarm64_native" FileName="E_SQLI~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_e_sqlite3.dll_1&gt;" SelfReg="false"/>
+    <ROW File="e_sqlite3.dll_2" Component_="FenixModbusS7_PublishOutput_runtimes_winx64_native" FileName="E_SQLI~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_e_sqlite3.dll_2&gt;" SelfReg="false"/>
+    <ROW File="e_sqlite3.dll_3" Component_="FenixModbusS7_PublishOutput_runtimes_winx86_native" FileName="E_SQLI~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll_3]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_e_sqlite3.dll_3&gt;" SelfReg="false"/>
+    <ROW File="e_sqlite3.a" Component_="FenixModbusS7_PublishOutput_runtimes_browserwasm_nativeassets_net9.0" FileName="E_SQLI~2.A|[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.a]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_e_sqlite3.a&gt;" SelfReg="false"/>
+    <ROW File="System.IO.Ports.dll_1" Component_="FenixModbusS7_PublishOutput_runtimes_unix_lib_net10.0" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.IO.Ports.dll_1&gt;" SelfReg="false"/>
+    <ROW File="System.IO.Ports.dll_2" Component_="FenixModbusS7_PublishOutput_runtimes_win_lib_net10.0" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.IO.Ports.dll_2&gt;" SelfReg="false"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_10" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_10]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_10]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_11" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_11]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_11]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_12" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_12]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_12]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_13" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_13]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_13]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_14" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_14]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_14]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_15" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_15]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_15]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_16" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_16]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_16]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_2" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_2]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_2]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_3" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_3]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_3]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_4" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_4]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_4]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_5" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_5]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_5]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_6" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_6]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_6]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_7" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_7]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_7]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_8" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_8]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_8]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll_9" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll_9]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll_9]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_FenixModbusS7.deps.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.deps.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.deps.json]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_FenixModbusS7.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_FenixModbusS7.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_FenixModbusS7.runtimeconfig.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.runtimeconfig.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.runtimeconfig.json]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ICSharpCode.AvalonEdit.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_12_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_12_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_12_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_1_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_1_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_1_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_2_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_2_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_2_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_3_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_3_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_3_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_4_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_4_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_4_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_5_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_5_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_5_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_6_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_6_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_6_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_7_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_7_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_7_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_8_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_8_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_8_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_9_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_9_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_9_pting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_10_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_10_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_10_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_11_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_11_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_11_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_12_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_12_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_12_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_1_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_1_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_1_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_2_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_2_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_2_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_3_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_3_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_3_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_4_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_4_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_4_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_5_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_5_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_5_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_6_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_6_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_6_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_7_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_7_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_7_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_8_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_8_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_8_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_9_urces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_9_urces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_9_urces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_10_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_10_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_10_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_11_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_11_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_11_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_12_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_12_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_12_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_1_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_1_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_1_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_2_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_2_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_2_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_3_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_3_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_3_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_4_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_4_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_4_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_5_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_5_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_5_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_6_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_6_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_6_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_7_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_7_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_7_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_8_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_8_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_8_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_9_esources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_9_esources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.r_9_esources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.Scripting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.Scripting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.Scripting.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_10" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_10]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_10]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_11" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_11]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_11]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_12" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_12]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_12]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_2" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_2]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_2]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_3" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_3]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_3]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_4" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_4]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_4]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_5" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_5]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_5]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_6" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_6]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_6]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_7" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_7]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_7]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_8" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_8]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_8]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_9" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.resources.dll_9]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_9]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Data.Sqlite.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Data.Sqlite.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.Sqlite.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Abstractions.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Relational.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.Sqlite.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.EntityFrameworkCore.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.EntityFrameworkCore.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.EntityFrameworkCore.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Abstractions.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Caching.Memory.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Caching.Memory.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Caching.Memory.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Configuration.Abstractions.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.Abstractions.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyInjection.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyInjection.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyInjection.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.DependencyModel.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.DependencyModel.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.DependencyModel.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.Abstractions.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Logging.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Logging.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Logging.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Options.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Options.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Primitives.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Primitives.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Xaml.Behaviors.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Xaml.Behaviors.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Xaml.Behaviors.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ModbusMasterASCII.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ModbusMasterASCII.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterASCII.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ModbusMasterRTU.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ModbusMasterRTU.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterRTU.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ModbusMasterTCP.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ModbusMasterTCP.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ModbusMasterTCP.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Newtonsoft.Json.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_OxyPlot.Wpf.Shared.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_OxyPlot.Wpf.Shared.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.Shared.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_OxyPlot.Wpf.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_OxyPlot.Wpf.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.Wpf.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_OxyPlot.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_OxyPlot.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_OxyPlot.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ProjectDataLib.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_S7300400Ethernet.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_S7300400Ethernet.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_S7300400Ethernet.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_SQLitePCLRaw.batteries_v2.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.batteries_v2.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.batteries_v2.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_SQLitePCLRaw.core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.core.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_SQLitePCLRaw.provider.e_sqlite3.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Sharp7.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Sharp7.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Sharp7.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.IO.Ports.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.IO.Ports.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.IO.Ports.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_System.IO.Ports.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.IO.Ports.dll_2" Path="[|AI_PROPPATH_DIR_PERBUILD_System.IO.Ports.dll_2]\[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_2]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_e_sqlite3.a" Path="[|AI_PROPPATH_DIR_PERBUILD_e_sqlite3.a]\[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.a]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_e_sqlite3.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_e_sqlite3.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_e_sqlite3.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_e_sqlite3.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_e_sqlite3.dll_2" Path="[|AI_PROPPATH_DIR_PERBUILD_e_sqlite3.dll_2]\[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll_2]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_e_sqlite3.dll_3" Path="[|AI_PROPPATH_DIR_PERBUILD_e_sqlite3.dll_3]\[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.dll_3]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.dylib" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.dylib]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.dylib_1" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.dylib_1]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.dylib_2" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.dylib_2]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib_2]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.dylib_3" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.dylib_3]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.dylib_3]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_1" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_1]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_10" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_10]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_10]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_11" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_11]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_11]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_2" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_2]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_2]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_3" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_3]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_3]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_4" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_4]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_4]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_5" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_5]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_5]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_6" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_6]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_6]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_7" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_7]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_7]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_8" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_8]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_8]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libSystem.IO.Ports.Native.so_9" Path="[|AI_PROPPATH_DIR_PERBUILD_libSystem.IO.Ports.Native.so_9]\[|AI_PROPPATH_FILENAME_PERBUILD_libSystem.IO.Ports.Native.so_9]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.dylib" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.dylib]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.dylib_1" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.dylib_1]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.dylib_2" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.dylib_2]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib_2]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.dylib_3" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.dylib_3]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.dylib_3]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_1" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_1]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_10" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_10]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_10]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_11" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_11]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_11]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_12" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_12]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_12]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_13" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_13]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_13]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_2" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_2]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_2]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_3" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_3]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_3]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_4" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_4]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_4]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_5" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_5]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_5]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_6" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_6]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_6]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_7" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_7]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_7]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_8" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_8]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_8]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_libe_sqlite3.so_9" Path="[|AI_PROPPATH_DIR_PERBUILD_libe_sqlite3.so_9]\[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_9]" Type="2" Content="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" Languages="en" InstallationType="4" UseLargeSchema="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
+    <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
+    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
+    <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceTypeDlg.aip"/>
+    <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceWelcomeDlg.aip"/>
+    <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
+    <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
+    <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="Themes.aip" Path="&lt;AI_FRAGS&gt;Themes.aip"/>
+    <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
+    <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
+    <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
+    <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
+    <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="99"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="202"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="101"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="ChangeButton" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="501"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceWelcomeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RemoveButton" Event="NewDialog" Argument="VerifyRemoveDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RepairButton" Event="NewDialog" Argument="VerifyRepairDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="1"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Repair" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="399" Options="1"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Remove" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="299" Options="1"/>
+    <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="201"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="203"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
+    <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
+    <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
+    <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Type="65" Source="aicustact.dll" Target="PreserveInstallType"/>
+    <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
+    <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
+    <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
+    <ROW Feature_="MainFeature" Component_="APPDIR"/>
+    <ROW Feature_="MainFeature" Component_="ProductInformation"/>
+    <ROW Feature_="MainFeature" Component_="_"/>
+    <ROW Feature_="MainFeature" Component_="__1"/>
+    <ROW Feature_="MainFeature" Component_="__2"/>
+    <ROW Feature_="MainFeature" Component_="__3"/>
+    <ROW Feature_="MainFeature" Component_="__4"/>
+    <ROW Feature_="MainFeature" Component_="__5"/>
+    <ROW Feature_="MainFeature" Component_="FenixManager_ContentOutput_Template"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PrimaryOutput"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_caES"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_cs"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_csCZ"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_de"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_es"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_fr"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_hu"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_it"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_ja"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_ko"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_nlBE"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_pl"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_pt"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_ptBR"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_ro"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_ru"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_sv"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_tr"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_zhHans"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_zhHant"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_androidarm_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_androidarm64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_androidx64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_androidx86_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxarm_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxarm64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxarmel_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxbionicarm64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxbionicx64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmips64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslarm_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslarm64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslriscv64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmusls390x_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxmuslx64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxppc64le_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxriscv64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxs390x_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxx64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_linuxx86_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_maccatalystarm64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_maccatalystx64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_osxarm64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_osxx64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_winarm_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_winarm64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_winx64_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_winx86_native"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_browserwasm_nativeassets_net9.0"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_unix_lib_net10.0"/>
+    <ROW Feature_="MainFeature" Component_="FenixModbusS7_PublishOutput_runtimes_win_lib_net10.0"/>
+    <ROW Feature_="MainFeature" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
+    <ROW Name="soft.exe" SourcePath="..\FenixModbusS7\soft.ico" Index="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
+    <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
+    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Sequence="199"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
+    <ROW Action="AI_DpiContentScale" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
+    <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 600)" Description="[ProductName] cannot be installed on [WindowsTypeNT60Display]." DescriptionLocId="AI.LaunchCondition.NoNT60" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
+    <ROW Registry="Classes" Root="1" Key="Software\Classes" Name="\"/>
+    <ROW Registry="Command" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\Shell\Open\Command" Name="\"/>
+    <ROW Registry="Command_1" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\Shell\OpenWithFenix\Command" Name="\"/>
+    <ROW Registry="DefaultIcon" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\DefaultIcon" Name="\"/>
+    <ROW Registry="FenixModbusS7.PSXFile" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile" Name="\"/>
+    <ROW Registry="Manufacturer" Root="-1" Key="Software\[Manufacturer]" Name="\"/>
+    <ROW Registry="Open" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\Shell\Open" Name="\"/>
+    <ROW Registry="OpenWithFenix" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\Shell\OpenWithFenix" Name="\"/>
+    <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="ProductName" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="\"/>
+    <ROW Registry="Shell" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\Shell" Name="\"/>
+    <ROW Registry="Software" Root="-1" Key="Software" Name="\"/>
+    <ROW Registry="Software_1" Root="1" Key="Software" Name="\"/>
+    <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+    <ROW Registry="_" Root="1" Key="Software\Classes\.pse" Value="FenixModbusS7.PSXFile" Component_="_"/>
+    <ROW Registry="__1" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile" Value="FenixModbusS7 PSX File" Component_="__1"/>
+    <ROW Registry="__2" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\DefaultIcon" Value="[ProgramFilesFolder]DGSoft\FenixModbusS7\Fenix\FenixWPF.exe,0" Component_="__2"/>
+    <ROW Registry="__3" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\Shell\Open\Command" Value="&quot;[ProgramFilesFolder]DGSoft\FenixModbusS7\Fenix\FenixWPF.exe&quot; &quot;%1&quot;" Component_="__3"/>
+    <ROW Registry="__4" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\Shell\OpenWithFenix" Value="Open with FenixModbusS7" Component_="__4"/>
+    <ROW Registry="__5" Root="1" Key="Software\Classes\FenixModbusS7.PSEFile\Shell\OpenWithFenix\Command" Value="&quot;[ProgramFilesFolder]DGSoft\FenixModbusS7\Fenix\FenixWPF.exe&quot; &quot;%1&quot;" Component_="__5"/>
+    <ROW Registry="psx" Root="1" Key="Software\Classes\.pse" Name="\"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="AI_PROPPATH_FILENAME_PERBUILD_Fenix" Directory_="DesktopFolder" Name="~1|FenixModbusS7" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe" Target="[#FenixModbusS7.exe]" Hotkey="0" Icon_="soft.exe" IconIndex="0" ShowCmd="1" WkDir="FenixManager_Dir"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
+    <ATTRIBUTE name="UsedTheme" value="classic"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.VsProjectComponent">
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="FenixModbusS7.deps.json"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="FenixModbusS7.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="FenixModbusS7.exe"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="FenixModbusS7.runtimeconfig.json"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="ICSharpCode.AvalonEdit.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scripting.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Data.Sqlite.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.EntityFrameworkCore.Abstractions.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.EntityFrameworkCore.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.EntityFrameworkCore.Relational.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.EntityFrameworkCore.Sqlite.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.Caching.Abstractions.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.Caching.Memory.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.Configuration.Abstractions.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.DependencyInjection.Abstractions.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.DependencyInjection.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.DependencyModel.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.Logging.Abstractions.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.Logging.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.Options.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Extensions.Primitives.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Xaml.Behaviors.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="ModbusMasterASCII.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="ModbusMasterRTU.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="ModbusMasterTCP.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Newtonsoft.Json.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="OxyPlot.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="OxyPlot.Wpf.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="OxyPlot.Wpf.Shared.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="ProjectDataLib.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="S7300400Ethernet.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Sharp7.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="SQLitePCLRaw.batteries_v2.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="SQLitePCLRaw.core.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="SQLitePCLRaw.provider.e_sqlite3.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="System.IO.Ports.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_1"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_2"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_1_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_1_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_1"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_1_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_3"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_2_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_2_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_2"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_2_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_4"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_3_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_3_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_3"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_3_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_5"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_6"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_4_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_4_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_4"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_4_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_7"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_5_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_5_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_5"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_5_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_8"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_6_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_6_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_6"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_6_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_9"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_10"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_7_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_7_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_7"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_7_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_11"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_8_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_8_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_8"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_8_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_12"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_13"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_9_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_9_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_9"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_9_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_14"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_10_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_10"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_10_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_15"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_11_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_11"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_11_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="AvalonDock.resources.dll_16"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_12_urces.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_12_pting.resources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_12"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.Scripting.r_12_esources.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_1"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_2"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_3"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_4"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_1"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_5"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_2"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_6"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_7"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_3"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_4"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_8"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_5"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_9"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_6"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_7"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_8"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_10"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_9"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_10"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_11"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_12"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.so_11"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.so_13"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.dylib"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.dylib"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.dylib_1"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.dylib_1"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.dylib_2"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.dylib_2"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libe_sqlite3.dylib_3"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="libSystem.IO.Ports.Native.dylib_3"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="e_sqlite3.dll"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="e_sqlite3.dll_1"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="e_sqlite3.dll_2"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="e_sqlite3.dll_3"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="e_sqlite3.a"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="System.IO.Ports.dll_1"/>
+    <ROW ProjectId="{e6b514c5-622f-b501-72f4-0403f3c65da8}" ProjectName="FenixModbusS7" OutputGroup="PublishOutput" OutputFile="System.IO.Ports.dll_2"/>
+  </COMPONENT>
+</DOCUMENT>

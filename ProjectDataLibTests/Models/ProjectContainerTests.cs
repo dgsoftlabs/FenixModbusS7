@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace ProjectDataLib.Tests
 {
@@ -50,6 +52,16 @@ namespace ProjectDataLib.Tests
             string content = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Fenix><version>3.3.3.0</version><link>https://sourceforge.net/projects/fenixmodbus/</link></Fenix>";
             string url = ProjectContainer.ParseUrlFromContent(content);
             Assert.IsNull(url, "Parsed URL should be null for invalid content.");
+        }
+
+        [Test()]
+        public void ProjectXmlSerialization_ShouldSerializeWithoutReflectionErrors()
+        {
+            var project = new Project();
+            var serializer = new XmlSerializer(typeof(Project));
+
+            using var ms = new MemoryStream();
+            Assert.DoesNotThrow(() => serializer.Serialize(ms, project));
         }
     }
 }
