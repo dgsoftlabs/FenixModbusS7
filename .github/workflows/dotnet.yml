@@ -28,11 +28,19 @@ jobs:
           advinst-version: '23.6'
           # advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
 
+      - name: Publish app
+        run: dotnet publish ${{ github.workspace }}\FenixModbusS7\FenixModbusS7.csproj -c Release /p:PublishProfile=FolderProfile
+
       - name: Build app for release
-        run: msbuild ${{ github.workspace }}\FenixModbusS7.sln -p:Configuration=Release
+        run: msbuild ${{ github.workspace }}\FenixModbusS7.sln -p:Configuration=Release -p:BuildProjectReferences=false
 
       - name: Get software version from XML
         id: get_version
