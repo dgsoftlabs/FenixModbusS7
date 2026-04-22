@@ -403,3 +403,4 @@ SQLite/x86/SQLite.Interop.dll
 
 FenixSetup/FenixSetup-cache
 FenixSetup/FenixSetup-SetupFiles
+*-cache/
