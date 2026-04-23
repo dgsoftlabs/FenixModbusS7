@@ -1667,9 +1667,11 @@ namespace Fenix
         {
             try
             {
-                string p = io.Path.GetDirectoryName(Pr.path) + io.Path.GetDirectoryName(PrCon.Database);
+                string dbRelative = PrCon.Database.TrimStart('\\', '/');
+                string fullDbPath = io.Path.Combine(io.Path.GetDirectoryName(Pr.path), dbRelative);
+                string p = io.Path.GetDirectoryName(fullDbPath);
                 if (io.Directory.Exists(p))
-                    Process.Start(p);
+                    Process.Start(new ProcessStartInfo(p) { UseShellExecute = true });
             }
             catch (Exception Ex)
             {
