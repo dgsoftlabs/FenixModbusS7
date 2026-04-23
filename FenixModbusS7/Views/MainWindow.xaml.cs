@@ -1734,18 +1734,36 @@ namespace Fenix
         {
             try
             {
-                StringBuilder sb = new StringBuilder();
-
                 var tags = Pr.Db.GetAll();
 
-                // Write header
-                sb.AppendLine("Name,Stamp,Value");
+                var tagNames = tags.Select(t => t.Name).Distinct().ToList();
 
-                // Write data rows
-                foreach (var tag in tags)
+                // Group by second precision — same logic as DBTableView pivot table
+                var groups = tags
+                    .GroupBy(t => new DateTime(t.Stamp.Year, t.Stamp.Month, t.Stamp.Day,
+                                               t.Stamp.Hour, t.Stamp.Minute, t.Stamp.Second))
+                    .OrderBy(g => g.Key);
+
+                StringBuilder sb = new StringBuilder();
+
+                // Header row: Stamp + one column per tag name
+                sb.Append("Stamp");
+                foreach (var name in tagNames)
+                    sb.Append($",{name}");
+                sb.AppendLine();
+
+                // Data rows — one row per timestamp group
+                foreach (var group in groups)
                 {
-                    string line = $"{tag.Name},{tag.Stamp:yyyy-MM-dd HH:mm:ss.fff},{tag.Value.ToString().Replace(',', '.')}";
-                    sb.AppendLine(line);
+                    sb.Append(group.Key.ToString("yyyy-MM-dd HH:mm:ss"));
+                    foreach (var name in tagNames)
+                    {
+                        var entry = group.FirstOrDefault(t => t.Name == name);
+                        sb.Append(',');
+                        if (entry != null)
+                            sb.Append(entry.Value.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                    }
+                    sb.AppendLine();
                 }
 
                 SaveFileDialog sfd = new SaveFileDialog();
