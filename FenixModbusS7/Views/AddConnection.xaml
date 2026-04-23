@@ -6,7 +6,7 @@
         xmlns:pr="clr-namespace:ProjectDataLib;assembly=ProjectDataLib"
         xmlns:local="clr-namespace:Fenix"
         mc:Ignorable="d"
-        Title="Add Connection" Height="470" Width="320" WindowStartupLocation="CenterOwner"
+        Title="Add Connection" Height="632" Width="353" WindowStartupLocation="CenterOwner"
         Background="{StaticResource Th.SurfaceBrush}">
     <DockPanel Style="{StaticResource Th.DialogRootDockPanel}">
         <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource Th.DialogBottomActionsPanel}">
@@ -14,16 +14,23 @@
             <Button Click="Button_Close_Click" Content="Close" Style="{StaticResource Th.DialogBottomActionButton}" />
         </StackPanel>
 
-        <StackPanel>
-            <Image Source="pack://application:,,,/TreeImage/Connection.png" Style="{StaticResource Th.DialogHeaderIcon}" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-            <TextBlock Text="Connection Name" Style="{StaticResource Th.DialogSectionTitle}" />
-            <TextBox Name="TbConnName" Text="{Binding connectionName }" />
+            <StackPanel Grid.Row="0">
+                <Image Source="pack://application:,,,/TreeImage/Connection.png" Style="{StaticResource Th.DialogHeaderIcon}" />
 
-            <TextBlock Text="Driver Name" Style="{StaticResource Th.DialogSectionTitle}" />
-            <ComboBox x:Name="CbDrivers" SelectionChanged="CbDrivers_SelectionChanged" />
+                <TextBlock Text="Connection Name" Style="{StaticResource Th.DialogSectionTitle}" />
+                <TextBox Name="TbConnName" Text="{Binding connectionName }" />
 
-            <local:PropertiesGridManager x:Name="PgDrvProps" Margin="0,4,0,0" Height="220" />
-        </StackPanel>
+                <TextBlock Text="Driver Name" Style="{StaticResource Th.DialogSectionTitle}" />
+                <ComboBox x:Name="CbDrivers" SelectionChanged="CbDrivers_SelectionChanged" />
+            </StackPanel>
+
+            <local:PropertiesGridManager Grid.Row="1" x:Name="PgDrvProps" Margin="0,4,0,0" />
+        </Grid>
     </DockPanel>
 </Window>
