@@ -5,7 +5,7 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <NoWarn>$(NoWarn);CA1416</NoWarn>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FenixWPF</RootNamespace>
+    <RootNamespace>Fenix</RootNamespace>
     <AssemblyName>FenixModbusS7</AssemblyName>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>

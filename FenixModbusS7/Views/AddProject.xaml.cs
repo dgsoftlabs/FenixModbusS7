@@ -99,6 +99,9 @@ namespace Fenix
                     if (projectContainer.saveProject(currentProject, sfd.FileName))
                     {
                         currentProject.path = sfd.FileName;
+                        currentProject.Db.Pr = currentProject;
+                        currentProject.Db.PrCon = projectContainer;
+                        currentProject.Db.OnDeserializedXML();
                         projectContainer.addProject(currentProject);
 
                         string[] files1 = io.Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + projectContainer.TemplateCatalog);
