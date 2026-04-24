@@ -1328,14 +1328,14 @@ namespace nmDriver
                         else if (frame[7] == 5 || frame[7] == 6)
                         {
                             TcpHeader = String.Format("{0:X}{1:X}   {2:X}{3:X}   {4:X}{5:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
-                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}.{5:X}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
+                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X} {5:X}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
                             return TcpHeader + "   " + modbusHeader;
                         }
                         else
                         {
                             TcpHeader = String.Format("{0:X}{1:X}   {2:X}{3:X}   {4:X}{5:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
                             modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}{5:X}   {6:X}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11], frame[12]);
-                            restData = frame.ToList().GetRange(14, frame.Length - 14).Aggregate(String.Format("{0:X}", frame[13]), (sum, next) => sum + "." + String.Format("{0:X}", next));
+                            restData = frame.ToList().GetRange(14, frame.Length - 14).Aggregate(String.Format("{0:X}", frame[13]), (sum, next) => sum + " " + String.Format("{0:X}", next));
                             return TcpHeader + "   " + modbusHeader + "   " + restData;
                         }
 
@@ -1350,14 +1350,14 @@ namespace nmDriver
                         if (frame[7] == 5 || frame[7] == 6)
                         {
                             TcpHeader = String.Format("{0}{1}   {2}{3}   {4}{5}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}.{5}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4} {5}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
                             return TcpHeader + "   " + modbusHeader;
                         }
                         else
                         {
                             TcpHeader = String.Format("{0}{1}   {2}{3}   {4}{5}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
                             modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11], frame[12]);
-                            restData = frame.ToList().GetRange(14, frame.Length - 14).Aggregate(String.Format("{0}", frame[13]), (sum, next) => sum + "." + String.Format("{0}", next));
+                            restData = frame.ToList().GetRange(14, frame.Length - 14).Aggregate(String.Format("{0}", frame[13]), (sum, next) => sum + " " + String.Format("{0}", next));
                             return TcpHeader + "   " + modbusHeader + "   " + restData;
                         }
 
@@ -1372,14 +1372,14 @@ namespace nmDriver
                         if (frame[7] == 5 || frame[7] == 6)
                         {
                             TcpHeader = String.Format("{0}{1}   {2}{3}   {4}{5}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}.{5}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4} {5}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
                             return TcpHeader + "   " + modbusHeader;
                         }
                         else
                         {
                             TcpHeader = String.Format("{0}{1}   {2}{3}   {4}{5}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
                             modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11], frame[12]);
-                            restData = frame.ToList().GetRange(14, frame.Length - 14).Aggregate(String.Format("{0}", frame[13]), (sum, next) => sum + "." + String.Format("{0}", next));
+                            restData = frame.ToList().GetRange(14, frame.Length - 14).Aggregate(String.Format("{0}", frame[13]), (sum, next) => sum + " " + String.Format("{0}", next));
                             return TcpHeader + "   " + modbusHeader + "   " + restData;
                         }
                 }
@@ -1415,14 +1415,14 @@ namespace nmDriver
                         {
                             TcpHeader = String.Format("{0:X}{1:X}   {2:X}{3:X}   {4:X}{5:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
                             modbusHeader = String.Format("{0:X}   {1:X}   {2:X}", frame[6], frame[7], frame[8]);
-                            restData = frame.ToList().GetRange(10, frame.Length - 10).Aggregate(String.Format("{0:X}", frame[9]), (sum, next) => sum + "." + String.Format("{0:X}", next));
+                            restData = frame.ToList().GetRange(10, frame.Length - 10).Aggregate(String.Format("{0:X}", frame[9]), (sum, next) => sum + " " + String.Format("{0:X}", next));
                             return TcpHeader + "   " + modbusHeader + "   " + restData;
                         }
                         //Single Cols and Single Register
                         else if (frame[7] == 5 || frame[7] == 6)
                         {
                             TcpHeader = String.Format("{0:X}{1:X}   {2:X}{3:X}   {4:X}{5:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
-                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}.{5:X}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
+                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X} {5:X}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
                             return TcpHeader + "   " + modbusHeader;
                         }
                         //Multiple Coils and Multiple Registers
@@ -1446,14 +1446,14 @@ namespace nmDriver
                         {
                             TcpHeader = String.Format("{0}{1}   {2}{3}   {4}{5}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
                             modbusHeader = String.Format("{0}   {1}   {2}", frame[6], frame[7], frame[8]);
-                            restData = frame.ToList().GetRange(10, frame.Length - 10).Aggregate(String.Format("{0}", frame[9]), (sum, next) => sum + "." + String.Format("{0}", next));
+                            restData = frame.ToList().GetRange(10, frame.Length - 10).Aggregate(String.Format("{0}", frame[9]), (sum, next) => sum + " " + String.Format("{0}", next));
                             return TcpHeader + "   " + modbusHeader + "   " + restData;
                         }
                         //Single Cols and Single Register
                         else if (frame[7] == 5 || frame[7] == 6)
                         {
                             TcpHeader = String.Format("{0}{1}   {2}{3}   {4}{5}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}.{5}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4} {5}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
                             return TcpHeader + "   " + modbusHeader;
                         }
                         //Multiple Coils and Multiple Registers
@@ -1477,14 +1477,14 @@ namespace nmDriver
                         {
                             TcpHeader = String.Format("{0}{1}   {2}{3}   {4}{5}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
                             modbusHeader = String.Format("{0}   {1}   {2}", frame[6], frame[7], frame[8]);
-                            restData = frame.ToList().GetRange(10, frame.Length - 10).Aggregate(String.Format("{0}", frame[9]), (sum, next) => sum + "." + String.Format("{0}", next));
+                            restData = frame.ToList().GetRange(10, frame.Length - 10).Aggregate(String.Format("{0}", frame[9]), (sum, next) => sum + " " + String.Format("{0}", next));
                             return TcpHeader + "   " + modbusHeader + "   " + restData;
                         }
                         //Single Cols and Single Register
                         else if (frame[7] == 5 || frame[7] == 6)
                         {
                             TcpHeader = String.Format("{0}{1}   {2}{3}   {4}{5}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}.{5}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4} {5}", frame[6], frame[7], frame[8], frame[9], frame[10], frame[11]);
                             return TcpHeader + "   " + modbusHeader;
                         }
                         //Multiple Coils and Multiple Registers

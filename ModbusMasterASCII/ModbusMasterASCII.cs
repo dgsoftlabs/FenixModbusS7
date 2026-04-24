@@ -1601,7 +1601,7 @@ namespace nmDriver
                         if (fct <= 4)
                         {
                             modbusHeader = String.Format("{0:X}{1:X}{2:X}   {3:X}{4:X}", frame[0], frame[1], frame[2], frame[3], frame[4]);
-                            restData = frame.ToList().GetRange(7, countData * 2).Aggregate(String.Format("{0:X}{1:X}   ", frame[5], frame[6]), (sum, next) => sum + "." + String.Format("{0:X}", next));
+                            restData = frame.ToList().GetRange(7, countData * 2).Aggregate(String.Format("{0:X}{1:X}   ", frame[5], frame[6]), (sum, next) => sum + " " + String.Format("{0:X}", next));
                             return modbusHeader + "   " + restData + String.Format("   {0:X}{1:X}", frame[frame.Length - 4], frame[frame.Length - 3]); ;
                         }
                         //Single Cols and Single Register
@@ -1624,7 +1624,7 @@ namespace nmDriver
                         if (fct <= 4)
                         {
                             modbusHeader = String.Format("{0}{1}{2}    {3}{4}", frame[0], frame[1], frame[2], frame[3], frame[4]);
-                            restData = frame.ToList().GetRange(7, countData * 2).Aggregate(String.Format("{0}{1}   ", frame[5], frame[6]), (sum, next) => sum + "." + String.Format("{0}", next));
+                            restData = frame.ToList().GetRange(7, countData * 2).Aggregate(String.Format("{0}{1}   ", frame[5], frame[6]), (sum, next) => sum + " " + String.Format("{0}", next));
                             return modbusHeader + "   " + restData + String.Format("   {0}{1}", frame[frame.Length - 4], frame[frame.Length - 3]); ;
                         }
                         //Single Cols and Single Register

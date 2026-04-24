@@ -668,13 +668,6 @@ namespace Fenix
         {
             try
             {
-                //Zapisanie layoutu
-                if (Pr != null)
-                {
-                    XmlLayoutSerializer serializer = new XmlLayoutSerializer(dockManager);
-                    serializer.Serialize(System.IO.Path.GetDirectoryName(PrCon.projectList.First().path) + "\\" + PrCon.LayoutFile);
-                }
-
                 //Zamkniecie edytorow
                 var docs = dockManager.Layout.Descendents()
                     .OfType<LayoutAnchorable>()
@@ -683,6 +676,9 @@ namespace Fenix
 
                 for (int i = 0; i < docs.Count(); i++)
                     ((LayoutAnchorable)docs[i]).Close();
+
+                //Zapisanie layoutu przed wyczyszczeniem projektu
+                SaveLayout();
 
                 propManag.SelectedObject = null;
                 exList.Clear();
@@ -710,6 +706,7 @@ namespace Fenix
             try
             {
                 //Zapisanie projectu
+                bool saved = false;
 
                 if (String.IsNullOrEmpty(Pr.path))
                 {
@@ -720,10 +717,17 @@ namespace Fenix
                     if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         PrCon.saveProject(Pr, sfd.FileName);
+                        saved = true;
                     }
                 }
                 else
+                {
                     PrCon.saveProject(Pr, Pr.path);
+                    saved = true;
+                }
+
+                if (saved)
+                    SaveLayout();
             }
             catch (Exception Ex)
             {
@@ -1318,6 +1322,23 @@ namespace Fenix
             }
         }
 
+        private void SaveLayout()
+        {
+            try
+            {
+                if (Pr == null) return;
+                string path = io.Path.GetDirectoryName(PrCon.projectList.First().path) + "\\" + PrCon.LayoutFile;
+                XmlLayoutSerializer serializer = new XmlLayoutSerializer(dockManager);
+                serializer.Serialize(path);
+                System.Diagnostics.Debug.WriteLine($"[SaveLayout] OK: {path}");
+            }
+            catch (Exception Ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[SaveLayout] ERROR: {Ex.Message}");
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
         private void LaCtrl_Closed(object sender, EventArgs e)
         {
             try
@@ -1354,6 +1375,7 @@ namespace Fenix
                 }
 
                 win = null;
+                SaveLayout();
                 CheckAccessForNodes();
             }
             catch (Exception Ex)
@@ -1423,11 +1445,7 @@ namespace Fenix
         {
             try
             {
-                if (Pr != null)
-                {
-                    XmlLayoutSerializer serializer = new XmlLayoutSerializer(dockManager);
-                    serializer.Serialize(io.Path.GetDirectoryName(PrCon.projectList.First().path) + "\\" + PrCon.LayoutFile);
-                }
+                SaveLayout();
 
                 lbPathProject.Content = string.Empty;
                 Pr = null;

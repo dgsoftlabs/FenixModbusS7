@@ -55,19 +55,19 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <CheckBox Content="Name" IsChecked="{Binding project.ChartConf.CvCol7, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Type" IsChecked="{Binding project.ChartConf.CvCol1, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Direction" IsChecked="{Binding project.ChartConf.CvCol1, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Date and Time" IsChecked="{Binding project.ChartConf.CvCol2, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Data [Hex]" IsChecked="{Binding project.ChartConf.CvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Time Diff. [ms]" IsChecked="{Binding project.ChartConf.CvCol4, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Description" IsChecked="{Binding project.ChartConf.CvCol5, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Tags" IsChecked="{Binding project.ChartConf.CvCol6, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Data [Hex]" IsChecked="{Binding project.ChartConf.CvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    
+
                 </ContextMenu>
             </DataGrid.ContextMenu>
 
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="Name"
-                                    Width="*"
+                                    Width="Auto"
                                     Visibility="{Binding Path=DataContext.project.ChartConf.CvCol7,
                                     Converter={StaticResource BoolVis},
                                     Source={StaticResource ProxyElement} ,Mode=TwoWay}"
@@ -76,17 +76,17 @@
                                     IsReadOnly="True">
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Type"
-                                        Width="*"
+                <DataGridTextColumn Header="Direction"
+                                        Width="Auto"
                                         Visibility="{Binding Path=DataContext.project.ChartConf.CvCol1,
                                         Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}"
-                                        ClipboardContentBinding="{Binding Sender}"
-                                        Binding="{Binding Sender}"
+                                        ClipboardContentBinding="{Binding Type}"
+                                        Binding="{Binding Type}"
                                         IsReadOnly="True">
                 </DataGridTextColumn>
 
                 <DataGridTextColumn Header="Date and Time"
-                                    Width="*"
+                                    Width="Auto"
                                     Visibility="{Binding Path=DataContext.project.ChartConf.CvCol2,
                                     Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}">
 
@@ -105,8 +105,16 @@
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
 
+                <DataGridTextColumn Header="Time Diff. [ms]"
+                    Width="Auto"
+                    Visibility="{Binding Path=DataContext.project.ChartConf.CvCol4,
+                    Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}"
+                    ClipboardContentBinding="{Binding RefTime}"
+                                    Binding="{Binding RefTime}"
+                                    IsReadOnly="True" />
+
                 <DataGridTemplateColumn Header="Data [Hex]"
-                                        Width="2*"
+                                        Width="*"
                                         Visibility="{Binding Path=DataContext.project.ChartConf.CvCol3,
                                         Converter={StaticResource BoolVis},
                                         Source={StaticResource ProxyElement} , Mode=TwoWay}">
@@ -136,31 +144,6 @@
                     </DataGridTemplateColumn.ClipboardContentBinding>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="Time Diff. [ms]"
-                    Width="*"
-                    Visibility="{Binding Path=DataContext.project.ChartConf.CvCol4,
-                    Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}"
-                    ClipboardContentBinding="{Binding RefTime}"
-                                    Binding="{Binding RefTime}"
-                                    IsReadOnly="True" />
-
-                <DataGridTextColumn Header="Description"
-                                        Width="2*"
-                                        Visibility="{Binding Path=DataContext.project.ChartConf.CvCol5,
-                                        Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}"
-                                        ClipboardContentBinding="{Binding Info}"
-                                        Binding="{Binding Info}"
-                                        IsReadOnly="True" />
-
-                <DataGridTextColumn Header="Tags"
-                    Width="4*"
-                    Visibility="{Binding Path=DataContext.project.ChartConf.CvCol6, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}"
-                    Binding="{Binding Converter={StaticResource TgConv}}">
-
-                    <DataGridTextColumn.ClipboardContentBinding>
-                        <Binding  Converter="{StaticResource TgConv}" />
-                    </DataGridTextColumn.ClipboardContentBinding>
-                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

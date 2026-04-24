@@ -28,6 +28,9 @@ namespace Fenix
                     frameText = idrv.FormatFrameResponse(data, NumberStyles.HexNumber);
             }
 
+            if (!string.IsNullOrWhiteSpace(frameText))
+                frameText = frameText.Replace('.', ' ').Trim();
+
             if (string.IsNullOrWhiteSpace(frameText))
                 frameText = !string.IsNullOrWhiteSpace(info) ? info : "No frame data";
 

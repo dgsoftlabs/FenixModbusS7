@@ -9,7 +9,9 @@
         Title="FenixModbusS7"
         Background="{StaticResource Th.BgBrush}"
         FontFamily="Segoe UI"
-        FontSize="{StaticResource Th.FontMd}">
+        FontSize="{StaticResource Th.FontMd}"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed">
 
     <Window.Resources>
 
