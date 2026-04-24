@@ -5,22 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Fenix"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="402.667" d:DesignWidth="912"
              Background="{StaticResource Th.BgBrush}">
 
     <UserControl.Resources>
         <local:DataBytes x:Key="DataBytesConv" />
-        <local:ColorConverter x:Key="ColorConv" />
         <local:DateTimeFormConverter x:Key="DtConv" />
         <local:TagsConverter x:Key="TgConv" />
         <local:BoolNegConverter x:Key="BoolNeg" />
         <local:BoolToVis  x:Key="BoolVis" />
-
-        <Style TargetType="DataGridRow" x:Key="rwStyle">
-            <Style.Setters>
-                <Setter Property="Background" Value="{Binding  Converter={StaticResource ColorConv}}" />
-            </Style.Setters>
-        </Style>
 
         <!--Dane pomocnidze dla data grid-->
         <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}" />
@@ -29,26 +22,25 @@
     <Grid Background="{StaticResource Th.BgBrush}">
 
         <Grid.RowDefinitions>
-            <RowDefinition  Height="40" />
-            <RowDefinition  Height="*" />
-            <RowDefinition  Height="30" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0" Background="{StaticResource Th.SurfaceBrush}">
-            <ToggleButton  Content="Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
+            <ToggleButton Content="📜 Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
             <Separator />
-            <Button Content="Save CSV" Click="SaveCSV" />
+            <Button Content="💾 Save CSV" Click="SaveCSV" />
             <Separator />
-            <Button Content="Copy to Clipboard" Click="Clipbord" />
+            <Button Content="📋 Copy to Clipboard" Click="Clipbord" />
             <Separator />
-            <Button Content="Clear" Click="Button_Clr_Click" />
-            <Separator />
+            <Button Content="🗑️ Clear" Click="Button_Clr_Click" />
         </ToolBar>
 
         <DataGrid x:Name="View"
                   AutoGenerateColumns="False"
                   Grid.Row="1"
-                  RowStyle="{StaticResource rwStyle}"
+                  RowStyle="{StaticResource Th.CommunicationRowStyle}"
                   CanUserSortColumns="False"
                   Background="{StaticResource Th.SurfaceBrush}"
                   BorderBrush="{StaticResource Th.BorderBrush}"
@@ -113,30 +105,36 @@
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header=" Data [Hex]"
-                                    Width="*"
-                                    Visibility="{Binding Path=DataContext.project.ChartConf.CvCol3,
-                                    Converter={StaticResource BoolVis},
-                                    Source={StaticResource ProxyElement} , Mode=TwoWay}">
+                <DataGridTemplateColumn Header="Data [Hex]"
+                                        Width="2*"
+                                        Visibility="{Binding Path=DataContext.project.ChartConf.CvCol3,
+                                        Converter={StaticResource BoolVis},
+                                        Source={StaticResource ProxyElement} , Mode=TwoWay}">
 
-                    <DataGridTextColumn.ClipboardContentBinding>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource Th.CommunicationFrameCellText}">
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource DataBytesConv}">
+                                        <Binding Path="Sender" />
+                                        <Binding Path="Dane" />
+                                        <Binding Path="Info" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+
+                    <DataGridTemplateColumn.ClipboardContentBinding>
                         <MultiBinding Converter="{StaticResource DataBytesConv}">
                             <Binding Path="Sender" />
                             <Binding Path="Dane" />
                             <Binding Path="Info" />
                             <Binding Path="Type" />
                         </MultiBinding>
-                    </DataGridTextColumn.ClipboardContentBinding>
-
-                    <DataGridTextColumn.Binding>
-                        <MultiBinding Converter="{StaticResource DataBytesConv}">
-                            <Binding Path="Sender" />
-                            <Binding Path="Dane" />
-                            <Binding Path="Info" />
-                            <Binding Path="Type" />
-                        </MultiBinding>
-                    </DataGridTextColumn.Binding>
-                </DataGridTextColumn>
+                    </DataGridTemplateColumn.ClipboardContentBinding>
+                </DataGridTemplateColumn>
 
                 <DataGridTextColumn Header="Time Diff. [ms]"
                     Width="*"
@@ -167,7 +165,7 @@
         </DataGrid>
 
         <StatusBar Grid.Row="2" Background="{StaticResource Th.SurfaceBrush}">
-            <Label >Records:</Label>
+            <Label>Records:</Label>
             <Label Content="{Binding ElementName=View , Path=Items.Count}" />
         </StatusBar>
     </Grid>

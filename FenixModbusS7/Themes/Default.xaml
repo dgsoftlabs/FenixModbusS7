@@ -1,6 +1,7 @@
- <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Fenix">
 
     <!-- PALETTE: Stone neutrals + Violet accent (Linear / Vercel / shadcn/ui) -->
 
@@ -53,6 +54,41 @@
     <SolidColorBrush x:Key="Th.AccentBrush"     Color="{StaticResource Th.AccentColor}" />
     <SolidColorBrush x:Key="Th.HoverBrush"      Color="{StaticResource Th.HoverColor}" />
     <SolidColorBrush x:Key="Th.SelBrush"        Color="{StaticResource Th.SelColor}" />
+
+    <local:ColorConverter x:Key="Th.CommunicationRowColorConverter" />
+    <local:FrameTooltipConverter x:Key="Th.FrameTooltipConverter" />
+
+    <Style x:Key="Th.CommunicationRowStyle" TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+        <Setter Property="Background" Value="{Binding Converter={StaticResource Th.CommunicationRowColorConverter}}" />
+    </Style>
+
+    <Style x:Key="Th.CommunicationFrameCellText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="ToolTipService.ShowDuration" Value="120000" />
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <ToolTip MaxWidth="900"
+                         Background="{StaticResource Th.SurfaceBrush}"
+                         BorderBrush="{StaticResource Th.BorderBrush}"
+                         Foreground="{StaticResource Th.TextBrush}">
+                    <TextBlock TextWrapping="Wrap"
+                               FontFamily="Consolas"
+                               FontSize="{StaticResource Th.FontSm}">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource Th.FrameTooltipConverter}">
+                                <Binding Path="Sender" />
+                                <Binding Path="Dane" />
+                                <Binding Path="Info" />
+                                <Binding Path="Type" />
+                                <Binding Path="Czas" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </ToolTip>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!-- IMPLICIT: TextBox -->
     <Style TargetType="TextBox">
