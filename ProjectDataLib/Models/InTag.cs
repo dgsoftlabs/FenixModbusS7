@@ -184,9 +184,7 @@ namespace ProjectDataLib
 
         private string WriteScript_;
 
-        [CusEventProperty]
         [Category("03 Script"), DisplayName("Code"), Browsable(true)]
-        [Editor(typeof(ScEditor), typeof(UITypeEditor))]
         [JsonIgnore]
         public string WriteScript
         {
@@ -490,6 +488,7 @@ namespace ProjectDataLib
             }
         }
 
+        [Browsable(false)]
         [XmlElement(ElementName = "Color")]
         public XmlColor ClrXml
         {

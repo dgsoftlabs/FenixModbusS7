@@ -1617,33 +1617,56 @@ namespace ProjectDataLib
 
         public static Version ParseVersionFromContent(string content)
         {
+            if (string.IsNullOrWhiteSpace(content))
+                return null;
+
             try
             {
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(content);
                 XmlNode node = doc.DocumentElement.SelectSingleNode("/Fenix/version");
-                string version = node.InnerText;
-                return new Version(version);
+                if (node != null && Version.TryParse(node.InnerText?.Trim(), out Version xmlVersion))
+                    return xmlVersion;
             }
-            catch (Exception)
+            catch
             {
-                return null;
             }
+
+            string[] parts = content
+                .Trim()
+                .Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+
+            if (parts.Length > 0 && Version.TryParse(parts[0], out Version plainVersion))
+                return plainVersion;
+
+            return null;
         }
 
         public static string ParseUrlFromContent(string content)
         {
+            if (string.IsNullOrWhiteSpace(content))
+                return null;
+
             try
             {
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(content);
                 XmlNode node = doc.DocumentElement.SelectSingleNode("/Fenix/url");
-                return node.InnerText;
+                if (node != null)
+                    return node.InnerText?.Trim();
             }
-            catch (Exception)
+            catch
             {
-                return null;
             }
+
+            string[] parts = content
+                .Trim()
+                .Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+
+            if (parts.Length > 1)
+                return parts[1];
+
+            return null;
         }
 
         #endregion

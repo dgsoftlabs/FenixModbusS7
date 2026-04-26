@@ -127,9 +127,12 @@ namespace Fenix
         {
             try
             {
-                if (Address != null)
+                if (!string.IsNullOrWhiteSpace(Address))
                 {
-                    System.Diagnostics.Process.Start(Address);
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(Address)
+                    {
+                        UseShellExecute = true
+                    });
                 }
             }
             catch (Exception ex)

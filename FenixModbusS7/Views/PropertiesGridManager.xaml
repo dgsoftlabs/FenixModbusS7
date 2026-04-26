@@ -176,7 +176,6 @@
                                             </Style>
                                         </StackPanel.Style>
                                         <TextBlock Text="{Binding CollectionSummary}" VerticalAlignment="Center" Margin="0,0,8,0" />
-                                        <Button Content="Edit..." Command="{Binding EditCollectionCommand}" IsEnabled="{Binding IsEditable}" MinWidth="54" Padding="8,2" />
                                     </StackPanel>
 
                                     <Border Grid.Column="1"

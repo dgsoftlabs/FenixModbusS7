@@ -1978,58 +1978,58 @@ namespace nmDriver
                     case NumberStyles.HexNumber:
                         if (frame[1] <= 4)
                         {
-                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}{5:X}   {6:X}.{7:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}{5:X}   {6:X} {7:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
 
                         if (frame[1] == 5 || frame[1] == 6)
                         {
-                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}.{5:X}   {6:X}.{7:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X} {5:X}   {6:X} {7:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
                         else
                         {
                             modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}{5:X}   {6:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6]);
-                            restData = frame.ToList().GetRange(8, frame.Length - 10).Aggregate(String.Format("{0:X}", frame[7]), (sum, next) => sum + "." + String.Format("{0:X}", next));
-                            return modbusHeader + "   " + restData + restData + String.Format("   {0:X}.{1:X}", frame[frame.Length - 2], frame[frame.Length - 1]);
+                            restData = frame.ToList().GetRange(8, frame.Length - 10).Aggregate(String.Format("{0:X}", frame[7]), (sum, next) => sum + " " + String.Format("{0:X}", next));
+                            return modbusHeader + "   " + restData + restData + String.Format("   {0:X} {1:X}", frame[frame.Length - 2], frame[frame.Length - 1]);
                         }
 
                     case NumberStyles.Integer:
                         if (frame[1] <= 4)
                         {
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5} {6}.{7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5} {6} {7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
 
                         if (frame[1] == 5 || frame[1] == 6)
                         {
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}.{5}   {6}.{7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4} {5}   {6} {7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
                         else
                         {
                             modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6]);
-                            restData = frame.ToList().GetRange(8, frame.Length - 10).Aggregate(String.Format("{0}", frame[7]), (sum, next) => sum + "." + String.Format("{0}", next));
-                            return modbusHeader + "   " + restData + String.Format("   {0}.{1}", frame[frame.Length - 2], frame[frame.Length - 1]);
+                            restData = frame.ToList().GetRange(8, frame.Length - 10).Aggregate(String.Format("{0}", frame[7]), (sum, next) => sum + " " + String.Format("{0}", next));
+                            return modbusHeader + "   " + restData + String.Format("   {0} {1}", frame[frame.Length - 2], frame[frame.Length - 1]);
                         }
 
                     default:
                         if (frame[1] <= 4)
                         {
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6}.{7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6} {7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
 
                         if (frame[1] == 5 || frame[1] == 6)
                         {
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}.{5}   {6}.{7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4} {5}   {6} {7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
                         else
                         {
                             modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6]);
-                            restData = frame.ToList().GetRange(8, frame.Length - 10).Aggregate(String.Format("{0}", frame[7]), (sum, next) => sum + "." + String.Format("{0}", next));
-                            return modbusHeader + "   " + restData + restData + String.Format("   {0}.{1}", frame[frame.Length - 2], frame[frame.Length - 1]);
+                            restData = frame.ToList().GetRange(8, frame.Length - 10).Aggregate(String.Format("{0}", frame[7]), (sum, next) => sum + " " + String.Format("{0}", next));
+                            return modbusHeader + "   " + restData + restData + String.Format("   {0} {1}", frame[frame.Length - 2], frame[frame.Length - 1]);
                         }
                 }
             }
@@ -2062,19 +2062,19 @@ namespace nmDriver
                         if (frame[1] <= 4)
                         {
                             modbusHeader = String.Format("{0:X}   {1:X}   {2:X}", frame[0], frame[1], frame[2]);
-                            restData = frame.ToList().GetRange(4, frame.Length - 6).Aggregate(String.Format("{0:X}", frame[3]), (sum, next) => sum + "." + String.Format("{0:X}", next));
-                            return modbusHeader + "   " + restData + String.Format("   {0:X}.{1:X}", frame[frame.Length - 2], frame[frame.Length - 1]); ;
+                            restData = frame.ToList().GetRange(4, frame.Length - 6).Aggregate(String.Format("{0:X}", frame[3]), (sum, next) => sum + " " + String.Format("{0:X}", next));
+                            return modbusHeader + "   " + restData + String.Format("   {0:X} {1:X}", frame[frame.Length - 2], frame[frame.Length - 1]); ;
                         }
                         //Single Cols and Single Register
                         else if (frame[1] == 5 || frame[1] == 6)
                         {
-                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}.{5:X}   {6:X}.{7:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X} {5:X}   {6:X} {7:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
                         //Multiple Coils and Multiple Registers
                         else if (frame[1] == 15 || frame[1] == 16)
                         {
-                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}{5:X}   {6:X}.{7:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0:X}   {1:X}   {2:X}{3:X}   {4:X}{5:X}   {6:X} {7:X}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
                         //Exceptions
@@ -2089,19 +2089,19 @@ namespace nmDriver
                         if (frame[1] <= 4)
                         {
                             modbusHeader = String.Format("{0}   {1}   {2}", frame[0], frame[1], frame[2]);
-                            restData = frame.ToList().GetRange(4, frame.Length - 6).Aggregate(String.Format("{0}", frame[3]), (sum, next) => sum + "." + String.Format("{0}", next));
-                            return modbusHeader + "   " + restData + String.Format("   {0}.{1}", frame[frame.Length - 2], frame[frame.Length - 1]); ;
+                            restData = frame.ToList().GetRange(4, frame.Length - 6).Aggregate(String.Format("{0}", frame[3]), (sum, next) => sum + " " + String.Format("{0}", next));
+                            return modbusHeader + "   " + restData + String.Format("   {0} {1}", frame[frame.Length - 2], frame[frame.Length - 1]); ;
                         }
                         //Single Cols and Single Register
                         else if (frame[1] == 5 || frame[1] == 6)
                         {
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}.{5}   {6}.{7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4} {5}   {6} {7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
                         //Multiple Coils and Multiple Registers
                         else if (frame[1] == 15 || frame[1] == 16)
                         {
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6}.{7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6} {7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
                         //Exceptions
@@ -2116,19 +2116,19 @@ namespace nmDriver
                         if (frame[1] <= 4)
                         {
                             modbusHeader = String.Format("{0}   {1}   {2}", frame[0], frame[1], frame[2]);
-                            restData = frame.ToList().GetRange(4, frame.Length - 6).Aggregate(String.Format("{0}", frame[3]), (sum, next) => sum + "." + String.Format("{0}", next));
-                            return modbusHeader + "   " + restData + String.Format("   {0}.{1}", frame[frame.Length - 2], frame[frame.Length - 1]); ;
+                            restData = frame.ToList().GetRange(4, frame.Length - 6).Aggregate(String.Format("{0}", frame[3]), (sum, next) => sum + " " + String.Format("{0}", next));
+                            return modbusHeader + "   " + restData + String.Format("   {0} {1}", frame[frame.Length - 2], frame[frame.Length - 1]); ;
                         }
                         //Single Cols and Single Register
                         else if (frame[1] == 5 || frame[1] == 6)
                         {
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}.{5}   {6}.{7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4} {5}   {6} {7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
                         //Multiple Coils and Multiple Registers
                         else if (frame[1] == 15 || frame[1] == 16)
                         {
-                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6}.{7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
+                            modbusHeader = String.Format("{0}   {1}   {2}{3}   {4}{5}   {6} {7}", frame[0], frame[1], frame[2], frame[3], frame[4], frame[5], frame[6], frame[7]);
                             return modbusHeader;
                         }
                         //Exceptions

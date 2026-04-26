@@ -1159,6 +1159,7 @@ namespace ProjectDataLib
         }
 
         [XmlElement(ElementName = "Color")]
+        [Browsable(false)]
         public XmlColor ClrXml
         {
             get => Clr_;
