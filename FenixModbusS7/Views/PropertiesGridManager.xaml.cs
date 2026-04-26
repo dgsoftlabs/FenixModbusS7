@@ -218,7 +218,6 @@ namespace Fenix
             private readonly TypeConverter _converter;
             private readonly ITypeDescriptorContext _converterContext;
             private readonly bool _isStandardValuesExclusive;
-            private readonly DelegateCommand _editCollectionCommand;
             private bool _isEnabled;
 
             public PropertyRow(object target, PropertyDescriptor property, bool enabled, string nameOverride = null)
@@ -230,7 +229,6 @@ namespace Fenix
                 _converter = _property.Converter;
                 _converterContext = new PropertyTypeDescriptorContext(_target, _property);
                 _isEnabled = enabled;
-                _editCollectionCommand = new DelegateCommand(_ => EditCollection(null), _ => IsEditable && IsCollectionEditorVisible);
 
                 if (_valueType.IsEnum)
                     EnumValues = Enum.GetValues(_valueType).Cast<object>().ToList();
@@ -359,8 +357,6 @@ namespace Fenix
                 }
             }
 
-            public ICommand EditCollectionCommand => _editCollectionCommand;
-
             public string ValueText
             {
                 get
@@ -428,30 +424,13 @@ namespace Fenix
 
             public void EditCollection(Window owner)
             {
-                if (!IsEditable || !IsCollectionEditorVisible)
-                    return;
-
-                if (_property.GetValue(_target) is not List<CustomTimer> timers)
-                    return;
-
-                var editor = new CustomTimerEditorWindow(timers)
-                {
-                    Owner = owner
-                };
-
-                if (editor.ShowDialog() != true)
-                    return;
-
-                _property.SetValue(_target, editor.GetResult());
-                OnPropertyChanged(nameof(CollectionSummary));
-                OnPropertyChanged(nameof(ValueText));
+                return;
             }
 
             public void UpdateEnabledState(bool enabled)
             {
                 _isEnabled = enabled;
                 OnPropertyChanged(nameof(IsEditable));
-                _editCollectionCommand.RaiseCanExecuteChanged();
             }
 
             public event PropertyChangedEventHandler PropertyChanged;
@@ -491,129 +470,6 @@ namespace Fenix
                 public void OnComponentChanged()
                 {
                 }
-            }
-        }
-
-        private sealed class CustomTimerEditorWindow : Window
-        {
-            private readonly ObservableCollection<CustomTimerRow> _rows;
-            private readonly DataGrid _grid;
-
-            public CustomTimerEditorWindow(IEnumerable<CustomTimer> source)
-            {
-                Title = "Timers";
-                Width = 560;
-                Height = 360;
-                WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                ResizeMode = ResizeMode.CanResize;
-
-                _rows = new ObservableCollection<CustomTimerRow>(source.Select(t => new CustomTimerRow
-                {
-                    Name = t.Name,
-                    Time = t.Time,
-                    Delay = t.Delay
-                }));
-
-                var layout = new Grid { Margin = new Thickness(10) };
-                layout.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-                layout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-                layout.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-
-                var toolbar = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 0, 0, 8) };
-                var addButton = new Button { Content = "Add", MinWidth = 70, Margin = new Thickness(0, 0, 0, 0) };
-                var removeButton = new Button { Content = "Remove", MinWidth = 70, Margin = new Thickness(8, 0, 0, 0) };
-                addButton.Click += (_, _) => _rows.Add(new CustomTimerRow { Name = "Timer", Time = 1000, Delay = 0 });
-                removeButton.Click += (_, _) =>
-                {
-                    if (_grid.SelectedItem is CustomTimerRow row)
-                        _rows.Remove(row);
-                };
-                toolbar.Children.Add(addButton);
-                toolbar.Children.Add(removeButton);
-
-                _grid = new DataGrid
-                {
-                    ItemsSource = _rows,
-                    AutoGenerateColumns = false,
-                    CanUserAddRows = false,
-                    CanUserDeleteRows = false,
-                    Margin = new Thickness(0, 0, 0, 8)
-                };
-                _grid.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new System.Windows.Data.Binding(nameof(CustomTimerRow.Name)), Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
-                _grid.Columns.Add(new DataGridTextColumn { Header = "Time [ms]", Binding = new System.Windows.Data.Binding(nameof(CustomTimerRow.Time)), Width = new DataGridLength(130) });
-                _grid.Columns.Add(new DataGridTextColumn { Header = "Delay [ms]", Binding = new System.Windows.Data.Binding(nameof(CustomTimerRow.Delay)), Width = new DataGridLength(130) });
-
-                var footer = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
-                var okButton = new Button { Content = "OK", MinWidth = 80, Margin = new Thickness(0, 0, 8, 0), IsDefault = true };
-                var cancelButton = new Button { Content = "Cancel", MinWidth = 80, IsCancel = true };
-                okButton.Click += (_, _) =>
-                {
-                    DialogResult = true;
-                    Close();
-                };
-                cancelButton.Click += (_, _) =>
-                {
-                    DialogResult = false;
-                    Close();
-                };
-                footer.Children.Add(okButton);
-                footer.Children.Add(cancelButton);
-
-                Grid.SetRow(toolbar, 0);
-                Grid.SetRow(_grid, 1);
-                Grid.SetRow(footer, 2);
-                layout.Children.Add(toolbar);
-                layout.Children.Add(_grid);
-                layout.Children.Add(footer);
-                Content = layout;
-            }
-
-            public List<CustomTimer> GetResult()
-            {
-                return _rows.Select(r => new CustomTimer
-                {
-                    Name = r.Name ?? string.Empty,
-                    Time = r.Time,
-                    Delay = r.Delay
-                }).ToList();
-            }
-        }
-
-        private sealed class CustomTimerRow
-        {
-            public string Name { get; set; }
-
-            public int Time { get; set; }
-
-            public int Delay { get; set; }
-        }
-
-        private sealed class DelegateCommand : ICommand
-        {
-            private readonly Action<object> _execute;
-            private readonly Predicate<object> _canExecute;
-
-            public DelegateCommand(Action<object> execute, Predicate<object> canExecute)
-            {
-                _execute = execute;
-                _canExecute = canExecute;
-            }
-
-            public event EventHandler CanExecuteChanged;
-
-            public bool CanExecute(object parameter)
-            {
-                return _canExecute?.Invoke(parameter) ?? true;
-            }
-
-            public void Execute(object parameter)
-            {
-                _execute?.Invoke(parameter);
-            }
-
-            public void RaiseCanExecuteChanged()
-            {
-                CanExecuteChanged?.Invoke(this, EventArgs.Empty);
             }
         }
     }

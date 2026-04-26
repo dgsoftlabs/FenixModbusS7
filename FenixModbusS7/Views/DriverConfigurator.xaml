@@ -5,22 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fenix"
         mc:Ignorable="d"
-        Title="DriverConfigurator" Height="350" Width="700"
-                   WindowStartupLocation="CenterOwner">
-    <StackPanel>
+        Title="Driver Configuration" Height="420" Width="760"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource Th.SurfaceBrush}">
+    <DockPanel Style="{StaticResource Th.DialogRootDockPanel}">
+        <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource Th.DialogBottomActionsPanel}">
+            <Button Content="Add Driver" Click="Button_AddDriver_Click" Style="{StaticResource Th.DialogBottomPrimaryActionButton}" />
+            <Button Content="Remove Driver" Click="Button_RemoveDriver_Click" Style="{StaticResource Th.DialogBottomActionButton}" />
+            <Button Content="Reset" Click="Button_Reset_Click" Style="{StaticResource Th.DialogBottomActionButton}" />
+        </StackPanel>
 
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Margin="5" Content="Add Drivers" Grid.Column="0" Click="Button_AddDriver_Click" />
-            <Button Margin="5" Content="Remove Driver" Grid.Column="1" Click="Button_RemoveDriver_Click" />
-            <Button Margin="5" Content="Reset" Grid.Column="3" Click="Button_Reset_Click" />
-        </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <DataGrid Name="View" Margin="5" ItemsSource="{Binding Drvs}" />
-    </StackPanel>
+            <StackPanel Grid.Row="0" Margin="0,0,0,8">
+                <TextBlock Text="Configured Drivers" Style="{StaticResource Th.DialogSectionTitle}" />
+            </StackPanel>
+
+            <DataGrid Grid.Row="1"
+                      Name="View"
+                      ItemsSource="{Binding Drvs}"
+                      AutoGenerateColumns="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      Style="{StaticResource Th.DialogDataGrid}" />
+        </Grid>
+    </DockPanel>
 </Window>

@@ -688,6 +688,20 @@
         </Setter>
     </Style>
 
+    <!-- DIALOG: DataGrid -->
+    <Style x:Key="Th.DialogDataGrid" TargetType="DataGrid">
+        <Setter Property="Background" Value="{StaticResource Th.SurfaceBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource Th.TextBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="RowHeaderWidth" Value="0" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
     <!-- IMPLICIT: Window -->
     <Style TargetType="Window">
         <Setter Property="Background" Value="{StaticResource Th.BgBrush}" />
