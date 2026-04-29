@@ -655,7 +655,7 @@ namespace ProjectDataLib
                         {
                             value = BitConverter.ToSingle(arrByte, 0);
                             string code = ReadScript_.Replace("x", String.Format("{0:0.000000}", value)).Replace(',', '.');
-                            value = (float)Proj_.ScriptCon.Eval(code);
+                            value = Convert.ToSingle(Proj_.ScriptCon.Eval(code));
                             break;
                         }
                         break;
@@ -688,7 +688,7 @@ namespace ProjectDataLib
                             value = BitConverter.ToInt16(arrByte, 0);
                             value = float.Parse(value.ToString());
                             string code = ReadScript_.Replace("x", String.Format("{0:0.000000}", value)).Replace(',', '.');
-                            value_ = (float)Proj_.ScriptCon.Eval(code);
+                            value_ = Convert.ToSingle(Proj_.ScriptCon.Eval(code));
                         }
 
                         break;
@@ -802,10 +802,10 @@ namespace ProjectDataLib
                         if (ScriptMark)
                         {
                             string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = (float)Proj_.ScriptCon.Eval(code);
+                            obj = Convert.ToSingle(Proj_.ScriptCon.Eval(code));
                         }
 
-                        biArr = new BitArray(BitConverter.GetBytes((float)obj));
+                        biArr = new BitArray(BitConverter.GetBytes(Convert.ToSingle(obj)));
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
@@ -1488,7 +1488,7 @@ namespace ProjectDataLib
 
         string ITag.Description
         {
-            get { return describe; }
+            get { return tagVersion; }
             set
             {
                 describe = value;
@@ -1864,7 +1864,3 @@ namespace ProjectDataLib
         }
     }
 }
-
-
-
-

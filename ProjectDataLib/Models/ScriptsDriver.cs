@@ -1,5 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Emit;
+using Microsoft.CodeAnalysis.Text;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace ProjectDataLib
@@ -42,7 +45,7 @@ namespace ProjectDataLib
             set
             {
                 objId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("objId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(objId)));
             }
         }
 
@@ -57,7 +60,7 @@ namespace ProjectDataLib
             set
             {
                 Proj_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Proj"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Proj)));
             }
         }
 
@@ -70,7 +73,7 @@ namespace ProjectDataLib
             set
             {
                 isExpand_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("isExpand"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(isExpand)));
             }
         }
 
@@ -96,7 +99,7 @@ namespace ProjectDataLib
             set
             {
                 Enable_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Enable"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Enable)));
             }
         }
 
@@ -109,7 +112,7 @@ namespace ProjectDataLib
             set
             {
                 IsBlocked_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsBlocked"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBlocked)));
 
                 if (_Children != null)
                     foreach (ITreeViewModel itv in _Children)
@@ -128,7 +131,7 @@ namespace ProjectDataLib
             Enable_ = true;
         }
 
-        private dynamic CompileAndLoadScript(string code)
+        private dynamic CompileAndLoadScript(string code, string scriptPath = null)
         {
             var references = new List<MetadataReference>
             {
@@ -139,7 +142,6 @@ namespace ProjectDataLib
                 MetadataReference.CreateFromFile(typeof(System.Collections.Generic.List<>).Assembly.Location),
             };
 
-            // Add runtime assemblies
             foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
             {
                 try
@@ -150,7 +152,8 @@ namespace ProjectDataLib
                 catch { }
             }
 
-            var syntaxTree = CSharpSyntaxTree.ParseText(code);
+            var sourceText = SourceText.From(code, Encoding.UTF8);
+            var syntaxTree = CSharpSyntaxTree.ParseText(sourceText, path: scriptPath ?? "Script.cs");
             var compilation = CSharpCompilation.Create(
                 "DynamicScript_" + Guid.NewGuid().ToString("N"),
                 new[] { syntaxTree },
@@ -158,19 +161,43 @@ namespace ProjectDataLib
                 new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
 
             using var ms = new MemoryStream();
-            var result = compilation.Emit(ms);
+            using var pdb = new MemoryStream();
+            var result = compilation.Emit(ms, pdb, options: new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb));
 
             if (!result.Success)
             {
                 var errors = string.Join(Environment.NewLine,
-                    result.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error).Select(d => d.ToString()));
+                    result.Diagnostics
+                        .Where(d => d.Severity == DiagnosticSeverity.Error)
+                        .Select(d => FormatScriptDiagnostic(d, sourceText, scriptPath)));
+
                 throw new InvalidOperationException("Script compilation failed:" + Environment.NewLine + errors);
             }
 
             ms.Seek(0, SeekOrigin.Begin);
-            var assembly = Assembly.Load(ms.ToArray());
+            pdb.Seek(0, SeekOrigin.Begin);
+            var assembly = Assembly.Load(ms.ToArray(), pdb.ToArray());
             var type = assembly.GetTypes().FirstOrDefault();
             return type != null ? Activator.CreateInstance(type) : null;
+        }
+
+        private static string FormatScriptDiagnostic(Diagnostic diagnostic, SourceText sourceText, string scriptPath)
+        {
+            var location = diagnostic.Location;
+            if (location == Location.None || !location.IsInSource)
+                return $"{diagnostic.Id}: {diagnostic.GetMessage()}";
+
+            var span = location.GetLineSpan();
+            var line = span.StartLinePosition.Line + 1;
+            var column = span.StartLinePosition.Character + 1;
+            var path = string.IsNullOrEmpty(span.Path) ? (scriptPath ?? "Script.cs") : span.Path;
+
+            var sourceLine = line >= 1 && line <= sourceText.Lines.Count
+                ? sourceText.Lines[line - 1].ToString().TrimEnd()
+                : string.Empty;
+
+            return $"{path}({line},{column}) {diagnostic.Id}: {diagnostic.GetMessage()}" +
+                   (string.IsNullOrWhiteSpace(sourceLine) ? string.Empty : Environment.NewLine + $"> {sourceLine}");
         }
 
         public ScriptsDriver()
@@ -245,7 +272,7 @@ namespace ProjectDataLib
                     if (f.Enable && !string.IsNullOrEmpty(f.TimerName))
                     {
                         string code = File.ReadAllText(f.FilePath);
-                        var script = CompileAndLoadScript(code);
+                        var script = CompileAndLoadScript(code, f.FilePath);
                         if (script != null)
                         {
                             scripts.Add(script);
@@ -415,7 +442,7 @@ namespace ProjectDataLib
             set
             {
                 isLive = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("isAlive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IDriverModel.isAlive)));
             }
         }
 
@@ -506,7 +533,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsLive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsLive)));
             }
         }
 
