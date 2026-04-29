@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="446.667" d:DesignWidth="366.667">
     <UserControl.Resources>
         <CollectionViewSource x:Key="GroupedProperties" Source="{Binding Rows}">
             <CollectionViewSource.GroupDescriptions>
@@ -35,10 +35,12 @@
         <Style TargetType="ListViewItem">
             <Setter Property="Padding" Value="0" />
             <Setter Property="Margin" Value="0" />
+            <Setter Property="Height" Value="32" />
             <Setter Property="BorderThickness" Value="0,0,0,1" />
             <Setter Property="BorderBrush" Value="{DynamicResource Th.BorderBrush}" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="{DynamicResource Th.HoverBrush}" />
@@ -164,6 +166,30 @@
                                         </ComboBox.Style>
                                     </ComboBox>
 
+                                    <Border Grid.Column="0"
+                                            Grid.ColumnSpan="2"
+                                            Margin="0,1"
+                                            BorderBrush="{DynamicResource Th.BorderBrush}"
+                                            BorderThickness="1"
+                                            Background="{Binding ColorPreviewBrush}"
+                                            MouseDown="ColorPreview_MouseDown"
+                                            Cursor="Hand">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsColorPickerVisible}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Text="{Binding ColorHexText}"
+                                                   Padding="4,0"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{Binding ColorForegroundBrush}" />
+                                    </Border>
+
                                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="4,0,0,0">
                                         <StackPanel.Style>
                                             <Style TargetType="StackPanel">
@@ -177,26 +203,6 @@
                                         </StackPanel.Style>
                                         <TextBlock Text="{Binding CollectionSummary}" VerticalAlignment="Center" Margin="0,0,8,0" />
                                     </StackPanel>
-
-                                    <Border Grid.Column="1"
-                                            Width="14"
-                                            Height="14"
-                                            Margin="4,0,0,0"
-                                            VerticalAlignment="Center"
-                                            BorderBrush="{DynamicResource Th.BorderBrush}"
-                                            BorderThickness="1"
-                                            Background="{Binding ColorPreviewBrush}">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Visibility" Value="Collapsed" />
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsColorPreviewVisible}" Value="True">
-                                                        <Setter Property="Visibility" Value="Visible" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                    </Border>
                                 </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

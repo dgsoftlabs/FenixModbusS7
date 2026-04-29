@@ -146,6 +146,14 @@ namespace Fenix
             ScheduleAdjustColumns();
         }
 
+        private void ColorPreview_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.DataContext is PropertyRow row)
+            {
+                row.SetColorFromPickerDialog();
+            }
+        }
+
         private void ScheduleAdjustColumns()
         {
             Dispatcher.BeginInvoke(new Action(AdjustColumns), DispatcherPriority.Loaded);
@@ -283,28 +291,46 @@ namespace Fenix
                 }
             }
 
-            public bool IsTextEditorVisible => !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible;
+            public bool IsTextEditorVisible => !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible && !IsColorPickerVisible;
 
             public IList EnumValues { get; }
 
             public IList StandardValues { get; }
 
-            public bool IsStandardValuesEditorVisible => StandardValues != null && (_isStandardValuesExclusive || IsColorType);
+            public bool IsStandardValuesEditorVisible => StandardValues != null && _isStandardValuesExclusive && !IsColorType;
 
             public bool IsColorPreviewVisible => IsColorType;
 
-            public Brush ColorPreviewBrush
+            public bool IsColorPickerVisible => IsColorType;
+
+            private Color GetWpfColor()
+            {
+                var value = _property.GetValue(_target);
+                if (value is System.Drawing.Color dc)
+                    return Color.FromArgb(dc.A, dc.R, dc.G, dc.B);
+                if (value is Color mc)
+                    return mc;
+                return Colors.Black;
+            }
+
+            public Brush ColorPreviewBrush => new SolidColorBrush(GetWpfColor());
+
+            public string ColorHexText
             {
                 get
                 {
-                    var value = _property.GetValue(_target);
-                    if (value is System.Drawing.Color drawingColor)
-                        return new SolidColorBrush(Color.FromArgb(drawingColor.A, drawingColor.R, drawingColor.G, drawingColor.B));
+                    var c = GetWpfColor();
+                    return $"#{c.R:X2}{c.G:X2}{c.B:X2}";
+                }
+            }
 
-                    if (value is Color mediaColor)
-                        return new SolidColorBrush(mediaColor);
-
-                    return Brushes.Transparent;
+            public Brush ColorForegroundBrush
+            {
+                get
+                {
+                    var c = GetWpfColor();
+                    var luminance = (0.299 * c.R + 0.587 * c.G + 0.114 * c.B) / 255;
+                    return luminance > 0.5 ? Brushes.Black : Brushes.White;
                 }
             }
 
@@ -354,6 +380,38 @@ namespace Fenix
                     OnPropertyChanged(nameof(EnumValue));
                     OnPropertyChanged(nameof(ValueText));
                     OnPropertyChanged(nameof(ColorPreviewBrush));
+                }
+            }
+
+            public void SetColorFromPickerDialog()
+            {
+                var currentColor = _property.GetValue(_target);
+                var wpfColor = currentColor is System.Drawing.Color drawingColor
+                    ? Color.FromArgb(drawingColor.A, drawingColor.R, drawingColor.G, drawingColor.B)
+                    : (Color)currentColor;
+
+                var dialog = new System.Windows.Forms.ColorDialog
+                {
+                    Color = System.Drawing.Color.FromArgb(wpfColor.A, wpfColor.R, wpfColor.G, wpfColor.B),
+                    AllowFullOpen = true,
+                    FullOpen = true
+                };
+
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    var selectedColor = dialog.Color;
+                    
+                    if (_valueType == typeof(System.Drawing.Color))
+                    {
+                        _property.SetValue(_target, selectedColor);
+                    }
+                    else if (_valueType.FullName == "System.Windows.Media.Color")
+                    {
+                        _property.SetValue(_target, Color.FromArgb(selectedColor.A, selectedColor.R, selectedColor.G, selectedColor.B));
+                    }
+
+                    OnPropertyChanged(nameof(ColorPreviewBrush));
+                    OnPropertyChanged(nameof(ValueText));
                 }
             }
 
