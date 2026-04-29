@@ -1,10 +1,13 @@
+using Microsoft.Win32;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using OxyPlot.Wpf;
 using ProjectDataLib;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -13,6 +16,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Fenix
 {
@@ -21,8 +25,8 @@ namespace Fenix
     /// </summary>
     public partial class DBChartView : UserControl, INotifyPropertyChanged
     {
-        private DateTime _fromDate;
-        private DateTime _toDate;
+        private DateTime? _fromDate;
+        private DateTime? _toDate;
         private string _selectedInterval;
         private string _interactionDescription;
         private double _yAxisMinimum;
@@ -42,7 +46,7 @@ namespace Fenix
 
         public ObservableCollection<string> TimeIntervals { get; set; }
 
-        public DateTime FromDate
+        public DateTime? FromDate
         {
             get => _fromDate;
             set
@@ -51,11 +55,16 @@ namespace Fenix
                 {
                     _fromDate = value;
                     OnPropertyChanged();
+
+                    if (_project != null && IsDateRangeEditable)
+                    {
+                        _ = RefreshChartAsync();
+                    }
                 }
             }
         }
 
-        public DateTime ToDate
+        public DateTime? ToDate
         {
             get => _toDate;
             set
@@ -64,6 +73,11 @@ namespace Fenix
                 {
                     _toDate = value;
                     OnPropertyChanged();
+
+                    if (_project != null && IsDateRangeEditable)
+                    {
+                        _ = RefreshChartAsync();
+                    }
                 }
             }
         }
@@ -81,6 +95,11 @@ namespace Fenix
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(IsDateRangeEditable));
                     UpdateDateXRangeBasedOnInterval();
+
+                    if (_project != null)
+                    {
+                        _ = RefreshChartAsync();
+                    }
                 }
             }
         }
@@ -197,11 +216,13 @@ namespace Fenix
             }
         }
 
-        private async Task<List<TagDTO>> LoadDataFromDatabase(DateTime from, DateTime to)
+        private async Task<List<TagDTO>> LoadDataFromDatabase(DateTime? from, DateTime? to)
         {
             return await Task.Run(() =>
             {
-                var data = _project.Db.GetDataByStamp(from, to) ?? new ObservableCollection<TagDTO>();
+                var effectiveFrom = from ?? DateTime.MinValue;
+                var effectiveTo = to ?? DateTime.MaxValue;
+                var data = _project.Db.GetDataByStamp(effectiveFrom, effectiveTo) ?? new ObservableCollection<TagDTO>();
                 return data.ToList();
             });
         }
@@ -280,9 +301,44 @@ namespace Fenix
             PlotModel?.InvalidatePlot(false);
         }
 
-        private async void ShowAllButton_Click(object sender, System.Windows.RoutedEventArgs e)
+
+        private void Button_ExportPng_Click(object sender, RoutedEventArgs e)
         {
-            await RefreshChartAsync();
+            try
+            {
+                var dlg = new SaveFileDialog
+                {
+                    Filter = "PNG Image|*.png",
+                    FileName = $"dbchart_{DateTime.Now:yyyyMMdd_HHmmss}.png"
+                };
+
+                if (dlg.ShowDialog() == true)
+                {
+                    var oldBackground = PlotModel.Background;
+                    var oldPlotAreaBackground = PlotModel.PlotAreaBackground;
+                    try
+                    {
+                        PlotModel.Background = OxyColors.White;
+                        PlotModel.PlotAreaBackground = OxyColors.White;
+
+                        using var stream = File.Create(dlg.FileName);
+                        var exporter = new PngExporter
+                        {
+                            Width = Math.Max(1, (int)View.ActualWidth),
+                            Height = Math.Max(1, (int)View.ActualHeight)
+                        };
+                        exporter.Export(PlotModel, stream);
+                    }
+                    finally
+                    {
+                        PlotModel.Background = oldBackground;
+                        PlotModel.PlotAreaBackground = oldPlotAreaBackground;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

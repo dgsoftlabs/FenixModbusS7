@@ -96,9 +96,6 @@ namespace Fenix
                 InitializeComponent();
 
                 TrackSpanInput.TextChanged += TrackSpanInput_TextChanged;
-                ClearTrackSpanButton.Click += Button_ClearTrackSpanFilter_Click;
-                ClearYMinButton.Click += Button_ClearYMinFilter_Click;
-                ClearYMaxButton.Click += Button_ClearYMaxFilter_Click;
 
                 // Object selection
                 if (ElKind == ElementKind.Project)
@@ -233,6 +230,8 @@ namespace Fenix
                         plotModel.Series.Add(s1);
                     }
                 }
+
+                plotModel.InvalidatePlot(true);
 
                 RefreshObservablePath();
 
@@ -421,16 +420,22 @@ namespace Fenix
             {
                 if (e.PropertyName == nameof(ChartViewConf.histData))
                 {
-                    if (!((ChartViewConf)sender).histData)
-                    {
-                        foreach (var ser in plotModel.Series)
-                            ((LineSeries)ser).Points.Clear();
-
-                        plotModel.InvalidatePlot(true);
-                    }
+                    UpdateStatusText();
                 }
                 else if (e.PropertyName == nameof(ChartViewConf.TrackSpan))
                 {
+                    UpdateFilterStates();
+                }
+                else if (e.PropertyName == nameof(ChartViewConf.minimumY))
+                {
+                    AxY1.Minimum = ((ChartViewConf)sender).minimumY;
+                    plotModel.InvalidatePlot(true);
+                    UpdateFilterStates();
+                }
+                else if (e.PropertyName == nameof(ChartViewConf.maximumY))
+                {
+                    AxY1.Maximum = ((ChartViewConf)sender).maximumY;
+                    plotModel.InvalidatePlot(true);
                     UpdateFilterStates();
                 }
             }
@@ -610,6 +615,12 @@ namespace Fenix
             {
                 View.Dispatcher.InvokeAsync(new Action(() =>
                 {
+                    if (Pr?.ChartConf?.histData == true)
+                    {
+                        UpdateStatusText();
+                        return;
+                    }
+
                     if (sender is ScriptsDriver || sender is InternalTagsDriver)
                     {
                         foreach (ITag tg in ITagList.Where(x => x.GrEnable && x is InTag))
@@ -627,33 +638,33 @@ namespace Fenix
                                     if (lastPoint != (bool)tg.Value)
                                     {
                                         var data = DateTime.Now;
-                                                            ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), Convert.ToDouble(lastPoint)));
-                                                            ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), Convert.ToDouble(tg.Value)));
-                                                        }
-                                                        else
-                                                        {
-                                                            ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), Convert.ToDouble(tg.Value)));
-                                                        }
-                                                    }
-                                                    else if (tg.TypeData_ == TypeData.CHAR)
-                                                    {
-                                                        int pom = (int)Char.GetNumericValue((char)tg.Value);
-                                                        double val = Convert.ToDouble(pom);
-                                                        ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), val));
-                                                    }
-                                                    else
-                                                    {
-                                                        ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), Convert.ToDouble(tg.Value)));
-                                                    }
-                                                }
-                                            }
+                                        ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), Convert.ToDouble(lastPoint)));
+                                        ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), Convert.ToDouble(tg.Value)));
+                                    }
+                                    else
+                                    {
+                                        ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), Convert.ToDouble(tg.Value)));
+                                    }
+                                }
+                                else if (tg.TypeData_ == TypeData.CHAR)
+                                {
+                                    int pom = (int)Char.GetNumericValue((char)tg.Value);
+                                    double val = Convert.ToDouble(pom);
+                                    ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), val));
+                                }
+                                else
+                                {
+                                    ser.Points.Add(new DataPoint(DateTime.Now.ToOADate(), Convert.ToDouble(tg.Value)));
+                                }
+                            }
+                        }
 
-                                            plotModel.InvalidatePlot(true);
-                                            UpdateStatusText();
-                                            }
-                                            else
-                                            {
-                                                #region Communication Driver
+                        plotModel.InvalidatePlot(true);
+                        UpdateStatusText();
+                    }
+                    else
+                    {
+                        #region Communication Driver
 
                         foreach (ITag tg in ITagList.Where(x => x.GrEnable && x is Tag && ((IDriverModel)sender).ObjId == ((IDriverModel)x).ObjId))
                         {
@@ -761,32 +772,6 @@ namespace Fenix
             {
                 AxY1.Maximum = double.NaN;
                 Y1.Text = string.Empty;
-                plotModel.InvalidatePlot(true);
-                UpdateFilterStates();
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void Button_Reset_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                AxY1.Maximum = double.NaN;
-                Y1.Text = "NaN";
-
-                AxY1.Minimum = double.NaN;
-                Y0.Text = "NaN";
-
-                AxX1.Maximum = double.NaN;
-
-                AxX1.Minimum = double.NaN;
-
-                Pr.ChartConf.TrackSpan = defaultTrackSpan;
-
-                plotModel.ResetAllAxes();
                 plotModel.InvalidatePlot(true);
                 UpdateFilterStates();
             }
@@ -927,23 +912,11 @@ namespace Fenix
         {
             try
             {
-                if (double.TryParse(Y0.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out var y0) ||
-                    double.TryParse(Y0.Text, out y0))
-                {
-                    if (Double.IsNaN(AxY1.Maximum) || Double.IsNaN(y0))
-                    {
-                        AxY1.Minimum = y0;
-                    }
-                    else
-                    {
-                        if (y0 <= AxY1.Maximum)
-                            AxY1.Minimum = y0;
-                        else
-                            throw new Exception("Minimum must be lower then maximum!");
-                    }
-
-                    plotModel.InvalidatePlot(true);
-                }
+                var y0 = Y0.DoubleValue;
+                if (!double.IsNaN(y0) && !double.IsNaN(AxY1.Maximum) && y0 > AxY1.Maximum)
+                    throw new Exception("Minimum must be lower then maximum!");
+                AxY1.Minimum = y0;
+                plotModel.InvalidatePlot(true);
             }
             catch (Exception Ex)
             {
@@ -959,23 +932,11 @@ namespace Fenix
         {
             try
             {
-                if (double.TryParse(Y1.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out var y1) ||
-                    double.TryParse(Y1.Text, out y1))
-                {
-                    if (Double.IsNaN(AxY1.Minimum) || Double.IsNaN(y1))
-                    {
-                        AxY1.Maximum = y1;
-                    }
-                    else
-                    {
-                        if (y1 > AxY1.Minimum)
-                            AxY1.Maximum = y1;
-                        else
-                            throw new Exception("Maximum must be grather then minumum!");
-                    }
-
-                    plotModel.InvalidatePlot(true);
-                }
+                var y1 = Y1.DoubleValue;
+                if (!double.IsNaN(y1) && !double.IsNaN(AxY1.Minimum) && y1 < AxY1.Minimum)
+                    throw new Exception("Maximum must be grather then minumum!");
+                AxY1.Maximum = y1;
+                plotModel.InvalidatePlot(true);
             }
             catch (Exception Ex)
             {
@@ -1011,27 +972,6 @@ namespace Fenix
             }
         }
 
-        private void Button_CopyToClipboard_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using var stream = new MemoryStream();
-                var exporter = new PngExporter { Width = (int)View.ActualWidth, Height = (int)View.ActualHeight };
-                exporter.Export(plotModel, stream);
-                stream.Seek(0, SeekOrigin.Begin);
-                var bmp = new System.Windows.Media.Imaging.BitmapImage();
-                bmp.BeginInit();
-                bmp.StreamSource = stream;
-                bmp.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
-                bmp.EndInit();
-                Clipboard.SetImage(bmp);
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
         private void Button_ExportPng_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1043,9 +983,26 @@ namespace Fenix
                 };
                 if (dlg.ShowDialog() == true)
                 {
-                    using var stream = File.Create(dlg.FileName);
-                    var exporter = new PngExporter { Width = (int)View.ActualWidth, Height = (int)View.ActualHeight };
-                    exporter.Export(plotModel, stream);
+                    var oldBackground = plotModel.Background;
+                    var oldPlotAreaBackground = plotModel.PlotAreaBackground;
+                    try
+                    {
+                        plotModel.Background = OxyColors.White;
+                        plotModel.PlotAreaBackground = OxyColors.White;
+
+                        using var stream = File.Create(dlg.FileName);
+                        var exporter = new PngExporter
+                        {
+                            Width = Math.Max(1, (int)View.ActualWidth),
+                            Height = Math.Max(1, (int)View.ActualHeight)
+                        };
+                        exporter.Export(plotModel, stream);
+                    }
+                    finally
+                    {
+                        plotModel.Background = oldBackground;
+                        plotModel.PlotAreaBackground = oldPlotAreaBackground;
+                    }
                 }
             }
             catch (Exception Ex)

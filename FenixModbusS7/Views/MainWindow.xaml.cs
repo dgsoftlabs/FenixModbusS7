@@ -1,4 +1,4 @@
-using AvalonDock.Layout;
+﻿using AvalonDock.Layout;
 using AvalonDock.Layout.Serialization;
 using Fenix.ViewModels;
 using Microsoft.Win32;
@@ -147,7 +147,7 @@ namespace Fenix
                                 args.Content = frOutput;
                                 break;
 
-                            case "Database":
+                            case "TableDatabase":
                                 LayoutAnchorable laDatabase = (LayoutAnchorable)args.Model;
                                 laDatabase.CanClose = true;
                                 DBTableView dbView = new DBTableView(pr);
@@ -643,18 +643,18 @@ namespace Fenix
             {
                 if (actualKindElement == ElementKind.Project)
                 {
-                    Process.Start(io.Path.GetDirectoryName(Pr.path));
+                    Process.Start(new ProcessStartInfo(io.Path.GetDirectoryName(Pr.path)) { UseShellExecute = true });
                 }
                 else if (actualKindElement == ElementKind.Scripts)
                 {
-                    Process.Start(io.Path.GetDirectoryName(Pr.path) + PrCon.ScriptsCatalog);
+                    Process.Start(new ProcessStartInfo(io.Path.GetDirectoryName(Pr.path) + PrCon.ScriptsCatalog) { UseShellExecute = true });
                 }
                 else if (actualKindElement == ElementKind.InFile)
                 {
                     if (tvMain.View.SelectedItem is CusFile selected && !string.IsNullOrWhiteSpace(selected.FullName))
-                        Process.Start(selected.FullName);
+                        Process.Start(new ProcessStartInfo(selected.FullName) { UseShellExecute = true });
                     else
-                        Process.Start(io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog);
+                        Process.Start(new ProcessStartInfo(io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog) { UseShellExecute = true });
                 }
             }
             catch (Exception Ex)
@@ -1527,18 +1527,6 @@ namespace Fenix
             }
         }
 
-        private async void MenuItem_SaveSnapshot_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                await Pr.Db.SaveSnapshotAsync();
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
         private void View_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             try
@@ -1704,7 +1692,7 @@ namespace Fenix
             {
                 LayoutAnchorable laTableView = new LayoutAnchorable();
                 laTableView.CanClose = true;
-                laTableView.ContentId = "Database";
+                laTableView.ContentId = "TableDatabase";
                 DBTableView db = new DBTableView(Pr);
                 laTableView.Closed += LaCtrl_Closed;
                 laTableView.Content = db;
@@ -1713,7 +1701,7 @@ namespace Fenix
 
                 MiddlePan1.Children.Add(laTableView);
                 laTableView.IsActive = true;
-                laTableView.Title = "\ud83d\uddc4\ufe0f Database";
+                laTableView.Title = "\ud83d\uddc4\ufe0f Table Database";
 
                 CheckAccessForNodes();
             }

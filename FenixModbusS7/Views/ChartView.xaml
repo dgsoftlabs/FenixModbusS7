@@ -33,57 +33,30 @@
 
                 <TextBlock Text="⏱️" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
                 <TextBlock Text="Range:" Style="{StaticResource Th.FilterLabel}" Margin="0,0,4,0" />
-                <TextBox x:Name="TrackSpanInput"
-                         Width="120"
-                         Style="{StaticResource Th.FilterTextBox}"
+                <local:ClearableTextBox x:Name="TrackSpanInput"
+                         Width="120" Height="28"
+                         Margin="0,0,8,0"
                          IsEnabled="{Binding Path=Pr.ChartConf.histData, Converter={StaticResource BoolNeg}}"
                          ToolTip="Set the time range displayed on the chart [DD:HH:MM:SS]"
                          Text="{Binding Path=Pr.ChartConf.TrackSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <Button x:Name="ClearTrackSpanButton"
-                        Width="22" MinWidth="22" Margin="2,0,8,0"
-                        Style="{StaticResource Th.FilterButton}"
-                        Padding="0" Content="✕"
-                        Visibility="{Binding IsTrackSpanFilterActive, Converter={StaticResource BoolToVisibility}}"
-                        ToolTip="Reset visible range filter" />
 
                 <TextBlock Text="📉" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
                 <TextBlock Text="Y Min:" Style="{StaticResource Th.FilterLabel}" Margin="0,0,4,0" />
-                <TextBox x:Name="Y0"
-                         Width="70"
-                         Style="{StaticResource Th.FilterTextBox}"
+                <local:ClearableTextBox x:Name="Y0"
+                         Width="70" Height="28"
+                         Margin="0,0,8,0"
                          ToolTip="Set the minimum value of the Y axis"
                          TextChanged="Y0_ValueChanged"
-                         Text="{Binding Path=Pr.ChartConf.minimumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <Button x:Name="ClearYMinButton"
-                        Width="22" MinWidth="22" Margin="2,0,8,0"
-                        Style="{StaticResource Th.FilterButton}"
-                        Padding="0" Content="✕"
-                        Visibility="{Binding IsYMinFilterActive, Converter={StaticResource BoolToVisibility}}"
-                        ToolTip="Clear Y min filter" />
+                         DoubleValue="{Binding Path=Pr.ChartConf.minimumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock Text="📈" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
                 <TextBlock Text="Y Max:" Style="{StaticResource Th.FilterLabel}" Margin="0,0,4,0" />
-                <TextBox x:Name="Y1"
-                         Width="70"
-                         Style="{StaticResource Th.FilterTextBox}"
+                <local:ClearableTextBox x:Name="Y1"
+                         Width="70" Height="28"
+                         Margin="0,0,8,0"
                          ToolTip="Set the maximum value of the Y axis"
                          TextChanged="Y1_ValueChanged"
-                         Text="{Binding Path=Pr.ChartConf.maximumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <Button x:Name="ClearYMaxButton"
-                        Width="22" MinWidth="22" Margin="2,0,8,0"
-                        Style="{StaticResource Th.FilterButton}"
-                        Padding="0" Content="✕"
-                        Visibility="{Binding IsYMaxFilterActive, Converter={StaticResource BoolToVisibility}}"
-                        ToolTip="Clear Y max filter" />
-
-                <Button Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
-                        Click="Button_Reset_Click"
-                        ToolTip="Restore default axis ranges">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="↺" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
-                        <TextBlock Text="Reset" VerticalAlignment="Center" />
-                    </StackPanel>
-                </Button>
+                         DoubleValue="{Binding Path=Pr.ChartConf.maximumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Button Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
                         Click="Button_Clear_Click"
@@ -101,15 +74,6 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Name="PauseResumeIcon" Text="⏸️" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
                         <TextBlock x:Name="PauseResumeLabel" Text="Pause" VerticalAlignment="Center" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
-                        Click="Button_CopyToClipboard_Click"
-                        ToolTip="Copy chart to clipboard">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="📋" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
-                        <TextBlock Text="Copy" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
 

@@ -1197,7 +1197,7 @@ namespace ProjectDataLib
 
         private Boolean GrVisible_;
 
-        [Category("06 Graph"), DisplayName("Visible")]
+        [Category("06 Graph"), DisplayName("Visible (Chart)")]
         [JsonIgnore]
         [XmlElement(ElementName = "ChartVisible")]
         public Boolean GrVisible
@@ -1212,7 +1212,7 @@ namespace ProjectDataLib
 
         private Boolean GrVisibleTab_;
 
-        [Category("07 Table"), DisplayName("Visible")]
+        [Category("07 Table"), DisplayName("Visible (Table)")]
         [JsonIgnore]
         [XmlElement(ElementName = "TableVisible")]
         public Boolean GrVisibleTab
