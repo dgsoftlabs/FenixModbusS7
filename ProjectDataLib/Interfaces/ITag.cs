@@ -61,6 +61,9 @@ namespace ProjectDataLib
         Boolean ActGrVisible { get; }
         Boolean GrVisible { get; set; }
 
+        Boolean ActGrAxisKey { get; }
+        string GrAxisKey { get; set; }
+
         Boolean ActGrMarkers { get; }
 
         Boolean ActGrVisibleTab { get; }

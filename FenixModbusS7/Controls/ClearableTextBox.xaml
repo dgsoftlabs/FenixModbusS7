@@ -1,0 +1,34 @@
+<UserControl x:Class="Fenix.ClearableTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignWidth="120" d:DesignHeight="28"
+             VerticalAlignment="Center">
+    <Grid>
+        <TextBox x:Name="InnerTextBox"
+                 Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 IsEnabled="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                 ToolTip="{Binding ToolTip, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                 VerticalContentAlignment="Center"
+                 Padding="4,0,24,0"
+                 Margin="0"
+                 TextChanged="InnerTextBox_TextChanged" />
+        <Button x:Name="ClearButton"
+                Width="18" Height="18"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,0,3,0"
+                Padding="0"
+                Focusable="False"
+                Cursor="Arrow"
+                Visibility="Collapsed"
+                Click="ClearButton_Click"
+                ToolTip="Clear"
+                BorderThickness="0"
+                Background="Transparent"
+                FontSize="10"
+                Content="✕" />
+    </Grid>
+</UserControl>

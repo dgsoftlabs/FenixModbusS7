@@ -138,6 +138,21 @@ namespace Fenix
 
         private void PropertyList_Loaded(object sender, RoutedEventArgs e)
         {
+            if (PropertyList.View is GridView gridView)
+            {
+                var dpd = DependencyPropertyDescriptor.FromProperty(GridViewColumn.WidthProperty, typeof(GridViewColumn));
+                // attach only to the "Property" column (all except last)
+                for (var i = 0; i < gridView.Columns.Count - 1; i++)
+                {
+                    var col = gridView.Columns[i];
+                    dpd.AddValueChanged(col, OnColumnWidthChanged);
+                }
+            }
+            ScheduleAdjustColumns();
+        }
+
+        private void OnColumnWidthChanged(object sender, EventArgs e)
+        {
             ScheduleAdjustColumns();
         }
 
@@ -146,9 +161,17 @@ namespace Fenix
             ScheduleAdjustColumns();
         }
 
+        private void ColorPreview_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.DataContext is PropertyRow row)
+            {
+                row.SetColorFromPickerDialog();
+            }
+        }
+
         private void ScheduleAdjustColumns()
         {
-            Dispatcher.BeginInvoke(new Action(AdjustColumns), DispatcherPriority.Loaded);
+            Dispatcher.BeginInvoke(new Action(AdjustColumns), DispatcherPriority.ContextIdle);
         }
 
         private void AdjustColumns()
@@ -179,7 +202,10 @@ namespace Fenix
             if (scrollViewer != null && scrollViewer.ViewportWidth > 0)
                 return scrollViewer.ViewportWidth;
 
-            return listView.ActualWidth - listView.BorderThickness.Left - listView.BorderThickness.Right;
+            var scrollBarWidth = scrollViewer?.ComputedVerticalScrollBarVisibility == Visibility.Visible
+                ? SystemParameters.VerticalScrollBarWidth
+                : 0;
+            return listView.ActualWidth - listView.BorderThickness.Left - listView.BorderThickness.Right - scrollBarWidth;
         }
 
         private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
@@ -218,6 +244,7 @@ namespace Fenix
             private readonly TypeConverter _converter;
             private readonly ITypeDescriptorContext _converterContext;
             private readonly bool _isStandardValuesExclusive;
+            private readonly bool _useClearableTextEditor;
             private bool _isEnabled;
 
             public PropertyRow(object target, PropertyDescriptor property, bool enabled, string nameOverride = null)
@@ -229,6 +256,7 @@ namespace Fenix
                 _converter = _property.Converter;
                 _converterContext = new PropertyTypeDescriptorContext(_target, _property);
                 _isEnabled = enabled;
+                _useClearableTextEditor = _property.Attributes[typeof(ClearableTextInputAttribute)] is ClearableTextInputAttribute;
 
                 if (_valueType.IsEnum)
                     EnumValues = Enum.GetValues(_valueType).Cast<object>().ToList();
@@ -283,28 +311,48 @@ namespace Fenix
                 }
             }
 
-            public bool IsTextEditorVisible => !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible;
+            public bool IsTextEditorVisible => !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible && !IsColorPickerVisible && !IsClearableTextEditorVisible;
+
+            public bool IsClearableTextEditorVisible => _useClearableTextEditor && !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible && !IsColorPickerVisible;
 
             public IList EnumValues { get; }
 
             public IList StandardValues { get; }
 
-            public bool IsStandardValuesEditorVisible => StandardValues != null && (_isStandardValuesExclusive || IsColorType);
+            public bool IsStandardValuesEditorVisible => StandardValues != null && _isStandardValuesExclusive && !IsColorType;
 
             public bool IsColorPreviewVisible => IsColorType;
 
-            public Brush ColorPreviewBrush
+            public bool IsColorPickerVisible => IsColorType;
+
+            private Color GetWpfColor()
+            {
+                var value = _property.GetValue(_target);
+                if (value is System.Drawing.Color dc)
+                    return Color.FromArgb(dc.A, dc.R, dc.G, dc.B);
+                if (value is Color mc)
+                    return mc;
+                return Colors.Black;
+            }
+
+            public Brush ColorPreviewBrush => new SolidColorBrush(GetWpfColor());
+
+            public string ColorHexText
             {
                 get
                 {
-                    var value = _property.GetValue(_target);
-                    if (value is System.Drawing.Color drawingColor)
-                        return new SolidColorBrush(Color.FromArgb(drawingColor.A, drawingColor.R, drawingColor.G, drawingColor.B));
+                    var c = GetWpfColor();
+                    return $"#{c.R:X2}{c.G:X2}{c.B:X2}";
+                }
+            }
 
-                    if (value is Color mediaColor)
-                        return new SolidColorBrush(mediaColor);
-
-                    return Brushes.Transparent;
+            public Brush ColorForegroundBrush
+            {
+                get
+                {
+                    var c = GetWpfColor();
+                    var luminance = (0.299 * c.R + 0.587 * c.G + 0.114 * c.B) / 255;
+                    return luminance > 0.5 ? Brushes.Black : Brushes.White;
                 }
             }
 
@@ -357,6 +405,38 @@ namespace Fenix
                 }
             }
 
+            public void SetColorFromPickerDialog()
+            {
+                var currentColor = _property.GetValue(_target);
+                var wpfColor = currentColor is System.Drawing.Color drawingColor
+                    ? Color.FromArgb(drawingColor.A, drawingColor.R, drawingColor.G, drawingColor.B)
+                    : (Color)currentColor;
+
+                var dialog = new System.Windows.Forms.ColorDialog
+                {
+                    Color = System.Drawing.Color.FromArgb(wpfColor.A, wpfColor.R, wpfColor.G, wpfColor.B),
+                    AllowFullOpen = true,
+                    FullOpen = true
+                };
+
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    var selectedColor = dialog.Color;
+                    
+                    if (_valueType == typeof(System.Drawing.Color))
+                    {
+                        _property.SetValue(_target, selectedColor);
+                    }
+                    else if (_valueType.FullName == "System.Windows.Media.Color")
+                    {
+                        _property.SetValue(_target, Color.FromArgb(selectedColor.A, selectedColor.R, selectedColor.G, selectedColor.B));
+                    }
+
+                    OnPropertyChanged(nameof(ColorPreviewBrush));
+                    OnPropertyChanged(nameof(ValueText));
+                }
+            }
+
             public string ValueText
             {
                 get
@@ -366,6 +446,12 @@ namespace Fenix
 
                     var value = _property.GetValue(_target);
                     if (value == null)
+                        return string.Empty;
+
+                    if (value is double d && double.IsNaN(d))
+                        return string.Empty;
+
+                    if (value is float f && float.IsNaN(f))
                         return string.Empty;
 
                     if (_converter != null && _converter.CanConvertTo(_converterContext, typeof(string)))
@@ -396,6 +482,14 @@ namespace Fenix
                         if (_valueType == typeof(string))
                         {
                             parsed = value;
+                        }
+                        else if (string.IsNullOrWhiteSpace(value) && _valueType == typeof(double))
+                        {
+                            parsed = double.NaN;
+                        }
+                        else if (string.IsNullOrWhiteSpace(value) && _valueType == typeof(float))
+                        {
+                            parsed = float.NaN;
                         }
                         else if (string.IsNullOrWhiteSpace(value) && Nullable.GetUnderlyingType(_property.PropertyType) != null)
                         {

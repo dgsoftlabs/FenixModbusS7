@@ -104,7 +104,7 @@ namespace ProjectDataLib
             set
             {
                 objId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("objId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(objId)));
             }
         }
 
@@ -127,8 +127,8 @@ namespace ProjectDataLib
             set
             {
                 projectName_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("projectName"));
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(projectName)));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.Name)));
                 modificationApear();
             }
         }
@@ -168,7 +168,7 @@ namespace ProjectDataLib
             set
             {
                 autor_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("autor"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(autor)));
                 modificationApear();
             }
         }
@@ -185,7 +185,7 @@ namespace ProjectDataLib
             {
                 company_ = value;
                 modificationApear();
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("company"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(company)));
             }
         }
 
@@ -201,7 +201,7 @@ namespace ProjectDataLib
             {
                 describe_ = value;
                 modificationApear();
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("describe"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(describe)));
             }
         }
 
@@ -227,7 +227,7 @@ namespace ProjectDataLib
             set
             {
                 modifeTime_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("modifeTime"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(modifeTime)));
             }
         }
 
@@ -242,7 +242,7 @@ namespace ProjectDataLib
             set
             {
                 modMarks_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("modMarks"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(modMarks)));
             }
         }
 
@@ -257,7 +257,7 @@ namespace ProjectDataLib
             set
             {
                 path_ = value; modificationApear();
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("path"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(path)));
             }
         }
 
@@ -272,9 +272,36 @@ namespace ProjectDataLib
             set { ChartConf_ = value; modificationApear(); }
         }
 
+        private TableViewConf TableConf_;
+
+        [Browsable(false)]
+        [ComVisible(false)]
+        [XmlElement(ElementName = "TableConfiguration")]
+        public TableViewConf TableConf
+        {
+            get { return TableConf_; }
+            set { TableConf_ = value; modificationApear(); }
+        }
+
+        private CommViewConf CommConf_;
+
+        [Browsable(false)]
+        [ComVisible(false)]
+        [XmlElement(ElementName = "CommViewConfiguration")]
+        public CommViewConf CommConf
+        {
+            get { return CommConf_; }
+            set { CommConf_ = value; modificationApear(); }
+        }
+
         [Browsable(false)]
         [XmlElement(ElementName = "DatabaseConfiguration")]
         public DatabaseModel Db { get; set; }
+
+        [field: NonSerialized]
+        [Browsable(false)]
+        [XmlIgnore]
+        public ChartConfigNode ChartConfigNode { get; private set; }
 
         private Boolean IsExpand_;
 
@@ -288,7 +315,7 @@ namespace ProjectDataLib
                 IsExpand_ = value;
                 modificationApear();
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsExpand"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsExpand)));
             }
         }
 
@@ -483,8 +510,8 @@ namespace ProjectDataLib
             Db = new DatabaseModel();
             TreeViewChildren_.Add(Db);
 
-            ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
-            ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
+            ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(new object[] { new TimersFolder(ScriptEng_.Timers, ScriptEng_.isTimersFolderExpand, v => ScriptEng_.isTimersFolderExpand = v) }.Concat(ScriptFileList_.Cast<object>()));
+            ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(new object[] { new TimersFolder(InternalTagsDrv.Timers, InternalTagsDrv.isTimersFolderExpand, v => InternalTagsDrv.isTimersFolderExpand = v) }.Concat(InTagsList_.Cast<object>()));
 
             DriverChildren_ = new ObservableCollection<IDriverModel>();
             DriverChildren_.Add((IDriverModel)ScriptEng);
@@ -504,6 +531,12 @@ namespace ProjectDataLib
 
             this.ChartConf = new ChartViewConf();
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
+
+            this.TableConf = new TableViewConf();
+            this.CommConf = new CommViewConf();
+
+            ChartConfigNode = new ChartConfigNode(this);
+            TreeViewChildren_.Add(ChartConfigNode);
         }
 
         private void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -535,6 +568,12 @@ namespace ProjectDataLib
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
 
+            foreach (var sf in ScriptFileList_)
+            {
+                sf.Proj = this;
+                sf.PrCon = PrCon;
+            }
+
             if (FileList_ == null)
                 FileList_ = new List<InFile>();
 
@@ -546,6 +585,15 @@ namespace ProjectDataLib
             if (Db == null)
                 Db = new DatabaseModel();
             TreeViewChildren_.Add(this.Db);
+
+            if (ChartConf == null)
+                ChartConf = new ChartViewConf();
+            if (TableConf == null)
+                TableConf = new TableViewConf();
+            if (CommConf == null)
+                CommConf = new CommViewConf();
+            ChartConfigNode = new ChartConfigNode(this);
+            TreeViewChildren_.Add(ChartConfigNode);
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
@@ -584,6 +632,12 @@ namespace ProjectDataLib
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
 
+            foreach (var sf in ScriptFileList_)
+            {
+                sf.Proj = this;
+                sf.PrCon = PrCon;
+            }
+
             if (FileList_ == null)
                 FileList_ = new List<InFile>();
 
@@ -596,8 +650,17 @@ namespace ProjectDataLib
                 Db = new DatabaseModel();
             TreeViewChildren_.Add(this.Db);
 
-            ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
-            ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
+            if (ChartConf == null)
+                ChartConf = new ChartViewConf();
+            if (TableConf == null)
+                TableConf = new TableViewConf();
+            if (CommConf == null)
+                CommConf = new CommViewConf();
+            ChartConfigNode = new ChartConfigNode(this);
+            TreeViewChildren_.Add(ChartConfigNode);
+
+            ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(new object[] { new TimersFolder(ScriptEng_.Timers, ScriptEng_.isTimersFolderExpand, v => ScriptEng_.isTimersFolderExpand = v) }.Concat(ScriptFileList_.Cast<object>()));
+            ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(new object[] { new TimersFolder(InternalTagsDrv.Timers, InternalTagsDrv.isTimersFolderExpand, v => InternalTagsDrv.isTimersFolderExpand = v) }.Concat(InTagsList_.Cast<object>()));
 
             foreach (var cn in connectionList_)
             {

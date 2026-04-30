@@ -278,6 +278,22 @@ namespace ProjectDataLib
                     buff.ScriptFileList.RemoveAll(x => x.FilePath == gp);
                 }
 
+                // Auto-discover script files on disk that are not yet registered in the project
+                string scriptDir = Path.GetDirectoryName(buff.path) + this.ScriptsCatalog;
+                if (Directory.Exists(scriptDir))
+                {
+                    foreach (string csFile in Directory.GetFiles(scriptDir, "*.cs"))
+                    {
+                        string fileName = Path.GetFileName(csFile);
+                        if (!buff.ScriptFileList.Any(x => x.Name == fileName))
+                        {
+                            var newSf = new ScriptFile(csFile) { Proj = buff, PrCon = this };
+                            buff.ScriptFileList.Add(newSf);
+                            ((ITreeViewModel)buff.ScriptEng).Children.Add(newSf);
+                        }
+                    }
+                }
+
                 deleteFiles.Clear();
 
                 foreach (InFile fil in buff.FileList)
@@ -1575,10 +1591,13 @@ namespace ProjectDataLib
 
                 if (sf != null)
                 {
-                    if (((ITreeViewModel)pr.ScriptEng).Children.ToList().Exists(x => ((ScriptFile)x).objId == file))
+                    if (((ITreeViewModel)pr.ScriptEng).Children.ToList().Exists(x => x is ScriptFile sf2 && sf2.objId == file))
                         ((ITreeViewModel)pr.ScriptEng).Children.Remove(sf);
 
                     pr.ScriptFileList.Remove(sf);
+
+                    if (File.Exists(sf.FilePath))
+                        File.Delete(sf.FilePath);
 
                     if (removeScriptFileEv != null)
                         removeScriptFileEv(pr, new ProjectEventArgs(file));

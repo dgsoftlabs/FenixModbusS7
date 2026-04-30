@@ -1,0 +1,197 @@
+<UserControl x:Class="Fenix.DateTimeRangeInput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Fenix"
+             mc:Ignorable="d"
+             d:DesignWidth="560"
+             d:DesignHeight="28"
+             VerticalAlignment="Center">
+    <UserControl.Resources>
+        <Style x:Key="RangeSegmentDatePicker" TargetType="DatePicker" BasedOn="{StaticResource {x:Type DatePicker}}">
+            <Setter Property="Height" Value="26" />
+            <Setter Property="MinWidth" Value="90" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="2,0,0,0" />
+        </Style>
+        <Style x:Key="RangeSegmentTimeBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="26" />
+            <Setter Property="Width" Value="68" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="4,0,2,0" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="RangeClearButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{StaticResource Th.TextSecBrush}" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="FontSize" Value="9" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="Transparent" CornerRadius="8"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource Th.HoverBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource Th.TextBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ClockBtn" TargetType="Button">
+            <Setter Property="Width"           Value="18" />
+            <Setter Property="Height"          Value="18" />
+            <Setter Property="Padding"         Value="0" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background"      Value="Transparent" />
+            <Setter Property="Foreground"      Value="{StaticResource Th.TextSecBrush}" />
+            <Setter Property="FontSize"        Value="11" />
+            <Setter Property="Focusable"       Value="False" />
+            <Setter Property="Cursor"          Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="Transparent" CornerRadius="9"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource Th.HoverBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource Th.AccentBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <!-- Popup-y muszą być w drzewie wizualnym UserControl - umieszczone w Grid jako nakładki -->
+    <Grid>
+        <!-- Single unified border — the whole control -->
+        <Border x:Name="OuterBorder"
+                BorderBrush="{StaticResource Th.BorderBrush}"
+                BorderThickness="1"
+                CornerRadius="4"
+                Background="{StaticResource Th.SurfaceBrush}"
+                Height="28"
+                SnapsToDevicePixels="True">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource AncestorType=local:DateTimeRangeInput}}" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource Th.AccentBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                <!-- FROM: date -->
+                <DatePicker x:Name="FromDatePicker"
+                            Style="{StaticResource RangeSegmentDatePicker}"
+                            ToolTip="{Binding FromToolTip, RelativeSource={RelativeSource AncestorType=local:DateTimeRangeInput}}"
+                            SelectedDateChanged="FromDatePicker_SelectedDateChanged" />
+
+                <!-- FROM: time textbox + watermark -->
+                <Grid VerticalAlignment="Center" Margin="4,0,0,0">
+                    <TextBox x:Name="FromTimeTextBox"
+                             Style="{StaticResource RangeSegmentTimeBox}"
+                             ToolTip="{Binding FromToolTip, RelativeSource={RelativeSource AncestorType=local:DateTimeRangeInput}}"
+                             TextChanged="FromTimeTextBox_TextChanged"
+                             LostFocus="FromTimeTextBox_LostFocus" />
+                    <TextBlock x:Name="FromTimeWatermark"
+                               Text="hh:mm:ss"
+                               Margin="5,0,0,0"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource Th.TextSecBrush}"
+                               IsHitTestVisible="False"
+                               FontSize="{StaticResource Th.FontSm}"
+                               Visibility="Visible" />
+                </Grid>
+
+                <!-- FROM: clock picker button -->
+                <Button x:Name="FromClockButton"
+                        Style="{StaticResource ClockBtn}"
+                        Margin="1,0,0,0"
+                        ToolTip="Pick time"
+                        Content="⏱"
+                        Click="FromClockButton_Click" />
+
+                <!-- FROM: clear button -->
+                <Button x:Name="FromClearButton"
+                        Style="{StaticResource RangeClearButton}"
+                        Margin="1,0,2,0"
+                        Visibility="Collapsed"
+                        Click="FromClearButton_Click"
+                        ToolTip="Clear start date and time"
+                        Content="✕" />
+
+                <!-- Separator -->
+                <TextBlock Text="→"
+                           VerticalAlignment="Center"
+                           Margin="4,0"
+                           Foreground="{StaticResource Th.TextSecBrush}"
+                           FontSize="{StaticResource Th.FontSm}" />
+
+                <!-- TO: date -->
+                <DatePicker x:Name="ToDatePicker"
+                            Style="{StaticResource RangeSegmentDatePicker}"
+                            ToolTip="{Binding ToToolTip, RelativeSource={RelativeSource AncestorType=local:DateTimeRangeInput}}"
+                            SelectedDateChanged="ToDatePicker_SelectedDateChanged" />
+
+                <!-- TO: time textbox + watermark -->
+                <Grid VerticalAlignment="Center" Margin="4,0,0,0">
+                    <TextBox x:Name="ToTimeTextBox"
+                             Style="{StaticResource RangeSegmentTimeBox}"
+                             ToolTip="{Binding ToToolTip, RelativeSource={RelativeSource AncestorType=local:DateTimeRangeInput}}"
+                             TextChanged="ToTimeTextBox_TextChanged"
+                             LostFocus="ToTimeTextBox_LostFocus" />
+                    <TextBlock x:Name="ToTimeWatermark"
+                               Text="hh:mm:ss"
+                               Margin="5,0,0,0"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource Th.TextSecBrush}"
+                               IsHitTestVisible="False"
+                               FontSize="{StaticResource Th.FontSm}"
+                               Visibility="Visible" />
+                </Grid>
+
+                <!-- TO: clock picker button -->
+                <Button x:Name="ToClockButton"
+                        Style="{StaticResource ClockBtn}"
+                        Margin="1,0,0,0"
+                        ToolTip="Pick time"
+                        Content="⏱"
+                        Click="ToClockButton_Click" />
+
+                <!-- TO: clear button -->
+                <Button x:Name="ToClearButton"
+                        Style="{StaticResource RangeClearButton}"
+                        Margin="1,0,4,0"
+                        Visibility="Collapsed"
+                        Click="ToClearButton_Click"
+                        ToolTip="Clear end date and time"
+                        Content="✕" />
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

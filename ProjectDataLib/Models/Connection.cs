@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -108,7 +108,7 @@ namespace ProjectDataLib
             set
             {
                 objId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("objId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(objId)));
             }
         }
 
@@ -123,7 +123,7 @@ namespace ProjectDataLib
             set
             {
                 parentId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("parentId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(parentId)));
             }
         }
 
@@ -137,8 +137,8 @@ namespace ProjectDataLib
             set
             {
                 connectionName_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("connectionName"));
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(connectionName)));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.Name)));
             }
         }
 
@@ -199,7 +199,7 @@ namespace ProjectDataLib
             set
             {
                 IsBlocked_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsBlocked"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBlocked)));
 
                 if (TreeViewChildren != null)
                     foreach (ITreeViewModel itv in TreeViewChildren)
@@ -236,7 +236,7 @@ namespace ProjectDataLib
             set
             {
                 assemblyError_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("assemblyError"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(assemblyError)));
             }
             get
             {
@@ -272,7 +272,7 @@ namespace ProjectDataLib
             set
             {
                 gConf_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("gConf"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(gConf)));
             }
             get { return gConf_; }
         }
@@ -289,7 +289,7 @@ namespace ProjectDataLib
             set
             {
                 PrCon_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("PrCon"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PrCon)));
             }
         }
 
@@ -390,7 +390,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsLive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsLive)));
             }
         }
 
@@ -604,31 +604,38 @@ namespace ProjectDataLib
             }
         }
 
+        private void EnsureParameters()
+        {
+            if (Parameters != null)
+                return;
+
+            // Prefer asking the driver itself for its default parameters (no string coupling).
+            if (gConf_ != null)
+            {
+                Parameters = gConf_.newDrv(DriverName_)?.setDriverParam;
+                if (Parameters != null)
+                    return;
+            }
+
+            // Fallback for binary deserialization when gConf is not available yet.
+            Parameters = DriverName_ switch
+            {
+                "ModbusMasterTCP" => new TcpDriverParam(),
+                "S7-300-400 Ethernet" => new S7DriverParam(),
+                "ModbusMasterRTU" or "ModbusMasterASCII" => new IoDriverParam(),
+                _ => null
+            };
+        }
+
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            if (Parameters == null)
-            {
-                if (DriverName == "ModbusMasterTCP")
-                    Parameters = new TcpDriverParam();
-                else if (DriverName == "S7-300-400 Ethernet")
-                    Parameters = new S7DriverParam();
-                else if (DriverName == "ModbusMasterRTU" || DriverName == "ModbusMasterASCII")
-                    Parameters = new IoDriverParam();
-            }
+            EnsureParameters();
         }
 
         public void OnDeserializedXML()
         {
-            if (Parameters == null)
-            {
-                if (DriverName == "ModbusMasterTCP")
-                    Parameters = new TcpDriverParam();
-                else if (DriverName == "S7-300-400 Ethernet")
-                    Parameters = new S7DriverParam();
-                else if (DriverName == "ModbusMasterRTU" || DriverName == "ModbusMasterASCII")
-                    Parameters = new IoDriverParam();
-            }
+            EnsureParameters();
         }
     }
 }

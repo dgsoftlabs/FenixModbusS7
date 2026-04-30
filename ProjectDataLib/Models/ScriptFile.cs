@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
@@ -37,7 +37,7 @@ namespace ProjectDataLib
             set
             {
                 projCon_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("PrCon"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PrCon)));
             }
         }
 
@@ -52,7 +52,7 @@ namespace ProjectDataLib
             set
             {
                 Proj_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Proj"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Proj)));
             }
         }
 
@@ -66,7 +66,7 @@ namespace ProjectDataLib
             set
             {
                 objId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("objId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(objId)));
             }
         }
 
@@ -98,7 +98,7 @@ namespace ProjectDataLib
             set
             {
                 FilePath_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("FilePath"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FilePath)));
             }
         }
 
@@ -111,7 +111,7 @@ namespace ProjectDataLib
             set
             {
                 Enable_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Enable"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Enable)));
             }
         }
 
@@ -122,7 +122,7 @@ namespace ProjectDataLib
             set
             {
                 Enable = !value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsBlocked"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBlocked)));
             }
         }
 
@@ -136,7 +136,7 @@ namespace ProjectDataLib
             set
             {
                 TimerName_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("TimerName"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimerName)));
             }
         }
 
@@ -186,7 +186,7 @@ namespace ProjectDataLib
 
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsLive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsLive)));
             }
         }
 
@@ -199,7 +199,7 @@ namespace ProjectDataLib
             set
             {
                 IsBlocked = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsBlocked"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBlocked)));
             }
         }
 

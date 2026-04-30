@@ -12,13 +12,16 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows;
 using System.Threading.Tasks;
+using Microsoft.Win32;
+using System.Text;
+using System.IO;
 
 namespace Fenix
 {
     public partial class DBTableView : UserControl, INotifyPropertyChanged
     {
-        private DateTime _fromDate;
-        private DateTime _toDate;
+        private DateTime? _fromDate;
+        private DateTime? _toDate;
         private string _selectedInterval;
         private string _selectedOrder;
         private bool _isLoading;
@@ -42,7 +45,7 @@ namespace Fenix
             }
         }
 
-        public DateTime FromDate
+        public DateTime? FromDate
         {
             get => _fromDate;
             set
@@ -51,11 +54,13 @@ namespace Fenix
                 {
                     _fromDate = value;
                     OnPropertyChanged();
+                    if (_selectedInterval == "Custom")
+                        _ = RefreshDataAsync();
                 }
             }
         }
 
-        public DateTime ToDate
+        public DateTime? ToDate
         {
             get => _toDate;
             set
@@ -64,6 +69,8 @@ namespace Fenix
                 {
                     _toDate = value;
                     OnPropertyChanged();
+                    if (_selectedInterval == "Custom")
+                        _ = RefreshDataAsync();
                 }
             }
         }
@@ -81,6 +88,7 @@ namespace Fenix
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(IsDateRangeEditable));
                     UpdateDateRange();
+                    _ = RefreshDataAsync();
                 }
             }
         }
@@ -94,6 +102,7 @@ namespace Fenix
                 {
                     _selectedOrder = value;
                     OnPropertyChanged();
+                    _ = RefreshDataAsync();
                 }
             }
         }
@@ -132,12 +141,21 @@ namespace Fenix
             ToDate = now;
         }
 
+        private async Task RefreshDataAsync()
+        {
+            IsLoading = true;
+            await GetDataFormDatabase();
+            IsLoading = false;
+        }
+
         private async Task GetDataFormDatabase()
         {
             if (SelectedOrder == null || OrderOptions == null) return;
 
             bool descending = SelectedOrder == OrderOptions[0];
-            var tags = await _project.Db.GetDataByStampAsync(FromDate, ToDate, descending);
+            var effectiveFrom = FromDate ?? DateTime.MinValue;
+            var effectiveTo = ToDate ?? DateTime.MaxValue;
+            var tags = await _project.Db.GetDataByStampAsync(effectiveFrom, effectiveTo, descending);
             myDataGrid.ItemsSource = BuildPivotTable(tags, descending).DefaultView;
         }
 
@@ -169,11 +187,38 @@ namespace Fenix
             return table;
         }
 
-        private async void ResetButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            IsLoading = true;
-            await GetDataFormDatabase();
-            IsLoading = false;
+            try
+            {
+                if (myDataGrid.ItemsSource is not DataView dataView || dataView.Table == null)
+                    return;
+
+                var dlg = new SaveFileDialog
+                {
+                    Filter = "CSV File|*.csv",
+                    FileName = $"export_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
+                };
+
+                if (dlg.ShowDialog() != true)
+                    return;
+
+                var sb = new StringBuilder();
+                var table = dataView.Table;
+
+                // Header
+                sb.AppendLine(string.Join(";", table.Columns.Cast<DataColumn>().Select(c => c.ColumnName)));
+
+                // Rows
+                foreach (DataRowView row in dataView)
+                    sb.AppendLine(string.Join(";", table.Columns.Cast<DataColumn>().Select(c => row[c.ColumnName]?.ToString() ?? "")));
+
+                File.WriteAllText(dlg.FileName, sb.ToString(), Encoding.UTF8);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Export error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

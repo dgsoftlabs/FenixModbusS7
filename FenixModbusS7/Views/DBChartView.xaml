@@ -36,52 +36,29 @@
                     <TextBlock Text="Last:" Style="{StaticResource Th.FilterLabel}" />
                 </StackPanel>
                 <ComboBox x:Name="TimeIntervalComboBox"
-                          Width="110"
+                          Width="70"
                           Style="{StaticResource Th.FilterComboBox}"
                           ItemsSource="{Binding TimeIntervals}"
                           SelectedItem="{Binding SelectedInterval, Mode=TwoWay}"
                           ToolTip="Show data from the last selected interval" />
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
-                    <TextBlock Text="📅" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                    <TextBlock Text="From:" Style="{StaticResource Th.FilterLabel}" />
-                </StackPanel>
-                <DatePicker x:Name="FromDateCtrl"
-                            Width="160"
-                            Style="{StaticResource Th.FilterDatePicker}"
-                            SelectedDate="{Binding FromDate, Mode=TwoWay}"
-                            ToolTip="Start date (available in Custom mode)"
-                            IsEnabled="{Binding IsDateRangeEditable}" />
+                <local:DateTimeRangeInput FromValue="{Binding FromDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          ToValue="{Binding ToDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          IsEnabled="{Binding IsDateRangeEditable}"
+                                          FromToolTip="Start date and time (available in Custom mode)"
+                                          ToToolTip="End date and time (available in Custom mode)" />
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
-                    <TextBlock Text="📅" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                    <TextBlock Text="To:" Style="{StaticResource Th.FilterLabel}" />
-                </StackPanel>
-                <DatePicker x:Name="ToDateCtrl"
-                            Width="160"
-                            Style="{StaticResource Th.FilterDatePicker}"
-                            SelectedDate="{Binding ToDate, Mode=TwoWay}"
-                            ToolTip="End date (available in Custom mode)"
-                            IsEnabled="{Binding IsDateRangeEditable}" />
-
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
-                    <TextBlock Text="📉" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                    <TextBlock Text="Y Min:" Style="{StaticResource Th.FilterLabel}" />
-                </StackPanel>
-                <TextBox Text="{Binding YAxisMinimum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         Width="90" Style="{StaticResource Th.FilterTextBox}" ToolTip="Y-Axis minimum value" />
-
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
-                    <TextBlock Text="📈" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                    <TextBlock Text="Y Max:" Style="{StaticResource Th.FilterLabel}" />
-                </StackPanel>
-                <TextBox Text="{Binding YAxisMaximum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         Width="90" Style="{StaticResource Th.FilterTextBox}" ToolTip="Y-Axis maximum value" />
-
-                <Button Style="{StaticResource Th.FilterButton}" Click="ShowAllButton_Click" ToolTip="Reload chart data">
+                <Button Style="{StaticResource Th.FilterButton}" Margin="4,0,4,0" Click="Button_ClearZoom_Click" ToolTip="Reset chart zoom to default view">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="🔄" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock Text="Refresh" VerticalAlignment="Center" />
+                        <TextBlock Text="🔎" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <TextBlock Text="Clear Zoom" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource Th.FilterButton}" Click="Button_ExportPng_Click" ToolTip="Export chart as PNG image">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="💾" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <TextBlock Text="Export" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
             </WrapPanel>
@@ -96,6 +73,8 @@
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="2,8,2,0">
             <TextBlock Text="ℹ️" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="{StaticResource Th.TextSecBrush}" />
             <TextBlock Text="{Binding InteractionDescription}" Foreground="{StaticResource Th.TextSecBrush}" VerticalAlignment="Center" />
+            <TextBlock Text=" | Points: " Foreground="{StaticResource Th.TextSecBrush}" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding PointsCount}" Foreground="{StaticResource Th.TextSecBrush}" VerticalAlignment="Center" />
         </StackPanel>
 
         <ProgressBar Grid.Row="2"

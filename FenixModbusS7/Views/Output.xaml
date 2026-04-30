@@ -13,25 +13,27 @@
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0">
-            <ToggleButton Content="Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
+            <ToggleButton Content="📜 Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
             <Separator />
-            <Button Click="Button_Clr_Click" Content="Clear" />
+            <Button Click="Button_Clr_Click" Content="🗑️ Clear" />
+            <Separator />
+            <Button Click="Button_Copy_Click" Content="📋 Copy Message" />
         </ToolBar>
 
         <DataGrid Name="View" Grid.Row="1" AutoGenerateColumns="False" GridLinesVisibility="None" CanUserAddRows="False"
                   HeadersVisibility="Column" AddingNewItem="View_AddingNewItem">
             <DataGrid.Columns>
-                <DataGridTemplateColumn  Header="Object" Width="*">
+                <DataGridTemplateColumn  Header="Object" Width="1.4*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock FontWeight="Bold" Text="{Binding Sender}" />
+                                <TextBlock FontWeight="Bold" Text="{Binding Sender}" TextWrapping="Wrap" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn  Header="Date and Time" Width="*">
+                <DataGridTemplateColumn  Header="Date and Time" Width="1.5*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -41,21 +43,21 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn  Header="Message" Width="4*">
+                <DataGridTemplateColumn  Header="Message" Width="3*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Ex.Message}" />
+                            <StackPanel VerticalAlignment="Top">
+                                <TextBlock Text="{Binding Ex.Message}" TextWrapping="Wrap" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn  Header="Details" Width="4*">
+                <DataGridTemplateColumn  Header="Details" Width="5*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Ex}" />
+                            <StackPanel VerticalAlignment="Top">
+                                <TextBlock Text="{Binding Ex}" TextWrapping="Wrap" FontFamily="Consolas" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
