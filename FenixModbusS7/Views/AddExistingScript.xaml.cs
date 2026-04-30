@@ -69,7 +69,10 @@ namespace Fenix
                     if (!io.Directory.Exists(TarDir))
                         io.Directory.CreateDirectory(TarDir);
 
-                    io.File.Copy(s, TarDir + "\\" + nName, true);
+                    string destPath = TarDir + "\\" + nName;
+                    using (var srcStream = new io.FileStream(s, io.FileMode.Open, io.FileAccess.Read, io.FileShare.ReadWrite))
+                    using (var dstStream = new io.FileStream(destPath, io.FileMode.Create, io.FileAccess.Write, io.FileShare.None))
+                        srcStream.CopyTo(dstStream);
 
                     projectContainer.AddScriptFile(currentProject.objId, new ScriptFile(TarDir + "\\" + nName));
                 }

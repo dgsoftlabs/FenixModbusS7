@@ -535,6 +535,12 @@ namespace ProjectDataLib
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
 
+            foreach (var sf in ScriptFileList_)
+            {
+                sf.Proj = this;
+                sf.PrCon = PrCon;
+            }
+
             if (FileList_ == null)
                 FileList_ = new List<InFile>();
 
@@ -583,6 +589,12 @@ namespace ProjectDataLib
 
             if (ScriptFileList_ == null)
                 ScriptFileList_ = new List<ScriptFile>();
+
+            foreach (var sf in ScriptFileList_)
+            {
+                sf.Proj = this;
+                sf.PrCon = PrCon;
+            }
 
             if (FileList_ == null)
                 FileList_ = new List<InFile>();
