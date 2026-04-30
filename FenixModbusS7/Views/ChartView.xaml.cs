@@ -245,7 +245,7 @@ namespace Fenix
                 UpdateFilterStates();
 
                 // Set interaction description
-                InteractionDescription = "Left Click + Drag: Pan | Ctrl + Right Click + Drag: Zoom Rectangle | Mouse Wheel: Zoom | C: Copy to Clipboard";
+                InteractionDescription = "Pan:[ Left Click + Drag ] | Zoom Rectangle:[ Ctrl + Right Click + Drag ] | Zoom:[ Mouse Wheel ]";
 
             }
             catch (Exception Ex)
@@ -409,8 +409,8 @@ namespace Fenix
                 foreach (var axConf in Pr.ChartConf.Axes)
                     ((INotifyPropertyChanged)axConf).PropertyChanged -= AxisConf_PropertyChanged;
 
-            // Remove existing Y axes
-            var toRemove = plotModel.Axes.OfType<LinearAxis>().ToList();
+            // Remove existing Y axes (but not DateTimeAxis)
+            var toRemove = plotModel.Axes.OfType<LinearAxis>().Where(a => a is not DateTimeAxis).ToList();
             foreach (var ax in toRemove)
                 plotModel.Axes.Remove(ax);
 

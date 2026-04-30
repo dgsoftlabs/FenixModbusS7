@@ -134,7 +134,7 @@ namespace Fenix
             _project = project;
 
             PlotController = new PlotController();
-            InteractionDescription = "Left Click + Drag: Pan | Ctrl + Right Click + Drag: Zoom Rectangle | Mouse Wheel: Zoom | C: Copy to Clipboard";
+            InteractionDescription = "Pan:[ Left Click + Drag ] | Zoom Rectangle:[ Ctrl + Right Click + Drag ] | Zoom:[ Mouse Wheel ]";
 
             AxX1 = new DateTimeAxis { Position = AxisPosition.Bottom, MajorGridlineStyle = LineStyle.Dash, StringFormat = "HH:mm:ss" };
 
@@ -156,7 +156,7 @@ namespace Fenix
                 foreach (var axConf in _project.ChartConf.Axes)
                     ((INotifyPropertyChanged)axConf).PropertyChanged -= AxisConf_PropertyChanged;
 
-            var toRemove = PlotModel.Axes.OfType<LinearAxis>().ToList();
+            var toRemove = PlotModel.Axes.OfType<LinearAxis>().Where(a => a is not DateTimeAxis).ToList();
             foreach (var ax in toRemove)
                 PlotModel.Axes.Remove(ax);
 
