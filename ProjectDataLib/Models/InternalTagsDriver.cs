@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -39,7 +39,7 @@ namespace ProjectDataLib
             set
             {
                 objId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("objId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(objId)));
             }
         }
 
@@ -54,7 +54,7 @@ namespace ProjectDataLib
             set
             {
                 Proj_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Proj"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Proj)));
             }
         }
 
@@ -67,7 +67,7 @@ namespace ProjectDataLib
             set
             {
                 isExpand_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("isExpand"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(isExpand)));
             }
         }
 
@@ -96,7 +96,7 @@ namespace ProjectDataLib
             set
             {
                 IsBlocked_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsBlocked"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBlocked)));
 
                 if (_Children != null)
                     foreach (ITreeViewModel itv in _Children)
@@ -355,7 +355,7 @@ namespace ProjectDataLib
             set
             {
                 isLive = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("isAlive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IDriverModel.isAlive)));
             }
         }
 
@@ -444,7 +444,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsLive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsLive)));
             }
         }
 

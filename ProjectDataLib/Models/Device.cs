@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -46,7 +46,7 @@ namespace ProjectDataLib
             set
             {
                 projId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("projId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(projId)));
             }
         }
 
@@ -60,7 +60,7 @@ namespace ProjectDataLib
             set
             {
                 parentId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("parentId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(parentId)));
             }
         }
 
@@ -81,7 +81,7 @@ namespace ProjectDataLib
                 }
 
                 objId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("objId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(objId)));
             }
         }
 
@@ -96,7 +96,7 @@ namespace ProjectDataLib
             set
             {
                 idrv_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("idrv"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(idrv)));
             }
         }
 
@@ -111,7 +111,7 @@ namespace ProjectDataLib
             set
             {
                 prCon_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("PrCon"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PrCon)));
             }
         }
 
@@ -125,7 +125,7 @@ namespace ProjectDataLib
             set
             {
                 name_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("name"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(name)));
             }
         }
 
@@ -144,7 +144,7 @@ namespace ProjectDataLib
                 if (adressChanged != null)
                     adressChanged(this, new ProjectEventArgs(adress_));
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("adress"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(adress)));
             }
         }
 
@@ -211,7 +211,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsLive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsLive)));
             }
         }
 
@@ -223,7 +223,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsBlocked"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsBlocked)));
             }
         }
 

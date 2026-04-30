@@ -104,7 +104,7 @@ namespace ProjectDataLib
             set
             {
                 objId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("objId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(objId)));
             }
         }
 
@@ -127,8 +127,8 @@ namespace ProjectDataLib
             set
             {
                 projectName_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("projectName"));
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(projectName)));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.Name)));
                 modificationApear();
             }
         }
@@ -168,7 +168,7 @@ namespace ProjectDataLib
             set
             {
                 autor_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("autor"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(autor)));
                 modificationApear();
             }
         }
@@ -185,7 +185,7 @@ namespace ProjectDataLib
             {
                 company_ = value;
                 modificationApear();
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("company"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(company)));
             }
         }
 
@@ -201,7 +201,7 @@ namespace ProjectDataLib
             {
                 describe_ = value;
                 modificationApear();
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("describe"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(describe)));
             }
         }
 
@@ -227,7 +227,7 @@ namespace ProjectDataLib
             set
             {
                 modifeTime_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("modifeTime"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(modifeTime)));
             }
         }
 
@@ -242,7 +242,7 @@ namespace ProjectDataLib
             set
             {
                 modMarks_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("modMarks"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(modMarks)));
             }
         }
 
@@ -257,7 +257,7 @@ namespace ProjectDataLib
             set
             {
                 path_ = value; modificationApear();
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("path"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(path)));
             }
         }
 
@@ -315,7 +315,7 @@ namespace ProjectDataLib
                 IsExpand_ = value;
                 modificationApear();
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsExpand"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsExpand)));
             }
         }
 

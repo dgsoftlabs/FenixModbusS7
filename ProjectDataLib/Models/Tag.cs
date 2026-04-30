@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -105,7 +105,7 @@ namespace ProjectDataLib
                 else
                     tagName_ = value;
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.Name)));
             }
         }
 
@@ -137,7 +137,7 @@ namespace ProjectDataLib
 
                 ResetValue();
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("TypeData_"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TypeData_)));
             }
         }
 
@@ -153,7 +153,7 @@ namespace ProjectDataLib
             set
             {
                 BlockAdress_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("BlockAdress"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BlockAdress)));
             }
         }
 
@@ -184,8 +184,8 @@ namespace ProjectDataLib
                         this.scAdres_ = war[0];
                 }
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("AreaData"));
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("BitByte"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.AreaData)));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.BitByte)));
             }
         }
 
@@ -207,7 +207,7 @@ namespace ProjectDataLib
                     this.bitAdres_ = (this.startData_ * mInf.AdresSize);
                 }
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Adress"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.Adress)));
             }
         }
 
@@ -232,7 +232,7 @@ namespace ProjectDataLib
             set
             {
                 deviceAdress_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("DevAdress"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.DevAdress)));
             }
         }
 
@@ -256,7 +256,7 @@ namespace ProjectDataLib
                         this.scAdres_ = war[0];
                 }
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("BitByte"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.BitByte)));
             }
         }
 
@@ -271,7 +271,7 @@ namespace ProjectDataLib
             set
             {
                 bytesOrder_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("BytesOrder_"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.BytesOrder_)));
             }
         }
 
@@ -286,7 +286,7 @@ namespace ProjectDataLib
             set
             {
                 describe_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Description"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.Description)));
             }
         }
 
@@ -301,7 +301,7 @@ namespace ProjectDataLib
             set
             {
                 tagVersion_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("TagVersion"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.TagVersion)));
             }
         }
 
@@ -319,7 +319,7 @@ namespace ProjectDataLib
             set
             {
                 value_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.Value)));
             }
         }
 
@@ -1154,7 +1154,7 @@ namespace ProjectDataLib
             set
             {
                 Clr_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Clr"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Clr)));
             }
         }
 
@@ -1176,7 +1176,7 @@ namespace ProjectDataLib
             set
             {
                 Width_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Width"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Width)));
             }
         }
 
@@ -1191,7 +1191,7 @@ namespace ProjectDataLib
             set
             {
                 GrEnable_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("GrEnable"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GrEnable)));
             }
         }
 
@@ -1206,7 +1206,7 @@ namespace ProjectDataLib
             set
             {
                 GrVisible_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("GrVisible"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GrVisible)));
             }
         }
 
@@ -1222,7 +1222,7 @@ namespace ProjectDataLib
             set
             {
                 GrAxisKey_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("GrAxisKey"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GrAxisKey)));
             }
         }
 
@@ -1237,7 +1237,7 @@ namespace ProjectDataLib
             set
             {
                 GrVisibleTab_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("GrVisibleTab"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GrVisibleTab)));
             }
         }
 
@@ -1801,7 +1801,7 @@ namespace ProjectDataLib
             set
             {
                 idrv.isAlive = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("isAlive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IDriverModel.isAlive)));
             }
         }
 
@@ -1874,7 +1874,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsLive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsLive)));
             }
         }
 
@@ -1886,7 +1886,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsBlocked"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsBlocked)));
             }
         }
     }

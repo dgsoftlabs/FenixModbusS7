@@ -66,7 +66,7 @@ namespace ProjectDataLib
             set
             {
                 Pr_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Proj"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Pr)));
             }
         }
 
