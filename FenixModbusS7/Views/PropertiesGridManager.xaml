@@ -90,7 +90,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="170" Header="Property" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Width="340" Header="Value">
+                    <GridViewColumn Width="200" Header="Value">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid Margin="0,1" ToolTip="{Binding Description}">

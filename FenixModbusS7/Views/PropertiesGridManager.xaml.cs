@@ -138,6 +138,21 @@ namespace Fenix
 
         private void PropertyList_Loaded(object sender, RoutedEventArgs e)
         {
+            if (PropertyList.View is GridView gridView)
+            {
+                var dpd = DependencyPropertyDescriptor.FromProperty(GridViewColumn.WidthProperty, typeof(GridViewColumn));
+                // attach only to the "Property" column (all except last)
+                for (var i = 0; i < gridView.Columns.Count - 1; i++)
+                {
+                    var col = gridView.Columns[i];
+                    dpd.AddValueChanged(col, OnColumnWidthChanged);
+                }
+            }
+            ScheduleAdjustColumns();
+        }
+
+        private void OnColumnWidthChanged(object sender, EventArgs e)
+        {
             ScheduleAdjustColumns();
         }
 
@@ -156,7 +171,7 @@ namespace Fenix
 
         private void ScheduleAdjustColumns()
         {
-            Dispatcher.BeginInvoke(new Action(AdjustColumns), DispatcherPriority.Loaded);
+            Dispatcher.BeginInvoke(new Action(AdjustColumns), DispatcherPriority.ContextIdle);
         }
 
         private void AdjustColumns()
@@ -187,7 +202,10 @@ namespace Fenix
             if (scrollViewer != null && scrollViewer.ViewportWidth > 0)
                 return scrollViewer.ViewportWidth;
 
-            return listView.ActualWidth - listView.BorderThickness.Left - listView.BorderThickness.Right;
+            var scrollBarWidth = scrollViewer?.ComputedVerticalScrollBarVisibility == Visibility.Visible
+                ? SystemParameters.VerticalScrollBarWidth
+                : 0;
+            return listView.ActualWidth - listView.BorderThickness.Left - listView.BorderThickness.Right - scrollBarWidth;
         }
 
         private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
