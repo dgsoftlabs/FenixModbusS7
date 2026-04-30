@@ -84,6 +84,9 @@ namespace ProjectDataLib
             }
         }
 
+        [Browsable(false)]
+        public bool isTimersFolderExpand { get; set; } = true;
+
         private bool IsBlocked_;
 
         [Category("01 Design"), DisplayName("IsBlocked")]

@@ -90,6 +90,9 @@ namespace ProjectDataLib
             }
         }
 
+        [Browsable(false)]
+        public bool isTimersFolderExpand { get; set; } = true;
+
         private Boolean Enable_;
 
         [Browsable(false)]

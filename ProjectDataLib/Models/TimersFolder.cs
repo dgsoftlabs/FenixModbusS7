@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
@@ -8,11 +9,14 @@ namespace ProjectDataLib
     {
         private readonly List<CustomTimer> _timersList;
         private readonly ObservableCollection<object> _children;
+        private readonly Action<bool> _onIsExpandChanged;
 
-        public TimersFolder(List<CustomTimer> timers)
+        public TimersFolder(List<CustomTimer> timers, bool isExpand = true, Action<bool> onIsExpandChanged = null)
         {
             _timersList = timers;
             _children = new ObservableCollection<object>(timers);
+            _isExpand = isExpand;
+            _onIsExpandChanged = onIsExpandChanged;
         }
 
         public void AddTimer()
@@ -40,12 +44,16 @@ namespace ProjectDataLib
             set { }
         }
 
-        private bool _isExpand = true;
+        private bool _isExpand;
 
         bool ITreeViewModel.IsExpand
         {
             get { return _isExpand; }
-            set { _isExpand = value; }
+            set
+            {
+                _isExpand = value;
+                _onIsExpandChanged?.Invoke(value);
+            }
         }
 
         bool ITreeViewModel.IsLive
