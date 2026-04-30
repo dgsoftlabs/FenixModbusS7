@@ -1,4 +1,4 @@
-ï»¿using AvalonDock.Layout;
+using AvalonDock.Layout;
 using AvalonDock.Layout.Serialization;
 using Fenix.ViewModels;
 using Microsoft.Win32;
@@ -93,6 +93,7 @@ namespace Fenix
 
         private object SelObj;
         private Guid SelGuid;
+        private TimersFolder _selectedTimersFolder;
 
         private Project Pr;
         private string pathRun = "";
@@ -380,11 +381,11 @@ namespace Fenix
         {
             try
             {
-                //Brak projektÃ³w w Buforze
+                //Brak projektów w Buforze
                 if (PrCon.projectList.Count == 0)
                     return;
 
-                //Chcemy usunÄ…c projekt
+                //Chcemy usun¹c projekt
 
                 wf.DialogResult result = wf.MessageBox.Show("Do you really want delate this element", "Warning", wf.MessageBoxButtons.OKCancel, wf.MessageBoxIcon.Warning);
                 if (result == wf.DialogResult.OK)
@@ -561,6 +562,62 @@ namespace Fenix
                 if (PrCon.ApplicationError != null)
                     PrCon.ApplicationError(this, new ProjectEventArgs(Ex));
             }
+        }
+
+        private void AddTimer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (SelObj is TimersFolder folder)
+                    folder.AddTimer();
+            }
+            catch (Exception Ex)
+            {
+                if (PrCon.ApplicationError != null)
+                    PrCon.ApplicationError(this, new ProjectEventArgs(Ex));
+            }
+        }
+
+        private void DeleteTimer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (SelObj is CustomTimer timer && _selectedTimersFolder != null)
+                {
+                    var result = MessageBox.Show(
+                        $"Are you sure you want to delete timer '{timer.Name}'?",
+                        "Delete Timer",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                        _selectedTimersFolder.RemoveTimer(timer);
+                }
+            }
+            catch (Exception Ex)
+            {
+                if (PrCon.ApplicationError != null)
+                    PrCon.ApplicationError(this, new ProjectEventArgs(Ex));
+            }
+        }
+
+        private TimersFolder FindParentTimersFolder(CustomTimer timer)
+        {
+            if (Pr == null) return null;
+
+            var scriptChildren = ((ITreeViewModel)Pr.ScriptEng).Children;
+            if (scriptChildren != null)
+                foreach (var child in scriptChildren)
+                    if (child is TimersFolder tf && ((ITreeViewModel)tf).Children.Contains(timer))
+                        return tf;
+
+            var intTagChildren = ((ITreeViewModel)Pr.InternalTagsDrv).Children;
+            if (intTagChildren != null)
+                foreach (var child in intTagChildren)
+                    if (child is TimersFolder tf && ((ITreeViewModel)tf).Children.Contains(timer))
+                        return tf;
+
+            return null;
         }
 
         private void Folder_Click(object sender, RoutedEventArgs e)
@@ -1537,7 +1594,7 @@ namespace Fenix
                 if (e.NewValue is Project)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     ((ContextMenu)Resources["CtxProject"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxProject"];
@@ -1547,7 +1604,7 @@ namespace Fenix
                 else if (e.NewValue is DatabaseModel)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     ((ContextMenu)Resources["CtxDatabse"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxDatabse"];
@@ -1555,7 +1612,7 @@ namespace Fenix
                 else if (e.NewValue is CusFile)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     if (((CusFile)e.NewValue).IsFile)
                     {
@@ -1575,7 +1632,7 @@ namespace Fenix
                 else if (e.NewValue is ScriptsDriver)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     ((ContextMenu)Resources["CtxScripts"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxScripts"];
@@ -1585,7 +1642,7 @@ namespace Fenix
                 else if (e.NewValue is ScriptFile)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     ((ContextMenu)Resources["CtxScriptFile"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxScriptFile"];
@@ -1595,7 +1652,7 @@ namespace Fenix
                 else if (e.NewValue is InternalTagsDriver)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     ((ContextMenu)Resources["CtxInternalTags"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxInternalTags"];
@@ -1605,7 +1662,7 @@ namespace Fenix
                 else if (e.NewValue is InTag)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     ((ContextMenu)Resources["CtxIntTag"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxIntTag"];
@@ -1615,10 +1672,20 @@ namespace Fenix
                     if (e.NewValue != null)
                         ((INotifyPropertyChanged)e.NewValue).PropertyChanged += MainWindow_PropertyChanged;
                 }
+                else if (e.NewValue is CustomTimer timer)
+                {
+                    _selectedTimersFolder = FindParentTimersFolder(timer);
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxTimer"];
+                }
+                else if (e.NewValue is TimersFolder tf)
+                {
+                    _selectedTimersFolder = tf;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxTimers"];
+                }
                 else if (e.NewValue is Connection)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     ((ContextMenu)Resources["CtxConnection"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxConnection"];
@@ -1628,7 +1695,7 @@ namespace Fenix
                 else if (e.NewValue is Device)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     ((ContextMenu)Resources["CtxDevice"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxDevice"];
@@ -1638,7 +1705,7 @@ namespace Fenix
                 else if (e.NewValue is Tag)
                 {
                     if (e.OldValue != null)
-                        ((INotifyPropertyChanged)e.OldValue).PropertyChanged -= MainWindow_PropertyChanged;
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
 
                     ((ContextMenu)Resources["CtxTag"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxTag"];
@@ -1746,7 +1813,7 @@ namespace Fenix
 
                 var tagNames = tags.Select(t => t.Name).Distinct().ToList();
 
-                // Group by second precision â€” same logic as DBTableView pivot table
+                // Group by second precision — same logic as DBTableView pivot table
                 var groups = tags
                     .GroupBy(t => new DateTime(t.Stamp.Year, t.Stamp.Month, t.Stamp.Day,
                                                t.Stamp.Hour, t.Stamp.Minute, t.Stamp.Second))
@@ -1760,7 +1827,7 @@ namespace Fenix
                     sb.Append($",{name}");
                 sb.AppendLine();
 
-                // Data rows â€” one row per timestamp group
+                // Data rows — one row per timestamp group
                 foreach (var group in groups)
                 {
                     sb.Append(group.Key.ToString("yyyy-MM-dd HH:mm:ss"));

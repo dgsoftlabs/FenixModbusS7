@@ -280,6 +280,12 @@ namespace ProjectDataLib
                             scripts.Last().Start();
 
                             CustomTimer ti = Proj_.ScriptEng.Timers.Find(x => x.Name == f.TimerName);
+                            if (ti == null)
+                            {
+                                if (sendInfoEv != null)
+                                    sendInfoEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, $"ScriptDriver.activateCycle: Timer '{f.TimerName}' not found for script '{f.Name}'."));
+                                continue;
+                            }
                             BckTimers.Add(new System.Threading.Timer(TimerTask, (object)scripts.Last(), ti.Delay, ti.Time));
                         }
                     }

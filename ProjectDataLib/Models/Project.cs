@@ -483,8 +483,8 @@ namespace ProjectDataLib
             Db = new DatabaseModel();
             TreeViewChildren_.Add(Db);
 
-            ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
-            ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
+            ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(new object[] { new TimersFolder(ScriptEng_.Timers) }.Concat(ScriptFileList_.Cast<object>()));
+            ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(new object[] { new TimersFolder(InternalTagsDrv.Timers) }.Concat(InTagsList_.Cast<object>()));
 
             DriverChildren_ = new ObservableCollection<IDriverModel>();
             DriverChildren_.Add((IDriverModel)ScriptEng);
@@ -596,8 +596,8 @@ namespace ProjectDataLib
                 Db = new DatabaseModel();
             TreeViewChildren_.Add(this.Db);
 
-            ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
-            ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
+            ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(new object[] { new TimersFolder(ScriptEng_.Timers) }.Concat(ScriptFileList_.Cast<object>()));
+            ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(new object[] { new TimersFolder(InternalTagsDrv.Timers) }.Concat(InTagsList_.Cast<object>()));
 
             foreach (var cn in connectionList_)
             {

@@ -35,8 +35,10 @@ namespace Fenix
             { typeof(DatabaseModel),      "🗄️" },
             { typeof(ScriptsDriver),      "📋" },
             { typeof(ScriptFile),         "📄" },
+            { typeof(TimersFolder),       "📁" },
             { typeof(InternalTagsDriver), "🏷️" },
             { typeof(InTag),              "🔖" },
+            { typeof(CustomTimer),        "⏱️" },
             { typeof(Connection),         "🔌" },
             { typeof(Device),             "💻" },
             { typeof(Tag),                "🏷️" }

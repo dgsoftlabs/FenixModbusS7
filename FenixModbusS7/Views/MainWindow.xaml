@@ -98,6 +98,14 @@
             <MenuItem Header="Unblock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
         </ContextMenu>
 
+        <ContextMenu x:Key="CtxTimers">
+            <MenuItem Header="Add Timer" Click="AddTimer_Click" />
+        </ContextMenu>
+
+        <ContextMenu x:Key="CtxTimer">
+            <MenuItem Header="Delete" Click="DeleteTimer_Click" />
+        </ContextMenu>
+
         <ContextMenu x:Key="CtxDatabse">
             <MenuItem Header="Show File" IsEnabled="{Binding mDbShowFile}" Click="MenuItem_ShowDbFile_Click" />
             <MenuItem Header="Show Table" IsEnabled="{Binding mShowDb}" Click="MenuItem_ShowDatabse_Click" />
