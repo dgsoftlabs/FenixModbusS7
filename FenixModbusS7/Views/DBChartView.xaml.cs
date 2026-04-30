@@ -117,6 +117,21 @@ namespace Fenix
             }
         }
 
+        private int _pointsCount;
+
+        public int PointsCount
+        {
+            get => _pointsCount;
+            set
+            {
+                if (_pointsCount != value)
+                {
+                    _pointsCount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private bool _isLoading;
 
         public bool IsLoading
@@ -326,6 +341,8 @@ namespace Fenix
             {
                 PlotModel.Series.Add(serie);
             }
+
+            PointsCount = series.Sum(s => s.Points.Count);
 
             PlotModel.InvalidatePlot(true);
 

@@ -66,6 +66,8 @@
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="2,8,2,0">
             <TextBlock Text="ℹ️" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="{StaticResource Th.TextSecBrush}" />
             <TextBlock Text="{Binding InteractionDescription}" Foreground="{StaticResource Th.TextSecBrush}" VerticalAlignment="Center" />
+            <TextBlock Text=" | Points: " Foreground="{StaticResource Th.TextSecBrush}" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding PointsCount}" Foreground="{StaticResource Th.TextSecBrush}" VerticalAlignment="Center" />
         </StackPanel>
 
         <ProgressBar Grid.Row="2"
