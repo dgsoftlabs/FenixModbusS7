@@ -540,6 +540,22 @@ namespace ProjectDataLib
             }
         }
 
+        private string GrAxisKey_ = "Y1";
+
+        [Category("05 Graph"), DisplayName("Y Axis")]
+        [TypeConverter(typeof(ChartAxisKeyConverter))]
+        [JsonIgnore]
+        [XmlElement(ElementName = "ChartAxisKey")]
+        public string GrAxisKey
+        {
+            get { return GrAxisKey_; }
+            set
+            {
+                GrAxisKey_ = value;
+                propChanged?.Invoke(this, new PropertyChangedEventArgs("GrAxisKey"));
+            }
+        }
+
         private Boolean GrVisibleTab_;
 
         [Category("06 Table"), DisplayName("Visible (Table)")]
@@ -940,6 +956,17 @@ namespace ProjectDataLib
             {
                 GrVisible = value;
             }
+        }
+
+        bool ITag.ActGrAxisKey
+        {
+            get { return true; }
+        }
+
+        string ITag.GrAxisKey
+        {
+            get { return GrAxisKey_; }
+            set { GrAxisKey_ = value; propChanged?.Invoke(this, new PropertyChangedEventArgs("GrAxisKey")); }
         }
 
         [Obsolete("Stare")]

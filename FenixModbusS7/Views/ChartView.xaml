@@ -40,24 +40,6 @@
                          ToolTip="Set the time range displayed on the chart [DD:HH:MM:SS]"
                          Text="{Binding Path=Pr.ChartConf.TrackSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                <TextBlock Text="📉" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                <TextBlock Text="Y Min:" Style="{StaticResource Th.FilterLabel}" Margin="0,0,4,0" />
-                <local:ClearableTextBox x:Name="Y0"
-                         Width="70" Height="28"
-                         Margin="0,0,8,0"
-                         ToolTip="Set the minimum value of the Y axis"
-                         TextChanged="Y0_ValueChanged"
-                         DoubleValue="{Binding Path=Pr.ChartConf.minimumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                <TextBlock Text="📈" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                <TextBlock Text="Y Max:" Style="{StaticResource Th.FilterLabel}" Margin="0,0,4,0" />
-                <local:ClearableTextBox x:Name="Y1"
-                         Width="70" Height="28"
-                         Margin="0,0,8,0"
-                         ToolTip="Set the maximum value of the Y axis"
-                         TextChanged="Y1_ValueChanged"
-                         DoubleValue="{Binding Path=Pr.ChartConf.maximumY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
                 <Button Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
                         Click="Button_Clear_Click"
                         ToolTip="Remove all points from the chart">

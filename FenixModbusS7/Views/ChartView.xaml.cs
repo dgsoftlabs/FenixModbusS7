@@ -22,8 +22,6 @@ namespace Fenix
         private int index;
         private TimeSpan defaultTrackSpan;
         private bool isTrackSpanFilterActive;
-        private bool isYMinFilterActive;
-        private bool isYMaxFilterActive;
 
         private ProjectContainer PrCon_;
 
@@ -78,6 +76,8 @@ namespace Fenix
         public PlotModel plotModel { get; private set; }
 
         public LinearAxis AxY1 { get; set; }
+
+        public LinearAxis AxY2 { get; set; }
 
         public DateTimeAxis AxX1 { get; set; }
 
@@ -201,14 +201,15 @@ namespace Fenix
                 }
 
                 // Axes
-                AxY1 = new LinearAxis { Position = AxisPosition.Left, MajorGridlineStyle = LineStyle.Dash };
                 AxX1 = new DateTimeAxis { Position = AxisPosition.Bottom, MajorGridlineStyle = LineStyle.Dash };
                 AxX1.StringFormat = "HH:mm:ss";
 
                 // Chart
                 plotModel = new PlotModel { };
                 plotModel.Axes.Add(AxX1);
-                plotModel.Axes.Add(AxY1);
+
+                RebuildYAxes();
+
                 View.Model = plotModel;
 
                 // Tag iteration
@@ -223,7 +224,8 @@ namespace Fenix
                             TrackerFormatString = "{0}" + Environment.NewLine + "Y: {4:0.000}" + Environment.NewLine + "X: {2:" + Pr.longDT + "}",
                             Color = OxyColor.FromRgb(t.Clr.R, t.Clr.G, t.Clr.B),
                             StrokeThickness = t.Width,
-                            IsVisible = t.GrVisible
+                            IsVisible = t.GrVisible,
+                            YAxisKey = ResolveAxisKey(t.GrAxisKey)
                         };
 
                         s1.Tag = t.Id;
@@ -302,37 +304,9 @@ namespace Fenix
             }
         }
 
-        public bool IsYMinFilterActive
-        {
-            get => isYMinFilterActive;
-            set
-            {
-                if (isYMinFilterActive != value)
-                {
-                    isYMinFilterActive = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public bool IsYMaxFilterActive
-        {
-            get => isYMaxFilterActive;
-            set
-            {
-                if (isYMaxFilterActive != value)
-                {
-                    isYMaxFilterActive = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         private void UpdateFilterStates()
         {
             IsTrackSpanFilterActive = Pr != null && Pr.ChartConf.TrackSpan != defaultTrackSpan;
-            IsYMinFilterActive = AxY1 != null && !double.IsNaN(AxY1.Minimum);
-            IsYMaxFilterActive = AxY1 != null && !double.IsNaN(AxY1.Maximum);
         }
 
         private void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -387,7 +361,8 @@ namespace Fenix
                                     TrackerFormatString = "{0}" + Environment.NewLine + "Y: {4:0.000}" + Environment.NewLine + "X: {2:" + Pr.longDT + "}",
                                     Color = OxyColor.FromRgb(tg.Clr.R, tg.Clr.G, tg.Clr.B),
                                     StrokeThickness = tg.Width,
-                                    IsVisible = tg.GrVisible
+                                    IsVisible = tg.GrVisible,
+                                    YAxisKey = ResolveAxisKey(tg.GrAxisKey)
                                 };
 
                                 s1.Tag = tg.Id;
@@ -401,6 +376,7 @@ namespace Fenix
                                 ser.Color = OxyColor.FromRgb(tg.Clr.R, tg.Clr.G, tg.Clr.B);
                                 ser.StrokeThickness = tg.Width;
                                 ser.IsVisible = tg.GrVisible;
+                                ser.YAxisKey = ResolveAxisKey(tg.GrAxisKey);
                             }
                         }
 
@@ -412,6 +388,85 @@ namespace Fenix
             {
                 PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
             }
+        }
+
+        private string ResolveAxisKey(string grAxisKey)
+        {
+            var key = string.IsNullOrEmpty(grAxisKey) ? "Y1" : grAxisKey;
+            return plotModel.Axes.OfType<LinearAxis>().Any(a => a.Key == key) ? key : "Y1";
+        }
+
+        private void RevalidateSeriesAxisKeys()
+        {
+            foreach (var series in plotModel.Series.OfType<LineSeries>())
+                series.YAxisKey = ResolveAxisKey(series.YAxisKey);
+        }
+
+        private void RebuildYAxes()
+        {
+            // Unsubscribe old axis conf events
+            if (Pr?.ChartConf?.Axes != null)
+                foreach (var axConf in Pr.ChartConf.Axes)
+                    ((INotifyPropertyChanged)axConf).PropertyChanged -= AxisConf_PropertyChanged;
+
+            // Remove existing Y axes
+            var toRemove = plotModel.Axes.OfType<LinearAxis>().ToList();
+            foreach (var ax in toRemove)
+                plotModel.Axes.Remove(ax);
+
+            AxY1 = null;
+            AxY2 = null;
+
+            var axisList = Pr?.ChartConf?.Axes;
+            if (axisList == null || axisList.Count == 0)
+            {
+                AxY1 = new LinearAxis { Key = "Y1", Position = AxisPosition.Left, MajorGridlineStyle = LineStyle.Dash };
+                plotModel.Axes.Add(AxY1);
+                return;
+            }
+
+            foreach (var axConf in axisList)
+            {
+                var ax = new LinearAxis
+                {
+                    Key = axConf.Key,
+                    Title = axConf.Title,
+                    Position = axConf.IsRight ? AxisPosition.Right : AxisPosition.Left,
+                    MajorGridlineStyle = LineStyle.Dash,
+                    IsAxisVisible = axConf.IsVisible,
+                    Minimum = double.IsNaN(axConf.Minimum) ? double.NaN : axConf.Minimum,
+                    Maximum = double.IsNaN(axConf.Maximum) ? double.NaN : axConf.Maximum
+                };
+                plotModel.Axes.Add(ax);
+
+                if (axConf.Key == "Y1") AxY1 = ax;
+                if (axConf.Key == "Y2") AxY2 = ax;
+
+                ((INotifyPropertyChanged)axConf).PropertyChanged += AxisConf_PropertyChanged;
+            }
+
+            if (AxY1 == null && plotModel.Axes.OfType<LinearAxis>().Any())
+                AxY1 = plotModel.Axes.OfType<LinearAxis>().First();
+        }
+
+        private void AxisConf_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var axConf = (ChartAxisConf)sender;
+            var ax = plotModel.Axes.OfType<LinearAxis>().FirstOrDefault(a => a.Key == axConf.Key);
+            if (ax == null) return;
+
+            switch (e.PropertyName)
+            {
+                case nameof(ChartAxisConf.Minimum): ax.Minimum = double.IsNaN(axConf.Minimum) ? double.NaN : axConf.Minimum; break;
+                case nameof(ChartAxisConf.Maximum): ax.Maximum = double.IsNaN(axConf.Maximum) ? double.NaN : axConf.Maximum; break;
+                case nameof(ChartAxisConf.Title):   ax.Title = axConf.Title; break;
+                case nameof(ChartAxisConf.IsVisible): ax.IsAxisVisible = axConf.IsVisible; break;
+                case nameof(ChartAxisConf.IsRight):
+                    ax.Position = axConf.IsRight ? AxisPosition.Right : AxisPosition.Left;
+                    break;
+            }
+
+            plotModel.InvalidatePlot(false);
         }
 
         private void ChartConf_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -426,17 +481,11 @@ namespace Fenix
                 {
                     UpdateFilterStates();
                 }
-                else if (e.PropertyName == nameof(ChartViewConf.minimumY))
+                else if (e.PropertyName == nameof(ChartViewConf.Axes))
                 {
-                    AxY1.Minimum = ((ChartViewConf)sender).minimumY;
+                    RebuildYAxes();
+                    RevalidateSeriesAxisKeys();
                     plotModel.InvalidatePlot(true);
-                    UpdateFilterStates();
-                }
-                else if (e.PropertyName == nameof(ChartViewConf.maximumY))
-                {
-                    AxY1.Maximum = ((ChartViewConf)sender).maximumY;
-                    plotModel.InvalidatePlot(true);
-                    UpdateFilterStates();
                 }
             }
             catch (Exception Ex)
@@ -751,35 +800,7 @@ namespace Fenix
             }
         }
 
-        private void Button_ClearYMinFilter_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                AxY1.Minimum = double.NaN;
-                Y0.Text = string.Empty;
-                plotModel.InvalidatePlot(true);
-                UpdateFilterStates();
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
 
-        private void Button_ClearYMaxFilter_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                AxY1.Maximum = double.NaN;
-                Y1.Text = string.Empty;
-                plotModel.InvalidatePlot(true);
-                UpdateFilterStates();
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
 
         private void Button_Clear_Click(object sender, RoutedEventArgs e)
         {
@@ -880,6 +901,11 @@ namespace Fenix
                         idr.refreshedCycle -= driverRefreshed;
                 }
 
+                // Unsubscribe per-axis property change handlers
+                if (Pr?.ChartConf?.Axes != null)
+                    foreach (var axConf in Pr.ChartConf.Axes)
+                        ((INotifyPropertyChanged)axConf).PropertyChanged -= AxisConf_PropertyChanged;
+
                 // Update window state information
                 PrCon.winManagment.RemoveAll(x => x.index == index);
 
@@ -887,6 +913,7 @@ namespace Fenix
                 propChanged_ = null;
                 AxX1 = null;
                 AxY1 = null;
+                AxY2 = null;
 
                 ITagList = null;
                 IDriverList = null;
@@ -908,45 +935,7 @@ namespace Fenix
             }
         }
 
-        private void Y0_ValueChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                var y0 = Y0.DoubleValue;
-                if (!double.IsNaN(y0) && !double.IsNaN(AxY1.Maximum) && y0 > AxY1.Maximum)
-                    throw new Exception("Minimum must be lower then maximum!");
-                AxY1.Minimum = y0;
-                plotModel.InvalidatePlot(true);
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-            finally
-            {
-                UpdateFilterStates();
-            }
-        }
 
-        private void Y1_ValueChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                var y1 = Y1.DoubleValue;
-                if (!double.IsNaN(y1) && !double.IsNaN(AxY1.Minimum) && y1 < AxY1.Minimum)
-                    throw new Exception("Maximum must be grather then minumum!");
-                AxY1.Maximum = y1;
-                plotModel.InvalidatePlot(true);
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-            finally
-            {
-                UpdateFilterStates();
-            }
-        }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

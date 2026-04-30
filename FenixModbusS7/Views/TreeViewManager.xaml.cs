@@ -33,6 +33,8 @@ namespace Fenix
             { typeof(Project),            "📁" },
             { typeof(CusFile),            "📂" },
             { typeof(DatabaseModel),      "🗄️" },
+            { typeof(ChartConfigNode),    "📐" },
+            { typeof(ChartAxisNode),      "📏" },
             { typeof(ScriptsDriver),      "📋" },
             { typeof(ScriptFile),         "📄" },
             { typeof(TimersFolder),       "📁" },

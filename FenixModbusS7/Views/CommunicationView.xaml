@@ -1,4 +1,4 @@
-<UserControl x:Class="Fenix.CommunicationView"
+﻿<UserControl x:Class="Fenix.CommunicationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -28,13 +28,13 @@
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0" Background="{StaticResource Th.SurfaceBrush}">
-            <ToggleButton Content="📜 Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
+            <ToggleButton Content="đź“ś Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
             <Separator />
-            <Button Content="💾 Save CSV" Click="SaveCSV" />
+            <Button Content="đź’ľ Save CSV" Click="SaveCSV" />
             <Separator />
-            <Button Content="📋 Copy to Clipboard" Click="Clipbord" />
+            <Button Content="đź“‹ Copy to Clipboard" Click="Clipbord" />
             <Separator />
-            <Button Content="🗑️ Clear" Click="Button_Clr_Click" />
+            <Button Content="đź—‘ď¸Ź Clear" Click="Button_Clr_Click" />
         </ToolBar>
 
         <DataGrid x:Name="View"
@@ -54,11 +54,11 @@
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <CheckBox Content="Name" IsChecked="{Binding project.ChartConf.CvCol7, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Direction" IsChecked="{Binding project.ChartConf.CvCol1, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Date and Time" IsChecked="{Binding project.ChartConf.CvCol2, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Time Diff. [ms]" IsChecked="{Binding project.ChartConf.CvCol4, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Data [Hex]" IsChecked="{Binding project.ChartConf.CvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Name" IsChecked="{Binding project.CommConf.CvCol7, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Direction" IsChecked="{Binding project.CommConf.CvCol1, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Date and Time" IsChecked="{Binding project.CommConf.CvCol2, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Time Diff. [ms]" IsChecked="{Binding project.CommConf.CvCol4, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Data [Hex]" IsChecked="{Binding project.CommConf.CvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     
 
                 </ContextMenu>
@@ -68,7 +68,7 @@
 
                 <DataGridTextColumn Header="Name"
                                     Width="Auto"
-                                    Visibility="{Binding Path=DataContext.project.ChartConf.CvCol7,
+                                    Visibility="{Binding Path=DataContext.project.CommConf.CvCol7,
                                     Converter={StaticResource BoolVis},
                                     Source={StaticResource ProxyElement} ,Mode=TwoWay}"
                                     ClipboardContentBinding="{Binding Name}"
@@ -78,7 +78,7 @@
 
                 <DataGridTextColumn Header="Direction"
                                         Width="Auto"
-                                        Visibility="{Binding Path=DataContext.project.ChartConf.CvCol1,
+                                        Visibility="{Binding Path=DataContext.project.CommConf.CvCol1,
                                         Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}"
                                         ClipboardContentBinding="{Binding Type}"
                                         Binding="{Binding Type}"
@@ -87,7 +87,7 @@
 
                 <DataGridTextColumn Header="Date and Time"
                                     Width="Auto"
-                                    Visibility="{Binding Path=DataContext.project.ChartConf.CvCol2,
+                                    Visibility="{Binding Path=DataContext.project.CommConf.CvCol2,
                                     Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}">
 
                     <DataGridTextColumn.ClipboardContentBinding>
@@ -107,7 +107,7 @@
 
                 <DataGridTextColumn Header="Time Diff. [ms]"
                     Width="Auto"
-                    Visibility="{Binding Path=DataContext.project.ChartConf.CvCol4,
+                    Visibility="{Binding Path=DataContext.project.CommConf.CvCol4,
                     Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}"
                     ClipboardContentBinding="{Binding RefTime}"
                                     Binding="{Binding RefTime}"
@@ -115,7 +115,7 @@
 
                 <DataGridTemplateColumn Header="Data [Hex]"
                                         Width="*"
-                                        Visibility="{Binding Path=DataContext.project.ChartConf.CvCol3,
+                                        Visibility="{Binding Path=DataContext.project.CommConf.CvCol3,
                                         Converter={StaticResource BoolVis},
                                         Source={StaticResource ProxyElement} , Mode=TwoWay}">
 
@@ -153,3 +153,4 @@
         </StatusBar>
     </Grid>
 </UserControl>
+

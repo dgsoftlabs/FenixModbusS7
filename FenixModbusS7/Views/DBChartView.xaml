@@ -48,28 +48,6 @@
                                           FromToolTip="Start date and time (available in Custom mode)"
                                           ToToolTip="End date and time (available in Custom mode)" />
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
-                    <TextBlock Text="📉" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                    <TextBlock Text="Y Min:" Style="{StaticResource Th.FilterLabel}" />
-                </StackPanel>
-                <local:ClearableTextBox x:Name="YMinInput"
-                                        Width="90"
-                                        Height="28"
-                                        Margin="0,0,8,0"
-                                        ToolTip="Y-Axis minimum value"
-                                        DoubleValue="{Binding YAxisMinimum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
-                    <TextBlock Text="📈" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                    <TextBlock Text="Y Max:" Style="{StaticResource Th.FilterLabel}" />
-                </StackPanel>
-                <local:ClearableTextBox x:Name="YMaxInput"
-                                        Width="90"
-                                        Height="28"
-                                        Margin="0,0,8,0"
-                                        ToolTip="Y-Axis maximum value"
-                                        DoubleValue="{Binding YAxisMaximum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
                 <Button Style="{StaticResource Th.FilterButton}" Click="Button_ExportPng_Click" ToolTip="Export chart as PNG image">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="💾" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />

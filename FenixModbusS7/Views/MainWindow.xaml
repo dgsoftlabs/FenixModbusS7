@@ -116,6 +116,14 @@
             <MenuItem Header="Database Reset" IsEnabled="{Binding mDbReset}" Click="MenuItem_DbReset_Click" />
         </ContextMenu>
 
+        <ContextMenu x:Key="CtxChartConfig">
+            <MenuItem Header="Add Axis" Click="MenuItem_ChartAddAxis_Click" />
+        </ContextMenu>
+
+        <ContextMenu x:Key="CtxChartAxis">
+            <MenuItem Header="Remove Axis" Click="MenuItem_ChartRemoveAxis_Click" />
+        </ContextMenu>
+
         <ContextMenu x:Key="CtxIntTag">
             <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
             <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />

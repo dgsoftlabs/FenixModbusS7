@@ -272,9 +272,36 @@ namespace ProjectDataLib
             set { ChartConf_ = value; modificationApear(); }
         }
 
+        private TableViewConf TableConf_;
+
+        [Browsable(false)]
+        [ComVisible(false)]
+        [XmlElement(ElementName = "TableConfiguration")]
+        public TableViewConf TableConf
+        {
+            get { return TableConf_; }
+            set { TableConf_ = value; modificationApear(); }
+        }
+
+        private CommViewConf CommConf_;
+
+        [Browsable(false)]
+        [ComVisible(false)]
+        [XmlElement(ElementName = "CommViewConfiguration")]
+        public CommViewConf CommConf
+        {
+            get { return CommConf_; }
+            set { CommConf_ = value; modificationApear(); }
+        }
+
         [Browsable(false)]
         [XmlElement(ElementName = "DatabaseConfiguration")]
         public DatabaseModel Db { get; set; }
+
+        [field: NonSerialized]
+        [Browsable(false)]
+        [XmlIgnore]
+        public ChartConfigNode ChartConfigNode { get; private set; }
 
         private Boolean IsExpand_;
 
@@ -504,6 +531,12 @@ namespace ProjectDataLib
 
             this.ChartConf = new ChartViewConf();
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
+
+            this.TableConf = new TableViewConf();
+            this.CommConf = new CommViewConf();
+
+            ChartConfigNode = new ChartConfigNode(this);
+            TreeViewChildren_.Add(ChartConfigNode);
         }
 
         private void Project_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -552,6 +585,15 @@ namespace ProjectDataLib
             if (Db == null)
                 Db = new DatabaseModel();
             TreeViewChildren_.Add(this.Db);
+
+            if (ChartConf == null)
+                ChartConf = new ChartViewConf();
+            if (TableConf == null)
+                TableConf = new TableViewConf();
+            if (CommConf == null)
+                CommConf = new CommViewConf();
+            ChartConfigNode = new ChartConfigNode(this);
+            TreeViewChildren_.Add(ChartConfigNode);
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
@@ -607,6 +649,15 @@ namespace ProjectDataLib
             if (Db == null)
                 Db = new DatabaseModel();
             TreeViewChildren_.Add(this.Db);
+
+            if (ChartConf == null)
+                ChartConf = new ChartViewConf();
+            if (TableConf == null)
+                TableConf = new TableViewConf();
+            if (CommConf == null)
+                CommConf = new CommViewConf();
+            ChartConfigNode = new ChartConfigNode(this);
+            TreeViewChildren_.Add(ChartConfigNode);
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(new object[] { new TimersFolder(ScriptEng_.Timers, ScriptEng_.isTimersFolderExpand, v => ScriptEng_.isTimersFolderExpand = v) }.Concat(ScriptFileList_.Cast<object>()));
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(new object[] { new TimersFolder(InternalTagsDrv.Timers, InternalTagsDrv.isTimersFolderExpand, v => InternalTagsDrv.isTimersFolderExpand = v) }.Concat(InTagsList_.Cast<object>()));

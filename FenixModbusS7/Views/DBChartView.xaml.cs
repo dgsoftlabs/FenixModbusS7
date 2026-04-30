@@ -29,8 +29,6 @@ namespace Fenix
         private DateTime? _toDate;
         private string _selectedInterval;
         private string _interactionDescription;
-        private double _yAxisMinimum;
-        private double _yAxisMaximum;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -39,6 +37,8 @@ namespace Fenix
         public PlotController PlotController { get; private set; }
 
         public LinearAxis AxY1 { get; set; }
+
+        public LinearAxis AxY2 { get; set; }
 
         public DateTimeAxis AxX1 { get; set; }
 
@@ -104,34 +104,6 @@ namespace Fenix
             }
         }
 
-        public double YAxisMinimum
-        {
-            get => _yAxisMinimum;
-            set
-            {
-                if (_yAxisMinimum != value)
-                {
-                    _yAxisMinimum = value;
-                    OnPropertyChanged();
-                    UpdatePlotYAxes();
-                }
-            }
-        }
-
-        public double YAxisMaximum
-        {
-            get => _yAxisMaximum;
-            set
-            {
-                if (_yAxisMaximum != value)
-                {
-                    _yAxisMaximum = value;
-                    OnPropertyChanged();
-                    UpdatePlotYAxes();
-                }
-            }
-        }
-
         public string InteractionDescription
         {
             get => _interactionDescription;
@@ -164,15 +136,103 @@ namespace Fenix
             PlotController = new PlotController();
             InteractionDescription = "Left Click + Drag: Pan | Ctrl + Right Click + Drag: Zoom Rectangle | Mouse Wheel: Zoom | C: Copy to Clipboard";
 
-            AxY1 = new LinearAxis { Position = AxisPosition.Left, MajorGridlineStyle = LineStyle.Dash };
             AxX1 = new DateTimeAxis { Position = AxisPosition.Bottom, MajorGridlineStyle = LineStyle.Dash, StringFormat = "HH:mm:ss" };
 
             PlotModel = new PlotModel();
             PlotModel.Axes.Add(AxX1);
-            PlotModel.Axes.Add(AxY1);
+
+            RebuildYAxes();
+
+            ((INotifyPropertyChanged)_project.ChartConf).PropertyChanged += ChartConf_PropertyChanged;
+
             View.Model = PlotModel;
 
             await RefreshChartAsync();
+        }
+
+        private void RebuildYAxes()
+        {
+            if (_project?.ChartConf?.Axes != null)
+                foreach (var axConf in _project.ChartConf.Axes)
+                    ((INotifyPropertyChanged)axConf).PropertyChanged -= AxisConf_PropertyChanged;
+
+            var toRemove = PlotModel.Axes.OfType<LinearAxis>().ToList();
+            foreach (var ax in toRemove)
+                PlotModel.Axes.Remove(ax);
+
+            AxY1 = null;
+            AxY2 = null;
+
+            var axisList = _project?.ChartConf?.Axes;
+            if (axisList == null || axisList.Count == 0)
+            {
+                AxY1 = new LinearAxis { Key = "Y1", Position = AxisPosition.Left, MajorGridlineStyle = LineStyle.Dash };
+                PlotModel.Axes.Add(AxY1);
+                return;
+            }
+
+            foreach (var axConf in axisList)
+            {
+                var ax = new LinearAxis
+                {
+                    Key = axConf.Key,
+                    Title = axConf.Title,
+                    Position = axConf.IsRight ? AxisPosition.Right : AxisPosition.Left,
+                    MajorGridlineStyle = LineStyle.Dash,
+                    IsAxisVisible = axConf.IsVisible,
+                    Minimum = double.IsNaN(axConf.Minimum) ? double.NaN : axConf.Minimum,
+                    Maximum = double.IsNaN(axConf.Maximum) ? double.NaN : axConf.Maximum
+                };
+                PlotModel.Axes.Add(ax);
+
+                if (axConf.Key == "Y1") AxY1 = ax;
+                if (axConf.Key == "Y2") AxY2 = ax;
+
+                ((INotifyPropertyChanged)axConf).PropertyChanged += AxisConf_PropertyChanged;
+            }
+
+            if (AxY1 == null && PlotModel.Axes.OfType<LinearAxis>().Any())
+                AxY1 = PlotModel.Axes.OfType<LinearAxis>().First();
+        }
+
+        private void AxisConf_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var axConf = (ChartAxisConf)sender;
+            var ax = PlotModel.Axes.OfType<LinearAxis>().FirstOrDefault(a => a.Key == axConf.Key);
+            if (ax == null) return;
+
+            switch (e.PropertyName)
+            {
+                case nameof(ChartAxisConf.Minimum):   ax.Minimum = double.IsNaN(axConf.Minimum) ? double.NaN : axConf.Minimum; break;
+                case nameof(ChartAxisConf.Maximum):   ax.Maximum = double.IsNaN(axConf.Maximum) ? double.NaN : axConf.Maximum; break;
+                case nameof(ChartAxisConf.Title):     ax.Title = axConf.Title; break;
+                case nameof(ChartAxisConf.IsVisible): ax.IsAxisVisible = axConf.IsVisible; break;
+                case nameof(ChartAxisConf.IsRight):   ax.Position = axConf.IsRight ? AxisPosition.Right : AxisPosition.Left; break;
+            }
+
+            PlotModel.InvalidatePlot(false);
+        }
+
+        private void ChartConf_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ChartViewConf.Axes))
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    RebuildYAxes();
+                    RevalidateSeriesAxisKeys();
+                    PlotModel.InvalidatePlot(true);
+                });
+            }
+        }
+
+        private void RevalidateSeriesAxisKeys()
+        {
+            foreach (var series in PlotModel.Series.OfType<XYAxisSeries>())
+            {
+                if (!PlotModel.Axes.OfType<LinearAxis>().Any(a => a.Key == series.YAxisKey))
+                    series.YAxisKey = "Y1";
+            }
         }
 
         public DBChartView(Project project)
@@ -183,11 +243,12 @@ namespace Fenix
             TimeIntervals = new ObservableCollection<string> { "1h", "3h", "6h", "12h", "24h", "Custom" };
             SelectedInterval = TimeIntervals.First();
 
-            YAxisMinimum = 0;
-            YAxisMaximum = 100;
-            UpdatePlotYAxes();
-
             Loaded += async (_, __) => await InitializeAsync(project);
+            Unloaded += (_, __) =>
+            {
+                if (_project?.ChartConf != null)
+                    ((INotifyPropertyChanged)_project.ChartConf).PropertyChanged -= ChartConf_PropertyChanged;
+            };
         }
 
         private async Task RefreshChartAsync()
@@ -198,17 +259,6 @@ namespace Fenix
                 var data = await LoadDataFromDatabase(FromDate, ToDate);
                 var series = await CreateSeriesAsync(data);
                 AddSeries(series);
-
-                if (data.Count != 0)
-                {
-                    YAxisMinimum = Math.Floor(data.Min(x => x.Value));
-                    YAxisMaximum = Math.Ceiling(data.Max(x => x.Value));
-                }
-                else
-                {
-                    YAxisMinimum = 0;
-                    YAxisMaximum = 100;
-                }
             }
             finally
             {
@@ -235,13 +285,18 @@ namespace Fenix
                 ITag tag = _project.GetITag(group.Key);
                 if (tag is null) continue;
 
+                var axisKey = string.IsNullOrEmpty(tag.GrAxisKey) ? "Y1" : tag.GrAxisKey;
+                if (PlotModel.Axes.OfType<LinearAxis>().All(a => a.Key != axisKey))
+                    axisKey = "Y1";
+
                 var serie = new LineSeries
                 {
                     Title = group.Key,
                     TrackerFormatString = "{0}" + Environment.NewLine + "Y: {4:0.000}" + Environment.NewLine + "X: {2:" + _project.longDT + "}",
                     Color = OxyColor.FromRgb(tag.Clr.R, tag.Clr.G, tag.Clr.B),
                     StrokeThickness = tag.Width,
-                    IsVisible = true
+                    IsVisible = true,
+                    YAxisKey = axisKey
                 };
 
                 await Task.Run(() =>
@@ -289,18 +344,6 @@ namespace Fenix
             };
             ToDate = now;
         }
-
-        private void UpdatePlotYAxes()
-        {
-            if (AxY1 != null)
-            {
-                AxY1.Minimum = YAxisMinimum;
-                AxY1.Maximum = YAxisMaximum;
-            }
-
-            PlotModel?.InvalidatePlot(false);
-        }
-
 
         private void Button_ExportPng_Click(object sender, RoutedEventArgs e)
         {

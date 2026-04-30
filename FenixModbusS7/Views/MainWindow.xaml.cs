@@ -1584,6 +1584,43 @@ namespace Fenix
             }
         }
 
+        private void MenuItem_ChartAddAxis_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var axes = Pr.ChartConf.Axes;
+                int idx = axes.Count + 1;
+                bool isRight = idx % 2 == 0;
+                string key = "Y" + idx;
+                axes.Add(new ChartAxisConf(key, key, isRight));
+                Pr.ChartConf.Axes = axes;
+                Pr.ChartConfigNode.RefreshChildren();
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
+        private void MenuItem_ChartRemoveAxis_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (SelObj is ChartAxisNode axisNode)
+                {
+                    var axes = Pr.ChartConf.Axes;
+                    if (axes.Count <= 1) return;
+                    axes.Remove(axisNode.AxisConf);
+                    Pr.ChartConf.Axes = axes;
+                    Pr.ChartConfigNode.RefreshChildren();
+                }
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
         private void View_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             try
@@ -1608,6 +1645,15 @@ namespace Fenix
 
                     ((ContextMenu)Resources["CtxDatabse"]).DataContext = _viewModel;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxDatabse"];
+                }
+                else if (e.NewValue is ChartConfigNode)
+                {
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxChartConfig"];
+                }
+                else if (e.NewValue is ChartAxisNode axisNode)
+                {
+                    propManag.SelectedObject = axisNode.AxisConf;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxChartAxis"];
                 }
                 else if (e.NewValue is CusFile)
                 {
