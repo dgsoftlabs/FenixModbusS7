@@ -425,13 +425,18 @@ namespace Fenix
                 return;
             }
 
+            int leftTier = 0, rightTier = 0;
             foreach (var axConf in axisList)
             {
+                var position = axConf.IsRight ? AxisPosition.Right : AxisPosition.Left;
+                int tier = axConf.IsRight ? rightTier++ : leftTier++;
+
                 var ax = new LinearAxis
                 {
                     Key = axConf.Key,
                     Title = axConf.Title,
-                    Position = axConf.IsRight ? AxisPosition.Right : AxisPosition.Left,
+                    Position = position,
+                    PositionTier = tier,
                     MajorGridlineStyle = LineStyle.Dash,
                     IsAxisVisible = axConf.IsVisible,
                     Minimum = double.IsNaN(axConf.Minimum) ? double.NaN : axConf.Minimum,
