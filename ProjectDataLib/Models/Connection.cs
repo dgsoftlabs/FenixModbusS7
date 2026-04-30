@@ -604,31 +604,38 @@ namespace ProjectDataLib
             }
         }
 
+        private void EnsureParameters()
+        {
+            if (Parameters != null)
+                return;
+
+            // Prefer asking the driver itself for its default parameters (no string coupling).
+            if (gConf_ != null)
+            {
+                Parameters = gConf_.newDrv(DriverName_)?.setDriverParam;
+                if (Parameters != null)
+                    return;
+            }
+
+            // Fallback for binary deserialization when gConf is not available yet.
+            Parameters = DriverName_ switch
+            {
+                "ModbusMasterTCP" => new TcpDriverParam(),
+                "S7-300-400 Ethernet" => new S7DriverParam(),
+                "ModbusMasterRTU" or "ModbusMasterASCII" => new IoDriverParam(),
+                _ => null
+            };
+        }
+
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            if (Parameters == null)
-            {
-                if (DriverName == "ModbusMasterTCP")
-                    Parameters = new TcpDriverParam();
-                else if (DriverName == "S7-300-400 Ethernet")
-                    Parameters = new S7DriverParam();
-                else if (DriverName == "ModbusMasterRTU" || DriverName == "ModbusMasterASCII")
-                    Parameters = new IoDriverParam();
-            }
+            EnsureParameters();
         }
 
         public void OnDeserializedXML()
         {
-            if (Parameters == null)
-            {
-                if (DriverName == "ModbusMasterTCP")
-                    Parameters = new TcpDriverParam();
-                else if (DriverName == "S7-300-400 Ethernet")
-                    Parameters = new S7DriverParam();
-                else if (DriverName == "ModbusMasterRTU" || DriverName == "ModbusMasterASCII")
-                    Parameters = new IoDriverParam();
-            }
+            EnsureParameters();
         }
     }
 }
