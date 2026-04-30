@@ -406,6 +406,12 @@ namespace Fenix
             }
         }
 
+        private void Button_ClearZoom_Click(object sender, RoutedEventArgs e)
+        {
+            PlotModel?.ResetAllAxes();
+            PlotModel?.InvalidatePlot(false);
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

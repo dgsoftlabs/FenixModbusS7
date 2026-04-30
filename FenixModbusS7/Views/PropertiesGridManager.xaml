@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Fenix"
              mc:Ignorable="d"
              d:DesignHeight="446.667" d:DesignWidth="366.667">
     <UserControl.Resources>
@@ -98,6 +99,21 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
+
+                                    <local:ClearableTextBox Grid.Column="0"
+                                                            Text="{Binding ValueText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            IsEnabled="{Binding IsEditable}">
+                                        <local:ClearableTextBox.Style>
+                                            <Style TargetType="local:ClearableTextBox">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsClearableTextEditorVisible}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </local:ClearableTextBox.Style>
+                                    </local:ClearableTextBox>
 
                                     <TextBox Grid.Column="0"
                                              Text="{Binding ValueText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"

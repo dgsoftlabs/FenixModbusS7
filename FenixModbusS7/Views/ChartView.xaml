@@ -49,6 +49,15 @@
                     </StackPanel>
                 </Button>
 
+                <Button Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
+                        Click="Button_ClearZoom_Click"
+                        ToolTip="Reset chart zoom to default view">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🔎" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <TextBlock Text="Clear Zoom" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
                 <Button x:Name="PauseResumeButton"
                         Style="{StaticResource Th.FilterButton}" Margin="0,0,4,0"
                         Click="Button_PauseResume_Click"

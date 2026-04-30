@@ -244,6 +244,7 @@ namespace Fenix
             private readonly TypeConverter _converter;
             private readonly ITypeDescriptorContext _converterContext;
             private readonly bool _isStandardValuesExclusive;
+            private readonly bool _useClearableTextEditor;
             private bool _isEnabled;
 
             public PropertyRow(object target, PropertyDescriptor property, bool enabled, string nameOverride = null)
@@ -255,6 +256,7 @@ namespace Fenix
                 _converter = _property.Converter;
                 _converterContext = new PropertyTypeDescriptorContext(_target, _property);
                 _isEnabled = enabled;
+                _useClearableTextEditor = _property.Attributes[typeof(ClearableTextInputAttribute)] is ClearableTextInputAttribute;
 
                 if (_valueType.IsEnum)
                     EnumValues = Enum.GetValues(_valueType).Cast<object>().ToList();
@@ -309,7 +311,9 @@ namespace Fenix
                 }
             }
 
-            public bool IsTextEditorVisible => !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible && !IsColorPickerVisible;
+            public bool IsTextEditorVisible => !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible && !IsColorPickerVisible && !IsClearableTextEditorVisible;
+
+            public bool IsClearableTextEditorVisible => _useClearableTextEditor && !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible && !IsColorPickerVisible;
 
             public IList EnumValues { get; }
 
@@ -444,6 +448,12 @@ namespace Fenix
                     if (value == null)
                         return string.Empty;
 
+                    if (value is double d && double.IsNaN(d))
+                        return string.Empty;
+
+                    if (value is float f && float.IsNaN(f))
+                        return string.Empty;
+
                     if (_converter != null && _converter.CanConvertTo(_converterContext, typeof(string)))
                     {
                         try
@@ -472,6 +482,14 @@ namespace Fenix
                         if (_valueType == typeof(string))
                         {
                             parsed = value;
+                        }
+                        else if (string.IsNullOrWhiteSpace(value) && _valueType == typeof(double))
+                        {
+                            parsed = double.NaN;
+                        }
+                        else if (string.IsNullOrWhiteSpace(value) && _valueType == typeof(float))
+                        {
+                            parsed = float.NaN;
                         }
                         else if (string.IsNullOrWhiteSpace(value) && Nullable.GetUnderlyingType(_property.PropertyType) != null)
                         {

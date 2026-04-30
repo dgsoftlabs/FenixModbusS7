@@ -48,6 +48,13 @@
                                           FromToolTip="Start date and time (available in Custom mode)"
                                           ToToolTip="End date and time (available in Custom mode)" />
 
+                <Button Style="{StaticResource Th.FilterButton}" Margin="4,0,4,0" Click="Button_ClearZoom_Click" ToolTip="Reset chart zoom to default view">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🔎" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />
+                        <TextBlock Text="Clear Zoom" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
                 <Button Style="{StaticResource Th.FilterButton}" Click="Button_ExportPng_Click" ToolTip="Export chart as PNG image">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="💾" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,4,0" />

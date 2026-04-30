@@ -36,6 +36,7 @@ namespace ProjectDataLib
 
         private double minimum_ = double.NaN;
 
+        [ClearableTextInput]
         [XmlElement(ElementName = "Minimum")]
         public double Minimum
         {
@@ -45,6 +46,7 @@ namespace ProjectDataLib
 
         private double maximum_ = double.NaN;
 
+        [ClearableTextInput]
         [XmlElement(ElementName = "Maximum")]
         public double Maximum
         {

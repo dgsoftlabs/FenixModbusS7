@@ -823,6 +823,19 @@ namespace Fenix
             }
         }
 
+        private void Button_ClearZoom_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                plotModel?.ResetAllAxes();
+                plotModel?.InvalidatePlot(false);
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
         private void Win_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
