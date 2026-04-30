@@ -13,9 +13,11 @@
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0">
-            <ToggleButton Content="Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
+            <ToggleButton Content="📜 Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
             <Separator />
-            <Button Click="Button_Clr_Click" Content="Clear" />
+            <Button Click="Button_Clr_Click" Content="🗑️ Clear" />
+            <Separator />
+            <Button Click="Button_Copy_Click" Content="📋 Copy Message" />
         </ToolBar>
 
         <DataGrid Name="View" Grid.Row="1" AutoGenerateColumns="False" GridLinesVisibility="None" CanUserAddRows="False"
