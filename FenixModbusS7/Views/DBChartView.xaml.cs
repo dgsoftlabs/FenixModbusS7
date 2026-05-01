@@ -5,18 +5,17 @@ using OxyPlot.Series;
 using OxyPlot.Wpf;
 using ProjectDataLib;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Markup;
-using System.Threading.Tasks;
-using System.IO;
 
 namespace Fenix
 {
@@ -223,11 +222,11 @@ namespace Fenix
 
             switch (e.PropertyName)
             {
-                case nameof(ChartAxisConf.Minimum):   ax.Minimum = double.IsNaN(axConf.Minimum) ? double.NaN : axConf.Minimum; break;
-                case nameof(ChartAxisConf.Maximum):   ax.Maximum = double.IsNaN(axConf.Maximum) ? double.NaN : axConf.Maximum; break;
-                case nameof(ChartAxisConf.Title):     ax.Title = axConf.Title; break;
+                case nameof(ChartAxisConf.Minimum): ax.Minimum = double.IsNaN(axConf.Minimum) ? double.NaN : axConf.Minimum; break;
+                case nameof(ChartAxisConf.Maximum): ax.Maximum = double.IsNaN(axConf.Maximum) ? double.NaN : axConf.Maximum; break;
+                case nameof(ChartAxisConf.Title): ax.Title = axConf.Title; break;
                 case nameof(ChartAxisConf.IsVisible): ax.IsAxisVisible = axConf.IsVisible; break;
-                case nameof(ChartAxisConf.IsRight):   ax.Position = axConf.IsRight ? AxisPosition.Right : AxisPosition.Left; break;
+                case nameof(ChartAxisConf.IsRight): ax.Position = axConf.IsRight ? AxisPosition.Right : AxisPosition.Left; break;
             }
 
             PlotModel.InvalidatePlot(false);
@@ -300,7 +299,7 @@ namespace Fenix
         private async Task<List<LineSeries>> CreateSeriesAsync(List<TagDTO> tagGroups)
         {
             List<LineSeries> series = new List<LineSeries>();
-            foreach (var group in tagGroups.GroupBy(x=>x.Name))
+            foreach (var group in tagGroups.GroupBy(x => x.Name))
             {
                 ITag tag = _project.GetITag(group.Key);
                 if (tag is null) continue;
@@ -357,12 +356,12 @@ namespace Fenix
             DateTime now = DateTime.Now;
             FromDate = SelectedInterval switch
             {
-                "1h"  => now.AddHours(-1),
-                "3h"  => now.AddHours(-3),
-                "6h"  => now.AddHours(-6),
+                "1h" => now.AddHours(-1),
+                "3h" => now.AddHours(-3),
+                "6h" => now.AddHours(-6),
                 "12h" => now.AddHours(-12),
                 "24h" => now.AddHours(-24),
-                _     => FromDate
+                _ => FromDate
             };
             ToDate = now;
         }

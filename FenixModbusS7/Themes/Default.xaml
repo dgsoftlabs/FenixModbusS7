@@ -584,7 +584,7 @@
                             <Grid x:Name="PART_DayTitleTemplate" />
 
                             <!-- Month grid -->
-                            <Grid x:Name="PART_MonthView"  />
+                            <Grid x:Name="PART_MonthView" />
                             <Grid x:Name="PART_YearView" Visibility="Hidden" />
                         </StackPanel>
                     </Border>
@@ -913,5 +913,4 @@
         <Setter Property="MinWidth" Value="100" />
         <Setter Property="Padding" Value="12,0" />
     </Style>
-
 </ResourceDictionary>

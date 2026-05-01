@@ -1,20 +1,18 @@
-using OxyPlot.Series;
-using OxyPlot;
+using Microsoft.Win32;
 using ProjectDataLib;
-using System.Data;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows;
-using System.Threading.Tasks;
-using Microsoft.Win32;
 using System.Text;
-using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Fenix
 {
@@ -131,12 +129,12 @@ namespace Fenix
             DateTime now = DateTime.Now;
             FromDate = SelectedInterval switch
             {
-                "1h"  => now.AddHours(-1),
-                "3h"  => now.AddHours(-3),
-                "6h"  => now.AddHours(-6),
+                "1h" => now.AddHours(-1),
+                "3h" => now.AddHours(-3),
+                "6h" => now.AddHours(-6),
                 "12h" => now.AddHours(-12),
                 "24h" => now.AddHours(-24),
-                _     => FromDate
+                _ => FromDate
             };
             ToDate = now;
         }

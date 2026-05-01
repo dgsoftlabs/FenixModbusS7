@@ -2,7 +2,6 @@ using AvalonDock.Layout;
 using AvalonDock.Layout.Serialization;
 using Fenix.ViewModels;
 using Microsoft.Win32;
-using System.Windows.Interop;
 using ProjectDataLib;
 using System;
 using System.Collections.Generic;
@@ -18,7 +17,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 using io = System.IO;
+
 using wf = System.Windows.Forms;
 
 namespace Fenix
@@ -26,6 +27,7 @@ namespace Fenix
     public partial class MainWindow : Window
     {
         #region Visibilty
+
         private readonly MainWindowViewModel _viewModel = new MainWindowViewModel();
 
         public Boolean mFile { get => _viewModel.mFile; set => _viewModel.mFile = value; }
@@ -535,7 +537,6 @@ namespace Fenix
         {
             try
             {
-
                 AddTag addTag_ = new Fenix.AddTag(ref PrCon, Pr.objId, SelGuid);
                 addTag_.Owner = this;
 
@@ -1031,7 +1032,6 @@ namespace Fenix
         {
             try
             {
-
                 if (PrCon.SrcType != ElementKind.InFile)
                 {
                     PrCon.pasteElement(Pr.objId, SelGuid);
@@ -1125,7 +1125,7 @@ namespace Fenix
                     if (f == null)
                         return;
 
-                    if (wf.MessageBox.Show( "Do you want to remove this file or directory?", "Attention", wf.MessageBoxButtons.OKCancel) == wf.DialogResult.OK)
+                    if (wf.MessageBox.Show("Do you want to remove this file or directory?", "Attention", wf.MessageBoxButtons.OKCancel) == wf.DialogResult.OK)
                     {
                         if (f.IsFile)
                             io.File.Delete(f.FullName);
@@ -1905,6 +1905,5 @@ namespace Fenix
         }
 
         #endregion Internal Events
-
     }
 }

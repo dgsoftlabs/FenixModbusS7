@@ -76,7 +76,6 @@
                         <TextBlock Text="Export" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
-
             </StackPanel>
         </GroupBox>
 
@@ -89,6 +88,5 @@
             <TextBlock Text="ℹ️" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="{StaticResource Th.TextSecBrush}" />
             <TextBlock Text="{Binding StatusText}" Foreground="{StaticResource Th.TextSecBrush}" VerticalAlignment="Center" />
         </StackPanel>
-
     </Grid>
 </UserControl>

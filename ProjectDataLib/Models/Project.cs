@@ -598,7 +598,6 @@ namespace ProjectDataLib
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
 
-
             foreach (var cn in connectionList_)
             {
                 TreeViewChildren_.Add(cn);
@@ -939,7 +938,7 @@ namespace ProjectDataLib
 
         #region IDisposable Support
 
-        private bool disposedValue = false;     
+        private bool disposedValue = false;
 
         protected virtual void Dispose(bool disposing)
         {

@@ -1,8 +1,9 @@
+using AvalonDock.Layout;
 using Microsoft.Win32;
 using OxyPlot;
 using OxyPlot.Axes;
-using OxyPlot.Wpf;
 using OxyPlot.Series;
+using OxyPlot.Wpf;
 using ProjectDataLib;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +14,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using AvalonDock.Layout;
 
 namespace Fenix
 {
@@ -246,7 +246,6 @@ namespace Fenix
 
                 // Set interaction description
                 InteractionDescription = "Pan:[ Left Click + Drag ] | Zoom Rectangle:[ Ctrl + Right Click + Drag ] | Zoom:[ Mouse Wheel ]";
-
             }
             catch (Exception Ex)
             {
@@ -255,6 +254,7 @@ namespace Fenix
         }
 
         private string _interactionDescription;
+
         public string InteractionDescription
         {
             get => _interactionDescription;
@@ -270,6 +270,7 @@ namespace Fenix
         }
 
         private string _statusText;
+
         public string StatusText
         {
             get => _statusText;
@@ -340,14 +341,14 @@ namespace Fenix
                         if (!tg.GrEnable)
                         {
                             // Series exists
-                                    if (plotModel.Series.ToList().Exists(x => (Guid)x.Tag == tg.Id))
-                                    {
-                                        var ser = (LineSeries)(from x in plotModel.Series where x.Title == tg.Name select x).First();
-                                        plotModel.Series.Remove(ser);
-                                    }
-                                    // Series does not exist
-                                    else
-                                        return;
+                            if (plotModel.Series.ToList().Exists(x => (Guid)x.Tag == tg.Id))
+                            {
+                                var ser = (LineSeries)(from x in plotModel.Series where x.Title == tg.Name select x).First();
+                                plotModel.Series.Remove(ser);
+                            }
+                            // Series does not exist
+                            else
+                                return;
                         }
                         else
                         {
@@ -464,7 +465,7 @@ namespace Fenix
             {
                 case nameof(ChartAxisConf.Minimum): ax.Minimum = double.IsNaN(axConf.Minimum) ? double.NaN : axConf.Minimum; break;
                 case nameof(ChartAxisConf.Maximum): ax.Maximum = double.IsNaN(axConf.Maximum) ? double.NaN : axConf.Maximum; break;
-                case nameof(ChartAxisConf.Title):   ax.Title = axConf.Title; break;
+                case nameof(ChartAxisConf.Title): ax.Title = axConf.Title; break;
                 case nameof(ChartAxisConf.IsVisible): ax.IsAxisVisible = axConf.IsVisible; break;
                 case nameof(ChartAxisConf.IsRight):
                     ax.Position = axConf.IsRight ? AxisPosition.Right : AxisPosition.Left;
@@ -583,15 +584,15 @@ namespace Fenix
                             ((INotifyPropertyChanged)t).PropertyChanged += ITag_PropertyChanged;
 
                         // Add series
-                            var s1 = new LineSeries
-                            {
-                                Title = t.Name,
-                                TrackerFormatString = "{0}" + Environment.NewLine + "Y: {4:0.000}" + Environment.NewLine + "X: {2:" + Pr.longDT + "}",
-                                Color = OxyColor.FromRgb(t.Clr.R, t.Clr.G, t.Clr.B),
-                                StrokeThickness = t.Width,
-                                IsVisible = t.GrVisible,
-                                Tag = t.Id
-                            };
+                        var s1 = new LineSeries
+                        {
+                            Title = t.Name,
+                            TrackerFormatString = "{0}" + Environment.NewLine + "Y: {4:0.000}" + Environment.NewLine + "X: {2:" + Pr.longDT + "}",
+                            Color = OxyColor.FromRgb(t.Clr.R, t.Clr.G, t.Clr.B),
+                            StrokeThickness = t.Width,
+                            IsVisible = t.GrVisible,
+                            Tag = t.Id
+                        };
 
                         plotModel.Series.Add(s1);
                     }
@@ -759,7 +760,7 @@ namespace Fenix
                         plotModel.InvalidatePlot(true);
                         UpdateStatusText();
 
-                        #endregion CommDriver
+                        #endregion Communication Driver
                     }
 
                     // Time range constraint
@@ -805,8 +806,6 @@ namespace Fenix
             }
         }
 
-
-
         private void Button_Clear_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -844,71 +843,71 @@ namespace Fenix
                 {
                     // Collection
 
-                        ((ITableView)Pr).Children.CollectionChanged -= ITagList_CollectionChanged;
-                        ((ITreeViewModel)Pr).Children.CollectionChanged -= Project_ChildrenChanged;
-                        ((IDriversMagazine)Pr).Children.CollectionChanged -= IDriver_CollectionChanged;
+                    ((ITableView)Pr).Children.CollectionChanged -= ITagList_CollectionChanged;
+                    ((ITreeViewModel)Pr).Children.CollectionChanged -= Project_ChildrenChanged;
+                    ((IDriversMagazine)Pr).Children.CollectionChanged -= IDriver_CollectionChanged;
 
-                        // Properties
+                    // Properties
 
-                        ((INotifyPropertyChanged)Pr).PropertyChanged -= Project_PropertyChanged;
-                        ((INotifyPropertyChanged)Pr.ChartConf).PropertyChanged -= ChartConf_PropertyChanged;
+                    ((INotifyPropertyChanged)Pr).PropertyChanged -= Project_PropertyChanged;
+                    ((INotifyPropertyChanged)Pr.ChartConf).PropertyChanged -= ChartConf_PropertyChanged;
 
-                        foreach (Connection c in Pr.connectionList)
-                            ((INotifyPropertyChanged)c).PropertyChanged -= Connection_PropertyChanged;
+                    foreach (Connection c in Pr.connectionList)
+                        ((INotifyPropertyChanged)c).PropertyChanged -= Connection_PropertyChanged;
 
-                        foreach (Device d in Pr.DevicesList)
-                            ((INotifyPropertyChanged)d).PropertyChanged -= Device_PropertyChanged;
+                    foreach (Device d in Pr.DevicesList)
+                        ((INotifyPropertyChanged)d).PropertyChanged -= Device_PropertyChanged;
 
-                        foreach (ITag t in ((ITableView)Pr).Children)
-                            ((INotifyPropertyChanged)t).PropertyChanged -= ITag_PropertyChanged;
+                    foreach (ITag t in ((ITableView)Pr).Children)
+                        ((INotifyPropertyChanged)t).PropertyChanged -= ITag_PropertyChanged;
 
-                        Win.Closing -= Win_Closing;
+                    Win.Closing -= Win_Closing;
 
-                        foreach (IDriverModel idr in IDriverList)
-                            idr.refreshedCycle -= driverRefreshed;
-                    }
-                    else if (ElKind == ElementKind.Connection)
-                    {
-                        // Collection
+                    foreach (IDriverModel idr in IDriverList)
+                        idr.refreshedCycle -= driverRefreshed;
+                }
+                else if (ElKind == ElementKind.Connection)
+                {
+                    // Collection
 
-                        ((ITableView)Pr).Children.CollectionChanged -= ITagList_CollectionChanged;
-                        ((ITreeViewModel)Pr).Children.CollectionChanged -= Project_ChildrenChanged;
-                        ((ITreeViewModel)Con).Children.CollectionChanged -= Device_CollectionChanged;
-                        ((IDriversMagazine)Con).Children.CollectionChanged -= IDriver_CollectionChanged;
+                    ((ITableView)Pr).Children.CollectionChanged -= ITagList_CollectionChanged;
+                    ((ITreeViewModel)Pr).Children.CollectionChanged -= Project_ChildrenChanged;
+                    ((ITreeViewModel)Con).Children.CollectionChanged -= Device_CollectionChanged;
+                    ((IDriversMagazine)Con).Children.CollectionChanged -= IDriver_CollectionChanged;
 
-                        // Properties
+                    // Properties
 
-                        ((INotifyPropertyChanged)Pr).PropertyChanged -= Project_PropertyChanged;
-                        ((INotifyPropertyChanged)Pr.ChartConf).PropertyChanged -= ChartConf_PropertyChanged;
+                    ((INotifyPropertyChanged)Pr).PropertyChanged -= Project_PropertyChanged;
+                    ((INotifyPropertyChanged)Pr.ChartConf).PropertyChanged -= ChartConf_PropertyChanged;
 
-                        ((INotifyPropertyChanged)Con).PropertyChanged -= Connection_PropertyChanged;
+                    ((INotifyPropertyChanged)Con).PropertyChanged -= Connection_PropertyChanged;
 
-                        foreach (Device d in ((ITreeViewModel)Con).Children)
-                            ((INotifyPropertyChanged)d).PropertyChanged -= Device_PropertyChanged;
+                    foreach (Device d in ((ITreeViewModel)Con).Children)
+                        ((INotifyPropertyChanged)d).PropertyChanged -= Device_PropertyChanged;
 
-                        foreach (ITag t in ((ITableView)Con).Children)
-                            ((INotifyPropertyChanged)t).PropertyChanged -= ITag_PropertyChanged;
+                    foreach (ITag t in ((ITableView)Con).Children)
+                        ((INotifyPropertyChanged)t).PropertyChanged -= ITag_PropertyChanged;
 
-                        Win.Closing -= Win_Closing;
+                    Win.Closing -= Win_Closing;
 
-                        foreach (IDriverModel idr in IDriverList)
-                            idr.refreshedCycle -= driverRefreshed;
-                    }
-                    else if (ElKind == ElementKind.Device)
-                    {
-                        // Collection
+                    foreach (IDriverModel idr in IDriverList)
+                        idr.refreshedCycle -= driverRefreshed;
+                }
+                else if (ElKind == ElementKind.Device)
+                {
+                    // Collection
 
-                        ((ITableView)Dev).Children.CollectionChanged -= ITagList_CollectionChanged;
-                        ((ITreeViewModel)Pr).Children.CollectionChanged -= Project_ChildrenChanged;
-                        ((ITreeViewModel)Con).Children.CollectionChanged -= Device_CollectionChanged;
-                        ((IDriversMagazine)Dev).Children.CollectionChanged -= IDriver_CollectionChanged;
+                    ((ITableView)Dev).Children.CollectionChanged -= ITagList_CollectionChanged;
+                    ((ITreeViewModel)Pr).Children.CollectionChanged -= Project_ChildrenChanged;
+                    ((ITreeViewModel)Con).Children.CollectionChanged -= Device_CollectionChanged;
+                    ((IDriversMagazine)Dev).Children.CollectionChanged -= IDriver_CollectionChanged;
 
-                        // Properties
+                    // Properties
 
-                        ((INotifyPropertyChanged)Pr).PropertyChanged -= Project_PropertyChanged;
-                        ((INotifyPropertyChanged)Pr.ChartConf).PropertyChanged -= ChartConf_PropertyChanged;
-                        ((INotifyPropertyChanged)Con).PropertyChanged -= Connection_PropertyChanged;
-                        ((INotifyPropertyChanged)Dev).PropertyChanged -= Device_PropertyChanged;
+                    ((INotifyPropertyChanged)Pr).PropertyChanged -= Project_PropertyChanged;
+                    ((INotifyPropertyChanged)Pr.ChartConf).PropertyChanged -= ChartConf_PropertyChanged;
+                    ((INotifyPropertyChanged)Con).PropertyChanged -= Connection_PropertyChanged;
+                    ((INotifyPropertyChanged)Dev).PropertyChanged -= Device_PropertyChanged;
 
                     foreach (ITag t in ((ITableView)Con).Children)
                         ((INotifyPropertyChanged)t).PropertyChanged -= ITag_PropertyChanged;
@@ -952,8 +951,6 @@ namespace Fenix
                 PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
             }
         }
-
-
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

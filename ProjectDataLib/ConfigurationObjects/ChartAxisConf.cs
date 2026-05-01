@@ -72,7 +72,8 @@ namespace ProjectDataLib
             set { isVisible_ = value; propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsVisible))); }
         }
 
-        public ChartAxisConf() { }
+        public ChartAxisConf()
+        { }
 
         public ChartAxisConf(string key, string title, bool isRight = false)
         {

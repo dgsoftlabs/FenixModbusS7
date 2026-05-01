@@ -55,6 +55,7 @@ namespace ProjectDataLib
         }
 
         private bool isExpand_ = true;
+
         public bool IsExpand
         {
             get { return isExpand_; }
@@ -63,6 +64,7 @@ namespace ProjectDataLib
 
         [Browsable(false)]
         public bool IsLive { get; set; }
+
         [Browsable(false)]
         public bool IsBlocked { get; set; }
 
@@ -112,6 +114,7 @@ namespace ProjectDataLib
         public ObservableCollection<object> Children { get; set; } = new ObservableCollection<object>();
 
         private bool isExpand_;
+
         public bool IsExpand
         {
             get { return isExpand_; }
@@ -120,6 +123,7 @@ namespace ProjectDataLib
 
         [Browsable(false)]
         public bool IsLive { get; set; }
+
         [Browsable(false)]
         public bool IsBlocked { get; set; }
 

@@ -109,7 +109,6 @@
             </Style.Triggers>
         </Style>
 
-
         <DataTemplate x:Key="BinaryField">
             <StackPanel>
                 <Button x:Name="bin" Content="Switch" Click="Button_Click" Padding="8,2" MinHeight="22">
@@ -632,7 +631,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
 
                 <DataGridTemplateColumn Width="*"  Header="Set Value" CellStyle="{StaticResource SwitchTp}" Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol13, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}">
                 </DataGridTemplateColumn>

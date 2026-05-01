@@ -1,10 +1,8 @@
 using ProjectDataLib;
 using System;
 using System.ComponentModel;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Xml;
 
 namespace Fenix
 {
@@ -24,6 +22,7 @@ namespace Fenix
         private ProjectContainer PrCon;
 
         private Version serVer;
+
         public Version SerVer
         {
             get => serVer;
@@ -35,6 +34,7 @@ namespace Fenix
         }
 
         private Version insVer;
+
         public Version InsVer
         {
             get => insVer;
@@ -46,6 +46,7 @@ namespace Fenix
         }
 
         private string status;
+
         public string Status
         {
             get => status;
@@ -57,6 +58,7 @@ namespace Fenix
         }
 
         private bool update;
+
         public bool Update
         {
             get => update;
@@ -68,6 +70,7 @@ namespace Fenix
         }
 
         private int progressValue;
+
         public int ProgressValue
         {
             get => progressValue;
@@ -91,7 +94,7 @@ namespace Fenix
 
         private async void CheckVersion_OnLoaded(object sender, RoutedEventArgs e)
         {
-           await Task.Run(async () => await CheckForUpdates());
+            await Task.Run(async () => await CheckForUpdates());
         }
 
         private async Task CheckForUpdates()

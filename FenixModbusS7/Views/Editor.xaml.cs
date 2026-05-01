@@ -1,9 +1,9 @@
+using AvalonDock.Layout;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
 using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Highlighting;
-using Microsoft.Win32;
 using ProjectDataLib;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using AvalonDock.Layout;
 
 namespace Fenix
 {
@@ -47,19 +46,19 @@ namespace Fenix
                 string ext = Path.GetExtension(path_);
                 string langName = ext switch
                 {
-                    ".cs"   => "C#",
+                    ".cs" => "C#",
                     ".html" => "HTML",
-                    ".js"   => "JavaScript",
-                    ".css"  => "CSS",
-                    ".xml"  => "XML",
-                    _       => "C#"
+                    ".js" => "JavaScript",
+                    ".css" => "CSS",
+                    ".xml" => "XML",
+                    _ => "C#"
                 };
 
                 textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition(langName);
                 InitializeFolding(langName);
 
                 textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
-                textEditor.TextArea.TextEntered  += textEditor_TextArea_TextEntered;
+                textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
                 textEditor.TextArea.Caret.PositionChanged += Caret_PositionChanged;
                 textEditor.PreviewKeyDown += TextEditor_PreviewKeyDown;
 
@@ -108,7 +107,7 @@ namespace Fenix
             if (e.Key == Key.F2) { ToggleCatalog(); e.Handled = true; }
         }
 
-        #endregion
+        #endregion Keyboard shortcuts
 
         #region Status bar
 
@@ -118,7 +117,7 @@ namespace Fenix
             tbCaretInfo.Text = $"Ln {caret.Line}  Col {caret.Column}";
         }
 
-        #endregion
+        #endregion Status bar
 
         #region File operations
 
@@ -184,7 +183,7 @@ namespace Fenix
             }
         }
 
-        #endregion
+        #endregion File operations
 
         #region Script API Catalog
 
@@ -265,6 +264,7 @@ namespace Fenix
         }
 
         private void BtnCatalog_Click(object sender, RoutedEventArgs e) => ToggleCatalog();
+
         private void BtnCloseCatalog_Click(object sender, RoutedEventArgs e) => ToggleCatalog(show: false);
 
         private void CatalogFilter_TextChanged(object sender, TextChangedEventArgs e)
@@ -319,19 +319,20 @@ namespace Fenix
             }
         }
 
-        #endregion
+        #endregion Script API Catalog
 
         #region Inline Find / Replace panel
 
-        private void Button_FindClick(object sender, RoutedEventArgs e)    => OpenSearchPanel(replaceMode: false);
+        private void Button_FindClick(object sender, RoutedEventArgs e) => OpenSearchPanel(replaceMode: false);
+
         private void Button_ReplaceClick(object sender, RoutedEventArgs e) => OpenSearchPanel(replaceMode: true);
 
         private void OpenSearchPanel(bool replaceMode)
         {
             var visibility = replaceMode ? Visibility.Visible : Visibility.Collapsed;
-            lblReplace.Visibility   = visibility;
-            txtReplace.Visibility   = visibility;
-            btnReplace.Visibility   = visibility;
+            lblReplace.Visibility = visibility;
+            txtReplace.Visibility = visibility;
+            btnReplace.Visibility = visibility;
             btnReplaceAll.Visibility = visibility;
 
             SearchPanel.Visibility = Visibility.Visible;
@@ -375,7 +376,7 @@ namespace Fenix
 
         private void TxtReplace_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)  { DoReplace(); e.Handled = true; }
+            if (e.Key == Key.Enter) { DoReplace(); e.Handled = true; }
             else if (e.Key == Key.Escape) { CloseSearchPanel(); e.Handled = true; }
         }
 
@@ -391,8 +392,10 @@ namespace Fenix
         }
 
         private void FindNextClick(object sender, RoutedEventArgs e) => FindNext();
+
         private void FindPrevClick(object sender, RoutedEventArgs e) => FindPrev();
-        private void ReplaceClick(object sender, RoutedEventArgs e)  => DoReplace();
+
+        private void ReplaceClick(object sender, RoutedEventArgs e) => DoReplace();
 
         private void ReplaceAllClick(object sender, RoutedEventArgs e)
         {
@@ -530,7 +533,7 @@ namespace Fenix
             return new Regex(pattern, options);
         }
 
-        #endregion
+        #endregion Inline Find / Replace panel
 
         #region Text completion
 
@@ -563,7 +566,7 @@ namespace Fenix
             }
         }
 
-        #endregion
+        #endregion Text completion
 
         #region Folding
 
@@ -575,6 +578,7 @@ namespace Fenix
                     foldingStrategy = new XmlFoldingStrategy();
                     textEditor.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.DefaultIndentationStrategy();
                     break;
+
                 case "C#":
                 case "C++":
                 case "PHP":
@@ -582,6 +586,7 @@ namespace Fenix
                     textEditor.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.CSharp.CSharpIndentationStrategy(textEditor.Options);
                     foldingStrategy = new BraceFoldingStrategy();
                     break;
+
                 default:
                     textEditor.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.DefaultIndentationStrategy();
                     foldingStrategy = null;
@@ -629,7 +634,7 @@ namespace Fenix
             }
         }
 
-        #endregion
+        #endregion Folding
 
         #region Clipboard
 
@@ -649,7 +654,7 @@ namespace Fenix
             }
         }
 
-        #endregion
+        #endregion Clipboard
 
         #region Font size
 
@@ -672,17 +677,20 @@ namespace Fenix
             UpdateFontSizeLabel();
         }
 
-        #endregion
+        #endregion Font size
     }
 
     public class EditorAux : ICompletionData
     {
-        public EditorAux(string text) { this.Text = text; }
+        public EditorAux(string text)
+        { this.Text = text; }
+
         public System.Windows.Media.ImageSource Image => null;
         public string Text { get; private set; }
         public object Content => Text;
         public object Description => "Description for " + Text;
         public double Priority => 0;
+
         public void Complete(TextArea textArea, ISegment completionSegment, EventArgs insertionRequestEventArgs)
             => textArea.Document.Replace(completionSegment, Text);
     }

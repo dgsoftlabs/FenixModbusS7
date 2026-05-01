@@ -422,7 +422,7 @@ namespace Fenix
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     var selectedColor = dialog.Color;
-                    
+
                     if (_valueType == typeof(System.Drawing.Color))
                     {
                         _property.SetValue(_target, selectedColor);

@@ -151,7 +151,6 @@
                         </MultiBinding>
                     </DataGridTemplateColumn.ClipboardContentBinding>
                 </DataGridTemplateColumn>
-
             </DataGrid.Columns>
         </DataGrid>
 
@@ -161,4 +160,3 @@
         </StatusBar>
     </Grid>
 </UserControl>
-

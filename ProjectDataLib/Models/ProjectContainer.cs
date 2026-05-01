@@ -5,17 +5,15 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
-using System.Net.Http;
-using System.Diagnostics;
-using System.Reflection;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace ProjectDataLib
 {
-
     public class ProjectContainer : ITreeViewModel
     {
         #region Fields
@@ -1394,34 +1392,25 @@ namespace ProjectDataLib
                     ITagList.AddRange((from tg in Pr.tagsList select (ITag)tg).ToList());
                     ITagList.AddRange((from tg in Pr.InTagsList select (ITag)tg).ToList());
                 }
-
                 else if (SelectedObject == typeof(InternalTagsDriver))
                     ITagList.AddRange((from tg in Pr.InTagsList select (ITag)tg).ToList());
-
                 else if (SelectedObject == typeof(Connection))
                     ITagList.AddRange((from tg in getAllTagsFromConnection(Pr1, Obj1) select (ITag)tg).ToList());
-
                 else if (SelectedObject == typeof(Device))
                     ITagList.AddRange((from tg in getAllTagsFromDevice(Pr1, Obj1) select (ITag)tg).ToList());
-
                 else if (SelectedObject == typeof(Tag))
                     ITagList.Add((ITag)getTag(Pr1, Obj1));
-
                 else if (SelectedObject == typeof(InTag))
                     ITagList.Add((ITag)GetIntTag(Pr1, Obj1));
-
                 else
                     throw new ApplicationException("Element not exists");
 
                 if (TabVisble && GraphVisible)
                     return (from t in ITagList where t.GrVisibleTab && t.GrEnable select t).ToList();
-
                 else if (!TabVisble && GraphVisible)
                     return (from t in ITagList where t.GrEnable select t).ToList();
-
                 else if (TabVisble && !GraphVisible)
                     return (from t in ITagList where t.GrVisibleTab select t).ToList();
-
                 else
                     return (from t in ITagList select t).ToList();
             }
@@ -1688,7 +1677,7 @@ namespace ProjectDataLib
             return null;
         }
 
-        #endregion
+        #endregion GitHub
 
         public override string ToString()
         {

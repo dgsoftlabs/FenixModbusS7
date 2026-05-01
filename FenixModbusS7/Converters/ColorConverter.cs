@@ -17,12 +17,16 @@ namespace Fenix
             {
                 case EventType.ERROR:
                     return new SolidColorBrush(Colors.Red);
+
                 case EventType.INFO:
                     return new SolidColorBrush(Colors.Yellow);
+
                 case EventType.IN:
                     return new SolidColorBrush(Colors.LightCyan);
+
                 case EventType.OUT:
                     return new SolidColorBrush(Colors.White);
+
                 default:
                     return new SolidColorBrush(Colors.White);
             }

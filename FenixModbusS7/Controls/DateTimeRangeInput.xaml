@@ -190,7 +190,6 @@
                         Click="ToClearButton_Click"
                         ToolTip="Clear end date and time"
                         Content="✕" />
-
             </StackPanel>
         </Border>
     </Grid>

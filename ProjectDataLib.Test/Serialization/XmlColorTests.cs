@@ -1,6 +1,5 @@
-using Xunit;
 using System.Drawing;
-using ProjectDataLib;
+using Xunit;
 
 namespace ProjectDataLib.Test.Serialization
 {

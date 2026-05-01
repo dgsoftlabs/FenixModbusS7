@@ -10,7 +10,7 @@ namespace Fenix
     {
         private bool _isUpdatingControls;
         private readonly TimePickerPopup _fromTimePicker = new();
-        private readonly TimePickerPopup _toTimePicker   = new();
+        private readonly TimePickerPopup _toTimePicker = new();
         private readonly Popup _fromTimePopup;
         private readonly Popup _toTimePopup;
 
@@ -59,16 +59,16 @@ namespace Fenix
             InitializeComponent();
 
             _fromTimePopup = new Popup { StaysOpen = false, AllowsTransparency = true, Placement = PlacementMode.Bottom, Child = _fromTimePicker };
-            _toTimePopup   = new Popup { StaysOpen = false, AllowsTransparency = true, Placement = PlacementMode.Bottom, Child = _toTimePicker };
+            _toTimePopup = new Popup { StaysOpen = false, AllowsTransparency = true, Placement = PlacementMode.Bottom, Child = _toTimePicker };
 
             Loaded += (_, __) =>
             {
                 _fromTimePopup.PlacementTarget = FromClockButton;
-                _toTimePopup.PlacementTarget   = ToClockButton;
+                _toTimePopup.PlacementTarget = ToClockButton;
                 SyncFromControls();
                 SyncToControls();
                 _fromTimePicker.TimeConfirmed += (s, t) => { _fromTimePopup.IsOpen = false; FromTimeTextBox.Text = t.ToString(@"hh\:mm\:ss"); };
-                _toTimePicker.TimeConfirmed   += (s, t) => { _toTimePopup.IsOpen   = false; ToTimeTextBox.Text   = t.ToString(@"hh\:mm\:ss"); };
+                _toTimePicker.TimeConfirmed += (s, t) => { _toTimePopup.IsOpen = false; ToTimeTextBox.Text = t.ToString(@"hh\:mm\:ss"); };
             };
         }
 

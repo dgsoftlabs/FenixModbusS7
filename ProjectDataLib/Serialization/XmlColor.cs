@@ -42,7 +42,7 @@ namespace ProjectDataLib
             {
                 try
                 {
-                    if (Alpha == 0xFF)       
+                    if (Alpha == 0xFF)
                         color_ = ColorTranslator.FromHtml(value);
                     else
                         color_ = Color.FromArgb(Alpha, ColorTranslator.FromHtml(value));
@@ -60,7 +60,7 @@ namespace ProjectDataLib
             get { return color_.A; }
             set
             {
-                if (value != color_.A)         
+                if (value != color_.A)
                     color_ = Color.FromArgb(value, color_);
             }
         }

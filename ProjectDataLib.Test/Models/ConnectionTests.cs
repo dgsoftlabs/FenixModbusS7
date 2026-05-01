@@ -1,8 +1,6 @@
-using Xunit;
-using ProjectDataLib;
-using System;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using Xunit;
 
 namespace ProjectDataLib.Test.Models
 {

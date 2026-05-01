@@ -25,7 +25,6 @@ namespace Fenix
         }
     }
 
-
     internal class ImageConverter : IValueConverter
     {
         private static readonly Dictionary<Type, string> ImageMappings = new Dictionary<Type, string>()
