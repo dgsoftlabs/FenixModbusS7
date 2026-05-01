@@ -2,8 +2,6 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,12 +11,19 @@ namespace ProjectDataLib.Data
     public interface ITagRepository : IAsyncDisposable
     {
         Task InitializeAsync(string databasePath);
+
         Task AddTagAsync(string name, double value, DateTime stamp);
+
         Task AddTagsBatchAsync(IEnumerable<(string Name, double Value)> tags, DateTime stamp);
+
         Task RemoveTagByNameAsync(string name);
+
         Task<List<TagDTO>> GetAllTagsAsync(bool descending = true);
+
         Task<List<TagDTO>> GetTagsByStampAsync(DateTime from, DateTime to, bool descending = true);
+
         Task<List<TagDTO>> GetTagsByNameAsync(string tagName, DateTime from, DateTime to, bool descending = true);
+
         Task ClearAllTagsAsync();
     }
 

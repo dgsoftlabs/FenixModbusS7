@@ -1,6 +1,4 @@
 using Xunit;
-using ProjectDataLib;
-using System;
 
 namespace ProjectDataLib.Test.Models
 {

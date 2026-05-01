@@ -78,6 +78,23 @@ namespace Fenix
             }
         }
 
+        //Kopiuj wiadomosc
+        private void Button_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (View.SelectedItem is CustomException item)
+                {
+                    string text = $"{item.Sender}\t{item.Czas}\t{item.Ex?.Message}\t{item.Ex}";
+                    Clipboard.SetText(text);
+                }
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
         public override string ToString()
         {
             return "Output";

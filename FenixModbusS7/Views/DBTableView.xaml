@@ -35,33 +35,17 @@
                     <TextBlock Text="Last:" Style="{StaticResource Th.FilterLabel}" />
                 </StackPanel>
                 <ComboBox x:Name="TimeIntervalComboBox"
-                          Width="100"
+                          Width="70"
                           Style="{StaticResource Th.FilterComboBox}"
                           ItemsSource="{Binding TimeIntervals}"
                           SelectedItem="{Binding SelectedInterval, Mode=TwoWay}"
                           ToolTip="Show data from the last selected interval" />
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
-                    <TextBlock Text="📅" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                    <TextBlock Text="From:" Style="{StaticResource Th.FilterLabel}" />
-                </StackPanel>
-                <DatePicker x:Name="FromDateCtrl"
-                            Width="160"
-                            Style="{StaticResource Th.FilterDatePicker}"
-                            SelectedDate="{Binding FromDate, Mode=TwoWay}"
-                            IsEnabled="{Binding IsDateRangeEditable}"
-                            ToolTip="Start date (available in Custom mode)" />
-
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
-                    <TextBlock Text="📅" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
-                    <TextBlock Text="To:" Style="{StaticResource Th.FilterLabel}" />
-                </StackPanel>
-                <DatePicker x:Name="ToDateCtrl"
-                            Width="160"
-                            Style="{StaticResource Th.FilterDatePicker}"
-                            SelectedDate="{Binding ToDate, Mode=TwoWay}"
-                            IsEnabled="{Binding IsDateRangeEditable}"
-                            ToolTip="End date (available in Custom mode)" />
+                <local:DateTimeRangeInput FromValue="{Binding FromDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          ToValue="{Binding ToDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          IsEnabled="{Binding IsDateRangeEditable}"
+                                          FromToolTip="Start date and time (available in Custom mode)"
+                                          ToToolTip="End date and time (available in Custom mode)" />
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
                     <TextBlock Text="&#x2195;" VerticalAlignment="Center" Margin="0,0,3,0" FontSize="{StaticResource Th.FontSm}" />
@@ -73,10 +57,10 @@
                           ItemsSource="{Binding OrderOptions}"
                           SelectedItem="{Binding SelectedOrder, Mode=TwoWay}" />
 
-                <Button Style="{StaticResource Th.FilterButton}" Click="ResetButton_Click" ToolTip="Reload table data">
+                <Button Style="{StaticResource Th.FilterButton}" Margin="4,0,0,0" Click="ExportButton_Click" ToolTip="Export visible data to CSV">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="🔄" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock Text="Refresh" VerticalAlignment="Center" />
+                        <TextBlock Text="💾" FontSize="{StaticResource Th.FontSm}" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Text="Export" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
             </WrapPanel>

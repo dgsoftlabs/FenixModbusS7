@@ -1,10 +1,10 @@
+using AvalonDock.Layout;
 using ProjectDataLib;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
-using AvalonDock.Layout;
 
 namespace Fenix
 {
@@ -13,6 +13,7 @@ namespace Fenix
         private int index;
 
         private ProjectContainer PrCon_;
+
         public ProjectContainer PrCon
         {
             get { return PrCon_; }
@@ -20,6 +21,7 @@ namespace Fenix
         }
 
         private Project Pr_;
+
         public Project Pr
         {
             get { return Pr_; }
@@ -27,6 +29,7 @@ namespace Fenix
         }
 
         private Connection Con_;
+
         public Connection Con
         {
             get { return Con_; }
@@ -34,6 +37,7 @@ namespace Fenix
         }
 
         private Device Dev_;
+
         public Device Dev
         {
             get { return Dev_; }
@@ -41,6 +45,7 @@ namespace Fenix
         }
 
         private PropertyChangedEventHandler propChanged_;
+
         event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
         {
             add { propChanged_ += value; }

@@ -25,7 +25,6 @@ namespace Fenix
         }
     }
 
-
     internal class ImageConverter : IValueConverter
     {
         private static readonly Dictionary<Type, string> ImageMappings = new Dictionary<Type, string>()
@@ -33,10 +32,14 @@ namespace Fenix
             { typeof(Project),            "📁" },
             { typeof(CusFile),            "📂" },
             { typeof(DatabaseModel),      "🗄️" },
+            { typeof(ChartConfigNode),    "📐" },
+            { typeof(ChartAxisNode),      "📏" },
             { typeof(ScriptsDriver),      "📋" },
             { typeof(ScriptFile),         "📄" },
+            { typeof(TimersFolder),       "📁" },
             { typeof(InternalTagsDriver), "🏷️" },
             { typeof(InTag),              "🔖" },
+            { typeof(CustomTimer),        "⏱️" },
             { typeof(Connection),         "🔌" },
             { typeof(Device),             "💻" },
             { typeof(Tag),                "🏷️" }

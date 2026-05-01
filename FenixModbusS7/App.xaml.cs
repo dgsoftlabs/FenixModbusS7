@@ -1,6 +1,5 @@
 using Microsoft.Win32;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -66,7 +65,7 @@ namespace Fenix
             {
                 string strp = (string)Registry.GetValue("HKEY_CURRENT_USER\\Software\\Fenix", "LastPath", "");
                 var layoutPath = Path.GetDirectoryName(strp) + "\\Layout_.xml";
-                if(File.Exists(layoutPath))
+                if (File.Exists(layoutPath))
                 {
                     File.Delete(layoutPath);
                 }

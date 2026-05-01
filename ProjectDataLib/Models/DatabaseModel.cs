@@ -1,16 +1,16 @@
 using Newtonsoft.Json;
+using ProjectDataLib.Data;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using ProjectDataLib.Data;
 
 namespace ProjectDataLib
 {
@@ -66,7 +66,7 @@ namespace ProjectDataLib
             set
             {
                 Pr_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Proj"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Pr)));
             }
         }
 
@@ -96,7 +96,7 @@ namespace ProjectDataLib
             try
             {
                 var dbPath = Path.GetDirectoryName(Pr.path) + PrCon.Database;
-                
+
                 _repository = new TagRepository();
                 await _repository.InitializeAsync(dbPath);
 
@@ -244,7 +244,7 @@ namespace ProjectDataLib
         {
             if (_repository == null)
                 return new List<TagDTO>();
-            
+
             return await _repository.GetAllTagsAsync();
         }
 

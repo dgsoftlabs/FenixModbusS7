@@ -1,3 +1,4 @@
+using AvalonDock.Layout;
 using ProjectDataLib;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using AvalonDock.Layout;
 
 namespace Fenix
 {
@@ -361,7 +361,8 @@ namespace Fenix
                     else
                     {
                         ((ComboBox)sender).ItemsSource = new List<int>() { 0 };
-                    };
+                    }
+                    ;
                     break;
 
                 case TypeData.CHAR:
@@ -760,7 +761,8 @@ namespace Fenix
                     else
                     {
                         return new List<int>() { 0 };
-                    };
+                    }
+                    ;
 
                 case TypeData.CHAR:
                     if (mArea.AdresSize > 16)

@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -78,7 +77,7 @@ namespace ProjectDataLib
             set
             {
                 Proj_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Proj"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Proj)));
             }
         }
 
@@ -94,7 +93,7 @@ namespace ProjectDataLib
             set
             {
                 idrv_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("idrv"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(idrv)));
             }
         }
 
@@ -109,7 +108,7 @@ namespace ProjectDataLib
             set
             {
                 Format_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Format"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Format)));
             }
         }
 
@@ -124,7 +123,7 @@ namespace ProjectDataLib
             set
             {
                 parentId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("parentId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(parentId)));
             }
         }
 
@@ -139,7 +138,7 @@ namespace ProjectDataLib
             set
             {
                 objId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("objId"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(objId)));
             }
         }
 
@@ -154,7 +153,7 @@ namespace ProjectDataLib
             {
                 if (Proj != null)
                 {
-                    if (Proj_.tagsList.Where(x => x.tagName == value).Count<Tag>() > 0 || Proj_.InTagsList.Where(x => x.tagName == value).Count<InTag>() > 0)
+                    if (Proj_.tagsList.Where(x => x.tagName == value).Count<Tag>() > 0 || Proj_.InTagsList.Where(x => x != this && x.tagName == value).Count<InTag>() > 0)
                         tagName_ = tagName_ + "$$";
                     else
                         tagName_ = value;
@@ -162,7 +161,7 @@ namespace ProjectDataLib
                 else
                     tagName_ = value;
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.Name)));
             }
         }
 
@@ -178,7 +177,7 @@ namespace ProjectDataLib
                 TypeData_ = value;
                 ResetValue();
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("TypeData_"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TypeData_)));
             }
         }
 
@@ -203,7 +202,7 @@ namespace ProjectDataLib
             set
             {
                 describe_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Description"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.Description)));
             }
         }
 
@@ -218,7 +217,7 @@ namespace ProjectDataLib
             set
             {
                 tagVersion_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("TagVersion"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.TagVersion)));
             }
         }
 
@@ -266,7 +265,7 @@ namespace ProjectDataLib
                     value_ = value;
                 }
 
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITag.Value)));
             }
         }
 
@@ -484,7 +483,7 @@ namespace ProjectDataLib
             set
             {
                 Clr_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Clr"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Clr)));
             }
         }
 
@@ -506,7 +505,7 @@ namespace ProjectDataLib
             set
             {
                 Width_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("Width"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Width)));
             }
         }
 
@@ -521,13 +520,13 @@ namespace ProjectDataLib
             set
             {
                 GrEnable_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("GrEnable"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GrEnable)));
             }
         }
 
         private Boolean GrVisible_;
 
-        [Category("05 Graph"), DisplayName("Visible")]
+        [Category("05 Graph"), DisplayName("Visible (Chart)")]
         [JsonIgnore]
         [XmlElement(ElementName = "ChartVisible")]
         public Boolean GrVisible
@@ -536,13 +535,29 @@ namespace ProjectDataLib
             set
             {
                 GrVisible_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("GrVisible"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GrVisible)));
+            }
+        }
+
+        private string GrAxisKey_ = "Y1";
+
+        [Category("05 Graph"), DisplayName("Y Axis")]
+        [TypeConverter(typeof(ChartAxisKeyConverter))]
+        [JsonIgnore]
+        [XmlElement(ElementName = "ChartAxisKey")]
+        public string GrAxisKey
+        {
+            get { return GrAxisKey_; }
+            set
+            {
+                GrAxisKey_ = value;
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GrAxisKey)));
             }
         }
 
         private Boolean GrVisibleTab_;
 
-        [Category("06 Table"), DisplayName("Visible")]
+        [Category("06 Table"), DisplayName("Visible (Table)")]
         [JsonIgnore]
         [XmlElement(ElementName = "TableVisible")]
         public Boolean GrVisibleTab
@@ -551,7 +566,7 @@ namespace ProjectDataLib
             set
             {
                 GrVisibleTab_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("GrVisibleTab"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GrVisibleTab)));
             }
         }
 
@@ -942,6 +957,17 @@ namespace ProjectDataLib
             }
         }
 
+        bool ITag.ActGrAxisKey
+        {
+            get { return true; }
+        }
+
+        string ITag.GrAxisKey
+        {
+            get { return GrAxisKey_; }
+            set { GrAxisKey_ = value; propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(GrAxisKey))); }
+        }
+
         [Obsolete("Stare")]
         bool ITag.ActGrMarkers
         {
@@ -1094,7 +1120,7 @@ namespace ProjectDataLib
             set
             {
                 idrv.isAlive = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("isAlive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IDriverModel.isAlive)));
             }
         }
 
@@ -1167,7 +1193,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsLive"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsLive)));
             }
         }
 
@@ -1179,7 +1205,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs("IsBlocked"));
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsBlocked)));
             }
         }
     }
