@@ -68,7 +68,6 @@ namespace Fenix
 
         private void InnerTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Text = InnerTextBox.Text;
             UpdateClearButtonVisibility();
 
             if (!_updatingFromDouble)
