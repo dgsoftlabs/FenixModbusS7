@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -154,7 +153,7 @@ namespace ProjectDataLib
             {
                 if (Proj != null)
                 {
-                    if (Proj_.tagsList.Where(x => x.tagName == value).Count<Tag>() > 0 || Proj_.InTagsList.Where(x => x.tagName == value).Count<InTag>() > 0)
+                    if (Proj_.tagsList.Where(x => x.tagName == value).Count<Tag>() > 0 || Proj_.InTagsList.Where(x => x != this && x.tagName == value).Count<InTag>() > 0)
                         tagName_ = tagName_ + "$$";
                     else
                         tagName_ = value;
