@@ -1,8 +1,8 @@
-using ProjectDataLib;
 using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using ProjectDataLib;
 
 namespace Fenix
 {
@@ -10,8 +10,15 @@ namespace Fenix
     {
         object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime tm = (DateTime)values[0];
-            Project pr = (Project)values[1];
+            if (values == null || values.Length < 2)
+                return DependencyProperty.UnsetValue;
+
+            if (values[0] == DependencyProperty.UnsetValue || values[0] is not DateTime tm)
+                return DependencyProperty.UnsetValue;
+
+            if (values[1] == DependencyProperty.UnsetValue || values[1] is not Project pr)
+                return DependencyProperty.UnsetValue;
+
             return tm.ToString(pr.longDT);
         }
 

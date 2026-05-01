@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Fenix"
              mc:Ignorable="d"
-             d:DesignHeight="402.667" d:DesignWidth="912"
+             d:DesignHeight="400" d:DesignWidth="900"
              Background="{StaticResource Th.BgBrush}">
 
     <UserControl.Resources>
@@ -54,15 +54,25 @@
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
+                    <CheckBox Content="Index" IsChecked="{Binding project.CommConf.CvCol5, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Name" IsChecked="{Binding project.CommConf.CvCol7, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Direction" IsChecked="{Binding project.CommConf.CvCol1, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Date and Time" IsChecked="{Binding project.CommConf.CvCol2, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Time Diff. [ms]" IsChecked="{Binding project.CommConf.CvCol4, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Data [Hex]" IsChecked="{Binding project.CommConf.CvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />               
+                    <CheckBox Content="Event Gap [ms]" IsChecked="{Binding project.CommConf.CvCol4, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Data [Hex]" IsChecked="{Binding project.CommConf.CvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
 
             <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Index"
+                                    Width="Auto"
+                                    Visibility="{Binding Path=DataContext.project.CommConf.CvCol5,
+                                    Converter={StaticResource BoolVis},
+                                    Source={StaticResource ProxyElement} ,Mode=TwoWay}"
+                                    ClipboardContentBinding="{Binding Index}"
+                                    Binding="{Binding Index}"
+                                    IsReadOnly="True" />
 
                 <DataGridTextColumn Header="Name"
                                     Width="Auto"
@@ -103,7 +113,7 @@
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Time Diff. [ms]"
+                <DataGridTextColumn Header="Event Gap [ms]"
                     Width="Auto"
                     Visibility="{Binding Path=DataContext.project.CommConf.CvCol4,
                     Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}"

@@ -20,6 +20,7 @@ namespace ProjectDataLib
             }
         }
 
+        public int Index { get; set; }
         public string Name { get; set; }
         public object Sender { get; set; }
         public DateTime Czas { get; set; }

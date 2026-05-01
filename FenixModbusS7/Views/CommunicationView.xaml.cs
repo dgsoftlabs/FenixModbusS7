@@ -292,7 +292,12 @@ namespace Fenix
                 if (Stack.Count > 0)
                     lsEl = Stack.Last();
 
-                Stack.Add(new EventElement(project, sender, data, time, description, EventType.OUT, lsEl, cn?.connectionName ?? "No Name"));
+                var eventElement = new EventElement(project, sender, data, time, description, EventType.OUT, lsEl, cn?.connectionName ?? "No Name")
+                {
+                    Index = Stack.Count + 1
+                };
+
+                Stack.Add(eventElement);
             };
 
             try
@@ -332,7 +337,12 @@ namespace Fenix
                 if (Stack.Count > 0)
                     lsEl = Stack.Last();
 
-                Stack.Add(new EventElement(project, sender, data, time, description, EventType.IN, lsEl, cn?.connectionName ?? "No Name"));
+                var eventElement = new EventElement(project, sender, data, time, description, EventType.IN, lsEl, cn?.connectionName ?? "No Name")
+                {
+                    Index = Stack.Count + 1
+                };
+
+                Stack.Add(eventElement);
             };
 
             try
@@ -372,7 +382,12 @@ namespace Fenix
                     lsEl = Stack.Last();
 
                 //Stack add
-                Stack.Add(new EventElement(project, se, data, time, description, EventType.INFO, lsEl, cn?.connectionName ?? "No Name"));
+                var eventElement = new EventElement(project, se, data, time, description, EventType.INFO, lsEl, cn?.connectionName ?? "No Name")
+                {
+                    Index = Stack.Count + 1
+                };
+
+                Stack.Add(eventElement);
             };
 
             View.Dispatcher?.Invoke(lacznik, sender, e);
@@ -403,7 +418,12 @@ namespace Fenix
                 if (Stack.Count > 0)
                     lsEl = Stack.Last();
 
-                Stack.Add(new EventElement(project, se, data, time, description, EventType.ERROR, lsEl, cn?.connectionName ?? "No Name"));
+                var eventElement = new EventElement(project, se, data, time, description, EventType.ERROR, lsEl, cn?.connectionName ?? "No Name")
+                {
+                    Index = Stack.Count + 1
+                };
+
+                Stack.Add(eventElement);
             };
 
             View.Dispatcher?.Invoke(lacznik, sender, e);
