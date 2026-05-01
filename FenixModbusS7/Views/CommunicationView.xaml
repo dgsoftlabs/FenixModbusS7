@@ -28,13 +28,13 @@
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0" Background="{StaticResource Th.SurfaceBrush}">
-            <ToggleButton Content="đź“ś Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
+            <ToggleButton Content="&#x1F4DC; Scroll" IsChecked="{Binding mScroll, Mode=TwoWay}" />
             <Separator />
-            <Button Content="đź’ľ Save CSV" Click="SaveCSV" />
+            <Button Content="&#x1F4BE; Save CSV" Click="SaveCSV" />
             <Separator />
-            <Button Content="đź“‹ Copy to Clipboard" Click="Clipbord" />
+            <Button Content="&#x1F4CB; Copy to Clipboard" Click="Clipbord" />
             <Separator />
-            <Button Content="đź—‘ď¸Ź Clear" Click="Button_Clr_Click" />
+            <Button Content="&#x1F5D1; Clear" Click="Button_Clr_Click" />
         </ToolBar>
 
         <DataGrid x:Name="View"
