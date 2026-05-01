@@ -1,16 +1,13 @@
+using AvalonDock.Layout;
 using ProjectDataLib;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using AvalonDock.Layout;
 using io = System.IO;
 using wf = System.Windows.Forms;
 
@@ -143,7 +140,7 @@ namespace Fenix
             index = projectContainer.winManagment.Count;
             projectContainer.winManagment.Add(new WindowsStatus(index, true, false));
 
-            //zmiana kolkcji
+            //zmiana kollcji
             Stack.CollectionChanged += Stack_CollectionChanged;
             DriverList.CollectionChanged += DriverList_CollectionChanged;
         }
@@ -446,110 +443,6 @@ namespace Fenix
             View.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
             ApplicationCommands.Copy.Execute(null, View);
             View.UnselectAll();
-        }
-    }
-
-    public class DateTimeFormConverter : IMultiValueConverter
-    {
-        object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            DateTime tm = (DateTime)values[0];
-            Project pr = (Project)values[1];
-            return tm.ToString(pr.longDT);
-        }
-
-        object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            return new object[] { DependencyProperty.UnsetValue };
-        }
-    }
-
-    public class DataBytes : IMultiValueConverter
-    {
-        object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            IDriverModel idrv = (IDriverModel)values[0];
-            byte[] data = (byte[])values[1];
-            string info = (string)values[2];
-            EventType Type = (EventType)values[3];
-
-            if (Type == EventType.OUT)
-                return idrv.FormatFrameRequest(data, NumberStyles.HexNumber);
-            else if (Type == EventType.IN)
-                return idrv.FormatFrameResponse(data, NumberStyles.HexNumber);
-            else
-            {
-                return "INTERNAL PROBLEM";
-            }
-        }
-
-        object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            return new object[] { DependencyProperty.UnsetValue };
-        }
-    }
-
-    public class ColorConverter : IValueConverter
-    {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            EventElement ev = (EventElement)value;
-
-            switch (ev.Type)
-            {
-                case EventType.ERROR:
-                    return new SolidColorBrush(Colors.Red);
-                case EventType.INFO:
-                    return new SolidColorBrush(Colors.Yellow);
-                case EventType.IN:
-                    return new SolidColorBrush(Colors.LightCyan);
-                case EventType.OUT:
-                    return new SolidColorBrush(Colors.White);
-                default:
-                    return new SolidColorBrush(Colors.White);
-            }
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return DependencyProperty.UnsetValue;
-        }
-    }
-
-    public class TagsConverter : IValueConverter
-    {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            EventElement ev = (EventElement)value;
-
-            string s = "";
-
-            var tgs = from t in ev.Pr.tagsList where t.idrv.ObjId == ((IDriverModel)ev.Sender).ObjId select t;
-            foreach (ITag tg in tgs)
-                s = s + string.Format("{0}: {1}  ;", tg.Name, tg.GetFormatedValue());
-
-            return s;
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return DependencyProperty.UnsetValue;
-        }
-    }
-
-    public class BoolToVis : IValueConverter
-    {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if ((bool)value)
-                return Visibility.Hidden;
-            else
-                return Visibility.Visible;
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return DependencyProperty.UnsetValue;
         }
     }
 }

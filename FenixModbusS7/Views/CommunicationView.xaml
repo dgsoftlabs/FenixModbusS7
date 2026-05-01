@@ -24,7 +24,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0" Background="{StaticResource Th.SurfaceBrush}">
@@ -58,9 +58,7 @@
                     <CheckBox Content="Direction" IsChecked="{Binding project.CommConf.CvCol1, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Date and Time" IsChecked="{Binding project.CommConf.CvCol2, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Time Diff. [ms]" IsChecked="{Binding project.CommConf.CvCol4, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Data [Hex]" IsChecked="{Binding project.CommConf.CvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    
-
+                    <CheckBox Content="Data [Hex]" IsChecked="{Binding project.CommConf.CvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />               
                 </ContextMenu>
             </DataGrid.ContextMenu>
 
