@@ -307,10 +307,10 @@
     <ROW Property="ARPPRODUCTICON" Value="soft.exe" Type="8"/>
     <ROW Property="ARPURLINFOABOUT" Value="https://dgsoftlabs.com/"/>
     <ROW Property="Manufacturer" Value="DGSoftLabs"/>
-    <ROW Property="ProductCode" Value="1033:{12C293D8-4302-4FB1-A200-0AEBE93A3C98} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{B08CE118-9086-450B-AD13-9D4E616A8B47} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="FenixModbusS7"/>
-    <ROW Property="ProductVersion" Value="4.0.3" Options="32"/>
+    <ROW Property="ProductVersion" Value="4.0.4" Options="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{288A4594-D6A7-4215-BB19-EB4A8DB3AA54}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
