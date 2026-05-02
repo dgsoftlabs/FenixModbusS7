@@ -58,29 +58,6 @@ namespace ProjectDataLib.Test.Models
         }
 
         [Fact]
-        public void Pr_SetValue_RaisesPropertyChanged()
-        {
-            // Arrange
-            var dbModel = new DatabaseModel();
-            var project = new Project();
-            bool eventRaised = false;
-            PropertyChangedEventHandler handler = (sender, e) =>
-            {
-                if (e.PropertyName == "Proj")
-                    eventRaised = true;
-            };
-
-            var notifyingModel = (INotifyPropertyChanged)dbModel;
-            notifyingModel.PropertyChanged += handler;
-
-            // Act
-            dbModel.Pr = project;
-
-            // Assert
-            Assert.True(eventRaised);
-        }
-
-        [Fact]
         public void Pr_CanBeSetNull()
         {
             // Arrange

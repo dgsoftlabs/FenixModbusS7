@@ -302,17 +302,6 @@ namespace ProjectDataLib
 
                 deleteFiles.Clear();
 
-                foreach (InFile fil in buff.FileList)
-                {
-                    fil.FilePath = Path.GetDirectoryName(buff.path) + this.HttpCatalog + "\\" + fil.Name;
-
-                    if (!File.Exists(fil.FilePath))
-                        deleteFiles.Add(fil.FilePath);
-                }
-
-                foreach (string gp in deleteFiles)
-                    buff.FileList.RemoveAll(x => x.FilePath == gp);
-
                 foreach (Connection cn in buff.connectionList)
                 {
                     cn.OnDeserializedXML();
@@ -605,13 +594,6 @@ namespace ProjectDataLib
                     return true;
                 }
 
-                if (elKind == ElementKind.InFile)
-                {
-                    RemoveInFile(projId, idEl);
-                    cutMarks = false;
-                    return true;
-                }
-
                 if (elKind == ElementKind.ScriptFile)
                 {
                     RemoveScriptFile(projId, idEl);
@@ -671,10 +653,6 @@ namespace ProjectDataLib
                 if (name == ScriptGuid)
                     return pr.ScriptEng;
 
-                obj = pr.FileList.Find(x => x.objId == name);
-                if (obj != null)
-                    return obj;
-
                 obj = pr.ScriptFileList.Find(x => x.objId == name);
                 if (obj != null)
                     return obj;
@@ -720,10 +698,6 @@ namespace ProjectDataLib
 
                     if (name == ScriptGuid)
                         return pr.ScriptEng;
-
-                    obj = pr.FileList.Find(x => x.objId == name);
-                    if (obj != null)
-                        return obj;
 
                     obj = pr.ScriptFileList.Find(x => x.objId == name);
                     if (obj != null)
@@ -1481,62 +1455,6 @@ namespace ProjectDataLib
         }
 
         #endregion ITag
-
-        #region InFile
-
-        public Boolean AddInFile(Guid projId, InFile file)
-        {
-            try
-            {
-                Project pr = getProject(projId);
-                pr.FileList.Add(file);
-
-                if (addInFileEv != null)
-                    addInFileEv(pr, new ProjectEventArgs(file));
-
-                return true;
-            }
-            catch (Exception Ex)
-            {
-                ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-                return false;
-            }
-        }
-
-        public Boolean RemoveInFile(Guid projId, Guid file)
-        {
-            try
-            {
-                Project pr = getProject(projId);
-                pr.FileList.RemoveAll(x => x.objId == file);
-
-                if (removeInFileEv != null)
-                    removeInFileEv(pr, new ProjectEventArgs(file));
-
-                return true;
-            }
-            catch (Exception Ex)
-            {
-                ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-                return false;
-            }
-        }
-
-        public InFile GetInFile(Guid projId, Guid file)
-        {
-            try
-            {
-                Project pr = getProject(projId);
-                return pr.FileList.Find(x => x.objId == file);
-            }
-            catch (Exception Ex)
-            {
-                ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-                return null;
-            }
-        }
-
-        #endregion InFile
 
         #region ScriptFile
 

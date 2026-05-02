@@ -36,7 +36,6 @@
 
         <ContextMenu x:Key="CtxHttpServer">
             <MenuItem Header="Folder"  Click="Folder_Click" IsEnabled="{Binding mFolder}" />
-            <MenuItem Header="Files" Click="File0_Click"  IsEnabled="{Binding mInFile}" />
             <Separator />
             <MenuItem Header="Simulation"  Click="Simulation0_Click" IsEnabled="{Binding mSimulate }" />
             <Separator />
@@ -206,10 +205,9 @@
                         <MenuItem.Icon><TextBlock Text="🔖" FontSize="12" /></MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Folder"  Click="Folder_Click" IsEnabled="{Binding mFolder}">
-                        <MenuItem.Icon><TextBlock Text="📁" FontSize="12" /></MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="File"  Click="File0_Click" IsEnabled="{Binding mInFile}">
-                        <MenuItem.Icon><TextBlock Text="📄" FontSize="12" /></MenuItem.Icon>
+                        <MenuItem.Icon>
+                            <TextBlock Text="📁" FontSize="12" />
+                        </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <Separator />

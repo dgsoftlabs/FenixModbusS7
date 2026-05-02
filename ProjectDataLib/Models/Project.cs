@@ -344,17 +344,6 @@ namespace ProjectDataLib
             }
         }
 
-        private List<InFile> FileList_;
-
-        [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "FileList", Type = typeof(List<InFile>))]
-        public List<InFile> FileList
-        {
-            get { return FileList_; }
-            set { FileList_ = value; }
-        }
-
         private List<ScriptFile> ScriptFileList_;
 
         [Browsable(false)]
@@ -491,7 +480,6 @@ namespace ProjectDataLib
 
             this.PrCon_ = prcn;
 
-            FileList_ = new List<InFile>();
             ScriptFileList_ = new List<ScriptFile>();
 
             ScriptEng_ = new ScriptsDriver(this);
@@ -576,9 +564,6 @@ namespace ProjectDataLib
                 sf.PrCon = PrCon;
             }
 
-            if (FileList_ == null)
-                FileList_ = new List<InFile>();
-
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             TreeViewChildren_ = new ObservableCollection<object>();
@@ -638,9 +623,6 @@ namespace ProjectDataLib
                 sf.Proj = this;
                 sf.PrCon = PrCon;
             }
-
-            if (FileList_ == null)
-                FileList_ = new List<InFile>();
 
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
@@ -952,7 +934,6 @@ namespace ProjectDataLib
                     DevicesList_.Clear();
                     tagsList_.Clear();
                     InTagsList_.Clear();
-                    FileList_?.Clear();
                     ScriptFileList_?.Clear();
                 }
 

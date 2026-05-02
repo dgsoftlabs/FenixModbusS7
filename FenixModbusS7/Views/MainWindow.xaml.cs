@@ -9,7 +9,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -29,7 +28,6 @@ namespace Fenix
 {
     public partial class MainWindow : Window
     {
-
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
 
@@ -364,14 +362,15 @@ namespace Fenix
                     Pr = PrCon.projectList.First();
                     Registry.SetValue(PrCon.RegUserRoot, PrCon.LastPathKey, Pr.path);
                 }
-            }          
+            }
         }
 
         #endregion Konstruktor
 
-        const int HOTKEY_ID_1 = 9000;
-        const int HOTKEY_ID_2 = 9001;
-        const int HOTKEY_ID_3 = 9002;
+        private const int HOTKEY_ID_1 = 9000;
+        private const int HOTKEY_ID_2 = 9001;
+        private const int HOTKEY_ID_3 = 9002;
+
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
@@ -428,6 +427,7 @@ namespace Fenix
 
             return IntPtr.Zero;
         }
+
         #region Internal Commands
 
         private void CheckAccessForNodes()
@@ -694,38 +694,9 @@ namespace Fenix
         {
             try
             {
-                if (tvMain.View.SelectedItem is CusFile)
-                {
-                    AddFolder fr = new AddFolder(PrCon, Pr, ((CusFile)tvMain.View.SelectedItem).FullName, actualKindElement);
-                    fr.Owner = this;
-                    fr.Show();
-                }
-                else if (tvMain.View.SelectedItem is Project)
+                if (tvMain.View.SelectedItem is Project)
                 {
                     AddFolder fr = new AddFolder(PrCon, Pr, io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog, actualKindElement);
-                    fr.Owner = this;
-                    fr.Show();
-                }
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void File0_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (tvMain.View.SelectedItem is CusFile)
-                {
-                    AddCusFile fr = new AddCusFile(PrCon, Pr, ((CusFile)tvMain.View.SelectedItem).FullName, actualKindElement);
-                    fr.Owner = this;
-                    fr.Show();
-                }
-                else if (tvMain.View.SelectedItem is Project)
-                {
-                    AddCusFile fr = new AddCusFile(PrCon, Pr, io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog, actualKindElement);
                     fr.Owner = this;
                     fr.Show();
                 }
@@ -775,13 +746,6 @@ namespace Fenix
                 else if (actualKindElement == ElementKind.Scripts)
                 {
                     Process.Start(new ProcessStartInfo(io.Path.GetDirectoryName(Pr.path) + PrCon.ScriptsCatalog) { UseShellExecute = true });
-                }
-                else if (actualKindElement == ElementKind.InFile)
-                {
-                    if (tvMain.View.SelectedItem is CusFile selected && !string.IsNullOrWhiteSpace(selected.FullName))
-                        Process.Start(new ProcessStartInfo(selected.FullName) { UseShellExecute = true });
-                    else
-                        Process.Start(new ProcessStartInfo(io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog) { UseShellExecute = true });
                 }
             }
             catch (Exception Ex)
@@ -1043,21 +1007,8 @@ namespace Fenix
         {
             try
             {
-                if (tvMain.View.SelectedItem is CusFile)
-                {
-                    CusFile f = (CusFile)tvMain.View.SelectedItem;
-                    if (f.IsFile)
-                    {
-                        PrCon.SrcType = actualKindElement;
-                        SelSrcPath = f.FullName;
-                        PrCon.cutMarks = true;
-                    }
-                }
-                else
-                {
-                    PrCon.copyCutElement(Pr.objId, SelGuid, actualKindElement, true);
-                    SelSrcPath = string.Empty;
-                }
+                PrCon.copyCutElement(Pr.objId, SelGuid, actualKindElement, true);
+                SelSrcPath = string.Empty;
 
                 CheckAccessForNodes();
             }
@@ -1072,22 +1023,8 @@ namespace Fenix
         {
             try
             {
-                if (tvMain.View.SelectedItem is CusFile)
-                {
-                    CusFile f = (CusFile)tvMain.View.SelectedItem;
-                    if (f.IsFile)
-                    {
-                        PrCon.SrcType = actualKindElement;
-                        SelSrcPath = f.FullName;
-                        PrCon.cutMarks = false;
-                    }
-                }
-                else
-                {
-                    PrCon.copyCutElement(Pr.objId, SelGuid, actualKindElement, false);
-                    SelSrcPath = string.Empty;
-                }
-
+                PrCon.copyCutElement(Pr.objId, SelGuid, actualKindElement, false);
+                SelSrcPath = string.Empty;
                 CheckAccessForNodes();
             }
             catch (Exception Ex)
@@ -1101,81 +1038,46 @@ namespace Fenix
         {
             try
             {
-                if (PrCon.SrcType != ElementKind.InFile)
+                if (PrCon.cutMarks)
                 {
-                    PrCon.pasteElement(Pr.objId, SelGuid);
-                    CheckAccessForNodes();
+                    if (!string.IsNullOrEmpty(SelSrcPath))
+                    {
+                        if (tvMain.View.SelectedItem is Project)
+                        {
+                            string dest = io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + io.Path.GetFileName(SelSrcPath);
+                            if (dest == SelSrcPath)
+                                throw new ApplicationException("This operation is forbbiden");
+
+                            io.File.Copy(SelSrcPath, dest, true);
+                            io.File.Delete(SelSrcPath);
+
+                            SelSrcPath = string.Empty;
+                            PrCon.SrcType = ElementKind.Empty;
+                            PrCon.cutMarks = false;
+                        }
+                    }
                 }
                 else
                 {
-                    if (PrCon.cutMarks)
+                    if (!string.IsNullOrEmpty(SelSrcPath))
                     {
-                        if (!string.IsNullOrEmpty(SelSrcPath))
+                        if (tvMain.View.SelectedItem is Project)
                         {
-                            if (tvMain.View.SelectedItem is Project)
-                            {
-                                string dest = io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + io.Path.GetFileName(SelSrcPath);
-                                if (dest == SelSrcPath)
-                                    throw new ApplicationException("This operation is forbbiden");
+                            string dest = io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + io.Path.GetFileName(SelSrcPath);
+                            if (dest == SelSrcPath)
+                                throw new ApplicationException("This operation is forbbiden");
 
-                                io.File.Copy(SelSrcPath, dest, true);
-                                io.File.Delete(SelSrcPath);
+                            io.File.Copy(SelSrcPath, dest, true);
 
-                                SelSrcPath = string.Empty;
-                                PrCon.SrcType = ElementKind.Empty;
-                                PrCon.cutMarks = false;
-                            }
-                            else
-                            {
-                                string dest = ((CusFile)tvMain.View.SelectedItem).FullName + "\\" + io.Path.GetFileName(SelSrcPath);
-
-                                if (dest == SelSrcPath)
-                                    throw new ApplicationException("This operation is forbbiden");
-
-                                io.File.Copy(SelSrcPath, dest, true);
-                                io.File.Delete(SelSrcPath);
-
-                                SelSrcPath = string.Empty;
-                                PrCon.SrcType = ElementKind.Empty;
-                                PrCon.cutMarks = false;
-                            }
+                            SelSrcPath = string.Empty;
+                            PrCon.SrcType = ElementKind.Empty;
+                            PrCon.cutMarks = false;
                         }
                     }
-                    else
-                    {
-                        if (!string.IsNullOrEmpty(SelSrcPath))
-                        {
-                            if (tvMain.View.SelectedItem is Project)
-                            {
-                                string dest = io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + io.Path.GetFileName(SelSrcPath);
-                                if (dest == SelSrcPath)
-                                    throw new ApplicationException("This operation is forbbiden");
-
-                                io.File.Copy(SelSrcPath, dest, true);
-
-                                SelSrcPath = string.Empty;
-                                PrCon.SrcType = ElementKind.Empty;
-                                PrCon.cutMarks = false;
-                            }
-                            else
-                            {
-                                string dest = ((CusFile)tvMain.View.SelectedItem).FullName + "\\" + io.Path.GetFileName(SelSrcPath);
-
-                                if (dest == SelSrcPath)
-                                    throw new ApplicationException("This operation is forbbiden");
-
-                                io.File.Copy(SelSrcPath, dest, true);
-
-                                SelSrcPath = string.Empty;
-                                PrCon.SrcType = ElementKind.Empty;
-                                PrCon.cutMarks = false;
-                            }
-                        }
-                    }
-
-                    SelSrcPath = string.Empty;
-                    CheckAccessForNodes();
                 }
+
+                SelSrcPath = string.Empty;
+                CheckAccessForNodes();
             }
             catch (Exception Ex)
             {
@@ -1188,27 +1090,8 @@ namespace Fenix
         {
             try
             {
-                if (tvMain.View.SelectedItem is CusFile)
-                {
-                    CusFile f = (CusFile)tvMain.View.SelectedItem;
-                    if (f == null)
-                        return;
-
-                    if (wf.MessageBox.Show("Do you want to remove this file or directory?", "Attention", wf.MessageBoxButtons.OKCancel) == wf.DialogResult.OK)
-                    {
-                        if (f.IsFile)
-                            io.File.Delete(f.FullName);
-                        else
-                            io.Directory.Delete(f.FullName, true);
-
-                        CheckAccessForNodes();
-                    }
-                }
-                else
-                {
-                    DeleteElementMethod(Pr.objId, SelGuid, actualKindElement);
-                    CheckAccessForNodes();
-                }
+                DeleteElementMethod(Pr.objId, SelGuid, actualKindElement);
+                CheckAccessForNodes();
             }
             catch (Exception Ex)
             {
@@ -1403,19 +1286,12 @@ namespace Fenix
                 LayoutAnchorable laEdit = new LayoutAnchorable
                 {
                     CanClose = true,
-                    ContentId = actualKindElement == ElementKind.InFile
-                        ? $"Editor;{((CusFile)tvMain.View.SelectedItem).FullName};{actualKindElement}"
-                        : $"Editor;{SelGuid};{actualKindElement}"
+                    ContentId = $"Editor;{SelGuid};{actualKindElement}"
                 };
 
                 Editor edit;
-                if (actualKindElement == ElementKind.InFile)
-                {
-                    var selectedFile = (CusFile)tvMain.View.SelectedItem;
-                    edit = new Editor(PrCon, Pr.objId, selectedFile.FullName, actualKindElement, laEdit);
-                    laEdit.Title = Path.GetFileName(selectedFile.FullName);
-                }
-                else if (actualKindElement == ElementKind.ScriptFile)
+
+                if (actualKindElement == ElementKind.ScriptFile)
                 {
                     var file = PrCon.GetScriptFile(Pr.objId, SelGuid);
                     edit = new Editor(PrCon, Pr.objId, file.FilePath, actualKindElement, laEdit);
@@ -1723,26 +1599,6 @@ namespace Fenix
                 {
                     propManag.SelectedObject = axisNode.AxisConf;
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxChartAxis"];
-                }
-                else if (e.NewValue is CusFile)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    if (((CusFile)e.NewValue).IsFile)
-                    {
-                        ((ContextMenu)Resources["CtxInFile"]).DataContext = _viewModel;
-                        tvMain.View.ContextMenu = (ContextMenu)Resources["CtxInFile"];
-                        SelGuid = PrCon.HttpFileGuid;
-                        actualKindElement = ElementKind.InFile;
-                    }
-                    else
-                    {
-                        ((ContextMenu)Resources["CtxHttpServer"]).DataContext = _viewModel;
-                        tvMain.View.ContextMenu = (ContextMenu)Resources["CtxHttpServer"];
-                        SelGuid = PrCon.HttpFileGuid;
-                        actualKindElement = ElementKind.InFile;
-                    }
                 }
                 else if (e.NewValue is ScriptsDriver)
                 {

@@ -30,7 +30,6 @@ namespace Fenix
         private static readonly Dictionary<Type, string> ImageMappings = new Dictionary<Type, string>()
         {
             { typeof(Project),            "📁" },
-            { typeof(CusFile),            "📂" },
             { typeof(DatabaseModel),      "🗄️" },
             { typeof(ChartConfigNode),    "📐" },
             { typeof(ChartAxisNode),      "📏" },
@@ -63,14 +62,6 @@ namespace Fenix
         /// <returns>The converted image.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is CusFile file)
-            {
-                if (file.IsFile && ExtensionMappings.TryGetValue(io.Path.GetExtension(file.FullName), out string ext))
-                    return ext;
-                else
-                    return "📂";
-            }
-
             if (ImageMappings.TryGetValue(value.GetType(), out string emoji))
                 return emoji;
 
