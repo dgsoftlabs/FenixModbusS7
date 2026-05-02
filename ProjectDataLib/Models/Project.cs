@@ -520,7 +520,6 @@ namespace ProjectDataLib
             foreach (var cn in connectionList_)
             {
                 TreeViewChildren_.Add(cn);
-
                 ((ITreeViewModel)cn).Children = new ObservableCollection<object>(from x in DevicesList_ where x.parentId == cn.objId select x);
             }
 
@@ -530,6 +529,9 @@ namespace ProjectDataLib
             TagChildren = new ObservableCollection<ITag>();
 
             this.ChartConf = new ChartViewConf();
+            this.ChartConf.Axes ??= new();
+            this.ChartConf.Axes.Add(new ChartAxisConf("Y1", "Y1", false));
+
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             this.TableConf = new TableViewConf();

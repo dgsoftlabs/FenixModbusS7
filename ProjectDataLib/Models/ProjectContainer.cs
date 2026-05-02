@@ -288,6 +288,14 @@ namespace ProjectDataLib
                             var newSf = new ScriptFile(csFile) { Proj = buff, PrCon = this };
                             buff.ScriptFileList.Add(newSf);
                             ((ITreeViewModel)buff.ScriptEng).Children.Add(newSf);
+
+                            //AttachTimers
+                            var firstTimer = buff.ScriptEng.Timers.FirstOrDefault();
+                            foreach (var scrFile in buff.ScriptFileList)
+                            {
+                                if (firstTimer is not null && string.IsNullOrEmpty(scrFile.TimerName))
+                                    scrFile.TimerName = firstTimer.Name;
+                            }
                         }
                     }
                 }
