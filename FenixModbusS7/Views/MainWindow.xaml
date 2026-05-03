@@ -11,164 +11,162 @@
         FontFamily="Segoe UI"
         FontSize="{StaticResource Th.FontMd}"
         Loaded="Window_Loaded"
-        Closed="Window_Closed">
+        Closed="MainWindow_Closed">
 
     <Window.Resources>
 
         <ContextMenu x:Key="CtxProject">
-            <MenuItem Header="Add Connection" Click="Connection0_Click" IsEnabled="{Binding mConnection}" />
+            <MenuItem Header="Add Connection" Click="ConnectionAdd_Click" IsEnabled="{Binding mConnection}" />
             <Separator />
-            <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Table View (Read Only)"  Click="TableViewRO0_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
-            <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
+            <MenuItem Header="Table View"  Click="TableViewShow_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Table View (Read Only)"  Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Chart View"  Click="ChartViewShow_Click" IsEnabled="{Binding mChart }" />
+            <MenuItem Header="Communication View"  Click="CommViewShow_Click" IsEnabled="{Binding mCommView }" />
             <Separator />
-            <MenuItem Header="Start All" Click="StartAll_Click" IsEnabled="{Binding mStartAll }" />
-            <MenuItem Header="Stop All"  Click="StopAll_Click" IsEnabled="{Binding mStopAll }" />
+            <MenuItem Header="Start All" Click="AllDriverCommunicationStart_Click" IsEnabled="{Binding mStartAll }" />
+            <MenuItem Header="Stop All"  Click="AllDriverCommunicationStop_Click" IsEnabled="{Binding mStopAll }" />
             <Separator />
-            <MenuItem Header="Show Location" Click="ShLocation0_Click" IsEnabled="{Binding mShowLoc }" />
+            <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc }" />
             <Separator />
-            <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxHttpServer">
-            <MenuItem Header="Folder"  Click="Folder_Click" IsEnabled="{Binding mFolder}" />
+            <MenuItem Header="Folder"  Click="FolderAdd_Click" IsEnabled="{Binding mFolder}" />
             <Separator />
-            <MenuItem Header="Simulation"  Click="Simulation0_Click" IsEnabled="{Binding mSimulate }" />
+            <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc }" />
             <Separator />
-            <MenuItem Header="Show Location" Click="ShLocation0_Click" IsEnabled="{Binding mShowLoc }" />
-            <Separator />
-            <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxInFile">
-            <MenuItem Header="Open"  Click="Editor0_Click" IsEnabled="{Binding mEditor }" />
+            <MenuItem Header="Open"  Click="EditorShow_Click" IsEnabled="{Binding mEditor }" />
             <Separator />
-            <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxScripts">
-            <MenuItem Header="Add New Script" Click="ScriptFile_Click" IsEnabled="{Binding mScriptFile}" />
-            <MenuItem Header="Add Existing Script" Click="ScriptFileExisting_Click" IsEnabled="{Binding mScriptFile}" />
+            <MenuItem Header="Add New Script" Click="ScriptFileAdd_Click" IsEnabled="{Binding mScriptFile}" />
+            <MenuItem Header="Add Existing Script" Click="ScriptFileExistingAdd_Click" IsEnabled="{Binding mScriptFile}" />
             <Separator />
-            <MenuItem Header="Show Location" Click="ShLocation0_Click" IsEnabled="{Binding mShowLoc }" />
+            <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc }" />
             <Separator />
-            <MenuItem Header="Start"  Click="Start0_Click" IsEnabled="{Binding mStart }" />
-            <MenuItem Header="Stop"  Click="Stop0_Click" IsEnabled="{Binding mStop }" />
+            <MenuItem Header="Start"  Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart }" />
+            <MenuItem Header="Stop"  Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop }" />
             <Separator />
-            <MenuItem Header="Block" Click="Block_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="Unblock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}" />
+            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}" />
             <Separator />
-            <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxScriptFile">
 
-            <MenuItem Header="Open"  Click="Editor0_Click" IsEnabled="{Binding mEditor }" />
+            <MenuItem Header="Open"  Click="EditorShow_Click" IsEnabled="{Binding mEditor }" />
             <Separator />
-            <MenuItem Header="Block" Click="Block_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="Unblock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}" />
+            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}" />
             <Separator />
-            <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxInternalTags">
-            <MenuItem Header="Add Internal Tag" Click="IntTag0_Click" IsEnabled="{Binding mIntTag}" />
+            <MenuItem Header="Add Internal Tag" Click="IntTagAdd_Click" IsEnabled="{Binding mIntTag}" />
             <Separator />
-            <MenuItem Header="Start"  Click="Start0_Click" IsEnabled="{Binding mStart }" />
-            <MenuItem Header="Stop"  Click="Stop0_Click" IsEnabled="{Binding mStop }" />
+            <MenuItem Header="Start"  Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart }" />
+            <MenuItem Header="Stop"  Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop }" />
             <Separator />
-            <MenuItem Header="Block" Click="Block_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="Unblock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}" />
+            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxTimers">
-            <MenuItem Header="Add Timer" Click="AddTimer_Click" />
+            <MenuItem Header="Add Timer" Click="TimerAdd_Click" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxTimer">
-            <MenuItem Header="Delete" Click="DeleteTimer_Click" />
+            <MenuItem Header="Delete" Click="TimerDelete_Click" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxDatabse">
-            <MenuItem Header="Show File" IsEnabled="{Binding mDbShowFile}" Click="MenuItem_ShowDbFile_Click" />
-            <MenuItem Header="Show Table" IsEnabled="{Binding mShowDb}" Click="MenuItem_ShowDatabse_Click" />
-            <MenuItem Header="Show Trend" IsEnabled="{Binding mShowTrendDb}" Click="MenuItem_ShowTrendDb_Click" />
+            <MenuItem Header="Show File" IsEnabled="{Binding mDbShowFile}" Click="DatabaseExplorerShow_Click" />
+            <MenuItem Header="Show Table" IsEnabled="{Binding mShowDb}" Click="DatabseTableViewShow_Click" />
+            <MenuItem Header="Show Trend" IsEnabled="{Binding mShowTrendDb}" Click="DatabaseTrendViewShow_Click" />
             <Separator />
-            <MenuItem Header="Export All Data to CSV" IsEnabled="{Binding mSaveCSV}" Click="MenuItem_SaveDatabeCSV_Click" />
+            <MenuItem Header="Export All Data to CSV" IsEnabled="{Binding mSaveCSV}" Click="DatabeCSVExport_Click" />
             <Separator />
-            <MenuItem Header="Database Reset" IsEnabled="{Binding mDbReset}" Click="MenuItem_DbReset_Click" />
+            <MenuItem Header="Database Reset" IsEnabled="{Binding mDbReset}" Click="DatabaseReset_Click" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxChartConfig">
-            <MenuItem Header="Add Axis" Click="MenuItem_ChartAddAxis_Click" />
+            <MenuItem Header="Add Axis" Click="ChartAddAxisY_Click" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxChartAxis">
-            <MenuItem Header="Remove Axis" Click="MenuItem_ChartRemoveAxis_Click" />
+            <MenuItem Header="Remove Axis" Click="ChartRemoveAxisY_Click" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxIntTag">
-            <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxConnection">
-            <MenuItem Header="Add Device" Click="Device0_Click" IsEnabled="{Binding mDevice}" />
+            <MenuItem Header="Add Device" Click="DeviceAdd_Click" IsEnabled="{Binding mDevice}" />
             <Separator />
-            <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Table View (Read Only)"  Click="TableViewRO0_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
-            <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
+            <MenuItem Header="Table View"  Click="TableViewShow_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Table View (Read Only)"  Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Chart View"  Click="ChartViewShow_Click" IsEnabled="{Binding mChart }" />
+            <MenuItem Header="Communication View"  Click="CommViewShow_Click" IsEnabled="{Binding mCommView }" />
             <Separator />
-            <MenuItem Header="Start"  Click="Start0_Click" IsEnabled="{Binding mStart }" />
-            <MenuItem Header="Stop"  Click="Stop0_Click" IsEnabled="{Binding mStop }" />
+            <MenuItem Header="Start"  Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart }" />
+            <MenuItem Header="Stop"  Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop }" />
             <Separator />
-            <MenuItem Header="Block" Click="Block_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="Unblock" Click="Unblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}" />
+            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}" />
             <Separator />
-            <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxDevice">
-            <MenuItem Header="Add Tag" Click="Tag0_Click" IsEnabled="{Binding mTag}" />
+            <MenuItem Header="Add Tag" Click="TagAdd_Click" IsEnabled="{Binding mTag}" />
             <Separator />
-            <MenuItem Header="Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Table View (Read Only)"  Click="TableViewRO0_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }" />
-            <MenuItem Header="Communication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }" />
+            <MenuItem Header="Table View"  Click="TableViewShow_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Table View (Read Only)"  Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable }" />
+            <MenuItem Header="Chart View"  Click="ChartViewShow_Click" IsEnabled="{Binding mChart }" />
+            <MenuItem Header="Communication View"  Click="CommViewShow_Click" IsEnabled="{Binding mCommView }" />
             <Separator />
-            <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
         </ContextMenu>
 
         <ContextMenu x:Key="CtxTag">
-            <MenuItem Header="Cut" Click="Cut0_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="Copy0_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="Paste0_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="Delete0_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
         </ContextMenu>
     </Window.Resources>
 
@@ -183,156 +181,154 @@
 
         <Menu Grid.Row="0">
             <MenuItem Header="_File" IsEnabled="{Binding mFile}">
-                <MenuItem Header="_New" Click="New0_Click" IsEnabled="{Binding mNew}" InputGestureText="Ctrl+N">
+                <MenuItem Header="_New" Click="NewProject_Click" IsEnabled="{Binding mNew}" InputGestureText="Ctrl+N">
                     <MenuItem.Icon><TextBlock Text="📄" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Open..." Click="Open0_Click" IsEnabled="{Binding mOpen}" InputGestureText="Ctrl+O">
+                <MenuItem Header="_Open..." Click="OpenProject_Click" IsEnabled="{Binding mOpen}" InputGestureText="Ctrl+O">
                     <MenuItem.Icon><TextBlock Text="📂" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="_Add" Name="Add0" IsEnabled="{Binding mAdd}">
                     <MenuItem.Icon><TextBlock Text="➕" FontSize="12" /></MenuItem.Icon>
-                    <MenuItem Header="Connection" Click="Connection0_Click" IsEnabled="{Binding mConnection}">
+                    <MenuItem Header="Connection" Click="ConnectionAdd_Click" IsEnabled="{Binding mConnection}">
                         <MenuItem.Icon><TextBlock Text="🔗" FontSize="12" /></MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Device"  Click="Device0_Click" IsEnabled="{Binding mDevice}">
+                    <MenuItem Header="Device"  Click="DeviceAdd_Click" IsEnabled="{Binding mDevice}">
                         <MenuItem.Icon><TextBlock Text="🖥️" FontSize="12" /></MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Tag"  Click="Tag0_Click" IsEnabled="{Binding mTag}">
+                    <MenuItem Header="Tag"  Click="TagAdd_Click" IsEnabled="{Binding mTag}">
                         <MenuItem.Icon><TextBlock Text="🏷️" FontSize="12" /></MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Internal Tag"  Click="IntTag0_Click" IsEnabled="{Binding mIntTag}">
+                    <MenuItem Header="Internal Tag"  Click="IntTagAdd_Click" IsEnabled="{Binding mIntTag}">
                         <MenuItem.Icon><TextBlock Text="🔖" FontSize="12" /></MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Folder"  Click="Folder_Click" IsEnabled="{Binding mFolder}">
+                    <MenuItem Header="Folder"  Click="FolderAdd_Click" IsEnabled="{Binding mFolder}">
                         <MenuItem.Icon>
                             <TextBlock Text="📁" FontSize="12" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Close Project" Click="ClProject0_Click" IsEnabled="{Binding mClosePr}">
+                <MenuItem Header="_Close Project" Click="ProjectClose_Click" IsEnabled="{Binding mClosePr}">
                     <MenuItem.Icon><TextBlock Text="❎" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Save"  Click="Save0_Click" IsEnabled="{Binding mSave}" InputGestureText="Ctrl+S">
+                <MenuItem Header="_Save"  Click="ProjectSave_Click" IsEnabled="{Binding mSave}" InputGestureText="Ctrl+S">
                     <MenuItem.Icon><TextBlock Text="💾" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="E_xit" Click="Exit0_Click" IsEnabled="{Binding mExit}" InputGestureText="Alt+F4">
+                <MenuItem Header="E_xit" Click="MainWindowExit_Click" IsEnabled="{Binding mExit}" InputGestureText="Alt+F4">
                     <MenuItem.Icon><TextBlock Text="🚪" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Edit" IsEnabled="{Binding mEdit}">
-                <MenuItem Header="Cu_t"  Click="Cut0_Click" IsEnabled="{Binding mCut}" InputGestureText="Ctrl+X">
+                <MenuItem Header="Cu_t"  Click="ElementCut_Click" IsEnabled="{Binding mCut}" InputGestureText="Ctrl+X">
                     <MenuItem.Icon><TextBlock Text="✂️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Copy"  Click="Copy0_Click" IsEnabled="{Binding mCopy}" InputGestureText="Ctrl+C">
+                <MenuItem Header="_Copy"  Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" InputGestureText="Ctrl+C">
                     <MenuItem.Icon><TextBlock Text="📋" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Paste"  Click="Paste0_Click" IsEnabled="{Binding mPaste}" InputGestureText="Ctrl+V">
+                <MenuItem Header="_Paste"  Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" InputGestureText="Ctrl+V">
                     <MenuItem.Icon><TextBlock Text="📌" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Delete"  Click="Delete0_Click" IsEnabled="{Binding mDelete}" InputGestureText="Del">
+                <MenuItem Header="_Delete"  Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" InputGestureText="Del">
                     <MenuItem.Icon><TextBlock Text="🗑️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_View" IsEnabled="{Binding mView}">
-                <MenuItem Header="_Solution Explorer"  Click="Solution0_Click" IsEnabled="{Binding mSolution }">
+                <MenuItem Header="_Solution Explorer"  Click="SolutionShow_Click" IsEnabled="{Binding mSolution }">
                     <MenuItem.Icon><TextBlock Text="🗂️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Properties Panel"  Click="Properties0_Click" IsEnabled="{Binding mProperties}">
+                <MenuItem Header="_Properties Panel"  Click="PropertiesShow_Click" IsEnabled="{Binding mProperties}">
                     <MenuItem.Icon><TextBlock Text="⚙️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Output"  Click="Output0_Click" IsEnabled="{Binding mOutput }">
+                <MenuItem Header="_Output"  Click="OutputShow_Click" IsEnabled="{Binding mOutput }">
                     <MenuItem.Icon><TextBlock Text="📋" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Table View"  Click="TableView0_Click" IsEnabled="{Binding mTable }">
+                <MenuItem Header="_Table View"  Click="TableViewShow_Click" IsEnabled="{Binding mTable }">
                     <MenuItem.Icon><TextBlock Text="📊" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Table View (Read Only)"  Click="TableViewRO0_Click" IsEnabled="{Binding mTable }">
+                <MenuItem Header="_Table View (Read Only)"  Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable }">
                     <MenuItem.Icon><TextBlock Text="📋" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Chart View"  Click="ChartView0_Click" IsEnabled="{Binding mChart }">
+                <MenuItem Header="_Chart View"  Click="ChartViewShow_Click" IsEnabled="{Binding mChart }">
                     <MenuItem.Icon><TextBlock Text="📈" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Co_mmunication View"  Click="CommView0_Click" IsEnabled="{Binding mCommView }">
+                <MenuItem Header="Co_mmunication View"  Click="CommViewShow_Click" IsEnabled="{Binding mCommView }">
                     <MenuItem.Icon><TextBlock Text="📡" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Editor"  Click="Editor0_Click" IsEnabled="{Binding mEditor }">
+                <MenuItem Header="_Editor"  Click="EditorShow_Click" IsEnabled="{Binding mEditor }">
                     <MenuItem.Icon><TextBlock Text="✏️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Drivers" IsEnabled="{Binding mDriversSt }">
-                <MenuItem Header="_Start"  Click="Start0_Click" IsEnabled="{Binding mStart }" InputGestureText="F5">
+                <MenuItem Header="_Start"  Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart }" InputGestureText="F5">
                     <MenuItem.Icon><TextBlock Text="▶️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="St_op"  Click="Stop0_Click" IsEnabled="{Binding mStop }" InputGestureText="Shift+F5">
+                <MenuItem Header="St_op"  Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop }" InputGestureText="Shift+F5">
                     <MenuItem.Icon><TextBlock Text="⏹️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Start _All" Click="StartAll_Click" IsEnabled="{Binding mStartAll }">
+                <MenuItem Header="Start _All" Click="AllDriverCommunicationStart_Click" IsEnabled="{Binding mStartAll }">
                     <MenuItem.Icon><TextBlock Text="⏩" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Stop A_ll"  Click="StopAll_Click" IsEnabled="{Binding mStopAll }">
+                <MenuItem Header="Stop A_ll"  Click="AllDriverCommunicationStop_Click" IsEnabled="{Binding mStopAll }">
                     <MenuItem.Icon><TextBlock Text="⏸️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Tools" IsEnabled="{Binding mTools }">
-                <MenuItem Header="_Block"  Click="Block_Click" IsEnabled="{Binding mBlock }">
+                <MenuItem Header="_Block"  Click="DriverBlock_Click" IsEnabled="{Binding mBlock }">
                     <MenuItem.Icon><TextBlock Text="🔒" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Unblock"   Click="Unblock_Click" IsEnabled="{Binding mUnBlock }">
-                    <MenuItem.Icon><TextBlock Text="🔓" FontSize="12" /></MenuItem.Icon>
+                <MenuItem Header="_Unblock"   Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock }">
+                    <MenuItem.Icon>
+                        <TextBlock Text="🔓" FontSize="12" />
+                    </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Simulation"  Click="Simulation0_Click" IsEnabled="{Binding mSimulate }">
-                    <MenuItem.Icon><TextBlock Text="🧪" FontSize="12" /></MenuItem.Icon>
-                </MenuItem>
-                <Separator />
-                <MenuItem Header="Show _Location" Click="ShLocation0_Click" IsEnabled="{Binding mShowLoc }">
+                <MenuItem Header="Show _Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc }">
                     <MenuItem.Icon><TextBlock Text="📍" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Driver _Configuration"  Click="DriveConf0_Click" IsEnabled="{Binding mDrivers }">
+                <MenuItem Header="Driver _Configuration"  Click="DriversConfigurationShow_Click" IsEnabled="{Binding mDrivers }">
                     <MenuItem.Icon><TextBlock Text="🔧" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Data_base" IsEnabled="{Binding mDatabase}">
-                <MenuItem Header="Show _File" IsEnabled="{Binding mDbShowFile}" Click="MenuItem_ShowDbFile_Click">
+                <MenuItem Header="Show _File" IsEnabled="{Binding mDbShowFile}" Click="DatabaseExplorerShow_Click">
                     <MenuItem.Icon><TextBlock Text="📄" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Show _Table" IsEnabled="{Binding mShowDb}" Click="MenuItem_ShowDatabse_Click">
+                <MenuItem Header="Show _Table" IsEnabled="{Binding mShowDb}" Click="DatabseTableViewShow_Click">
                     <MenuItem.Icon><TextBlock Text="🗄️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Show _Trend" IsEnabled="{Binding mShowTrendDb}" Click="MenuItem_ShowTrendDb_Click">
+                <MenuItem Header="Show _Trend" IsEnabled="{Binding mShowTrendDb}" Click="DatabaseTrendViewShow_Click">
                     <MenuItem.Icon><TextBlock Text="📉" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Export All Data to CSV" IsEnabled="{Binding mSaveCSV}" Click="MenuItem_SaveDatabeCSV_Click">
+                <MenuItem Header="_Export All Data to CSV" IsEnabled="{Binding mSaveCSV}" Click="DatabeCSVExport_Click">
                     <MenuItem.Icon><TextBlock Text="📤" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Reset Database" IsEnabled="{Binding mDbReset}" Click="MenuItem_DbReset_Click">
+                <MenuItem Header="_Reset Database" IsEnabled="{Binding mDbReset}" Click="DatabaseReset_Click">
                     <MenuItem.Icon><TextBlock Text="♻️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Help" IsEnabled="{Binding mHelp }">
-                <MenuItem Header="Check for _Updates"  Click="Updates0_Click" IsEnabled="{Binding mUpdates }">
+                <MenuItem Header="Check for _Updates"  Click="UpdatesShow_Click" IsEnabled="{Binding mUpdates }">
                     <MenuItem.Icon><TextBlock Text="🔄" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Documentation"  Click="ShHelp0_Click" IsEnabled="{Binding mViewHelp }" InputGestureText="F1">
+                <MenuItem Header="_Documentation"  Click="HelpShow_Click" IsEnabled="{Binding mViewHelp }" InputGestureText="F1">
                     <MenuItem.Icon><TextBlock Text="📖" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_About FenixModbusS7" Click="About0_Click" IsEnabled="{Binding mAbout}">
+                <MenuItem Header="_About FenixModbusS7" Click="AboutShow_Click" IsEnabled="{Binding mAbout}">
                     <MenuItem.Icon><TextBlock Text="ℹ️" FontSize="12" /></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -341,89 +337,89 @@
         <ToolBar Grid.Row="1"
                  Background="{StaticResource Th.SurfaceBrush}"
                  Foreground="{StaticResource Th.TextBrush}">
-            <Button Click="New0_Click" IsEnabled="{Binding mNew}" ToolTip="New Project (Ctrl+N)">
+            <Button Click="NewProject_Click" IsEnabled="{Binding mNew}" ToolTip="New Project (Ctrl+N)">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="📄" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="New" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
-            <Button Click="Open0_Click" IsEnabled="{Binding mOpen}" ToolTip="Open Project (Ctrl+O)">
+            <Button Click="OpenProject_Click" IsEnabled="{Binding mOpen}" ToolTip="Open Project (Ctrl+O)">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="📂" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Open" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
-            <Button Click="Save0_Click" IsEnabled="{Binding mSave}" ToolTip="Save Project (Ctrl+S)">
+            <Button Click="ProjectSave_Click" IsEnabled="{Binding mSave}" ToolTip="Save Project (Ctrl+S)">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="💾" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Save" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
             <Separator />
-            <Button Click="TableView0_Click" IsEnabled="{Binding mTable}" ToolTip="Table View">
+            <Button Click="TableViewShow_Click" IsEnabled="{Binding mTable}" ToolTip="Table View">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="📊" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Table" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
-            <Button Click="TableViewRO0_Click" IsEnabled="{Binding mTable}" ToolTip="Table View (Read Only)">
+            <Button Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable}" ToolTip="Table View (Read Only)">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="📋" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Table RO" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
-            <Button Click="ChartView0_Click" IsEnabled="{Binding mChart}" ToolTip="Chart View">
+            <Button Click="ChartViewShow_Click" IsEnabled="{Binding mChart}" ToolTip="Chart View">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="📈" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Chart" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
-            <Button Click="CommView0_Click" IsEnabled="{Binding mCommView}" ToolTip="Communication View">
+            <Button Click="CommViewShow_Click" IsEnabled="{Binding mCommView}" ToolTip="Communication View">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="📡" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Comm" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
-            <Button Click="Editor0_Click" IsEnabled="{Binding mEditor}" ToolTip="Script Editor">
+            <Button Click="EditorShow_Click" IsEnabled="{Binding mEditor}" ToolTip="Script Editor">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="✏️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Editor" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
             <Separator />
-            <Button Click="Start0_Click" IsEnabled="{Binding mStart}" ToolTip="Start Selected Driver (F5)">
+            <Button Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart}" ToolTip="Start Selected Driver (F5)">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="▶️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Start" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
-            <Button Click="Stop0_Click" IsEnabled="{Binding mStop}" ToolTip="Stop Selected Driver (Shift+F5)">
+            <Button Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop}" ToolTip="Stop Selected Driver (Shift+F5)">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="⏹️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Stop" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
             <Separator />
-            <Button Click="StartAll_Click" IsEnabled="{Binding mStartAll}" ToolTip="Start All Drivers">
+            <Button Click="AllDriverCommunicationStart_Click" IsEnabled="{Binding mStartAll}" ToolTip="Start All Drivers">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="⏩" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Start All" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
-            <Button Click="StopAll_Click" IsEnabled="{Binding mStopAll}" ToolTip="Stop All Drivers">
+            <Button Click="AllDriverCommunicationStop_Click" IsEnabled="{Binding mStopAll}" ToolTip="Stop All Drivers">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="⏸️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Stop All" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
             <Separator />
-            <Button Click="ShHelp0_Click" IsEnabled="{Binding mViewHelp}" ToolTip="Documentation (F1)">
+            <Button Click="HelpShow_Click" IsEnabled="{Binding mViewHelp}" ToolTip="Documentation (F1)">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="📖" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="Docs" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
                 </StackPanel>
             </Button>
-            <Button Click="About0_Click" IsEnabled="{Binding mAbout}" ToolTip="About FenixModbusS7">
+            <Button Click="AboutShow_Click" IsEnabled="{Binding mAbout}" ToolTip="About FenixModbusS7">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
                     <TextBlock Text="ℹ️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
                     <TextBlock Text="About" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />

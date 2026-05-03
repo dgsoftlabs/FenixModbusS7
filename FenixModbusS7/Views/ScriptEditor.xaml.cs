@@ -18,7 +18,7 @@ using System.Windows.Threading;
 
 namespace Fenix
 {
-    public partial class Editor : UserControl
+    public partial class ScriptEditor : UserControl
     {
         private CompletionWindow completionWindow;
         private FoldingManager foldingManager;
@@ -31,7 +31,7 @@ namespace Fenix
         private List<ScriptFunctionCategory> allCategories_;
         private double fontSizePt_ = 10;
 
-        public Editor(ProjectContainer PrCon, Guid Pr, string path, ElementKind ElKind, LayoutAnchorable Win)
+        public ScriptEditor(ProjectContainer PrCon, Guid Pr, string path, ElementKind ElKind, LayoutAnchorable Win)
         {
             try
             {

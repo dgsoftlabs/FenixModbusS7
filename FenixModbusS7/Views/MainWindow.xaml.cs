@@ -1,308 +1,23 @@
 using AvalonDock.Layout;
-using AvalonDock.Layout.Serialization;
-using Fenix.ViewModels;
 using Microsoft.Win32;
 using ProjectDataLib;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Interop;
-using io = System.IO;
-
 using wf = System.Windows.Forms;
 
 namespace Fenix
 {
     public partial class MainWindow : Window
     {
-        [DllImport("user32.dll")]
-        public static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
-
-        [DllImport("user32.dll")]
-        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-        #region Visibilty
-
-        private readonly MainWindowViewModel _viewModel = new MainWindowViewModel();
-
-        public Boolean mFile { get => _viewModel.mFile; set => _viewModel.mFile = value; }
-        public Boolean mNew { get => _viewModel.mNew; set => _viewModel.mNew = value; }
-        public Boolean mOpen { get => _viewModel.mOpen; set => _viewModel.mOpen = value; }
-        public Boolean mAdd { get => _viewModel.mAdd; set => _viewModel.mAdd = value; }
-        public Boolean mConnection { get => _viewModel.mConnection; set => _viewModel.mConnection = value; }
-        public Boolean mDevice { get => _viewModel.mDevice; set => _viewModel.mDevice = value; }
-        public Boolean mTag { get => _viewModel.mTag; set => _viewModel.mTag = value; }
-        public Boolean mIntTag { get => _viewModel.mIntTag; set => _viewModel.mIntTag = value; }
-        public Boolean mScriptFile { get => _viewModel.mScriptFile; set => _viewModel.mScriptFile = value; }
-        public Boolean mFolder { get => _viewModel.mFolder; set => _viewModel.mFolder = value; }
-        public Boolean mInFile { get => _viewModel.mInFile; set => _viewModel.mInFile = value; }
-        public Boolean mClosePr { get => _viewModel.mClosePr; set => _viewModel.mClosePr = value; }
-        public Boolean mSave { get => _viewModel.mSave; set => _viewModel.mSave = value; }
-        public Boolean mSaveAs { get => _viewModel.mSaveAs; set => _viewModel.mSaveAs = value; }
-        public Boolean mExit { get => _viewModel.mExit; set => _viewModel.mExit = value; }
-
-        public Boolean mEdit { get => _viewModel.mEdit; set => _viewModel.mEdit = value; }
-        public Boolean mCut { get => _viewModel.mCut; set => _viewModel.mCut = value; }
-        public Boolean mCopy { get => _viewModel.mCopy; set => _viewModel.mCopy = value; }
-        public Boolean mPaste { get => _viewModel.mPaste; set => _viewModel.mPaste = value; }
-        public Boolean mDelete { get => _viewModel.mDelete; set => _viewModel.mDelete = value; }
-
-        public Boolean mView { get => _viewModel.mView; set => _viewModel.mView = value; }
-        public Boolean mSolution { get => _viewModel.mSolution; set => _viewModel.mSolution = value; }
-        public Boolean mProperties { get => _viewModel.mProperties; set => _viewModel.mProperties = value; }
-        public Boolean mOutput { get => _viewModel.mOutput; set => _viewModel.mOutput = value; }
-        public Boolean mTable { get => _viewModel.mTable; set => _viewModel.mTable = value; }
-        public Boolean mChart { get => _viewModel.mChart; set => _viewModel.mChart = value; }
-        public Boolean mCommView { get => _viewModel.mCommView; set => _viewModel.mCommView = value; }
-        public Boolean mEditor { get => _viewModel.mEditor; set => _viewModel.mEditor = value; }
-
-        public Boolean mDriversSt { get => _viewModel.mDriversSt; set => _viewModel.mDriversSt = value; }
-        public Boolean mStart { get => _viewModel.mStart; set => _viewModel.mStart = value; }
-        public Boolean mStop { get => _viewModel.mStop; set => _viewModel.mStop = value; }
-        public Boolean mStartAll { get => _viewModel.mStartAll; set => _viewModel.mStartAll = value; }
-        public Boolean mStopAll { get => _viewModel.mStopAll; set => _viewModel.mStopAll = value; }
-
-        public Boolean mTools { get => _viewModel.mTools; set => _viewModel.mTools = value; }
-        public Boolean mBlock { get => _viewModel.mBlock; set => _viewModel.mBlock = value; }
-        public Boolean mUnBlock { get => _viewModel.mUnBlock; set => _viewModel.mUnBlock = value; }
-        public Boolean mSimulate { get => _viewModel.mSimulate; set => _viewModel.mSimulate = value; }
-        public Boolean mShowLoc { get => _viewModel.mShowLoc; set => _viewModel.mShowLoc = value; }
-        public Boolean mDrivers { get => _viewModel.mDrivers; set => _viewModel.mDrivers = value; }
-
-        public Boolean mDatabase { get => _viewModel.mDatabase; set => _viewModel.mDatabase = value; }
-        public Boolean mDbShowFile { get => _viewModel.mDbShowFile; set => _viewModel.mDbShowFile = value; }
-        public Boolean mDbReset { get => _viewModel.mDbReset; set => _viewModel.mDbReset = value; }
-        public Boolean mShowDb { get => _viewModel.mShowDb; set => _viewModel.mShowDb = value; }
-        public Boolean mShowTrendDb { get => _viewModel.mShowTrendDb; set => _viewModel.mShowTrendDb = value; }
-        public Boolean mSaveCSV { get => _viewModel.mSaveCSV; set => _viewModel.mSaveCSV = value; }
-
-        public Boolean mHelp { get => _viewModel.mHelp; set => _viewModel.mHelp = value; }
-        public Boolean mUpdates { get => _viewModel.mUpdates; set => _viewModel.mUpdates = value; }
-        public Boolean mAbout { get => _viewModel.mAbout; set => _viewModel.mAbout = value; }
-        public Boolean mViewHelp { get => _viewModel.mViewHelp; set => _viewModel.mViewHelp = value; }
-
-        #endregion Visibilty
-
-        #region Fileds
-
-        private ProjectContainer PrCon = new ProjectContainer();
-        private ElementKind actualKindElement;
-
-        private object SelObj;
-        private Guid SelGuid;
-        private TimersFolder _selectedTimersFolder;
-
-        private Project Pr;
-        private string pathRun = "";
-
-        private string SelSrcPath = string.Empty;
-
-        private LayoutAnchorable laPropGrid = new LayoutAnchorable();
-        private PropertiesGridManager propManag = new PropertiesGridManager();
-
-        private LayoutAnchorable laTvMain = new LayoutAnchorable();
-        private TreeViewManager tvMain = new TreeViewManager();
-
-        private LayoutAnchorGroup laGrOutput = new LayoutAnchorGroup();
-        private LayoutAnchorable laOutput = new LayoutAnchorable();
-        private Output frOutput;
-
-        private ObservableCollection<CustomException> exList = new ObservableCollection<CustomException>();
-
-        #region External Events
-
-        private void AddProjectEvent(object sender, ProjectEventArgs ev)
-        {
-            try
-            {
-                Project pr = (Project)ev.element;
-                this.Pr = pr;
-
-                #region Sprawdzenie czy istnieje zapisany layout
-
-                if (io.File.Exists(io.Path.GetDirectoryName(PrCon.projectList.First().path) + "\\" + PrCon.LayoutFile))
-                {
-                    Project pp = (Project)sender;
-                    XmlLayoutSerializer serializer = new XmlLayoutSerializer(dockManager);
-
-                    serializer.LayoutSerializationCallback += (s, args) =>
-                    {
-                        if (string.IsNullOrEmpty(args.Model.ContentId))
-                            return;
-
-                        string[] param = args.Model.ContentId.Split(';');
-                        switch (param[0])
-                        {
-                            case "Properties":
-                                args.Content = propManag;
-                                break;
-
-                            case "Solution":
-                                args.Content = tvMain;
-                                break;
-
-                            case "Output":
-                                args.Content = frOutput;
-                                break;
-
-                            case "TableDatabase":
-                                LayoutAnchorable laDatabase = (LayoutAnchorable)args.Model;
-                                laDatabase.CanClose = true;
-                                DBTableView dbView = new DBTableView(pr);
-                                laDatabase.Closed += LaCtrl_Closed;
-                                args.Content = dbView;
-                                break;
-
-                            case "TrendDatabase":
-                                LayoutAnchorable laTrendDb = (LayoutAnchorable)args.Model;
-                                laTrendDb.CanClose = true;
-                                DBChartView trendDbView = new DBChartView(pr);
-                                laTrendDb.Closed += LaCtrl_Closed;
-                                args.Content = trendDbView;
-                                break;
-
-                            case "TableView":
-                                LayoutAnchorable laTableView = (LayoutAnchorable)args.Model;
-                                laTableView.CanClose = true;
-                                TableView tbView = new TableView(PrCon, pp.objId, Guid.Parse(param[1]), (ElementKind)Enum.Parse(typeof(ElementKind), param[2]), laTableView);
-                                laTableView.Closed += LaCtrl_Closed;
-                                args.Content = tbView;
-                                break;
-
-                            case "TableViewRO":
-                                LayoutAnchorable laTableViewRO = (LayoutAnchorable)args.Model;
-                                laTableViewRO.CanClose = true;
-                                TableViewRO tbViewRO = new TableViewRO(PrCon, pp.objId, Guid.Parse(param[1]), (ElementKind)Enum.Parse(typeof(ElementKind), param[2]), laTableViewRO);
-                                laTableViewRO.Closed += LaCtrl_Closed;
-                                args.Content = tbViewRO;
-                                break;
-
-                            case "ChartView":
-                                LayoutAnchorable laChartView = (LayoutAnchorable)args.Model;
-                                laChartView.CanClose = true;
-                                ChartView chView = new ChartView(PrCon, pp.objId, Guid.Parse(param[1]), (ElementKind)Enum.Parse(typeof(ElementKind), param[2]), laChartView);
-                                laChartView.Closed += LaCtrl_Closed;
-                                args.Content = chView;
-                                break;
-
-                            case "CommView":
-                                LayoutAnchorable laCommView = (LayoutAnchorable)args.Model;
-                                laCommView.CanClose = true;
-                                CommunicationView comView = new CommunicationView(PrCon, pp.objId, Guid.Parse(param[1]), (ElementKind)Enum.Parse(typeof(ElementKind), param[2]), laCommView);
-                                laCommView.Closed += LaCtrl_Closed;
-                                args.Content = comView;
-                                break;
-
-                            case "Editor":
-                                LayoutAnchorable laEditorView = (LayoutAnchorable)args.Model;
-                                laEditorView.CanClose = true;
-
-                                ElementKind editorKind = (ElementKind)Enum.Parse(typeof(ElementKind), param[2]);
-                                string editorPath = param[1];
-
-                                // For ScriptFile the ContentId stores a GUID, resolve it to a file path
-                                if (editorKind == ElementKind.ScriptFile && Guid.TryParse(param[1], out Guid scriptGuid))
-                                {
-                                    var scriptFile = PrCon.GetScriptFile(pp.objId, scriptGuid);
-                                    editorPath = scriptFile?.FilePath ?? string.Empty;
-                                }
-
-                                if (io.File.Exists(editorPath))
-                                {
-                                    Editor edView = new Editor(PrCon, pp.objId, editorPath, editorKind, laEditorView);
-                                    laEditorView.Closed += LaCtrl_Closed;
-                                    args.Content = edView;
-                                }
-                                else
-                                {
-                                    laEditorView.Close();
-                                }
-
-                                break;
-
-                            default:
-                                args.Content = new System.Windows.Controls.TextBox() { Text = args.Model.ContentId };
-                                break;
-                        }
-                    };
-
-                    string ss = io.Path.GetDirectoryName(PrCon.projectList.First().path) + "\\" + PrCon.LayoutFile;
-                    serializer.Deserialize(ss);
-                }
-
-                #endregion Sprawdzenie czy istnieje zapisany layout
-
-                tvMain.View.DataContext = ((ITreeViewModel)PrCon).Children;
-                tvMain.View.ItemsSource = ((ITreeViewModel)PrCon).Children;
-
-                TreeViewItem PrNode = FindTviFromObjectRecursive(tvMain.View, pr);
-                if (PrNode != null) PrNode.IsSelected = true;
-
-                lbPathProject.Content = Pr.path;
-                Registry.SetValue(PrCon.RegUserRoot, PrCon.LastPathKey, Pr.path);
-
-                CheckAccessForNodes();
-            }
-            catch (Exception Ex)
-            {
-                if (PrCon.ApplicationError != null)
-                    PrCon.ApplicationError(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void Error(object sender, EventArgs ev)
-        {
-            this.Dispatcher.Invoke(() =>
-            {
-                ProjectEventArgs e = (ProjectEventArgs)ev;
-
-                if (e.element is Exception)
-                    exList.Add(new CustomException(sender, (Exception)e.element));
-                else if (e.element2 is Exception)
-                    exList.Add(new CustomException(sender, (Exception)e.element2));
-                else
-                    exList.Add(new CustomException(sender, new Exception(e.element1.ToString())));
-
-                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Output").First();
-                lpAnchor.IsActive = true;
-            });
-        }
-
-        public static TreeViewItem FindTviFromObjectRecursive(ItemsControl ic, object o)
-        {
-            //Search for the object model in first level children (recursively)
-            TreeViewItem tvi = ic.ItemContainerGenerator.ContainerFromItem(o) as TreeViewItem;
-            if (tvi != null) return tvi;
-            //Loop through user object models
-            foreach (object i in ic.Items)
-            {
-                //Get the TreeViewItem associated with the iterated object model
-                TreeViewItem tvi2 = ic.ItemContainerGenerator.ContainerFromItem(i) as TreeViewItem;
-                tvi = FindTviFromObjectRecursive(tvi2, o);
-                if (tvi != null) return tvi;
-            }
-            return null;
-        }
-
-        #endregion External Events
-
-        #endregion Fileds
-
-        #region Konstruktor
-
         public MainWindow()
         {
             InitializeComponent();
@@ -318,7 +33,7 @@ namespace Fenix
 
             //TreeView
 
-            tvMain.View.SelectedItemChanged += View_SelectedItemChanged;
+            tvMain.View.SelectedItemChanged += ContextMenu_AttachRigtMenu_SelectedItemChanged;
 
             laTvMain.Content = tvMain;
             laTvMain.Title = "\ud83d\uddc2\ufe0f Solution Explorer";
@@ -326,7 +41,7 @@ namespace Fenix
             LeftPan.Children.Add(laTvMain);
 
             //Exceptions
-            frOutput = new Output(PrCon, exList);
+            frOutput = new OutputView(PrCon, exList);
             laOutput.Title = "\ud83d\udccb Output";
             laOutput.Content = frOutput;
             laOutput.ContentId = "Output";
@@ -356,7 +71,7 @@ namespace Fenix
             string[] s = Environment.GetCommandLineArgs();
             if (s.Length > 1)
             {
-                if (io.File.Exists(s[1]))
+                if (File.Exists(s[1]))
                 {
                     PrCon.openProjects(s[1]);
                     Pr = PrCon.projectList.First();
@@ -365,81 +80,14 @@ namespace Fenix
             }
         }
 
-        #endregion Konstruktor
-
-        private const int HOTKEY_ID_1 = 9000;
-        private const int HOTKEY_ID_2 = 9001;
-        private const int HOTKEY_ID_3 = 9002;
-
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            base.OnSourceInitialized(e);
-
-            var helper = new WindowInteropHelper(this);
-            HwndSource source = HwndSource.FromHwnd(helper.Handle);
-            source.AddHook(HwndHook);
-
-            // Ctrl + Shift + R
-            RegisterHotKey(helper.Handle, HOTKEY_ID_1, 0x0002 | 0x0004, (uint)KeyInterop.VirtualKeyFromKey(Key.R));
-            // Ctrl + Shift + S
-            RegisterHotKey(helper.Handle, HOTKEY_ID_2, 0x0002 | 0x0004, (uint)KeyInterop.VirtualKeyFromKey(Key.S));
-            // Ctrl + Shift + C
-            RegisterHotKey(helper.Handle, HOTKEY_ID_3, 0x0002 | 0x0004, (uint)KeyInterop.VirtualKeyFromKey(Key.C));
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            var helper = new WindowInteropHelper(this);
-            UnregisterHotKey(helper.Handle, HOTKEY_ID_1);
-
-            base.OnClosed(e);
-        }
-
-        private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            const int WM_HOTKEY = 0x0312;
-            if (msg == WM_HOTKEY)
-            {
-                switch (wParam.ToInt32())
-                {
-                    case HOTKEY_ID_1:
-                        // Ctrl+Shift+R
-                        StopAll_Click(this, new RoutedEventArgs());
-
-                        Thread.Sleep(1000);
-
-                        Save0_Click(this, new RoutedEventArgs());
-                        StartAll_Click(this, new RoutedEventArgs());
-                        break;
-
-                    case HOTKEY_ID_2:
-                        // Ctrl+Shift+S
-                        Save0_Click(this, new RoutedEventArgs());
-                        StartAll_Click(this, new RoutedEventArgs());
-                        break;
-
-                    case HOTKEY_ID_3:
-                        // Ctrl+Shift+C
-                        StopAll_Click(this, new RoutedEventArgs());
-                        break;
-                }
-            }
-
-            return IntPtr.Zero;
-        }
-
-        #region Internal Commands
-
-        private void CheckAccessForNodes()
+        private void MainWindow_Closed(object sender, EventArgs e)
         {
             try
             {
-                propManag.Enabled = _viewModel.CheckAccessForNodes(
-                    tvMain.View.SelectedItem,
-                    SelObj,
-                    PrCon.SrcType,
-                    PrCon.anyCommunication(),
-                    propManag.Enabled);
+                SaveLayout();
+
+                lbPathProject.Content = string.Empty;
+                Pr = null;
             }
             catch (Exception Ex)
             {
@@ -448,91 +96,31 @@ namespace Fenix
             }
         }
 
-        private void DeleteElementMethod(Guid projId, Guid id, ElementKind elKind)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                //Brak projektów w Buforze
-                if (PrCon.projectList.Count == 0)
-                    return;
+                await VerifySoftwareUpdate(false);
 
-                //Chcemy usun¹c projekt
-
-                wf.DialogResult result = wf.MessageBox.Show("Do you really want delate this element", "Warning", wf.MessageBoxButtons.OKCancel, wf.MessageBoxIcon.Warning);
-                if (result == wf.DialogResult.OK)
+                if (!String.IsNullOrEmpty(pathRun))
                 {
-                    PrCon.deleteElement(Pr.objId, id, elKind);
-                    return;
+                    PrCon.openProjects(pathRun);
+                    Pr = PrCon.projectList[0];
+                    Registry.SetValue(PrCon.RegUserRoot, PrCon.LastPathKey, Pr.path);
+
+                    CheckAccessForNodes();
                 }
             }
             catch (Exception Ex)
             {
-                if (PrCon.ApplicationError != null)
-                    PrCon.ApplicationError(this, new ProjectEventArgs(Ex));
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
             }
         }
 
-        private async Task VerifySoftwareUpdate(object sender)
-        {
-            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
-            {
-                Dispatcher.Invoke(() => lbInfo.Content = "No Internet connection.");
-                return;
-            }
-
-            Dispatcher.Invoke(() => lbInfo.Content = "Checking update for software...");
-
-            try
-            {
-                string result = await ProjectContainer.GetVersionFromGitHub();
-                if (result != null)
-                {
-                    var newVer = ProjectContainer.ParseVersionFromContent(result);
-                    var url = ProjectContainer.ParseUrlFromContent(result);
-
-                    CheckVersion(newVer, url, (bool)sender);
-                    Dispatcher.Invoke(() => lbInfo.Content = "Completed");
-                }
-            }
-            catch (Exception)
-            {
-                // Handle exceptions if necessary
-            }
-        }
-
-        private void CheckVersion(Version newVersion, string url, bool automatic)
-        {
-            // Get the running version
-            Version curVersion = Assembly.GetExecutingAssembly().GetName().Version;
-
-            // Compare the versions
-            if (curVersion < newVersion)
-            {
-                // Ask the user if they would like to download the new version
-                string title = "New version detected.";
-                string question = $"Download the new version Fenix {newVersion}?";
-
-                if (wf.MessageBox.Show(question, title, wf.MessageBoxButtons.YesNo, wf.MessageBoxIcon.Question) == wf.DialogResult.Yes)
-                {
-                    // Navigate the default web browser to the app homepage (the URL comes from the XML content)
-                    Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
-                }
-            }
-            else if (automatic)
-            {
-                MessageBox.Show(this, "Your version is up to date.");
-            }
-        }
-
-        #endregion Internal Commands
-
-        #region Internal Events
-
-        private void New0_Click(object sender, RoutedEventArgs e)
+        private void NewProject_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //dodanie projektu
                 AddProject fr = new AddProject(PrCon);
                 fr.Owner = this;
                 fr.ShowDialog();
@@ -544,7 +132,7 @@ namespace Fenix
             }
         }
 
-        private void Open0_Click(object sender, RoutedEventArgs e)
+        private void OpenProject_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -554,10 +142,10 @@ namespace Fenix
                     return;
                 }
 
-                string startupPath = io.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                string startupPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
                 string strp = (string)Registry.GetValue(PrCon.RegUserRoot, PrCon.LastPathKey, startupPath + "\\Project.pse");
                 OpenFileDialog ofd = new OpenFileDialog();
-                ofd.InitialDirectory = io.Path.GetDirectoryName(strp);
+                ofd.InitialDirectory = Path.GetDirectoryName(strp);
                 ofd.Filter = "Fenix project files (*.pse)|*.pse";
 
                 if (ofd.ShowDialog(this) == true)
@@ -572,13 +160,13 @@ namespace Fenix
             }
         }
 
-        private void Connection0_Click(object sender, RoutedEventArgs e)
+        private void ConnectionAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                AddConnection addConnection_ = new AddConnection(PrCon, PrCon.gConf, Pr.objId);
-                addConnection_.Owner = this;
-                addConnection_.ShowDialog();
+                AddConnection addConnection = new AddConnection(PrCon, PrCon.gConf, Pr.objId);
+                addConnection.Owner = this;
+                addConnection.ShowDialog();
             }
             catch (Exception Ex)
             {
@@ -587,13 +175,13 @@ namespace Fenix
             }
         }
 
-        private void Device0_Click(object sender, RoutedEventArgs e)
+        private void DeviceAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                AddDevice addTagFolder_ = new Fenix.AddDevice(PrCon, Pr.objId, SelGuid);
-                addTagFolder_.Owner = this;
-                addTagFolder_.ShowDialog();
+                AddDevice addDevice = new AddDevice(PrCon, Pr.objId, SelGuid);
+                addDevice.Owner = this;
+                addDevice.ShowDialog();
             }
             catch (Exception Ex)
             {
@@ -602,15 +190,13 @@ namespace Fenix
             }
         }
 
-        private void Tag0_Click(object sender, RoutedEventArgs e)
+        private void TagAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                AddTag addTag_ = new Fenix.AddTag(ref PrCon, Pr.objId, SelGuid);
-                addTag_.Owner = this;
-
-                //reakcja USERA
-                addTag_.ShowDialog();
+                AddTag addTag = new AddTag(ref PrCon, Pr.objId, SelGuid);
+                addTag.Owner = this;
+                addTag.ShowDialog();
             }
             catch (Exception Ex)
             {
@@ -619,13 +205,13 @@ namespace Fenix
             }
         }
 
-        private void IntTag0_Click(object sender, RoutedEventArgs e)
+        private void IntTagAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Fenix.AddInTag aTag = new Fenix.AddInTag(Pr.objId, PrCon);
-                aTag.Owner = this;
-                aTag.ShowDialog();
+                AddInTag addTag = new AddInTag(Pr.objId, PrCon);
+                addTag.Owner = this;
+                addTag.ShowDialog();
             }
             catch (Exception Ex)
             {
@@ -634,7 +220,7 @@ namespace Fenix
             }
         }
 
-        private void AddTimer_Click(object sender, RoutedEventArgs e)
+        private void TimerAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -648,7 +234,7 @@ namespace Fenix
             }
         }
 
-        private void DeleteTimer_Click(object sender, RoutedEventArgs e)
+        private void TimerDelete_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -671,32 +257,13 @@ namespace Fenix
             }
         }
 
-        private TimersFolder FindParentTimersFolder(CustomTimer timer)
-        {
-            if (Pr == null) return null;
-
-            var scriptChildren = ((ITreeViewModel)Pr.ScriptEng).Children;
-            if (scriptChildren != null)
-                foreach (var child in scriptChildren)
-                    if (child is TimersFolder tf && ((ITreeViewModel)tf).Children.Contains(timer))
-                        return tf;
-
-            var intTagChildren = ((ITreeViewModel)Pr.InternalTagsDrv).Children;
-            if (intTagChildren != null)
-                foreach (var child in intTagChildren)
-                    if (child is TimersFolder tf && ((ITreeViewModel)tf).Children.Contains(timer))
-                        return tf;
-
-            return null;
-        }
-
-        private void Folder_Click(object sender, RoutedEventArgs e)
+        private void FolderAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (tvMain.View.SelectedItem is Project)
                 {
-                    AddFolder fr = new AddFolder(PrCon, Pr, io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog, actualKindElement);
+                    AddFolder fr = new AddFolder(PrCon, Pr, Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog, actualKindElement);
                     fr.Owner = this;
                     fr.Show();
                 }
@@ -707,7 +274,7 @@ namespace Fenix
             }
         }
 
-        private void ScriptFile_Click(object sender, RoutedEventArgs e)
+        private void ScriptFileAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -721,7 +288,7 @@ namespace Fenix
             }
         }
 
-        private void ScriptFileExisting_Click(object sender, RoutedEventArgs e)
+        private void ScriptFileExistingAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -735,17 +302,17 @@ namespace Fenix
             }
         }
 
-        private void ShLocation0_Click(object sender, RoutedEventArgs e)
+        private void ShowLocation_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (actualKindElement == ElementKind.Project)
                 {
-                    Process.Start(new ProcessStartInfo(io.Path.GetDirectoryName(Pr.path)) { UseShellExecute = true });
+                    Process.Start(new ProcessStartInfo(Path.GetDirectoryName(Pr.path)) { UseShellExecute = true });
                 }
                 else if (actualKindElement == ElementKind.Scripts)
                 {
-                    Process.Start(new ProcessStartInfo(io.Path.GetDirectoryName(Pr.path) + PrCon.ScriptsCatalog) { UseShellExecute = true });
+                    Process.Start(new ProcessStartInfo(Path.GetDirectoryName(Pr.path) + PrCon.ScriptsCatalog) { UseShellExecute = true });
                 }
             }
             catch (Exception Ex)
@@ -755,11 +322,10 @@ namespace Fenix
             }
         }
 
-        private void ClProject0_Click(object sender, RoutedEventArgs e)
+        private void ProjectClose_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //Zamkniecie edytorow
                 var docs = dockManager.Layout.Descendents()
                     .OfType<LayoutAnchorable>()
                     .Where(x => x.ContentId != "Output" && x.ContentId != "Properties" && x.ContentId != "Solution")
@@ -768,7 +334,6 @@ namespace Fenix
                 for (int i = 0; i < docs.Count(); i++)
                     ((LayoutAnchorable)docs[i]).Close();
 
-                //Zapisanie layoutu przed wyczyszczeniem projektu
                 SaveLayout();
 
                 propManag.SelectedObject = null;
@@ -782,7 +347,6 @@ namespace Fenix
 
                 Pr = null;
 
-                //Sprawdzenie i ustawienie menu
                 CheckAccessForNodes();
             }
             catch (Exception Ex)
@@ -792,11 +356,10 @@ namespace Fenix
             }
         }
 
-        private void Save0_Click(object sender, RoutedEventArgs e)
+        private void ProjectSave_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //Zapisanie projectu
                 bool saved = false;
 
                 if (String.IsNullOrEmpty(Pr.path))
@@ -827,7 +390,7 @@ namespace Fenix
             }
         }
 
-        private void Start0_Click(object sender, RoutedEventArgs e)
+        private void DriverCommunicationStart_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -864,7 +427,7 @@ namespace Fenix
             }
         }
 
-        private void Stop0_Click(object sender, RoutedEventArgs e)
+        private void DriverCommnicationStop_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -887,7 +450,7 @@ namespace Fenix
 
                     if (((IDriverModel)SelObj).isAlive)
                     {
-                        CommStop fr = new CommStop((IDriverModel)SelObj);
+                        CommunicationWait fr = new CommunicationWait((IDriverModel)SelObj);
                         fr.Owner = this;
                         fr.ShowDialog();
                     }
@@ -901,7 +464,7 @@ namespace Fenix
             }
         }
 
-        private void StartAll_Click(object sender, RoutedEventArgs e)
+        private void AllDriverCommunicationStart_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -942,7 +505,7 @@ namespace Fenix
             }
         }
 
-        private void StopAll_Click(object sender, RoutedEventArgs e)
+        private void AllDriverCommunicationStop_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -954,7 +517,7 @@ namespace Fenix
 
                     if (id.isAlive)
                     {
-                        CommStop fr = new CommStop(id);
+                        CommunicationWait fr = new CommunicationWait(id);
                         fr.Owner = this;
                         fr.ShowDialog();
                     }
@@ -984,26 +547,7 @@ namespace Fenix
             }
         }
 
-        private void Simulation0_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ProcessStartInfo pInfo = new ProcessStartInfo();
-                pInfo.FileName = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + @"\\FenixServer.exe";
-                pInfo.UseShellExecute = true;
-                pInfo.Verb = "runas";
-                pInfo.Arguments = "-s";
-
-                Process.Start(pInfo);
-            }
-            catch (Exception Ex)
-            {
-                if (PrCon.ApplicationError != null)
-                    PrCon.ApplicationError(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void Cut0_Click(object sender, RoutedEventArgs e)
+        private void ElementCut_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1019,7 +563,7 @@ namespace Fenix
             }
         }
 
-        private void Copy0_Click(object sender, RoutedEventArgs e)
+        private void ElementCopy_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1034,7 +578,7 @@ namespace Fenix
             }
         }
 
-        private void Paste0_Click(object sender, RoutedEventArgs e)
+        private void ElementPaste_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1044,12 +588,12 @@ namespace Fenix
                     {
                         if (tvMain.View.SelectedItem is Project)
                         {
-                            string dest = io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + io.Path.GetFileName(SelSrcPath);
+                            string dest = Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + Path.GetFileName(SelSrcPath);
                             if (dest == SelSrcPath)
                                 throw new ApplicationException("This operation is forbbiden");
 
-                            io.File.Copy(SelSrcPath, dest, true);
-                            io.File.Delete(SelSrcPath);
+                            File.Copy(SelSrcPath, dest, true);
+                            File.Delete(SelSrcPath);
 
                             SelSrcPath = string.Empty;
                             PrCon.SrcType = ElementKind.Empty;
@@ -1063,11 +607,11 @@ namespace Fenix
                     {
                         if (tvMain.View.SelectedItem is Project)
                         {
-                            string dest = io.Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + io.Path.GetFileName(SelSrcPath);
+                            string dest = Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + Path.GetFileName(SelSrcPath);
                             if (dest == SelSrcPath)
                                 throw new ApplicationException("This operation is forbbiden");
 
-                            io.File.Copy(SelSrcPath, dest, true);
+                            File.Copy(SelSrcPath, dest, true);
 
                             SelSrcPath = string.Empty;
                             PrCon.SrcType = ElementKind.Empty;
@@ -1086,7 +630,7 @@ namespace Fenix
             }
         }
 
-        private void Delete0_Click(object sender, RoutedEventArgs e)
+        private void ElementDelete_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1100,12 +644,13 @@ namespace Fenix
             }
         }
 
-        private void Solution0_Click(object sender, RoutedEventArgs e)
+        private void SolutionShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Solution").First();
-                lpAnchor.IsVisible = true;
+                LayoutAnchorable solutionAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Solution").FirstOrDefault();
+                solutionAnchor?.IsVisible = true;
+
             }
             catch (Exception Ex)
             {
@@ -1113,12 +658,12 @@ namespace Fenix
             }
         }
 
-        private void Properties0_Click(object sender, RoutedEventArgs e)
+        private void PropertiesShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Properties").First();
-                lpAnchor.IsVisible = true;
+                LayoutAnchorable propertiesAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Properties").FirstOrDefault();
+                propertiesAnchor?.IsVisible = true;
             }
             catch (Exception Ex)
             {
@@ -1127,12 +672,12 @@ namespace Fenix
             }
         }
 
-        private void Output0_Click(object sender, RoutedEventArgs e)
+        private void OutputShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                LayoutAnchorable lpAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Output").First();
-                lpAnchor.IsVisible = true;
+                LayoutAnchorable outputAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Output").FirstOrDefault();
+                outputAnchor?.IsVisible = true;
             }
             catch (Exception Ex)
             {
@@ -1141,35 +686,35 @@ namespace Fenix
             }
         }
 
-        private void TableView0_Click(object sender, RoutedEventArgs e)
+        private void TableViewShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (Pr == null)
                     return;
 
-                var laTableViewAnchorable = new LayoutAnchorable
+                var tableViewAnchor = new LayoutAnchorable
                 {
                     CanClose = true,
                     Title = $"\ud83d\udcca {((ITreeViewModel)SelObj)?.Name ?? "Table View"}",
                     ContentId = $"TableView;{SelGuid};{actualKindElement}"
                 };
 
-                var tbView = new TableView(PrCon, Pr.objId, SelGuid, actualKindElement, laTableViewAnchorable);
-                laTableViewAnchorable.Closed += LaCtrl_Closed;
-                laTableViewAnchorable.Content = tbView;
+                var tbView = new TableView(PrCon, Pr.objId, SelGuid, actualKindElement, tableViewAnchor);
+                tableViewAnchor.Closed += EditorLayoutElement_Closed;
+                tableViewAnchor.Content = tbView;
 
                 var middlePan1 = dockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
                 if (middlePan1 != null)
                 {
-                    middlePan1.Children.Add(laTableViewAnchorable);
+                    middlePan1.Children.Add(tableViewAnchor);
                 }
                 else
                 {
-                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(laTableViewAnchorable));
+                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(tableViewAnchor));
                 }
 
-                laTableViewAnchorable.IsActive = true;
+                tableViewAnchor.IsActive = true;
                 CheckAccessForNodes();
             }
             catch (Exception Ex)
@@ -1178,31 +723,31 @@ namespace Fenix
             }
         }
 
-        private void TableViewRO0_Click(object sender, RoutedEventArgs e)
+        private void TableViewReadOnlyShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (Pr == null)
                     return;
 
-                var laAnchorable = new LayoutAnchorable
+                var tableViewROAnchor = new LayoutAnchorable
                 {
                     CanClose = true,
                     Title = $"\ud83d\udccb {((ITreeViewModel)SelObj)?.Name ?? "Table View RO"}",
                     ContentId = $"TableViewRO;{SelGuid};{actualKindElement}"
                 };
 
-                var tbViewRO = new TableViewRO(PrCon, Pr.objId, SelGuid, actualKindElement, laAnchorable);
-                laAnchorable.Closed += LaCtrl_Closed;
-                laAnchorable.Content = tbViewRO;
+                var tbViewRO = new TableViewRO(PrCon, Pr.objId, SelGuid, actualKindElement, tableViewROAnchor);
+                tableViewROAnchor.Closed += EditorLayoutElement_Closed;
+                tableViewROAnchor.Content = tbViewRO;
 
                 var middlePan1 = dockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
                 if (middlePan1 != null)
-                    middlePan1.Children.Add(laAnchorable);
+                    middlePan1.Children.Add(tableViewROAnchor);
                 else
-                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(laAnchorable));
+                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(tableViewROAnchor));
 
-                laAnchorable.IsActive = true;
+                tableViewROAnchor.IsActive = true;
                 CheckAccessForNodes();
             }
             catch (Exception Ex)
@@ -1211,32 +756,32 @@ namespace Fenix
             }
         }
 
-        private void ChartView0_Click(object sender, RoutedEventArgs e)
+        private void ChartViewShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var laChartView = new LayoutAnchorable
+                var chartViewAnchor = new LayoutAnchorable
                 {
                     CanClose = true,
                     Title = $"\ud83d\udcc8 {((ITreeViewModel)SelObj)?.Name ?? "Chart View"}",
                     ContentId = $"ChartView;{SelGuid};{actualKindElement}"
                 };
 
-                var chartView = new ChartView(PrCon, Pr.objId, SelGuid, actualKindElement, laChartView);
-                laChartView.Closed += LaCtrl_Closed;
-                laChartView.Content = chartView;
+                var chartView = new ChartView(PrCon, Pr.objId, SelGuid, actualKindElement, chartViewAnchor);
+                chartViewAnchor.Closed += EditorLayoutElement_Closed;
+                chartViewAnchor.Content = chartView;
 
                 var middlePan1 = dockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
                 if (middlePan1 != null)
                 {
-                    middlePan1.Children.Add(laChartView);
+                    middlePan1.Children.Add(chartViewAnchor);
                 }
                 else
                 {
-                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(laChartView));
+                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(chartViewAnchor));
                 }
 
-                laChartView.IsActive = true;
+                chartViewAnchor.IsActive = true;
                 CheckAccessForNodes();
             }
             catch (Exception ex)
@@ -1245,32 +790,32 @@ namespace Fenix
             }
         }
 
-        private void CommView0_Click(object sender, RoutedEventArgs e)
+        private void CommViewShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var laCommunicationView = new LayoutAnchorable
+                var communicationAnchor = new LayoutAnchorable
                 {
                     CanClose = true,
                     Title = $"\ud83d\udce1 {((ITreeViewModel)SelObj)?.Name ?? "Comm View"}",
                     ContentId = $"CommView;{SelGuid};{actualKindElement}"
                 };
 
-                var commView = new CommunicationView(PrCon, Pr.objId, SelGuid, actualKindElement, laCommunicationView);
-                laCommunicationView.Closed += LaCtrl_Closed;
-                laCommunicationView.Content = commView;
+                var commView = new CommunicationView(PrCon, Pr.objId, SelGuid, actualKindElement, communicationAnchor);
+                communicationAnchor.Closed += EditorLayoutElement_Closed;
+                communicationAnchor.Content = commView;
 
                 var middlePan1 = dockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
                 if (middlePan1 != null)
                 {
-                    middlePan1.Children.Add(laCommunicationView);
+                    middlePan1.Children.Add(communicationAnchor);
                 }
                 else
                 {
-                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(laCommunicationView));
+                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(communicationAnchor));
                 }
 
-                laCommunicationView.IsActive = true;
+                communicationAnchor.IsActive = true;
                 CheckAccessForNodes();
             }
             catch (Exception ex)
@@ -1279,43 +824,43 @@ namespace Fenix
             }
         }
 
-        private void Editor0_Click(object sender, RoutedEventArgs e)
+        private void EditorShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                LayoutAnchorable laEdit = new LayoutAnchorable
+                LayoutAnchorable editorAnchor = new LayoutAnchorable
                 {
                     CanClose = true,
                     ContentId = $"Editor;{SelGuid};{actualKindElement}"
                 };
 
-                Editor edit;
+                ScriptEditor edit;
 
                 if (actualKindElement == ElementKind.ScriptFile)
                 {
                     var file = PrCon.GetScriptFile(Pr.objId, SelGuid);
-                    edit = new Editor(PrCon, Pr.objId, file.FilePath, actualKindElement, laEdit);
-                    laEdit.Title = file.Name;
+                    edit = new ScriptEditor(PrCon, Pr.objId, file.FilePath, actualKindElement, editorAnchor);
+                    editorAnchor.Title = file.Name;
                 }
                 else
                 {
                     return;
                 }
 
-                laEdit.Closed += LaCtrl_Closed;
-                laEdit.Content = edit;
+                editorAnchor.Closed += EditorLayoutElement_Closed;
+                editorAnchor.Content = edit;
 
                 var middlePane = dockManager.Layout.Descendents().OfType<LayoutDocumentPane>().FirstOrDefault();
                 if (middlePane != null)
                 {
-                    middlePane.Children.Add(laEdit);
+                    middlePane.Children.Add(editorAnchor);
                 }
                 else
                 {
-                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(laEdit));
+                    dockManager.Layout.RootPanel.Children.Add(new LayoutDocumentPane(editorAnchor));
                 }
 
-                laEdit.IsActive = true;
+                editorAnchor.IsActive = true;
                 CheckAccessForNodes();
             }
             catch (Exception Ex)
@@ -1324,32 +869,13 @@ namespace Fenix
             }
         }
 
-        private void SaveLayout()
+        private void EditorLayoutElement_Closed(object sender, EventArgs e)
         {
             try
             {
-                if (Pr == null) return;
-                string path = io.Path.GetDirectoryName(PrCon.projectList.First().path) + "\\" + PrCon.LayoutFile;
-                XmlLayoutSerializer serializer = new XmlLayoutSerializer(dockManager);
-                serializer.Serialize(path);
-                System.Diagnostics.Debug.WriteLine($"[SaveLayout] OK: {path}");
-            }
-            catch (Exception Ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"[SaveLayout] ERROR: {Ex.Message}");
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void LaCtrl_Closed(object sender, EventArgs e)
-        {
-            try
-            {
-                //Okno
                 LayoutAnchorable win = (LayoutAnchorable)sender;
-                win.Closed -= LaCtrl_Closed;
+                win.Closed -= EditorLayoutElement_Closed;
 
-                //TableView
                 if (win.Content is TableView)
                 {
                     TableView tbVw = (TableView)win.Content;
@@ -1364,9 +890,9 @@ namespace Fenix
                     tbVw = null;
                     GC.Collect();
                 }
-                else if (win.Content is Editor)
+                else if (win.Content is ScriptEditor)
                 {
-                    Editor editor = (Editor)win.Content;
+                    ScriptEditor editor = (ScriptEditor)win.Content;
                     win.Content = null;
                 }
                 else if (win.Content is CommunicationView)
@@ -1386,7 +912,7 @@ namespace Fenix
             }
         }
 
-        private void DriveConf0_Click(object sender, RoutedEventArgs e)
+        private void DriversConfigurationShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1401,7 +927,7 @@ namespace Fenix
             }
         }
 
-        private void About0_Click(object sender, RoutedEventArgs e)
+        private void AboutShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1416,7 +942,7 @@ namespace Fenix
             }
         }
 
-        private void Updates0_Click(object sender, RoutedEventArgs e)
+        private void UpdatesShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1431,57 +957,19 @@ namespace Fenix
             }
         }
 
-        private void ShHelp0_Click(object sender, RoutedEventArgs e)
+        private void HelpShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(PrCon.HelpWebSite) { UseShellExecute = true });
+                Process.Start(new ProcessStartInfo(PrCon.HelpWebSite) { UseShellExecute = true });
             }
             catch (Exception Ex)
             {
                 PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
             }
         }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            try
-            {
-                SaveLayout();
-
-                lbPathProject.Content = string.Empty;
-                Pr = null;
-            }
-            catch (Exception Ex)
-            {
-                if (PrCon.ApplicationError != null)
-                    PrCon.ApplicationError(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                await VerifySoftwareUpdate(false);
-
-                if (!String.IsNullOrEmpty(pathRun))
-                {
-                    //Ta metoda zostala przeniesiona tu w konstruktorze wyrzucala blad
-                    PrCon.openProjects(pathRun);
-                    Pr = PrCon.projectList[0];
-                    Registry.SetValue(PrCon.RegUserRoot, PrCon.LastPathKey, Pr.path);
-
-                    CheckAccessForNodes();
-                }
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void Exit0_Click(object sender, RoutedEventArgs e)
+        
+        private void MainWindowExit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1493,7 +981,7 @@ namespace Fenix
             }
         }
 
-        private void Block_Click(object sender, RoutedEventArgs e)
+        private void DriverBlock_Click(object sender, RoutedEventArgs e)
         {
             if (SelObj != null)
             {
@@ -1505,7 +993,7 @@ namespace Fenix
             }
         }
 
-        private void Unblock_Click(object sender, RoutedEventArgs e)
+        private void DriverUnblock_Click(object sender, RoutedEventArgs e)
         {
             if (SelObj != null)
             {
@@ -1517,7 +1005,7 @@ namespace Fenix
             }
         }
 
-        private void MenuItem_DbReset_Click(object sender, RoutedEventArgs e)
+        private void DatabaseReset_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1529,192 +1017,14 @@ namespace Fenix
             }
         }
 
-        private void MenuItem_ChartAddAxis_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var axes = Pr.ChartConf.Axes;
-                int idx = axes.Count + 1;
-                bool isRight = idx % 2 == 0;
-                string key = "Y" + idx;
-                axes.Add(new ChartAxisConf(key, key, isRight));
-                Pr.ChartConf.Axes = axes;
-                Pr.ChartConfigNode.RefreshChildren();
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void MenuItem_ChartRemoveAxis_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (SelObj is ChartAxisNode axisNode)
-                {
-                    var axes = Pr.ChartConf.Axes;
-                    if (axes.Count <= 1) return;
-                    axes.Remove(axisNode.AxisConf);
-                    Pr.ChartConf.Axes = axes;
-                    Pr.ChartConfigNode.RefreshChildren();
-                }
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void View_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            try
-            {
-                propManag.SelectedObject = e.NewValue;
-                SelObj = e.NewValue;
-
-                if (e.NewValue is Project)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxProject"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxProject"];
-                    SelGuid = ((Project)e.NewValue).objId;
-                    actualKindElement = ElementKind.Project;
-                }
-                else if (e.NewValue is DatabaseModel)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxDatabse"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxDatabse"];
-                }
-                else if (e.NewValue is ChartConfigNode)
-                {
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxChartConfig"];
-                }
-                else if (e.NewValue is ChartAxisNode axisNode)
-                {
-                    propManag.SelectedObject = axisNode.AxisConf;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxChartAxis"];
-                }
-                else if (e.NewValue is ScriptsDriver)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxScripts"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxScripts"];
-                    SelGuid = ((ScriptsDriver)e.NewValue).objId;
-                    actualKindElement = ElementKind.Scripts;
-                }
-                else if (e.NewValue is ScriptFile)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxScriptFile"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxScriptFile"];
-                    SelGuid = ((ScriptFile)e.NewValue).objId;
-                    actualKindElement = ElementKind.ScriptFile;
-                }
-                else if (e.NewValue is InternalTagsDriver)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxInternalTags"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxInternalTags"];
-                    SelGuid = ((InternalTagsDriver)e.NewValue).objId;
-                    actualKindElement = ElementKind.InternalsTags;
-                }
-                else if (e.NewValue is InTag)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxIntTag"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxIntTag"];
-                    SelGuid = ((InTag)e.NewValue).objId;
-                    actualKindElement = ElementKind.IntTag;
-
-                    if (e.NewValue != null)
-                        ((INotifyPropertyChanged)e.NewValue).PropertyChanged += MainWindow_PropertyChanged;
-                }
-                else if (e.NewValue is CustomTimer timer)
-                {
-                    _selectedTimersFolder = FindParentTimersFolder(timer);
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxTimer"];
-                }
-                else if (e.NewValue is TimersFolder tf)
-                {
-                    _selectedTimersFolder = tf;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxTimers"];
-                }
-                else if (e.NewValue is Connection)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxConnection"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxConnection"];
-                    SelGuid = ((Connection)e.NewValue).objId;
-                    actualKindElement = ElementKind.Connection;
-                }
-                else if (e.NewValue is Device)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxDevice"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxDevice"];
-                    SelGuid = ((Device)e.NewValue).objId;
-                    actualKindElement = ElementKind.Device;
-                }
-                else if (e.NewValue is Tag)
-                {
-                    if (e.OldValue != null)
-                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= MainWindow_PropertyChanged;
-
-                    ((ContextMenu)Resources["CtxTag"]).DataContext = _viewModel;
-                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxTag"];
-                    SelGuid = ((Tag)e.NewValue).objId;
-                    actualKindElement = ElementKind.Tag;
-
-                    if (e.NewValue != null)
-                        ((INotifyPropertyChanged)e.NewValue).PropertyChanged += MainWindow_PropertyChanged;
-                }
-
-                CheckAccessForNodes();
-            }
-            catch (Exception Ex)
-            {
-                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        private void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            Dispatcher.Invoke(new Action(() =>
-            {
-                if (SelObj is Tag || SelObj is ITag)
-                {
-                    if (!((IDriverModel)sender).isAlive)
-                        propManag.SelectedObject = sender;
-                }
-            }));
-        }
-
-        private void MenuItem_ShowDbFile_Click(object sender, RoutedEventArgs e)
+        private void DatabaseExplorerShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 string dbRelative = PrCon.Database.TrimStart('\\', '/');
-                string fullDbPath = io.Path.Combine(io.Path.GetDirectoryName(Pr.path), dbRelative);
-                string p = io.Path.GetDirectoryName(fullDbPath);
-                if (io.Directory.Exists(p))
+                string fullDbPath = Path.Combine(Path.GetDirectoryName(Pr.path), dbRelative);
+                string p = Path.GetDirectoryName(fullDbPath);
+                if (Directory.Exists(p))
                     Process.Start(new ProcessStartInfo(p) { UseShellExecute = true });
             }
             catch (Exception Ex)
@@ -1724,7 +1034,7 @@ namespace Fenix
             }
         }
 
-        private void MenuItem_ShowDatabse_Click(object sender, RoutedEventArgs e)
+        private void DatabseTableViewShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1732,7 +1042,7 @@ namespace Fenix
                 laTableView.CanClose = true;
                 laTableView.ContentId = "TableDatabase";
                 DBTableView db = new DBTableView(Pr);
-                laTableView.Closed += LaCtrl_Closed;
+                laTableView.Closed += EditorLayoutElement_Closed;
                 laTableView.Content = db;
 
                 var MiddlePan1 = dockManager.Layout.Descendents().OfType<LayoutDocumentPane>().First();
@@ -1750,7 +1060,7 @@ namespace Fenix
             }
         }
 
-        private void MenuItem_ShowTrendDb_Click(object sender, RoutedEventArgs e)
+        private void DatabaseTrendViewShow_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1758,7 +1068,7 @@ namespace Fenix
                 laTableView.CanClose = true;
                 laTableView.ContentId = "TrendDatabase";
                 DBChartView chart = new DBChartView(Pr);
-                laTableView.Closed += LaCtrl_Closed;
+                laTableView.Closed += EditorLayoutElement_Closed;
                 laTableView.Content = chart;
 
                 var MiddlePan1 = dockManager.Layout.Descendents().OfType<LayoutDocumentPane>().First();
@@ -1776,7 +1086,7 @@ namespace Fenix
             }
         }
 
-        private void MenuItem_SaveDatabeCSV_Click(object sender, RoutedEventArgs e)
+        private void DatabeCSVExport_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1815,7 +1125,7 @@ namespace Fenix
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "CSV files (*.csv)|*.csv";
                 if (sfd.ShowDialog(this) == true)
-                    io.File.WriteAllText(sfd.FileName, sb.ToString());
+                    File.WriteAllText(sfd.FileName, sb.ToString());
             }
             catch (Exception Ex)
             {
@@ -1824,11 +1134,187 @@ namespace Fenix
             }
         }
 
+        private void ChartAddAxisY_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var axes = Pr.ChartConf.Axes;
+                int idx = axes.Count + 1;
+                bool isRight = idx % 2 == 0;
+                string key = "Y" + idx;
+                axes.Add(new ChartAxisConf(key, key, isRight));
+                Pr.ChartConf.Axes = axes;
+                Pr.ChartConfigNode.RefreshChildren();
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
+        private void ChartRemoveAxisY_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (SelObj is ChartAxisNode axisNode)
+                {
+                    var axes = Pr.ChartConf.Axes;
+                    if (axes.Count <= 1) return;
+                    axes.Remove(axisNode.AxisConf);
+                    Pr.ChartConf.Axes = axes;
+                    Pr.ChartConfigNode.RefreshChildren();
+                }
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
+        private void ContextMenu_AttachRigtMenu_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            try
+            {
+                propManag.SelectedObject = e.NewValue;
+                SelObj = e.NewValue;
+
+                if (e.NewValue is Project)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxProject"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxProject"];
+                    SelGuid = ((Project)e.NewValue).objId;
+                    actualKindElement = ElementKind.Project;
+                }
+                else if (e.NewValue is DatabaseModel)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxDatabse"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxDatabse"];
+                }
+                else if (e.NewValue is ChartConfigNode)
+                {
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxChartConfig"];
+                }
+                else if (e.NewValue is ChartAxisNode axisNode)
+                {
+                    propManag.SelectedObject = axisNode.AxisConf;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxChartAxis"];
+                }
+                else if (e.NewValue is ScriptsDriver)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxScripts"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxScripts"];
+                    SelGuid = ((ScriptsDriver)e.NewValue).objId;
+                    actualKindElement = ElementKind.Scripts;
+                }
+                else if (e.NewValue is ScriptFile)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxScriptFile"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxScriptFile"];
+                    SelGuid = ((ScriptFile)e.NewValue).objId;
+                    actualKindElement = ElementKind.ScriptFile;
+                }
+                else if (e.NewValue is InternalTagsDriver)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxInternalTags"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxInternalTags"];
+                    SelGuid = ((InternalTagsDriver)e.NewValue).objId;
+                    actualKindElement = ElementKind.InternalsTags;
+                }
+                else if (e.NewValue is InTag)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxIntTag"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxIntTag"];
+                    SelGuid = ((InTag)e.NewValue).objId;
+                    actualKindElement = ElementKind.IntTag;
+
+                    if (e.NewValue != null)
+                        ((INotifyPropertyChanged)e.NewValue).PropertyChanged += TreeViewPropertiesBind_PropertyChanged;
+                }
+                else if (e.NewValue is CustomTimer timer)
+                {
+                    _selectedTimersFolder = FindParentTimersFolder(timer);
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxTimer"];
+                }
+                else if (e.NewValue is TimersFolder tf)
+                {
+                    _selectedTimersFolder = tf;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxTimers"];
+                }
+                else if (e.NewValue is Connection)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxConnection"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxConnection"];
+                    SelGuid = ((Connection)e.NewValue).objId;
+                    actualKindElement = ElementKind.Connection;
+                }
+                else if (e.NewValue is Device)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxDevice"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxDevice"];
+                    SelGuid = ((Device)e.NewValue).objId;
+                    actualKindElement = ElementKind.Device;
+                }
+                else if (e.NewValue is Tag)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxTag"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxTag"];
+                    SelGuid = ((Tag)e.NewValue).objId;
+                    actualKindElement = ElementKind.Tag;
+
+                    if (e.NewValue != null)
+                        ((INotifyPropertyChanged)e.NewValue).PropertyChanged += TreeViewPropertiesBind_PropertyChanged;
+                }
+
+                CheckAccessForNodes();
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
+        private void TreeViewPropertiesBind_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                if (SelObj is Tag || SelObj is ITag)
+                {
+                    if (!((IDriverModel)sender).isAlive)
+                        propManag.SelectedObject = sender;
+                }
+            }));
+        }
+
         public override string ToString()
         {
             return "FenixModbusS7";
         }
-
-        #endregion Internal Events
     }
 }

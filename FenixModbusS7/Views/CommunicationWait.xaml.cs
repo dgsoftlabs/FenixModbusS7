@@ -4,12 +4,12 @@ using System.Windows;
 
 namespace Fenix
 {
-    public partial class CommStop : Window
+    public partial class CommunicationWait : Window
     {
         public IDriverModel Idrv { get; set; }
         private System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
-        public CommStop(IDriverModel idrv)
+        public CommunicationWait(IDriverModel idrv)
         {
             InitializeComponent();
 

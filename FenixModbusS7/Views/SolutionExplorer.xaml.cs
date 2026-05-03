@@ -13,12 +13,12 @@ namespace Fenix
     /// <summary>
     /// Interaction logic for TreeViewManager.xaml
     /// </summary>
-    public partial class TreeViewManager : UserControl
+    public partial class SolutionExplorer : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TreeViewManager"/> class.
+        /// Initializes a new instance of the <see cref="SolutionExplorer"/> class.
         /// </summary>
-        public TreeViewManager()
+        public SolutionExplorer()
         {
             InitializeComponent();
             DataContext = this;
