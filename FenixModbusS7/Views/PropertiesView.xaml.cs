@@ -77,7 +77,8 @@ namespace Fenix
 
             foreach (var prop in props)
             {
-                _rows.Add(new PropertyRow(_selectedObject, prop, IsEditorEnabled));
+                if(!prop.Attributes.OfType<BlockRootNameAttribute>().Any())
+                    _rows.Add(new PropertyRow(_selectedObject, prop, IsEditorEnabled));
 
                 var nestedRows = GetExpandableRows(_selectedObject, prop);
                 foreach (var nested in nestedRows)
