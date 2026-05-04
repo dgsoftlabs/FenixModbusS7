@@ -6,9 +6,9 @@ using System.Drawing;
 namespace ProjectDataLib
 {
     /// <summary>
-    /// Tree node representing Chart Configuration in the project tree.
+    /// Tree node representing a single chart axis in the project tree.
     /// </summary>
-    public class ChartConfigNode : ITreeViewModel, INotifyPropertyChanged
+    public class ChartAxisNode : ITreeViewModel, INotifyPropertyChanged
     {
         [field: NonSerialized]
         private PropertyChangedEventHandler propChanged;
@@ -19,44 +19,32 @@ namespace ProjectDataLib
             remove { propChanged -= value; }
         }
 
-        private ObservableCollection<object> children_ = new ObservableCollection<object>();
-
         [Browsable(false)]
-        public ObservableCollection<object> Children
+        public ChartAxisConf AxisConf { get; }
+
+        public ChartAxisNode(ChartAxisConf axisConf)
         {
-            get { return children_; }
-            set { children_ = value; }
+            AxisConf = axisConf;
+            ((INotifyPropertyChanged)axisConf).PropertyChanged += AxisConf_PropertyChanged;
         }
 
-        [Browsable(false)]
-        public Project Project { get; }
-
-        public ChartConfigNode(Project project)
+        private void AxisConf_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Project = project;
-
-            // Populate children – one node per axis
-            RefreshChildren();
-        }
-
-        public void RefreshChildren()
-        {
-            children_.Clear();
-            if (Project?.ChartConf?.Axes == null) return;
-
-            foreach (var axis in Project.ChartConf.Axes)
-                children_.Add(new ChartAxisNode(axis));
+            if (e.PropertyName == nameof(ChartAxisConf.Key) || e.PropertyName == nameof(ChartAxisConf.Title))
+                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
         }
 
         public string Name
         {
-            get { return "Chart Configuration"; }
+            get { return string.IsNullOrWhiteSpace(AxisConf.Title) ? AxisConf.Key : $"{AxisConf.Key} – {AxisConf.Title}"; }
             set { }
         }
 
-        private bool isExpand_ = true;
-
         [Browsable(false)]
+        public ObservableCollection<object> Children { get; set; } = new ObservableCollection<object>();
+
+        private bool isExpand_;
+
         public bool IsExpand
         {
             get { return isExpand_; }

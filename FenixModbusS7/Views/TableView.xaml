@@ -383,8 +383,10 @@
                                             VerticalAlignment="Center"
                                             BorderBrush="{StaticResource Th.BorderBrush}"
                                             BorderThickness="1"
-                                            Background="{Binding Path=(PrCon:ITag.Clr), Converter={StaticResource ColorConv}}"
-                                            ToolTip="{Binding Path=(PrCon:ITag.Clr)}" />
+                                            Background="{Binding Path=Clr, Converter={StaticResource ColorConv}}"
+                                            ToolTip="{Binding Path=Clr}"
+                                            Cursor="Hand"
+                                            MouseDown="ChartColorBorder_MouseDown" />
                             </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
