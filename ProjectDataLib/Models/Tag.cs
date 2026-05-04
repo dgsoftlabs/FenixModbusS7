@@ -1145,7 +1145,7 @@ namespace ProjectDataLib
 
         private Color Clr_;
 
-        [Category("06 Graph"), DisplayName("Color")]
+        [Category("06 Graph"), DisplayName("Chart Color")]
         [JsonIgnore]
         [XmlIgnore]
         public Color Clr
@@ -1168,7 +1168,7 @@ namespace ProjectDataLib
 
         private int Width_;
 
-        [Category("06 Graph"), DisplayName("Line Width")]
+        [Category("06 Graph"), DisplayName("Chart Width")]
         [JsonIgnore]
         public int Width
         {
@@ -1212,7 +1212,7 @@ namespace ProjectDataLib
 
         private string GrAxisKey_ = "Y1";
 
-        [Category("06 Graph"), DisplayName("Y Axis")]
+        [Category("06 Graph"), DisplayName("Chart Y Axis")]
         [TypeConverter(typeof(ChartAxisKeyConverter))]
         [JsonIgnore]
         [XmlElement(ElementName = "ChartAxisKey")]
