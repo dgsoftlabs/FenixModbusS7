@@ -369,7 +369,6 @@
                     <CheckBox Content="Value" IsChecked="{Binding Pr.TableConf.TvCol11, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Set Value" IsChecked="{Binding Pr.TableConf.TvCol13, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Description" IsChecked="{Binding Pr.TableConf.TvCol14, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-
                 </ContextMenu>
             </DataGrid.ContextMenu>
 
@@ -678,7 +677,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
                 </DataGrid.Columns>
             </DataGrid>
     </Grid>

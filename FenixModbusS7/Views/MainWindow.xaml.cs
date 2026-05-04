@@ -664,7 +664,6 @@ namespace Fenix
             {
                 LayoutAnchorable solutionAnchor = dockManager.Layout.Descendents().OfType<LayoutAnchorable>().Where(x => x.ContentId == "Solution").FirstOrDefault();
                 solutionAnchor?.IsVisible = true;
-
             }
             catch (Exception Ex)
             {
@@ -982,7 +981,7 @@ namespace Fenix
                 PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
             }
         }
-        
+
         private void MainWindowExit_Click(object sender, RoutedEventArgs e)
         {
             try
