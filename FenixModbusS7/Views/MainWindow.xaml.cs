@@ -470,15 +470,22 @@ namespace Fenix
             {
                 foreach (IDriverModel id in ((IDriversMagazine)Pr).Children)
                 {
-                    id.information -= Error;
-                    id.error -= Error;
+                    try
+                    {
+                        id.information -= Error;
+                        id.error -= Error;
 
-                    List<ITag> tagsList = PrCon.GetAllITagsForDriver(Pr.objId, id.ObjId);
+                        List<ITag> tagsList = PrCon.GetAllITagsForDriver(Pr.objId, id.ObjId) ?? new List<ITag>();
 
-                    id.information += Error;
-                    id.error += Error;
+                        id.information += Error;
+                        id.error += Error;
 
-                    id.activateCycle(tagsList);
+                        id.activateCycle(tagsList);
+                    }
+                    catch (Exception Ex)
+                    {
+                        PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+                    }
                 }
 
                 List<object> lista1 = new List<object>();
@@ -511,15 +518,22 @@ namespace Fenix
             {
                 foreach (IDriverModel id in ((IDriversMagazine)Pr).Children)
                 {
-                    id.information -= Error;
-                    id.error -= Error;
-                    id.deactivateCycle();
-
-                    if (id.isAlive)
+                    try
                     {
-                        CommunicationWait fr = new CommunicationWait(id);
-                        fr.Owner = this;
-                        fr.ShowDialog();
+                        id.information -= Error;
+                        id.error -= Error;
+                        id.deactivateCycle();
+
+                        if (id.isAlive)
+                        {
+                            CommunicationWait fr = new CommunicationWait(id);
+                            fr.Owner = this;
+                            fr.ShowDialog();
+                        }
+                    }
+                    catch (Exception Ex)
+                    {
+                        PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
                     }
                 }
 

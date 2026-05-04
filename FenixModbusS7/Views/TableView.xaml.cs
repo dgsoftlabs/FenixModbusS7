@@ -890,6 +890,22 @@ namespace Fenix
         }
     }
 
+    public class ChartAxisKeyConv : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is IEnumerable<ChartAxisConf> axes)
+                return axes.Select(a => a.Key).ToList();
+
+            return new List<string>() { "Y1" };
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class ValueConv : IMultiValueConverter
     {
         object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

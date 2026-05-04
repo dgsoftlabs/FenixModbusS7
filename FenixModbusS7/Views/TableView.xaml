@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Fenix.TableView"
+<UserControl x:Class="Fenix.TableView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -25,6 +25,7 @@
 
         <local:BitByteConv      x:Key="BitByteConv" />
         <local:AreaDataConv     x:Key="AreaDataConv" />
+        <local:ChartAxisKeyConv x:Key="ChartAxisKeyConv" />
         <local:ValueConv        x:Key="ValueConv" />
         <local:ColorConv        x:Key="ColorConv" />
         <local:ValueMarkConv    x:Key="ValueMarkConv" />
@@ -354,9 +355,10 @@
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <CheckBox Content="Color" IsChecked="{Binding Pr.TableConf.TvCol1, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Chart Color" IsChecked="{Binding Pr.TableConf.TvCol1, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="ChartView" IsChecked="{Binding Pr.TableConf.TvCol2, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Width" IsChecked="{Binding Pr.TableConf.TvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Chart Width" IsChecked="{Binding Pr.TableConf.TvCol3, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+                    <CheckBox Content="Chart Y Axis" IsChecked="{Binding Pr.TableConf.TvCol16, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Tag Name" IsChecked="{Binding Pr.TableConf.TvCol4, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="DB" IsChecked="{Binding Pr.TableConf.TvCol5, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Start" IsChecked="{Binding Pr.TableConf.TvCol6, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
@@ -367,12 +369,12 @@
                     <CheckBox Content="Value" IsChecked="{Binding Pr.TableConf.TvCol11, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Set Value" IsChecked="{Binding Pr.TableConf.TvCol13, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Description" IsChecked="{Binding Pr.TableConf.TvCol14, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Version" IsChecked="{Binding Pr.TableConf.TvCol15, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
+
                 </ContextMenu>
             </DataGrid.ContextMenu>
 
             <DataGrid.Columns>
-                <DataGridTemplateColumn x:Name="Color" Header="Color" Width="*" Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol1, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}">
+                <DataGridTemplateColumn x:Name="Color" Header="Chart Color" Width="*" Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol1, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid>
@@ -392,11 +394,24 @@
                 <DataGridCheckBoxColumn Header="ChartView" Binding="{Binding Path=(PrCon:ITag.GrVisible),Mode=TwoWay}" Width="*"  Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol2, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}">
                 </DataGridCheckBoxColumn>
 
-                <DataGridTemplateColumn Header="Width"  Width="*" Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol3, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}">
+                <DataGridTemplateColumn Header="Chart Width"  Width="*" Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol3, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement} ,Mode=TwoWay}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
                                 <TextBox Style="{StaticResource CellTextBox}" Text="{Binding Path=(PrCon:ITag.Width),Mode=TwoWay}" TextChanged="IntegerUpDown_ValueChanged" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Chart Y Axis" Width="*" Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol16, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement}, Mode=TwoWay}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <ComboBox Style="{StaticResource CellComboBox}" SelectedItem="{Binding Path=(PrCon:ITag.GrAxisKey), Mode=TwoWay}"
+                                          IsEnabled="{Binding Path=(PrCon:ITag.ActGrAxisKey)}"
+                                          ItemsSource="{Binding Path=DataContext.Pr.ChartConf.Axes, Source={StaticResource ProxyElement}, Converter={StaticResource ChartAxisKeyConv}}"
+                                          SelectionChanged="ComboBox_SelectionChanged" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -663,16 +678,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="*" x:Name="tagVersion" Header="Version" Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol15, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement}, Mode=TwoWay}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBox x:Name="ver" Style="{StaticResource CellTextBox}" Text="{Binding Path=(PrCon:ITag.TagVersion), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=(PrCon:ITag.ActVersion)}"
-                                             TextChanged="TextBox_TextChanged" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
     </Grid>

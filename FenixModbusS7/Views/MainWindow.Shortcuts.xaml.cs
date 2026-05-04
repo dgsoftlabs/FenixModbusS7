@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -53,9 +52,6 @@ namespace Fenix
                     case HOTKEY_ID_1:
                         // Ctrl+Shift+R
                         AllDriverCommunicationStop_Click(this, new RoutedEventArgs());
-
-                        Thread.Sleep(1000);
-
                         ProjectSave_Click(this, new RoutedEventArgs());
                         AllDriverCommunicationStart_Click(this, new RoutedEventArgs());
                         break;

@@ -508,6 +508,7 @@ namespace ProjectDataLib
             foreach (var cn in connectionList_)
             {
                 TreeViewChildren_.Add(cn);
+                DriverChildren_.Add((IDriverModel)cn);
                 ((ITreeViewModel)cn).Children = new ObservableCollection<object>(from x in DevicesList_ where x.parentId == cn.objId select x);
             }
 
