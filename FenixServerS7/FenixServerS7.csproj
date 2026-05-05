@@ -9,7 +9,7 @@
     <StartupObject>FenixServer.Program</StartupObject>
     <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
     <RootNamespace>FenixServer</RootNamespace>
-    <AssemblyName>FenixServer</AssemblyName>
+    <AssemblyName>FenixServerS7</AssemblyName>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>false</Install>
