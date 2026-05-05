@@ -3,7 +3,8 @@
 ## Project Guidelines
 - User prefers chart UI labels/descriptions in English (EN).
 - User expects UI fixes to be complete, specifically no unnecessary right-side empty space in the property grid.
-- Support only the .pse project format; do not support legacy .psx/.psf formats.
+- Support only the .pse project format; do not support legacy .psx formats for saving, but open legacy .psx files for conversion.
+- Legacy .psf files should be openable via conversion, but saving should remain only in the new format (.pse).
 - Upgrade target framework to .NET 10.0 (LTS).
 - Force migration execution; proceed aggressively without pausing.
 - Replace anything incompatible with a compatible alternative during migration.

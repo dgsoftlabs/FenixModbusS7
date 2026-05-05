@@ -146,7 +146,7 @@ namespace Fenix
                 string strp = (string)Registry.GetValue(PrCon.RegUserRoot, PrCon.LastPathKey, startupPath + "\\Project.pse");
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.InitialDirectory = Path.GetDirectoryName(strp);
-                ofd.Filter = "Fenix project files (*.pse)|*.pse";
+                ofd.Filter = "Fenix project files (*.pse;*.psx)|*.pse;*.psx";
 
                 if (ofd.ShowDialog(this) == true)
                 {

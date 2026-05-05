@@ -571,10 +571,10 @@ namespace FenixServer
                 }
 
                 //Sprawdzenie rejestru czy istnieje poprzednie otwzrcie
-                string strp = (string)Registry.GetValue(PrCon.RegUserRoot, PrCon.LastPathKey, Application.StartupPath + "\\Project.psf");
+                string strp = (string)Registry.GetValue(PrCon.RegUserRoot, PrCon.LastPathKey, Application.StartupPath + "\\Project.pse");
                 ofd_Menager.InitialDirectory = Path.GetDirectoryName(strp);
 
-                ofd_Menager.Filter = "XML Files (*.psx)|*.psx";
+                ofd_Menager.Filter = "Fenix project files (*.pse;*.psx)|*.pse;*.psx";
                 ofd_Menager.Multiselect = false;
 
                 if (ofd_Menager.ShowDialog() == DialogResult.OK)

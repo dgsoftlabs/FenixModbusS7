@@ -222,10 +222,13 @@ namespace ProjectDataLib
                     return false;
 
                 var extension = Path.GetExtension(path);
-                if (!string.Equals(extension, ".pse", StringComparison.OrdinalIgnoreCase))
+                bool isModernFormat = string.Equals(extension, ".pse", StringComparison.OrdinalIgnoreCase);
+                bool isLegacyConvertibleFormat = string.Equals(extension, ".psx", StringComparison.OrdinalIgnoreCase);
+
+                if (!isModernFormat && !isLegacyConvertibleFormat)
                 {
                     throw new NotSupportedException(
-                        $"Unsupported project format '{extension}'. Only '.pse' is supported in .NET 10.");
+                        $"Unsupported project format '{extension}'. Supported open formats: '.pse' and legacy '.psx' (conversion on save).");
                 }
 
                 Project buff;
@@ -235,7 +238,11 @@ namespace ProjectDataLib
                     buff = (Project)xmlSer.Deserialize(fsream);
                 }
 
-                buff.path = path;
+                // Legacy .psx projects are opened in compatibility mode and mapped to modern .pse path for subsequent saves.
+                buff.path = isLegacyConvertibleFormat
+                    ? Path.ChangeExtension(path, ".pse")
+                    : path;
+
                 buff.PrCon = this;
 
                 buff.OnDeserializedXML();
