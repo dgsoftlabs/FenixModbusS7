@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
+using System.Threading;
 using System.Xml.Serialization;
 
 namespace ProjectDataLib
@@ -14,9 +15,17 @@ namespace ProjectDataLib
     [Serializable]
     public class WebServer : IDisposable, ITreeViewModel, INotifyPropertyChanged
     {
+        private const int MaxConcurrentRequests = 32;
+
         [field: NonSerialized]
         [XmlIgnore]
         public HttpListener _listener = new HttpListener();
+
+        [field: NonSerialized]
+        private SemaphoreSlim _requestGate = new SemaphoreSlim(MaxConcurrentRequests, MaxConcurrentRequests);
+
+        [field: NonSerialized]
+        private CancellationTokenSource _runCts;
 
         [field: NonSerialized]
         private ProjectContainer projCon_;
@@ -269,31 +278,65 @@ namespace ProjectDataLib
             _listener.Start();
             Active_ = true;
 
+            _runCts?.Cancel();
+            _runCts?.Dispose();
+            _runCts = new CancellationTokenSource();
+
             System.Threading.ThreadPool.QueueUserWorkItem((o) =>
             {
                 try
                 {
-                    while (_listener.IsListening)
+                    while (_listener.IsListening && !_runCts.IsCancellationRequested)
                     {
+                        HttpListenerContext ctx;
+                        try
+                        {
+                            ctx = _listener.GetContext();
+                        }
+                        catch (HttpListenerException)
+                        {
+                            break;
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            break;
+                        }
+
+                        _requestGate.Wait(_runCts.Token);
+
                         System.Threading.ThreadPool.QueueUserWorkItem((c) =>
                         {
-                            var ctx = c as HttpListenerContext;
+                            var reqCtx = c as HttpListenerContext;
 
                             try
                             {
-                                byte[] buf = _responderMethod(ctx);
-                                ctx.Response.ContentLength64 = buf.Length;
-                                ctx.Response.OutputStream.Write(buf, 0, buf.Length);
+                                byte[] buf = _responderMethod(reqCtx);
+                                reqCtx.Response.ContentLength64 = buf.Length;
+                                reqCtx.Response.OutputStream.Write(buf, 0, buf.Length);
                             }
-                            catch { Active_ = false; }
+                            catch
+                            {
+                                Active_ = false;
+                            }
                             finally
                             {
-                                ctx.Response.OutputStream.Close();
+                                try
+                                {
+                                    reqCtx?.Response?.OutputStream?.Close();
+                                }
+                                catch { }
+
+                                _requestGate.Release();
                             }
-                        }, _listener.GetContext());
+                        }, ctx);
                     }
                 }
-                catch { }
+                catch (OperationCanceledException)
+                {
+                }
+                catch
+                {
+                }
             });
         }
 
@@ -301,6 +344,7 @@ namespace ProjectDataLib
         {
             try
             {
+                _runCts?.Cancel();
                 _listener.Stop();
                 Active_ = false;
             }
@@ -341,6 +385,9 @@ namespace ProjectDataLib
                         _listener.Prefixes.Add(s);
                 }
             }
+
+            _requestGate = new SemaphoreSlim(MaxConcurrentRequests, MaxConcurrentRequests);
+            _runCts = null;
         }
 
         #region IDisposable Support
@@ -353,6 +400,10 @@ namespace ProjectDataLib
             {
                 if (disposing)
                 {
+                    _runCts?.Cancel();
+                    _runCts?.Dispose();
+                    _requestGate?.Dispose();
+
                     if (_listener == null)
                         return;
 

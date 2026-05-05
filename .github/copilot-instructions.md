@@ -9,6 +9,7 @@
 - Force migration execution; proceed aggressively without pausing.
 - Replace anything incompatible with a compatible alternative during migration.
 - Use the same libraries pattern for FenixServer as FenixModbusS7 where possible.
+- Adopt a new ASP.NET Core server-hosted approach in this application.
 
 ## Code Style
 - Style definitions should only be placed in the style file (Themes/Default.xaml), not inline in views.

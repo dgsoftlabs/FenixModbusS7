@@ -354,6 +354,7 @@ namespace ProjectDataLib
             set { WebServer1_ = value; }
         }
 
+        #pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
         private List<InFile> FileList_;
 
         [Browsable(false)]
@@ -364,6 +365,7 @@ namespace ProjectDataLib
             get { return FileList_; }
             set { FileList_ = value; }
         }
+        #pragma warning restore CS0618
 
         private List<ScriptFile> ScriptFileList_;
 
@@ -501,7 +503,9 @@ namespace ProjectDataLib
 
             this.PrCon_ = prcn;
 
+            #pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
             FileList_ = new List<InFile>();
+            #pragma warning restore CS0618
             ScriptFileList_ = new List<ScriptFile>();
 
             WebServer1_ = new WebServer(null);
@@ -584,7 +588,11 @@ namespace ProjectDataLib
             WebServer1_.Proj = this;
 
             if (FileList_ == null)
+            {
+                #pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
                 FileList_ = new List<InFile>();
+                #pragma warning restore CS0618
+            }
 
             if (string.IsNullOrEmpty(longDT))
                 longDT = "yyyy-MM-dd HH:mm:ss.fff";
@@ -673,7 +681,11 @@ namespace ProjectDataLib
             WebServer1_.Proj = this;
 
             if (FileList_ == null)
+            {
+                #pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
                 FileList_ = new List<InFile>();
+                #pragma warning restore CS0618
+            }
 
             if (string.IsNullOrEmpty(longDT))
                 longDT = "yyyy-MM-dd HH:mm:ss.fff";
@@ -1049,8 +1061,13 @@ namespace ProjectDataLib
         [Serializable]
         public class LegacyScriptCompat
         {
+            private const int MaxCachedCSharpScripts = 256;
+
             private readonly Project project;
             private readonly ConcurrentDictionary<string, ScriptRunner<object>> csharpScripts = new ConcurrentDictionary<string, ScriptRunner<object>>();
+            private readonly ConcurrentQueue<string> csharpScriptsOrder = new ConcurrentQueue<string>();
+            private readonly ConcurrentDictionary<string, byte> invalidCsharpExpressions = new ConcurrentDictionary<string, byte>();
+            private readonly object csharpScriptsSync = new object();
 
             private static readonly ScriptOptions scriptOptions = ScriptOptions.Default
                 .AddReferences(typeof(object).Assembly, typeof(Project).Assembly)
@@ -1086,15 +1103,45 @@ namespace ProjectDataLib
 
             private object EvalAsCSharp(string expr)
             {
-                var runner = csharpScripts.GetOrAdd(expr, code =>
-                    CSharpScript.Create<object>(code, scriptOptions, typeof(ScriptGlobals)).CreateDelegate());
+                if (invalidCsharpExpressions.ContainsKey(expr))
+                    throw new InvalidOperationException("Expression failed CSharp compilation.");
 
-                return runner(new ScriptGlobals { Project = project }).GetAwaiter().GetResult();
+                if (!csharpScripts.TryGetValue(expr, out ScriptRunner<object> runner))
+                {
+                    ScriptRunner<object> compiledRunner;
+                    try
+                    {
+                        compiledRunner = CSharpScript.Create<object>(expr, scriptOptions, typeof(ScriptGlobals)).CreateDelegate();
+                    }
+                    catch (CompilationErrorException)
+                    {
+                        invalidCsharpExpressions.TryAdd(expr, 0);
+                        throw;
+                    }
+
+                    lock (csharpScriptsSync)
+                    {
+                        if (!csharpScripts.TryGetValue(expr, out runner))
+                        {
+                            runner = compiledRunner;
+                            csharpScripts[expr] = runner;
+                            csharpScriptsOrder.Enqueue(expr);
+
+                            while (csharpScripts.Count > MaxCachedCSharpScripts && csharpScriptsOrder.TryDequeue(out string toRemove))
+                            {
+                                csharpScripts.TryRemove(toRemove, out _);
+                            }
+                        }
+                    }
+                }
+
+                return runner(new ScriptGlobals { Project = project, Prj = project }).GetAwaiter().GetResult();
             }
 
             private class ScriptGlobals
             {
                 public Project Project { get; set; }
+                public Project Prj { get; set; }
             }
         }
     }

@@ -2,6 +2,7 @@ using Microsoft.Win32;
 using Microsoft.Win32.TaskScheduler;
 using Newtonsoft.Json;
 using ProjectDataLib;
+using FenixServer.Web;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -489,9 +490,8 @@ namespace FenixServer
         {
             try
             {
-                //Start
-                Pr.WebServer1.Run();
-                Pr.WebServer1._responderMethod = SendResponse;
+                //Start ASP.NET Core web host instead of legacy HttpListener
+                _ = WebHostExtensions.InitializeAndStartWebHostAsync(Pr, PrCon);
 
                 //Przyciski
                 btStartWeb.Enabled = false;
@@ -532,11 +532,11 @@ namespace FenixServer
                 if (Pr == null)
                     return;
 
-                //Stop
-                if (Pr.WebServer1.Acitve)
-                    Pr.WebServer1.Stop();
+                //Stop ASP.NET Core web host
+                _ = WebHostExtensions.StopWebHostAsync();
 
                 //Przyciski
+
                 btStartWeb.Enabled = true;
                 btStopWeb.Enabled = false;
                 prManag.propGrid.Enabled = true;

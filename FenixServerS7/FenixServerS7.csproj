@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
@@ -61,6 +61,7 @@
     <ProjectReference Include="..\ModbusMasterTCP\ModbusMasterTCP.csproj" />
     <ProjectReference Include="..\ProjectDataLib\ProjectDataLib.csproj" />
     <ProjectReference Include="..\S7-300-400 Ethernet\S7-300-400 Ethernet.csproj" />
+    <ProjectReference Include="..\FenixServer.Web\FenixServer.Web.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DockPanelSuite" Version="3.1.1" />
