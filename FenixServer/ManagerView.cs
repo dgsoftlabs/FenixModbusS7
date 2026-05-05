@@ -1,9 +1,10 @@
-ï»¿using Microsoft.Win32;
+using Microsoft.Win32;
 using Microsoft.Win32.TaskScheduler;
 using Newtonsoft.Json;
 using ProjectDataLib;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -41,6 +42,7 @@ namespace FenixServer
         private int ProbeCounter = 100;
         private Boolean IsAutoStart;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Boolean Autostart
         {
             get
@@ -199,7 +201,17 @@ namespace FenixServer
             {
                 AlarmEvent ev = new AlarmEvent("ManagerView: " + Ex.Message);
                 alarmList.Add(ev);
-                evManag.addEvent(ev);
+
+                if (evManag != null)
+                {
+                    evManag.addEvent(ev);
+                }
+
+                MessageBox.Show(
+                    "Fenix Server startup failed:\n" + Ex,
+                    "Fenix Server",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -358,7 +370,7 @@ namespace FenixServer
             }
         }
 
-        /// Obsluga rzadanie POST
+        /// Obsluga rzadania POST
         private byte[] PostMethodRes(string s)
         {
             //Zabranie / z danych pozostalosc po starych metodach
@@ -375,7 +387,7 @@ namespace FenixServer
                 // OBJECT \ NAME \ FIELD \ VALUE (OPTIONAL)
                 if (Regex.IsMatch(s, @"^[A-Z]\w{1,}/\w{1,}/(?:[A-Z]\w{1,}/\d{1,}[.,]\d{1,}|[A-Z]\w{1,})", RegexOptions.IgnoreCase))
                 {
-                    //podzielenie zapytanie na na kawaÅ‚ki [object][name][param][value : optional]
+                    //podzielenie zapytanie na na kawa³ki [object][name][param][value : optional]
                     string[] buff = s.Split('/');
                     //GET
                     if (buff.Length == 3)
@@ -395,7 +407,7 @@ namespace FenixServer
             }
         }
 
-        /// Funkcja ustawiajÄ…ca parametry
+        /// Funkcja ustawiaj¹ca parametry
         private byte[] SetValFct(string obj, string name, string param, string value)
         {
             // Wyczysc liste alamrow
@@ -436,10 +448,10 @@ namespace FenixServer
             }
         }
 
-        /// Funkcja zwracajÄ…ca dane
+        /// Funkcja zwracaj¹ca dane
         private byte[] GetValFct(string obj, string name, string param)
         {
-            //W przypadku Event nie bedzie mozna sie odwolac do projektu trzeba go oddac z tÄ…d
+            //W przypadku Event nie bedzie mozna sie odwolac do projektu trzeba go oddac z t¹d
             if (obj == "Events" && name == "All" && param == "All")
             {
                 string ret = JsonConvert.SerializeObject(alarmList.ToArray());
@@ -486,11 +498,11 @@ namespace FenixServer
                 btStopWeb.Enabled = true;
                 prManag.propGrid.Enabled = false;
 
-                //Jezeli brakuje tagÃ³w do odczytu
+                //Jezeli brakuje tagów do odczytu
                 if (((ITableView)Pr).Children.Count == 0)
                     throw new ApplicationException("There is no Tags to read");
 
-                //Start SterownikÃ³w
+                //Start Sterowników
                 foreach (IDriverModel idrv in ((IDriversMagazine)Pr).Children)
                 {
                     idrv.refreshedCycle += Idrv_refreshedCycle;
@@ -529,7 +541,7 @@ namespace FenixServer
                 btStopWeb.Enabled = false;
                 prManag.propGrid.Enabled = true;
 
-                //Start SterownikÃ³w
+                //Start Sterowników
                 foreach (IDriverModel idrv in ((IDriversMagazine)Pr).Children)
                 {
                     idrv.deactivateCycle();
@@ -660,7 +672,7 @@ namespace FenixServer
                         start();
                     }
 
-                    //zabzpiecznie przed podwojnym dzialeniem
+                    //zabzpiezenie przed podwojnym dzialeniem
                     fsWatcher.EnableRaisingEvents = true;
                 }
                 catch (Exception Ex)
