@@ -344,6 +344,27 @@ namespace ProjectDataLib
             }
         }
 
+        private WebServer WebServer1_;
+
+        [Browsable(false)]
+        [XmlElement(ElementName = "WebServerConfiguration")]
+        public WebServer WebServer1
+        {
+            get { return WebServer1_; }
+            set { WebServer1_ = value; }
+        }
+
+        private List<InFile> FileList_;
+
+        [Browsable(false)]
+        [ComVisible(false)]
+        [XmlElement(ElementName = "FileList", Type = typeof(List<InFile>))]
+        public List<InFile> FileList
+        {
+            get { return FileList_; }
+            set { FileList_ = value; }
+        }
+
         private List<ScriptFile> ScriptFileList_;
 
         [Browsable(false)]
@@ -480,7 +501,12 @@ namespace ProjectDataLib
 
             this.PrCon_ = prcn;
 
+            FileList_ = new List<InFile>();
             ScriptFileList_ = new List<ScriptFile>();
+
+            WebServer1_ = new WebServer(null);
+            WebServer1_.PrCon = prcn;
+            WebServer1_.Proj = this;
 
             ScriptEng_ = new ScriptsDriver(this);
             ScriptEng_.Proj = this;
@@ -492,11 +518,14 @@ namespace ProjectDataLib
             InternalTags_ = new InternalTagsDriver(this);
 
             TreeViewChildren_ = new ObservableCollection<object>();
+            TreeViewChildren_.Add(WebServer1_);
             TreeViewChildren_.Add(ScriptEng_);
             TreeViewChildren_.Add(InternalTags_);
 
             Db = new DatabaseModel();
             TreeViewChildren_.Add(Db);
+
+            ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>();
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(new object[] { new TimersFolder(ScriptEng_.Timers, ScriptEng_.isTimersFolderExpand, v => ScriptEng_.isTimersFolderExpand = v) }.Concat(ScriptFileList_.Cast<object>()));
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(new object[] { new TimersFolder(InternalTagsDrv.Timers, InternalTagsDrv.isTimersFolderExpand, v => InternalTagsDrv.isTimersFolderExpand = v) }.Concat(InTagsList_.Cast<object>()));
@@ -548,6 +577,15 @@ namespace ProjectDataLib
         {
             InternalTags_.Proj = this;
 
+            if (WebServer1_ == null)
+                WebServer1_ = new WebServer(null);
+
+            WebServer1_.PrCon = this.PrCon;
+            WebServer1_.Proj = this;
+
+            if (FileList_ == null)
+                FileList_ = new List<InFile>();
+
             if (string.IsNullOrEmpty(longDT))
                 longDT = "yyyy-MM-dd HH:mm:ss.fff";
 
@@ -568,6 +606,7 @@ namespace ProjectDataLib
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             TreeViewChildren_ = new ObservableCollection<object>();
+            TreeViewChildren_.Add(this.WebServer1_);
             TreeViewChildren_.Add(this.ScriptEng_);
             TreeViewChildren_.Add(this.InternalTags_);
             if (Db == null)
@@ -582,6 +621,25 @@ namespace ProjectDataLib
                 CommConf = new CommViewConf();
             ChartConfigNode = new ChartConfigNode(this);
             TreeViewChildren_.Add(ChartConfigNode);
+
+            DirectoryInfo gt = new DirectoryInfo(Path.GetDirectoryName(this.path) + "\\Http");
+
+            if (gt.Exists)
+            {
+                var subDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
+                subDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
+                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(subDir);
+                FileList.Clear();
+            }
+            else
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(this.path) + "\\Http");
+                gt = new DirectoryInfo(Path.GetDirectoryName(this.path) + "\\Http");
+                var subDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
+                subDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
+                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(subDir);
+                FileList.Clear();
+            }
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(ScriptFileList_);
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(InTagsList_);
@@ -608,6 +666,15 @@ namespace ProjectDataLib
         {
             InternalTags_.Proj = this;
 
+            if (WebServer1_ == null)
+                WebServer1_ = new WebServer(null);
+
+            WebServer1_.PrCon = this.PrCon;
+            WebServer1_.Proj = this;
+
+            if (FileList_ == null)
+                FileList_ = new List<InFile>();
+
             if (string.IsNullOrEmpty(longDT))
                 longDT = "yyyy-MM-dd HH:mm:ss.fff";
 
@@ -628,6 +695,7 @@ namespace ProjectDataLib
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             TreeViewChildren_ = new ObservableCollection<object>();
+            TreeViewChildren_.Add(this.WebServer1_);
             TreeViewChildren_.Add(this.ScriptEng_);
             TreeViewChildren_.Add(this.InternalTags_);
             if (Db == null)
@@ -642,6 +710,25 @@ namespace ProjectDataLib
                 CommConf = new CommViewConf();
             ChartConfigNode = new ChartConfigNode(this);
             TreeViewChildren_.Add(ChartConfigNode);
+
+            DirectoryInfo gt = new DirectoryInfo(Path.GetDirectoryName(this.path) + "\\Http");
+
+            if (gt.Exists)
+            {
+                var subDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
+                subDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
+                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(subDir);
+                FileList.Clear();
+            }
+            else
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(this.path) + "\\Http");
+                gt = new DirectoryInfo(Path.GetDirectoryName(this.path) + "\\Http");
+                var subDir = (from x in gt.GetDirectories() select new CusFile(x)).ToList();
+                subDir.AddRange(from x in gt.GetFiles() select new CusFile(x));
+                ((ITreeViewModel)WebServer1_).Children = new ObservableCollection<object>(subDir);
+                FileList.Clear();
+            }
 
             ((ITreeViewModel)ScriptEng_).Children = new ObservableCollection<object>(new object[] { new TimersFolder(ScriptEng_.Timers, ScriptEng_.isTimersFolderExpand, v => ScriptEng_.isTimersFolderExpand = v) }.Concat(ScriptFileList_.Cast<object>()));
             ((ITreeViewModel)InternalTagsDrv).Children = new ObservableCollection<object>(new object[] { new TimersFolder(InternalTagsDrv.Timers, InternalTagsDrv.isTimersFolderExpand, v => InternalTagsDrv.isTimersFolderExpand = v) }.Concat(InTagsList_.Cast<object>()));
@@ -931,10 +1018,12 @@ namespace ProjectDataLib
             {
                 if (disposing)
                 {
+                    WebServer1_?.Dispose();
                     connectionList_.Clear();
                     DevicesList_.Clear();
                     tagsList_.Clear();
                     InTagsList_.Clear();
+                    FileList_?.Clear();
                     ScriptFileList_?.Clear();
                 }
 

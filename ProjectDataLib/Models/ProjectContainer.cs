@@ -432,6 +432,7 @@ namespace ProjectDataLib
                         ((ITreeViewModel)conn).Children.Clear();
 
                     ((ITreeViewModel)proj.ScriptEng).Children.Clear();
+                    ((ITreeViewModel)proj.WebServer1).Children.Clear();
 
                     ((ITreeViewModel)proj).Children.Clear();
 
@@ -650,6 +651,9 @@ namespace ProjectDataLib
                 if (proj == name)
                     return pr;
 
+                if (name == ServerGuid)
+                    return pr.WebServer1;
+
                 if (name == ScriptGuid)
                     return pr.ScriptEng;
 
@@ -695,6 +699,9 @@ namespace ProjectDataLib
 
                     if (pr.objId == name)
                         return pr;
+
+                    if (name == ServerGuid)
+                        return pr.WebServer1;
 
                     if (name == ScriptGuid)
                         return pr.ScriptEng;
@@ -1455,6 +1462,66 @@ namespace ProjectDataLib
         }
 
         #endregion ITag
+
+        #region InFile
+
+        public Boolean AddInFile(Guid projId, InFile file)
+        {
+            try
+            {
+                Project pr = getProject(projId);
+                ((ITreeViewModel)pr.WebServer1).Children.Add(file);
+                pr.FileList.Add(file);
+
+                if (addInFileEv != null)
+                    addInFileEv(pr, new ProjectEventArgs(file));
+
+                return true;
+            }
+            catch (Exception Ex)
+            {
+                ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+                return false;
+            }
+        }
+
+        public Boolean RemoveInFile(Guid projId, Guid file)
+        {
+            try
+            {
+                Project pr = getProject(projId);
+
+                ((ITreeViewModel)pr.WebServer1).Children.Remove(GetInFile(projId, file));
+
+                pr.FileList.RemoveAll(x => x.objId == file);
+
+                if (removeInFileEv != null)
+                    removeInFileEv(pr, new ProjectEventArgs(file));
+
+                return true;
+            }
+            catch (Exception Ex)
+            {
+                ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+                return false;
+            }
+        }
+
+        public InFile GetInFile(Guid projId, Guid file)
+        {
+            try
+            {
+                Project pr = getProject(projId);
+                return pr.FileList.Find(x => x.objId == file);
+            }
+            catch (Exception Ex)
+            {
+                ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+                return null;
+            }
+        }
+
+        #endregion InFile
 
         #region ScriptFile
 

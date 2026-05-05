@@ -261,12 +261,34 @@ namespace Fenix
         {
             try
             {
-                if (tvMain.View.SelectedItem is Project)
+                if (tvMain.View.SelectedItem is Project || tvMain.View.SelectedItem is WebServer || tvMain.View.SelectedItem is CusFile)
                 {
-                    AddFolder fr = new AddFolder(PrCon, Pr, Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog, actualKindElement);
+                    string targetPath = Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog;
+                    if (tvMain.View.SelectedItem is CusFile cf && !cf.IsFile)
+                        targetPath = cf.FullName;
+
+                    AddFolder fr = new AddFolder(PrCon, Pr, targetPath, actualKindElement);
                     fr.Owner = this;
                     fr.Show();
                 }
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
+        private void FileAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string targetPath = Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog;
+                if (tvMain.View.SelectedItem is CusFile cf && !cf.IsFile)
+                    targetPath = cf.FullName;
+
+                AddCusFile fr = new AddCusFile(PrCon, Pr, targetPath, actualKindElement);
+                fr.Owner = this;
+                fr.Show();
             }
             catch (Exception Ex)
             {
@@ -310,9 +332,20 @@ namespace Fenix
                 {
                     Process.Start(new ProcessStartInfo(Path.GetDirectoryName(Pr.path)) { UseShellExecute = true });
                 }
+                else if (actualKindElement == ElementKind.HttpConfig)
+                {
+                    Process.Start(new ProcessStartInfo(Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog) { UseShellExecute = true });
+                }
                 else if (actualKindElement == ElementKind.Scripts)
                 {
                     Process.Start(new ProcessStartInfo(Path.GetDirectoryName(Pr.path) + PrCon.ScriptsCatalog) { UseShellExecute = true });
+                }
+                else if (actualKindElement == ElementKind.InFile)
+                {
+                    if (tvMain.View.SelectedItem is CusFile selected && !string.IsNullOrWhiteSpace(selected.FullName))
+                        Process.Start(new ProcessStartInfo(selected.FullName) { UseShellExecute = true });
+                    else
+                        Process.Start(new ProcessStartInfo(Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog) { UseShellExecute = true });
                 }
             }
             catch (Exception Ex)
@@ -566,7 +599,7 @@ namespace Fenix
             try
             {
                 PrCon.copyCutElement(Pr.objId, SelGuid, actualKindElement, true);
-                SelSrcPath = string.Empty;
+                SelSrcPath = (tvMain.View.SelectedItem is CusFile srcFile && srcFile.IsFile) ? srcFile.FullName : string.Empty;
 
                 CheckAccessForNodes();
             }
@@ -582,7 +615,7 @@ namespace Fenix
             try
             {
                 PrCon.copyCutElement(Pr.objId, SelGuid, actualKindElement, false);
-                SelSrcPath = string.Empty;
+                SelSrcPath = (tvMain.View.SelectedItem is CusFile srcFile && srcFile.IsFile) ? srcFile.FullName : string.Empty;
                 CheckAccessForNodes();
             }
             catch (Exception Ex)
@@ -600,9 +633,13 @@ namespace Fenix
                 {
                     if (!string.IsNullOrEmpty(SelSrcPath))
                     {
-                        if (tvMain.View.SelectedItem is Project)
+                        if (tvMain.View.SelectedItem is Project || tvMain.View.SelectedItem is WebServer || (tvMain.View.SelectedItem is CusFile folder && !folder.IsFile))
                         {
-                            string dest = Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + Path.GetFileName(SelSrcPath);
+                            string basePath = tvMain.View.SelectedItem is CusFile selectedFolder && !selectedFolder.IsFile
+                                ? selectedFolder.FullName
+                                : Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog;
+
+                            string dest = basePath + "\\" + Path.GetFileName(SelSrcPath);
                             if (dest == SelSrcPath)
                                 throw new ApplicationException("This operation is forbbiden");
 
@@ -619,9 +656,13 @@ namespace Fenix
                 {
                     if (!string.IsNullOrEmpty(SelSrcPath))
                     {
-                        if (tvMain.View.SelectedItem is Project)
+                        if (tvMain.View.SelectedItem is Project || tvMain.View.SelectedItem is WebServer || (tvMain.View.SelectedItem is CusFile folder && !folder.IsFile))
                         {
-                            string dest = Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog + "\\" + Path.GetFileName(SelSrcPath);
+                            string basePath = tvMain.View.SelectedItem is CusFile selectedFolder && !selectedFolder.IsFile
+                                ? selectedFolder.FullName
+                                : Path.GetDirectoryName(Pr.path) + PrCon.HttpCatalog;
+
+                            string dest = basePath + "\\" + Path.GetFileName(SelSrcPath);
                             if (dest == SelSrcPath)
                                 throw new ApplicationException("This operation is forbbiden");
 
@@ -854,6 +895,11 @@ namespace Fenix
                     var file = PrCon.GetScriptFile(Pr.objId, SelGuid);
                     edit = new ScriptEditor(PrCon, Pr.objId, file.FilePath, actualKindElement, editorAnchor);
                     editorAnchor.Title = file.Name;
+                }
+                else if (actualKindElement == ElementKind.InFile && tvMain.View.SelectedItem is CusFile selected && selected.IsFile)
+                {
+                    edit = new ScriptEditor(PrCon, Pr.objId, selected.FullName, actualKindElement, editorAnchor);
+                    editorAnchor.Title = Path.GetFileName(selected.FullName);
                 }
                 else
                 {
@@ -1200,6 +1246,36 @@ namespace Fenix
                     tvMain.View.ContextMenu = (ContextMenu)Resources["CtxProject"];
                     SelGuid = ((Project)e.NewValue).objId;
                     actualKindElement = ElementKind.Project;
+                }
+                else if (e.NewValue is WebServer)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    ((ContextMenu)Resources["CtxHttpServer"]).DataContext = _viewModel;
+                    tvMain.View.ContextMenu = (ContextMenu)Resources["CtxHttpServer"];
+                    SelGuid = ((WebServer)e.NewValue).ObjId;
+                    actualKindElement = ElementKind.HttpConfig;
+                }
+                else if (e.NewValue is CusFile)
+                {
+                    if (e.OldValue != null)
+                        (e.OldValue as System.ComponentModel.INotifyPropertyChanged)?.PropertyChanged -= TreeViewPropertiesBind_PropertyChanged;
+
+                    if (((CusFile)e.NewValue).IsFile)
+                    {
+                        ((ContextMenu)Resources["CtxInFile"]).DataContext = _viewModel;
+                        tvMain.View.ContextMenu = (ContextMenu)Resources["CtxInFile"];
+                        SelGuid = PrCon.HttpFileGuid;
+                        actualKindElement = ElementKind.InFile;
+                    }
+                    else
+                    {
+                        ((ContextMenu)Resources["CtxHttpServer"]).DataContext = _viewModel;
+                        tvMain.View.ContextMenu = (ContextMenu)Resources["CtxHttpServer"];
+                        SelGuid = PrCon.HttpFileGuid;
+                        actualKindElement = ElementKind.InFile;
+                    }
                 }
                 else if (e.NewValue is DatabaseModel)
                 {

@@ -36,6 +36,7 @@
 
         <ContextMenu x:Key="CtxHttpServer">
             <MenuItem Header="Folder"  Click="FolderAdd_Click" IsEnabled="{Binding mFolder}" />
+            <MenuItem Header="Files" Click="FileAdd_Click"  IsEnabled="{Binding mInFile}" />
             <Separator />
             <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc }" />
             <Separator />
