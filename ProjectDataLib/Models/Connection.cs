@@ -87,6 +87,7 @@ namespace ProjectDataLib
         [XmlElement("TCP", typeof(TcpDriverParam))]
         [XmlElement("IO", typeof(IoDriverParam))]
         [XmlElement("S7", typeof(S7DriverParam))]
+        [BlockRootName]
         public object Parameters
         {
             get { return Parameters_; }

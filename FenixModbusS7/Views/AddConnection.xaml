@@ -30,7 +30,7 @@
                 <ComboBox x:Name="CbDrivers" SelectionChanged="CbDrivers_SelectionChanged" />
             </StackPanel>
 
-            <local:PropertiesGridManager Grid.Row="1" x:Name="PgDrvProps" Margin="0,4,0,0" />
+            <local:PropertiesView Grid.Row="1" x:Name="PgDrvProps" Margin="0,4,0,0" />
         </Grid>
     </DockPanel>
 </Window>

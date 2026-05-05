@@ -122,14 +122,13 @@
                     <CheckBox Content="Bytes Order" IsChecked="{Binding Pr.TableConf.TvCol10, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Value"       IsChecked="{Binding Pr.TableConf.TvCol11, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                     <CheckBox Content="Description" IsChecked="{Binding Pr.TableConf.TvCol14, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
-                    <CheckBox Content="Version"     IsChecked="{Binding Pr.TableConf.TvCol15, Mode=TwoWay, Converter={StaticResource BoolNeg}}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
 
             <DataGrid.Columns>
 
-                <!-- Color -->
-                <DataGridTemplateColumn Header="Color" Width="*"
+                <!-- Chart Color -->
+                <DataGridTemplateColumn Header="Chart Color" Width="*"
                     Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol1, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement}, Mode=TwoWay}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -146,12 +145,22 @@
                     Binding="{Binding Path=(PrCon:ITag.GrVisible), Mode=OneWay}"
                     Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol2, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement}, Mode=TwoWay}" />
 
-                <!-- Width -->
-                <DataGridTemplateColumn Header="Width" Width="*"
+                <!-- Chart Width -->
+                <DataGridTemplateColumn Header="Chart Width" Width="*"
                     Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol3, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement}, Mode=TwoWay}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Style="{StaticResource CellText}" Text="{Binding Path=(PrCon:ITag.Width)}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Chart Y Axis -->
+                <DataGridTemplateColumn Header="Chart Y Axis" Width="*"
+                    Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol16, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement}, Mode=TwoWay}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource CellText}" Text="{Binding Path=(PrCon:ITag.GrAxisKey)}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -252,16 +261,6 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Style="{StaticResource CellText}" Text="{Binding Path=(PrCon:ITag.Description)}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-                <!-- Version -->
-                <DataGridTemplateColumn Header="Version" Width="*"
-                    Visibility="{Binding Path=DataContext.Pr.TableConf.TvCol15, Converter={StaticResource BoolVis}, Source={StaticResource ProxyElement}, Mode=TwoWay}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Style="{StaticResource CellText}" Text="{Binding Path=(PrCon:ITag.TagVersion)}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

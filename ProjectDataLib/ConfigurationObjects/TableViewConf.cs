@@ -105,5 +105,11 @@ namespace ProjectDataLib
         [XmlElement(ElementName = "TableColumn15Visibility")]
         public bool TvCol15
         { get => TvCol15_; set { TvCol15_ = value; propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TvCol15))); } }
+
+        private bool TvCol16_;
+
+        [XmlElement(ElementName = "TableColumn16Visibility")]
+        public bool TvCol16
+        { get => TvCol16_; set { TvCol16_ = value; propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TvCol16))); } }
     }
 }

@@ -14,12 +14,12 @@ using System.Windows.Threading;
 
 namespace Fenix
 {
-    public partial class PropertiesGridManager : UserControl, INotifyPropertyChanged
+    public partial class PropertiesView : UserControl, INotifyPropertyChanged
     {
         private readonly ObservableCollection<PropertyRow> _rows = new ObservableCollection<PropertyRow>();
         private object _selectedObject;
 
-        public PropertiesGridManager()
+        public PropertiesView()
         {
             InitializeComponent();
             DataContext = this;
@@ -77,7 +77,8 @@ namespace Fenix
 
             foreach (var prop in props)
             {
-                _rows.Add(new PropertyRow(_selectedObject, prop, IsEditorEnabled));
+                if (!prop.Attributes.OfType<BlockRootNameAttribute>().Any())
+                    _rows.Add(new PropertyRow(_selectedObject, prop, IsEditorEnabled));
 
                 var nestedRows = GetExpandableRows(_selectedObject, prop);
                 foreach (var nested in nestedRows)

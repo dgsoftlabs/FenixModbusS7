@@ -44,7 +44,6 @@ namespace ProjectDataLib.Test.Models
             var project = new Project(projectContainer, "Test", "Author", "Company", "Desc");
 
             // Assert
-            Assert.NotNull(project.FileList);
             Assert.NotNull(project.ScriptFileList);
             Assert.NotNull(project.connectionList);
             Assert.NotNull(project.DevicesList);

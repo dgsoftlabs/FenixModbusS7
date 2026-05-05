@@ -344,17 +344,6 @@ namespace ProjectDataLib
             }
         }
 
-        private List<InFile> FileList_;
-
-        [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "FileList", Type = typeof(List<InFile>))]
-        public List<InFile> FileList
-        {
-            get { return FileList_; }
-            set { FileList_ = value; }
-        }
-
         private List<ScriptFile> ScriptFileList_;
 
         [Browsable(false)]
@@ -491,7 +480,6 @@ namespace ProjectDataLib
 
             this.PrCon_ = prcn;
 
-            FileList_ = new List<InFile>();
             ScriptFileList_ = new List<ScriptFile>();
 
             ScriptEng_ = new ScriptsDriver(this);
@@ -520,7 +508,7 @@ namespace ProjectDataLib
             foreach (var cn in connectionList_)
             {
                 TreeViewChildren_.Add(cn);
-
+                DriverChildren_.Add((IDriverModel)cn);
                 ((ITreeViewModel)cn).Children = new ObservableCollection<object>(from x in DevicesList_ where x.parentId == cn.objId select x);
             }
 
@@ -530,6 +518,9 @@ namespace ProjectDataLib
             TagChildren = new ObservableCollection<ITag>();
 
             this.ChartConf = new ChartViewConf();
+            this.ChartConf.Axes ??= new();
+            this.ChartConf.Axes.Add(new ChartAxisConf("Y1", "Y1", false));
+
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
             this.TableConf = new TableViewConf();
@@ -573,9 +564,6 @@ namespace ProjectDataLib
                 sf.Proj = this;
                 sf.PrCon = PrCon;
             }
-
-            if (FileList_ == null)
-                FileList_ = new List<InFile>();
 
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
@@ -636,9 +624,6 @@ namespace ProjectDataLib
                 sf.Proj = this;
                 sf.PrCon = PrCon;
             }
-
-            if (FileList_ == null)
-                FileList_ = new List<InFile>();
 
             ((INotifyPropertyChanged)ChartConf).PropertyChanged += Project_PropertyChanged;
 
@@ -950,7 +935,6 @@ namespace ProjectDataLib
                     DevicesList_.Clear();
                     tagsList_.Clear();
                     InTagsList_.Clear();
-                    FileList_?.Clear();
                     ScriptFileList_?.Clear();
                 }
 

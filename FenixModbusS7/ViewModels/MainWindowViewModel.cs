@@ -247,68 +247,6 @@ namespace Fenix.ViewModels
 
                 propertiesEnabled = !((ITreeViewModel)selectedObject).IsLive;
             }
-
-            if (selectedItem is CusFile)
-            {
-                mFile = true;
-                mNew = true;
-                mOpen = true;
-                mAdd = !((CusFile)selectedItem).IsFile;
-                mConnection = false;
-                mDevice = false;
-                mTag = false;
-                mIntTag = false;
-                mScriptFile = false;
-                mFolder = !((CusFile)selectedItem).IsFile;
-                mInFile = !((CusFile)selectedItem).IsFile;
-                mClosePr = true;
-                mSave = true;
-                mSaveAs = true;
-                mExit = true;
-
-                mEdit = false;
-                mCut = ((CusFile)selectedItem).IsFile;
-                mCopy = ((CusFile)selectedItem).IsFile;
-                mPaste = !((CusFile)selectedItem).IsFile && srcType == ElementKind.InFile;
-                mDelete = true;
-
-                mView = true;
-                mSolution = true;
-                mProperties = true;
-                mOutput = true;
-                mTable = false;
-                mChart = false;
-                mCommView = false;
-                mEditor = ((CusFile)selectedItem).IsFile;
-
-                mDriversSt = true;
-                mStart = false;
-                mStop = false;
-                mStartAll = true;
-                mStopAll = true;
-
-                mTools = true;
-                mBlock = false;
-                mUnBlock = false;
-                mShowLoc = !((CusFile)selectedItem).IsFile;
-                mSimulate = false;
-                mDrivers = true;
-
-                mDatabase = true;
-                mDbShowFile = true;
-                mDbReset = true;
-                mShowDb = true;
-                mShowTrendDb = true;
-                mSaveCSV = true;
-
-                mHelp = true;
-                mAbout = true;
-                mUpdates = true;
-                mViewHelp = true;
-
-                propertiesEnabled = !((ITreeViewModel)selectedObject).IsLive;
-            }
-
             if (selectedItem is ScriptFile)
             {
                 mFile = true;

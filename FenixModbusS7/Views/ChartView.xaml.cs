@@ -772,7 +772,7 @@ namespace Fenix
                             TimeSpan diff = DateTime.Now.Subtract(DateTime.FromOADate(min));
                             if (diff > Pr.ChartConf.TrackSpan)
                             {
-                                while (diff > Pr.ChartConf.TrackSpan)
+                                while (diff > Pr.ChartConf.TrackSpan && sr.Points.Count > 0)
                                 {
                                     diff = DateTime.Now.Subtract(DateTime.FromOADate(sr.Points.First().X));
                                     sr.Points.RemoveAt(0);

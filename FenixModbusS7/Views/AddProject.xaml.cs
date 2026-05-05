@@ -1,5 +1,6 @@
 using ProjectDataLib;
 using System;
+using System.Linq;
 using System.Runtime.Versioning;
 using System.Windows;
 using io = System.IO;
@@ -32,50 +33,6 @@ namespace Fenix
             catch (Exception Ex)
             {
                 projectContainer.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
-            }
-        }
-
-        /// <summary>
-        /// Copies a directory and its contents to a new location.
-        /// </summary>
-        /// <param name="sourceDirName">The path of the source directory.</param>
-        /// <param name="destDirName">The path of the destination directory.</param>
-        /// <param name="copySubDirs">A flag indicating whether to copy subdirectories.</param>
-        private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
-        {
-            // Get the subdirectories for the specified directory.
-            io.DirectoryInfo dir = new io.DirectoryInfo(sourceDirName);
-
-            if (!dir.Exists)
-            {
-                throw new io.DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
-            }
-
-            io.DirectoryInfo[] dirs = dir.GetDirectories();
-            // If the destination directory doesn't exist, create it.
-            if (!io.Directory.Exists(destDirName))
-            {
-                io.Directory.CreateDirectory(destDirName);
-            }
-
-            // Get the files in the directory and copy them to the new location.
-            io.FileInfo[] files = dir.GetFiles();
-            foreach (io.FileInfo file in files)
-            {
-                string temppath = io.Path.Combine(destDirName, file.Name);
-                file.CopyTo(temppath, true);
-            }
-
-            // If copying subdirectories, copy them and their contents to new location.
-            if (copySubDirs)
-            {
-                foreach (io.DirectoryInfo subdir in dirs)
-                {
-                    string temppath = io.Path.Combine(destDirName, subdir.Name);
-                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
-                }
             }
         }
 
@@ -118,6 +75,14 @@ namespace Fenix
                             ScriptFile file = new ScriptFile(TarDir + "\\" + nName);
 
                             projectContainer.AddScriptFile(currentProject.objId, file);
+
+                            //AttachTimers
+                            var firstTimer = currentProject.ScriptEng.Timers.FirstOrDefault();
+                            foreach (var scrFile in currentProject.ScriptFileList)
+                            {
+                                if (firstTimer is not null && string.IsNullOrEmpty(scrFile.TimerName))
+                                    scrFile.TimerName = firstTimer.Name;
+                            }
                         }
 
                         Close();
