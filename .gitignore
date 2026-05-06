@@ -32,6 +32,12 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Advanced Installer cache
+FenixSetup-cache/
+**/FenixSetup-cache/
+**/FenixModbusS7Setup-cache/
+UpgradeLog.htm
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -242,11 +248,6 @@ orleans.codegen.cs
 
 # Including strong name files can present a security risk
 # (https://github.com/github/gitignore/pull/2483#issue-259490424)
-#*.snk
-
-# Since there are multiple workflows, uncomment next line to ignore bower_components
-# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
-#bower_components/
 
 # RIA/Silverlight projects
 Generated_Code/
@@ -407,3 +408,8 @@ FenixModbusS7Setup/FenixModbusS7Setup-cache/
 
 *-cache/
 /FenixModbusS7/REMARKS.md
+#*.snk
+
+# Since there are multiple workflows, uncomment next line to ignore bower_components
+# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
+#bower_components/
