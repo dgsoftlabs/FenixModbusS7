@@ -11,7 +11,11 @@ namespace FenixServer.Web
 
         public static void ConfigureWebHost(Project project, ProjectContainer projectContainer, int port = 80)
         {
-            _builder = WebApplication.CreateBuilder(new[] { "--urls", $"http://+:{port}/" });
+            _builder = WebApplication.CreateBuilder();
+            _builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenAnyIP(port);
+            });
 
             ConfigureServices(_builder, project, projectContainer);
 
@@ -31,22 +35,26 @@ namespace FenixServer.Web
             if (_app == null)
                 throw new InvalidOperationException("ConfigureWebHost must be called before StartAsync");
 
+            var startTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+
             _ = Task.Run(async () =>
             {
                 try
                 {
-                    await _app.RunAsync(cancellationToken);
+                    await _app.StartAsync(cancellationToken);
+                    startTcs.TrySetResult();
                 }
-                catch (OperationCanceledException)
+                catch (OperationCanceledException ex)
                 {
+                    startTcs.TrySetCanceled(ex.CancellationToken);
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Web host error: {ex.Message}");
+                    startTcs.TrySetException(ex);
                 }
             }, cancellationToken);
 
-            await Task.Delay(500, cancellationToken);
+            await startTcs.Task;
         }
 
         public static async Task StopAsync()

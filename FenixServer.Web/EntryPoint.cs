@@ -61,8 +61,6 @@ namespace FenixServer.Web
             AttachDriverEvents(project, container);
             StartAllDrivers(project, container);
 
-            Program.ConfigureWebHost(project, container, port);
-
             using var cts = new CancellationTokenSource();
             Console.CancelKeyPress += (_, e) =>
             {
@@ -70,9 +68,20 @@ namespace FenixServer.Web
                 cts.Cancel();
             };
 
-            Console.WriteLine($"FenixServer.Web starting on http://localhost:{port} ...");
-            await Program.StartAsync(cts.Token);
-            Console.WriteLine("Server running. Press Ctrl+C to stop.");
+            try
+            {
+                Program.ConfigureWebHost(project, container, port);
+                Console.WriteLine($"FenixServer.Web starting on http://localhost:{port} ...");
+                await Program.StartAsync(cts.Token);
+                Console.WriteLine("Server running. Press Ctrl+C to stop.");
+            }
+            catch (Exception ex) when (!cts.IsCancellationRequested)
+            {
+                Console.Error.WriteLine($"[SERVER][ERROR] Failed to start: {ex.Message}");
+                StopAllDrivers(project);
+                await Program.StopAsync();
+                Environment.Exit(3);
+            }
 
             try { await Task.Delay(Timeout.Infinite, cts.Token); }
             catch (TaskCanceledException) { }
@@ -154,8 +163,8 @@ namespace FenixServer.Web
         {
             driver.information += (_, e) => Console.WriteLine(FormatDriverEvent("INFO", sourceName, e));
             driver.error += (_, e) => Console.Error.WriteLine(FormatDriverEvent("ERROR", sourceName, e));
-            driver.dataSent += (_, e) => Console.WriteLine(FormatDriverEvent("OUT", sourceName, e));
-            driver.dataRecived += (_, e) => Console.WriteLine(FormatDriverEvent("IN", sourceName, e));
+            //driver.dataSent += (_, e) => Console.WriteLine(FormatDriverEvent("OUT", sourceName, e));
+            //driver.dataRecived += (_, e) => Console.WriteLine(FormatDriverEvent("IN", sourceName, e));
         }
 
         private static string FormatDriverEvent(string level, string sourceName, EventArgs e)

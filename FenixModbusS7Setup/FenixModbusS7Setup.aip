@@ -37,7 +37,6 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.staticwebassets.endpoints.json" Value="..\FenixServer.Web\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.deps.json" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.dll.config" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.exe" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.runtimeconfig.json" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
@@ -574,7 +573,6 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.staticwebassets.endpoints.json" Value="FenixServer.Web.staticwebassets.endpoints.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.deps.json" Value="FenixServerS7.deps.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.dll" Value="FenixServerS7.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.dll.config" Value="FenixServerS7.dll.config"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe" Value="FenixServerS7.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.runtimeconfig.json" Value="FenixServerS7.runtimeconfig.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="ICSharpCode.AvalonEdit.dll"/>
@@ -1645,7 +1643,6 @@
     <ROW File="EntityFramework.dll" Component_="FenixServerS7_PublishOutput" FileName="ENTITY~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EntityFramework.dll&gt;" SelfReg="false"/>
     <ROW File="EntityFramework.SqlServer.dll" Component_="FenixServerS7_PublishOutput" FileName="ENTITY~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EntityFramework.SqlServer.dll&gt;" SelfReg="false"/>
     <ROW File="FenixServerS7.deps.json" Component_="FenixServerS7_PublishOutput" FileName="FENIXS~2.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.deps.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServerS7.deps.json&gt;" SelfReg="false"/>
-    <ROW File="FenixServerS7.dll.config" Component_="FenixServerS7_PublishOutput" FileName="FENIXS~2.CON|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.dll.config]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServerS7.dll.config&gt;" SelfReg="false"/>
     <ROW File="FenixServerS7.exe" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe" FileName="FENIXS~2.EXE|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServerS7.exe&gt;" SelfReg="false" DigSign="true"/>
     <ROW File="FenixServerS7.runtimeconfig.json" Component_="FenixServerS7_PublishOutput" FileName="FENIXS~3.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.runtimeconfig.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServerS7.runtimeconfig.json&gt;" SelfReg="false"/>
     <ROW File="Microsoft.CodeAnalysis.CSharp.dll_1" Component_="FenixServerS7_PublishOutput" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.dll_1&gt;" SelfReg="false"/>
@@ -2106,7 +2103,6 @@
     <ROW Name="AI_APPPATH_PERBUILD_FenixServer.Web.staticwebassets.endpoints.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.staticwebassets.endpoints.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.staticwebassets.endpoints.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.deps.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.deps.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.deps.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.dll.config" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.dll.config]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.dll.config]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.runtimeconfig.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.runtimeconfig.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.runtimeconfig.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ICSharpCode.AvalonEdit.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll]" Type="2" Content="0"/>
@@ -3235,7 +3231,6 @@
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="EntityFramework.SqlServer.dll"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="FenixServerS7.deps.json"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="FenixServerS7.dll"/>
-    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="FenixServerS7.dll.config"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="FenixServerS7.exe"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="FenixServerS7.runtimeconfig.json"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.dll_1"/>

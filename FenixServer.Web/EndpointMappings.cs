@@ -60,31 +60,25 @@ namespace FenixServer.Web
         {
             app.MapPost("/{obj}/{name}/{param}",
                     (string obj, string name, string? param, HttpContext context) => HandleRequestWithParam(obj, name, param, context))
-                .WithName("CodeRequest")
-                .WithOpenApi();
+                .WithName("CodeRequest");
 
             app.MapPost("/{obj}/{name}",
                     (string obj, string name, HttpContext context) => HandleRequestWithoutParam(obj, name, context))
-                .WithName("CodeRequestNoParam")
-                .WithOpenApi();
+                .WithName("CodeRequestNoParam");
 
             app.MapGet("/{obj}/{name}/{param}",
                     (string obj, string name, string? param, HttpContext context) => HandleRequestWithParam(obj, name, param, context))
-                .WithName("CodeRequestGet")
-                .WithOpenApi();
+                .WithName("CodeRequestGet");
 
             app.MapGet("/{obj}/{name}",
                     (string obj, string name, HttpContext context) => HandleRequestWithoutParam(obj, name, context))
-                .WithName("CodeRequestNoParamGet")
-                .WithOpenApi();
+                .WithName("CodeRequestNoParamGet");
 
             app.MapPost("/{obj}/{name}/{param}/{value}", HandleRequestWithValue)
-                .WithName("CodeRequestWithValue")
-                .WithOpenApi();
+                .WithName("CodeRequestWithValue");
 
             app.MapGet("/{obj}/{name}/{param}/{value}", HandleRequestWithValue)
-                .WithName("CodeRequestWithValueGet")
-                .WithOpenApi();
+                .WithName("CodeRequestWithValueGet");
         }
 
         private static Project GetProjectFromServices(IServiceProvider services)
