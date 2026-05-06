@@ -29,6 +29,12 @@
       <Private>True</Private>
       <OutputsToImport>PublishOutput#FolderProfile#bin\Release\net10.0-windows\publish\###FileSystem##win-x64#true###</OutputsToImport>
     </ProjectReference>
+    <ProjectReference Include="..\FenixServer.Web\FenixServer.Web.csproj">
+      <Name>FenixServer.Web</Name>
+      <Project>{c1caef8e-c8ed-136f-6c17-b6b43287488b}</Project>
+      <Private>True</Private>
+      <OutputsToImport>PublishOutput#FolderProfile#bin\Release\net10.0-windows\publish\###FileSystem######</OutputsToImport>
+    </ProjectReference>
     <ProjectReference Include="..\FenixServerS7\FenixServerS7.csproj">
       <Name>FenixServerS7</Name>
       <Project>{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}</Project>
