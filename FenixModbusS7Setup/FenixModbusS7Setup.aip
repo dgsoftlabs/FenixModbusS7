@@ -1359,6 +1359,7 @@
     <ROW Component="ProductInformation" Value="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_Feni_1_xServer.Web.exe_1" ComponentId="{4C131217-218B-4741-9C1A-6CC50B6EAB68}" Directory_="FenixServer.Web_Dir" Attributes="256" KeyPath="FenixServer.Web.exe_1"/>
     <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe" ComponentId="{D16F1C67-0837-4018-BDCE-CB13459D5440}" Directory_="FenixModbusS7_Dir" Attributes="256" KeyPath="FenixModbusS7.exe"/>
     <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe" ComponentId="{10579F1F-0000-4C71-BC81-A1436110788E}" Directory_="FenixServerS7_Dir" Attributes="256" KeyPath="FenixServerS7.exe"/>
     <ROW Component="APPDIR" ComponentId="{B87DF860-8CBC-468C-B43B-8F9B149F2E38}" Directory_="APPDIR" Attributes="0"/>
@@ -1889,7 +1890,7 @@
     <ROW File="System.IO.Ports.dll_5" Component_="FenixModbusS7_PublishOutput_runtimes_win_lib_net10.0" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_5]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.IO.Ports.dll_5&gt;" SelfReg="false"/>
     <ROW File="FenixServer.Web.dll_1" Component_="FenixServer.Web_PrimaryOutput" FileName="FENIXS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.dll_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServer.Web.dll_1&gt;" SelfReg="false"/>
     <ROW File="FenixServer.Web.deps.json_1" Component_="FenixServer.Web_PublishOutput" FileName="FENIXS~2.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.deps.json_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServer.Web.deps.json_1&gt;" SelfReg="false"/>
-    <ROW File="FenixServer.Web.exe_1" Component_="FenixServer.Web_PublishOutput" FileName="FENIXS~2.EXE|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.exe_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServer.Web.exe_1&gt;" SelfReg="false" DigSign="true"/>
+    <ROW File="FenixServer.Web.exe_1" Component_="AI_PROPPATH_FILENAME_PERBUILD_Feni_1_xServer.Web.exe_1" FileName="FENIXS~2.EXE|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.exe_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServer.Web.exe_1&gt;" SelfReg="false" DigSign="true"/>
     <ROW File="FenixServer.Web.runtimeconfig.json_1" Component_="FenixServer.Web_PublishOutput" FileName="FENIXS~3.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.runtimeconfig.json_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServer.Web.runtimeconfig.json_1&gt;" SelfReg="false"/>
     <ROW File="FenixServer.Web.staticwebassets.endpoints.json" Component_="FenixServer.Web_PublishOutput" FileName="FENIXS~4.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.staticwebassets.endpoints.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServer.Web.staticwebassets.endpoints.json&gt;" SelfReg="false"/>
     <ROW File="Microsoft.ApplicationInsights.dll_1" Component_="FenixServer.Web_PublishOutput" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ApplicationInsights.dll_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.ApplicationInsights.dll_1&gt;" SelfReg="false"/>
@@ -2842,6 +2843,7 @@
     <ROW Feature_="MainFeature" Component_="FenixServer.Web_PublishOutput_runtimes_browserwasm_nativeassets_net9.0"/>
     <ROW Feature_="MainFeature" Component_="FenixServer.Web_PublishOutput_runtimes_unix_lib_net10.0"/>
     <ROW Feature_="MainFeature" Component_="FenixServer.Web_PublishOutput_runtimes_win_lib_net10.0"/>
+    <ROW Feature_="MainFeature" Component_="AI_PROPPATH_FILENAME_PERBUILD_Feni_1_xServer.Web.exe_1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="FenixServerS7.exe" SourcePath="..\FenixServerS7\HttpServer.ico" Index="0"/>
@@ -2894,6 +2896,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
     <ROW Shortcut="FenixModbusS7" Directory_="DesktopFolder" Name="FENIXM~1|FenixModbusS7" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe" Target="[#FenixModbusS7.exe]" Hotkey="0" Icon_="soft.exe" IconIndex="0" ShowCmd="1" WkDir="FenixModbusS7_Dir"/>
+    <ROW Shortcut="FenixServerConsole" Directory_="DesktopFolder" Name="FENIXS~2|FenixServerConsole" Component_="AI_PROPPATH_FILENAME_PERBUILD_Feni_1_xServer.Web.exe_1" Target="[#FenixServer.Web.exe_1]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="FenixServer.Web_Dir"/>
     <ROW Shortcut="FenixServerS7" Directory_="DesktopFolder" Name="FENIXS~1|FenixServerS7" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe" Target="[#FenixServerS7.exe]" Hotkey="0" Icon_="FenixServerS7.exe" IconIndex="0" ShowCmd="1" WkDir="FenixServerS7_Dir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
