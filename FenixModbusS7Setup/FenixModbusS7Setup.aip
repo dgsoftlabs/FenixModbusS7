@@ -29,14 +29,19 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.exe" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.runtimeconfig.json" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.deps.json" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.exe" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.runtimeconfig.json" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.deps.json" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.dll.config" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.exe" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_FenixServerS7.runtimeconfig.json" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.ApplicationInsights.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.AspNetCore.OpenApi.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CSharp.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\tr"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\zh-Hans"/>
@@ -173,6 +178,49 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Options.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Primitives.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.OpenApi.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\tr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_11_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\zh-Hans"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_12_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\zh-Hant"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_1_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\de"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_2_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\es"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_3_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\fr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_4_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\it"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_5_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\ja"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\ko"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_7_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\pl"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_8_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\pt-BR"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_9_ld.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBuild.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBuild.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\cs"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_10_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\tr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_11_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\zh-Hans"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_12_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\zh-Hant"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_1_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\de"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_2_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\es"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_3_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\fr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_4_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\it"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_5_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\ja"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_6_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\ko"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_7_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\pl"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_8_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\pt-BR"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_9_etry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telemetry.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telemetry.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\cs"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.TrxReport.Abstractions.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_10_es.dll" Value="..\FenixServerS7\bin\Release\Publish\tr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_11_es.dll" Value="..\FenixServerS7\bin\Release\Publish\zh-Hans"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_12_es.dll" Value="..\FenixServerS7\bin\Release\Publish\zh-Hant"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_1_es.dll" Value="..\FenixServerS7\bin\Release\Publish\de"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_2_es.dll" Value="..\FenixServerS7\bin\Release\Publish\es"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_3_es.dll" Value="..\FenixServerS7\bin\Release\Publish\fr"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_4_es.dll" Value="..\FenixServerS7\bin\Release\Publish\it"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_5_es.dll" Value="..\FenixServerS7\bin\Release\Publish\ja"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_6_es.dll" Value="..\FenixServerS7\bin\Release\Publish\ko"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_7_es.dll" Value="..\FenixServerS7\bin\Release\Publish\pl"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_8_es.dll" Value="..\FenixServerS7\bin\Release\Publish\pt-BR"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_9_es.dll" Value="..\FenixServerS7\bin\Release\Publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resources.dll" Value="..\FenixServerS7\bin\Release\Publish\cs"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualBasic.Core.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualBasic.Forms.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualBasic.Forms.resour_10_ces.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\tr"/>
@@ -273,6 +321,9 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_PresentationUI.resources.dll_7" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pl"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_PresentationUI.resources.dll_8" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pt-BR"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_PresentationUI.resources.dll_9" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ru"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.Test.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.Test.exe" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.Test.runtimeconfig.json" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.dll_1" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ReachFramework.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
@@ -639,8 +690,6 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_UIAutomationTypes.resources.dll_7" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pl"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_UIAutomationTypes.resources.dll_8" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\pt-BR"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_UIAutomationTypes.resources.dll_9" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\ru"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_WeifenLuo.WinFormsUI.Docking.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_WindowsBase.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_WindowsBase.resources.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\cs"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_WindowsBase.resources.dll_1" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish\de"/>
@@ -729,6 +778,14 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_sni.dll_2" Value="..\FenixServerS7\bin\Release\Publish\runtimes\win-x86\native"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_vcruntime140_cor3.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_wpfgfx_cor3.dll" Value="..\FenixModbusS7\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_xunit.abstractions.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_xunit.runner.visualstudio.testadapter.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_xunit.v3.assert.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_xunit.v3.common.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_xunit.v3.core.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_xunit.v3.mtpv1.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_xunit.v3.runner.common.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_xunit.v3.runner.inproc.console.dll" Value="..\FenixServerS7\bin\Release\Publish"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Accessibility.dll" Value="Accessibility.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll" Value="AvalonDock.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll" Value="AvalonDock.resources.dll"/>
@@ -756,14 +813,19 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.dll" Value="FenixModbusS7.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe" Value="FenixModbusS7.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.runtimeconfig.json" Value="FenixModbusS7.runtimeconfig.json"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.deps.json" Value="FenixServer.Web.deps.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.dll" Value="FenixServer.Web.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.exe" Value="FenixServer.Web.exe"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.runtimeconfig.json" Value="FenixServer.Web.runtimeconfig.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.deps.json" Value="FenixServerS7.deps.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.dll" Value="FenixServerS7.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.dll.config" Value="FenixServerS7.dll.config"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe" Value="FenixServerS7.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.runtimeconfig.json" Value="FenixServerS7.runtimeconfig.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll" Value="ICSharpCode.AvalonEdit.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ApplicationInsights.dll" Value="Microsoft.ApplicationInsights.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.AspNetCore.OpenApi.dll" Value="Microsoft.AspNetCore.OpenApi.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll" Value="Microsoft.Bcl.AsyncInterfaces.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CSharp.dll" Value="Microsoft.CSharp.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll" Value="Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll"/>
@@ -900,6 +962,49 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll" Value="Microsoft.Extensions.Options.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll" Value="Microsoft.Extensions.Primitives.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.OpenApi.dll" Value="Microsoft.OpenApi.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_11_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_12_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_1_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_2_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_3_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_4_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_5_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_7_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_8_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_9_ld.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBuild.dll" Value="Microsoft.Testing.Extensions.MSBuild.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBuild.resources.dll" Value="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_10_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_11_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_12_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_1_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_2_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_3_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_4_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_5_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_6_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_7_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_8_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_9_etry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telemetry.dll" Value="Microsoft.Testing.Extensions.Telemetry.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telemetry.resources.dll" Value="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.TrxReport.Abstractions.dll" Value="Microsoft.Testing.Extensions.TrxReport.Abstractions.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.dll" Value="Microsoft.Testing.Platform.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_10_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_11_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_12_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_1_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_2_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_3_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_4_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_5_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_6_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_7_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_8_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_9_es.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resources.dll" Value="Microsoft.Testing.Platform.resources.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualBasic.Core.dll" Value="Microsoft.VisualBasic.Core.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualBasic.Forms.dll" Value="Microsoft.VisualBasic.Forms.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualBasic.Forms.resour_10_ces.dll" Value="Microsoft.VisualBasic.Forms.resources.dll"/>
@@ -1000,6 +1105,9 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_PresentationUI.resources.dll_7" Value="PresentationUI.resources.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_PresentationUI.resources.dll_8" Value="PresentationUI.resources.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_PresentationUI.resources.dll_9" Value="PresentationUI.resources.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.Test.dll" Value="ProjectDataLib.Test.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.Test.exe" Value="ProjectDataLib.Test.exe"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.Test.runtimeconfig.json" Value="ProjectDataLib.Test.runtimeconfig.json"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll" Value="ProjectDataLib.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll_1" Value="ProjectDataLib.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ReachFramework.dll" Value="ReachFramework.dll"/>
@@ -1366,8 +1474,6 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_UIAutomationTypes.resources.dll_7" Value="UIAutomationTypes.resources.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_UIAutomationTypes.resources.dll_8" Value="UIAutomationTypes.resources.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_UIAutomationTypes.resources.dll_9" Value="UIAutomationTypes.resources.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll" Value="WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_WeifenLuo.WinFormsUI.Docking.dll" Value="WeifenLuo.WinFormsUI.Docking.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_WindowsBase.dll" Value="WindowsBase.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_WindowsBase.resources.dll" Value="WindowsBase.resources.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_WindowsBase.resources.dll_1" Value="WindowsBase.resources.dll"/>
@@ -1456,6 +1562,14 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_sni.dll_2" Value="sni.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_vcruntime140_cor3.dll" Value="vcruntime140_cor3.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_wpfgfx_cor3.dll" Value="wpfgfx_cor3.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_xunit.abstractions.dll" Value="xunit.abstractions.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_xunit.runner.visualstudio.testadapter.dll" Value="xunit.runner.visualstudio.testadapter.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.assert.dll" Value="xunit.v3.assert.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.common.dll" Value="xunit.v3.common.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.core.dll" Value="xunit.v3.core.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.mtpv1.dll" Value="xunit.v3.mtp-v1.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.runner.common.dll" Value="xunit.v3.runner.common.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.runner.inproc.console.dll" Value="xunit.v3.runner.inproc.console.dll"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPPRODUCTICON" Value="soft.exe" Type="8"/>
@@ -1619,16 +1733,16 @@
     <ROW Component="FenixModbusS7_PublishOutput_zhHans" ComponentId="{5A13F475-77BF-40F9-AD61-DB444D80D7E8}" Directory_="zhHans_Dir" Attributes="0" KeyPath="WindowsFormsIntegration.resources.dll_11"/>
     <ROW Component="FenixModbusS7_PublishOutput_zhHant" ComponentId="{6BD4E0A3-42AB-4159-9866-FF35A3B03C3A}" Directory_="zhHant_Dir" Attributes="0" KeyPath="WindowsFormsIntegration.resources.dll_12"/>
     <ROW Component="FenixServerS7_PrimaryOutput" ComponentId="{E0EDBF27-CD04-4173-BA72-3CC28A4378E9}" Directory_="FenixServerS7_Dir" Attributes="0" KeyPath="FenixServerS7.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput" ComponentId="{7B6659CF-0746-4B21-B5F6-0D4FCA874452}" Directory_="FenixServerS7_Dir" Attributes="0" KeyPath="Swashbuckle.AspNetCore.SwaggerUI.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_cs" ComponentId="{7DE6813D-472D-4D42-A248-2D5D3A421293}" Directory_="cs_1_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_13_esources.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_de" ComponentId="{1C6C4629-5189-4B6F-8DC2-473706CA5CE9}" Directory_="de_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.resources.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_es" ComponentId="{2671DF4F-21C1-44B3-A100-EB429144F0E4}" Directory_="es_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_1_urces.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_fr" ComponentId="{CE7082E5-D378-41A5-BD37-F5489B8FE074}" Directory_="fr_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_2_urces.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_it" ComponentId="{2789AAFD-83EC-479D-9BCA-19C0F0713A87}" Directory_="it_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_3_urces.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_ja" ComponentId="{CEBD8BD6-CCB4-41D6-834C-0362AD1EBC90}" Directory_="ja_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_4_urces.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_ko" ComponentId="{F1FD46EE-B244-46CE-A699-570B3E78D8C6}" Directory_="ko_1_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_19_esources.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_pl" ComponentId="{427D1141-3907-4811-BED4-FA32045B7AD5}" Directory_="pl_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_5_urces.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_ptBR" ComponentId="{567AB412-E049-4DF9-8259-D60F2F8F7DA7}" Directory_="ptBR_1_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_21_esources.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput" ComponentId="{7B6659CF-0746-4B21-B5F6-0D4FCA874452}" Directory_="FenixServerS7_Dir" Attributes="0" KeyPath="xunit.v3.runner.inproc.console.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_cs" ComponentId="{7DE6813D-472D-4D42-A248-2D5D3A421293}" Directory_="cs_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_de" ComponentId="{1C6C4629-5189-4B6F-8DC2-473706CA5CE9}" Directory_="de_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_1_es.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_es" ComponentId="{2671DF4F-21C1-44B3-A100-EB429144F0E4}" Directory_="es_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_2_es.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_fr" ComponentId="{CE7082E5-D378-41A5-BD37-F5489B8FE074}" Directory_="fr_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Extensions.Telem_3_etry.resources.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_it" ComponentId="{2789AAFD-83EC-479D-9BCA-19C0F0713A87}" Directory_="it_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_4_es.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_ja" ComponentId="{CEBD8BD6-CCB4-41D6-834C-0362AD1EBC90}" Directory_="ja_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_5_es.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_ko" ComponentId="{F1FD46EE-B244-46CE-A699-570B3E78D8C6}" Directory_="ko_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_pl" ComponentId="{427D1141-3907-4811-BED4-FA32045B7AD5}" Directory_="pl_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_7_es.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_ptBR" ComponentId="{567AB412-E049-4DF9-8259-D60F2F8F7DA7}" Directory_="ptBR_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_8_es.dll"/>
     <ROW Component="FenixServerS7_PublishOutput_ru" ComponentId="{6AF58DEA-6369-4F58-8D08-BBC19C6C5329}" Directory_="ru_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_6_urces.dll"/>
     <ROW Component="FenixServerS7_PublishOutput_runtimes_androidarm64_native" ComponentId="{B6DC7322-4A8F-4F2D-8692-64F8A0BD8DD9}" Directory_="native_1_Dir" Attributes="0" KeyPath="libSystem.IO.Ports.Native.so_1" Type="0"/>
     <ROW Component="FenixServerS7_PublishOutput_runtimes_androidarm_native" ComponentId="{D96B1973-6E96-4157-BD30-BC1238CCEE13}" Directory_="native_Dir" Attributes="0" KeyPath="libSystem.IO.Ports.Native.so" Type="0"/>
@@ -1664,10 +1778,14 @@
     <ROW Component="FenixServerS7_PublishOutput_runtimes_winx64_native" ComponentId="{97330ADA-C633-4EAA-82C1-73F3ED55E0A1}" Directory_="native_26_Dir" Attributes="256" KeyPath="sni.dll_1"/>
     <ROW Component="FenixServerS7_PublishOutput_runtimes_winx86_native" ComponentId="{39E32D96-A2C7-4403-A59E-38FC57126AF4}" Directory_="native_27_Dir" Attributes="0" KeyPath="sni.dll_2"/>
     <ROW Component="FenixServerS7_PublishOutput_sv" ComponentId="{8AEDEAF6-A881-4107-A3F4-11681A3FCBBE}" Directory_="sv_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_7_urces.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_tr" ComponentId="{851C69C1-B28B-460C-88D1-8F1F97235AF8}" Directory_="tr_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_8_urces.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_tr" ComponentId="{851C69C1-B28B-460C-88D1-8F1F97235AF8}" Directory_="tr_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll"/>
     <ROW Component="FenixServerS7_PublishOutput_zhCN" ComponentId="{DA487EEF-22AC-4F1F-9758-59303755B8B4}" Directory_="zhCN_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_9_urces.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_zhHans" ComponentId="{4B23D611-1F3D-43B1-BF74-1B37E80CA406}" Directory_="zhHans_1_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.r_24_esources.dll"/>
-    <ROW Component="FenixServerS7_PublishOutput_zhHant" ComponentId="{3EB40F11-C98C-48E4-8783-895BDA7FFCCF}" Directory_="zhHant_1_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_10_urces.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_zhHans" ComponentId="{4B23D611-1F3D-43B1-BF74-1B37E80CA406}" Directory_="zhHans_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_11_es.dll"/>
+    <ROW Component="FenixServerS7_PublishOutput_zhHant" ComponentId="{3EB40F11-C98C-48E4-8783-895BDA7FFCCF}" Directory_="zhHant_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_12_es.dll"/>
+    <ROW Component="Microsoft.Testing.Extensions.MSBuild.resources.dll" ComponentId="{A624AA4E-CF00-42DF-81D6-7C903068CF29}" Directory_="ru_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_9_es.dll"/>
+    <ROW Component="Microsoft.Testing.Extensions.Telem_4_etry.resources.dll" ComponentId="{2D2B500A-462E-4670-866E-A7E5D544083A}" Directory_="tr_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_10_es.dll"/>
+    <ROW Component="Microsoft.Testing.Extensions.Telemetry.resources.dll" ComponentId="{F775E65C-C88F-4440-8DF1-E3AD27501C8F}" Directory_="ko_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_6_es.dll"/>
+    <ROW Component="Microsoft.Testing.Platform.resources.dll" ComponentId="{651D2D2E-0D22-465A-9474-58C4FF9A2B0F}" Directory_="fr_1_Dir" Attributes="0" KeyPath="Microsoft.Testing.Platform.resourc_3_es.dll"/>
     <ROW Component="ProductInformation" ComponentId="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="_" ComponentId="{CC4C29E9-D905-462C-9A4F-A3F5EC3B2E1A}" Directory_="APPDIR" Attributes="4" KeyPath="_"/>
     <ROW Component="__1" ComponentId="{0966780B-833E-415E-B721-23B3351FEC08}" Directory_="APPDIR" Attributes="4" KeyPath="__1"/>
@@ -2291,8 +2409,6 @@
     <ROW File="System.Data.SQLite.dll" Component_="FenixServerS7_PublishOutput" FileName="SYSTEM~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SQLite.dll&gt;" SelfReg="false"/>
     <ROW File="System.Data.SQLite.EF6.dll" Component_="FenixServerS7_PublishOutput" FileName="SYSTEM~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SQLite.EF6.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SQLite.EF6.dll&gt;" SelfReg="false"/>
     <ROW File="System.IO.Ports.dll_1" Component_="FenixServerS7_PublishOutput" FileName="SYSTEM~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.IO.Ports.dll_1&gt;" SelfReg="false"/>
-    <ROW File="WeifenLuo.WinFormsUI.Docking.dll" Component_="FenixServerS7_PublishOutput" FileName="WEIFEN~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_WeifenLuo.WinFormsUI.Docking.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_WeifenLuo.WinFormsUI.Docking.dll&gt;" SelfReg="false"/>
-    <ROW File="WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll" Component_="FenixServerS7_PublishOutput" FileName="WEIFEN~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.CodeAnalysis.CSharp.reso_13_urces.dll" Component_="FenixServerS7_PublishOutput_cs" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_13_urces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.reso_13_urces.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.CodeAnalysis.CSharp.Scri_13_pting.resources.dll" Component_="FenixServerS7_PublishOutput_cs" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_13_pting.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_13_pting.resources.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.CodeAnalysis.resources.dll_13" Component_="FenixServerS7_PublishOutput_cs" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.resources.dll_13]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.resources.dll_13&gt;" SelfReg="false"/>
@@ -2408,6 +2524,65 @@
     <ROW File="Swashbuckle.AspNetCore.Swagger.dll" Component_="FenixServerS7_PublishOutput" FileName="SWASHB~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Swashbuckle.AspNetCore.Swagger.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Swashbuckle.AspNetCore.Swagger.dll&gt;" SelfReg="false"/>
     <ROW File="Swashbuckle.AspNetCore.SwaggerGen.dll" Component_="FenixServerS7_PublishOutput" FileName="SWASHB~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Swashbuckle.AspNetCore.SwaggerGen.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Swashbuckle.AspNetCore.SwaggerGen.dll&gt;" SelfReg="false"/>
     <ROW File="Swashbuckle.AspNetCore.SwaggerUI.dll" Component_="FenixServerS7_PublishOutput" FileName="SWASHB~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Swashbuckle.AspNetCore.SwaggerUI.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Swashbuckle.AspNetCore.SwaggerUI.dll&gt;" SelfReg="false"/>
+    <ROW File="FenixServer.Web.deps.json" Component_="FenixServerS7_PublishOutput" FileName="FENIXS~4.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.deps.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServer.Web.deps.json&gt;" SelfReg="false"/>
+    <ROW File="FenixServer.Web.exe" Component_="FenixServerS7_PublishOutput" FileName="FENIXS~3.EXE|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.exe]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServer.Web.exe&gt;" SelfReg="false" DigSign="true"/>
+    <ROW File="FenixServer.Web.runtimeconfig.json" Component_="FenixServerS7_PublishOutput" FileName="FENIXS~5.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.runtimeconfig.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FenixServer.Web.runtimeconfig.json&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.ApplicationInsights.dll" Component_="FenixServerS7_PublishOutput" FileName="MICRO~13.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ApplicationInsights.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.ApplicationInsights.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Bcl.AsyncInterfaces.dll" Component_="FenixServerS7_PublishOutput" FileName="MICRO~14.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBuild.dll" Component_="FenixServerS7_PublishOutput" FileName="MICRO~15.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBuild.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBuild.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telemetry.dll" Component_="FenixServerS7_PublishOutput" FileName="MICRO~17.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telemetry.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telemetry.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.TrxReport.Abstractions.dll" Component_="FenixServerS7_PublishOutput" FileName="MICRO~18.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.TrxReport.Abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.TrxReport.Abstractions.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.dll" Component_="FenixServerS7_PublishOutput" FileName="MICRO~19.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.dll&gt;" SelfReg="false"/>
+    <ROW File="ProjectDataLib.Test.dll" Component_="FenixServerS7_PublishOutput" FileName="PROJEC~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.Test.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ProjectDataLib.Test.dll&gt;" SelfReg="false"/>
+    <ROW File="ProjectDataLib.Test.exe" Component_="FenixServerS7_PublishOutput" FileName="PROJEC~2.EXE|[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.Test.exe]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ProjectDataLib.Test.exe&gt;" SelfReg="false" DigSign="true"/>
+    <ROW File="ProjectDataLib.Test.runtimeconfig.json" Component_="FenixServerS7_PublishOutput" FileName="PROJEC~2.JSO|[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.Test.runtimeconfig.json]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ProjectDataLib.Test.runtimeconfig.json&gt;" SelfReg="false"/>
+    <ROW File="xunit.abstractions.dll" Component_="FenixServerS7_PublishOutput" FileName="XUNITA~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_xunit.abstractions.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_xunit.abstractions.dll&gt;" SelfReg="false"/>
+    <ROW File="xunit.runner.visualstudio.testadapter.dll" Component_="FenixServerS7_PublishOutput" FileName="XUNITR~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_xunit.runner.visualstudio.testadapter.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_xunit.runner.visualstudio.testadapter.dll&gt;" SelfReg="false"/>
+    <ROW File="xunit.v3.assert.dll" Component_="FenixServerS7_PublishOutput" FileName="XUNITV~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.assert.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_xunit.v3.assert.dll&gt;" SelfReg="false"/>
+    <ROW File="xunit.v3.common.dll" Component_="FenixServerS7_PublishOutput" FileName="XUNITV~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.common.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_xunit.v3.common.dll&gt;" SelfReg="false"/>
+    <ROW File="xunit.v3.core.dll" Component_="FenixServerS7_PublishOutput" FileName="XUNITV~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.core.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_xunit.v3.core.dll&gt;" SelfReg="false"/>
+    <ROW File="xunit.v3.mtpv1.dll" Component_="FenixServerS7_PublishOutput" FileName="XUNITV~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.mtpv1.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_xunit.v3.mtpv1.dll&gt;" SelfReg="false"/>
+    <ROW File="xunit.v3.runner.common.dll" Component_="FenixServerS7_PublishOutput" FileName="XUNITV~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.runner.common.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_xunit.v3.runner.common.dll&gt;" SelfReg="false"/>
+    <ROW File="xunit.v3.runner.inproc.console.dll" Component_="FenixServerS7_PublishOutput" FileName="XUNITV~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.runner.inproc.console.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_xunit.v3.runner.inproc.console.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBuild.resources.dll" Component_="FenixServerS7_PublishOutput_cs" FileName="MICROS~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBuild.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBuild.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telemetry.resources.dll" Component_="FenixServerS7_PublishOutput_cs" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telemetry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telemetry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resources.dll" Component_="FenixServerS7_PublishOutput_cs" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_1_ld.resources.dll" Component_="FenixServerS7_PublishOutput_de" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_1_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_1_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_1_etry.resources.dll" Component_="FenixServerS7_PublishOutput_de" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_1_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_1_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_1_es.dll" Component_="FenixServerS7_PublishOutput_de" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_1_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_1_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_2_ld.resources.dll" Component_="FenixServerS7_PublishOutput_es" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_2_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_2_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_2_etry.resources.dll" Component_="FenixServerS7_PublishOutput_es" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_2_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_2_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_2_es.dll" Component_="FenixServerS7_PublishOutput_es" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_2_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_2_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_3_ld.resources.dll" Component_="FenixServerS7_PublishOutput_fr" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_3_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_3_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_3_etry.resources.dll" Component_="FenixServerS7_PublishOutput_fr" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_3_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_3_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_3_es.dll" Component_="Microsoft.Testing.Platform.resources.dll" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_3_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_3_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_4_ld.resources.dll" Component_="FenixServerS7_PublishOutput_it" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_4_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_4_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_4_etry.resources.dll" Component_="FenixServerS7_PublishOutput_it" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_4_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_4_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_4_es.dll" Component_="FenixServerS7_PublishOutput_it" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_4_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_4_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_5_ld.resources.dll" Component_="FenixServerS7_PublishOutput_ja" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_5_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_5_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_5_etry.resources.dll" Component_="FenixServerS7_PublishOutput_ja" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_5_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_5_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_5_es.dll" Component_="FenixServerS7_PublishOutput_ja" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_5_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_5_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll" Component_="FenixServerS7_PublishOutput_ko" FileName="MICROS~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_6_etry.resources.dll" Component_="Microsoft.Testing.Extensions.Telemetry.resources.dll" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_6_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_6_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_6_es.dll" Component_="Microsoft.Testing.Extensions.Telemetry.resources.dll" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_6_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_6_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_7_ld.resources.dll" Component_="FenixServerS7_PublishOutput_pl" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_7_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_7_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_7_etry.resources.dll" Component_="FenixServerS7_PublishOutput_pl" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_7_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_7_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_7_es.dll" Component_="FenixServerS7_PublishOutput_pl" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_7_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_7_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_8_ld.resources.dll" Component_="FenixServerS7_PublishOutput_ptBR" FileName="MICROS~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_8_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_8_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_8_etry.resources.dll" Component_="FenixServerS7_PublishOutput_ptBR" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_8_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_8_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_8_es.dll" Component_="FenixServerS7_PublishOutput_ptBR" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_8_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_8_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_9_ld.resources.dll" Component_="Microsoft.Testing.Extensions.MSBuild.resources.dll" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_9_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_9_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_9_etry.resources.dll" Component_="Microsoft.Testing.Extensions.MSBuild.resources.dll" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_9_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_9_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_9_es.dll" Component_="Microsoft.Testing.Extensions.MSBuild.resources.dll" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_9_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_9_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll" Component_="FenixServerS7_PublishOutput_tr" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_10_etry.resources.dll" Component_="Microsoft.Testing.Extensions.Telem_4_etry.resources.dll" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_10_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_10_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_10_es.dll" Component_="Microsoft.Testing.Extensions.Telem_4_etry.resources.dll" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_10_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_10_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_11_ld.resources.dll" Component_="FenixServerS7_PublishOutput_zhHans" FileName="MICROS~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_11_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_11_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_11_etry.resources.dll" Component_="FenixServerS7_PublishOutput_zhHans" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_11_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_11_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_11_es.dll" Component_="FenixServerS7_PublishOutput_zhHans" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_11_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_11_es.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.MSBui_12_ld.resources.dll" Component_="FenixServerS7_PublishOutput_zhHant" FileName="MICROS~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_12_ld.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_12_ld.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Extensions.Telem_12_etry.resources.dll" Component_="FenixServerS7_PublishOutput_zhHant" FileName="MICROS~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_12_etry.resources.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_12_etry.resources.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Testing.Platform.resourc_12_es.dll" Component_="FenixServerS7_PublishOutput_zhHant" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_12_es.dll]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_12_es.dll&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_Accessibility.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Accessibility.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Accessibility.dll]" Type="2" Content="0"/>
@@ -2437,14 +2612,19 @@
     <ROW Name="AI_APPPATH_PERBUILD_FenixModbusS7.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixModbusS7.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixModbusS7.runtimeconfig.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixModbusS7.runtimeconfig.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.runtimeconfig.json]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_FenixServer.Web.deps.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.deps.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.deps.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServer.Web.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_FenixServer.Web.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.exe]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_FenixServer.Web.runtimeconfig.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServer.Web.runtimeconfig.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.runtimeconfig.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.deps.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.deps.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.deps.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.dll.config" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.dll.config]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.dll.config]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_FenixServerS7.runtimeconfig.json" Path="[|AI_PROPPATH_DIR_PERBUILD_FenixServerS7.runtimeconfig.json]\[|AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.runtimeconfig.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ICSharpCode.AvalonEdit.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ICSharpCode.AvalonEdit.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ICSharpCode.AvalonEdit.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.ApplicationInsights.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.ApplicationInsights.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ApplicationInsights.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.AspNetCore.OpenApi.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.AspNetCore.OpenApi.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.AspNetCore.OpenApi.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CSharp.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CSharp.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CSharp.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_10_pting.resources.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.CodeAnalysis.CSharp.Scri_11_pting.resources.dll]" Type="2" Content="0"/>
@@ -2581,6 +2761,49 @@
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Options.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Options.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Options.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Extensions.Primitives.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Extensions.Primitives.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Extensions.Primitives.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.OpenApi.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.OpenApi.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.OpenApi.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_11_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_11_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_11_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_12_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_12_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_12_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_1_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_1_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_1_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_2_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_2_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_2_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_3_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_3_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_3_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_4_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_4_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_4_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_5_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_5_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_5_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_7_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_7_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_7_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_8_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_8_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_8_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBui_9_ld.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBui_9_ld.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBui_9_ld.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBuild.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBuild.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBuild.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.MSBuild.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.MSBuild.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.MSBuild.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_10_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_10_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_10_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_11_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_11_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_11_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_12_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_12_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_12_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_1_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_1_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_1_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_2_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_2_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_2_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_3_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_3_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_3_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_4_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_4_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_4_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_5_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_5_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_5_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_6_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_6_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_6_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_7_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_7_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_7_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_8_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_8_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_8_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telem_9_etry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telem_9_etry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telem_9_etry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telemetry.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telemetry.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telemetry.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.Telemetry.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.Telemetry.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.Telemetry.resources.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Extensions.TrxReport.Abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Extensions.TrxReport.Abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Extensions.TrxReport.Abstractions.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_10_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_10_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_10_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_11_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_11_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_11_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_12_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_12_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_12_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_1_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_1_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_1_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_2_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_2_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_2_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_3_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_3_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_3_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_4_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_4_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_4_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_5_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_5_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_5_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_6_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_6_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_6_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_7_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_7_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_7_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_8_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_8_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_8_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resourc_9_es.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resourc_9_es.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resourc_9_es.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Testing.Platform.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Testing.Platform.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Testing.Platform.resources.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.VisualBasic.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualBasic.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualBasic.Core.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.VisualBasic.Forms.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualBasic.Forms.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualBasic.Forms.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.VisualBasic.Forms.resour_10_ces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualBasic.Forms.resour_10_ces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualBasic.Forms.resour_10_ces.dll]" Type="2" Content="0"/>
@@ -2681,6 +2904,9 @@
     <ROW Name="AI_APPPATH_PERBUILD_PresentationUI.resources.dll_7" Path="[|AI_PROPPATH_DIR_PERBUILD_PresentationUI.resources.dll_7]\[|AI_PROPPATH_FILENAME_PERBUILD_PresentationUI.resources.dll_7]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_PresentationUI.resources.dll_8" Path="[|AI_PROPPATH_DIR_PERBUILD_PresentationUI.resources.dll_8]\[|AI_PROPPATH_FILENAME_PERBUILD_PresentationUI.resources.dll_8]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_PresentationUI.resources.dll_9" Path="[|AI_PROPPATH_DIR_PERBUILD_PresentationUI.resources.dll_9]\[|AI_PROPPATH_FILENAME_PERBUILD_PresentationUI.resources.dll_9]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ProjectDataLib.Test.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.Test.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.Test.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ProjectDataLib.Test.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.Test.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.Test.exe]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ProjectDataLib.Test.runtimeconfig.json" Path="[|AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.Test.runtimeconfig.json]\[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.Test.runtimeconfig.json]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ProjectDataLib.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ProjectDataLib.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_ProjectDataLib.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_ProjectDataLib.dll_1]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ReachFramework.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ReachFramework.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ReachFramework.dll]" Type="2" Content="0"/>
@@ -3047,8 +3273,6 @@
     <ROW Name="AI_APPPATH_PERBUILD_UIAutomationTypes.resources.dll_7" Path="[|AI_PROPPATH_DIR_PERBUILD_UIAutomationTypes.resources.dll_7]\[|AI_PROPPATH_FILENAME_PERBUILD_UIAutomationTypes.resources.dll_7]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_UIAutomationTypes.resources.dll_8" Path="[|AI_PROPPATH_DIR_PERBUILD_UIAutomationTypes.resources.dll_8]\[|AI_PROPPATH_FILENAME_PERBUILD_UIAutomationTypes.resources.dll_8]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_UIAutomationTypes.resources.dll_9" Path="[|AI_PROPPATH_DIR_PERBUILD_UIAutomationTypes.resources.dll_9]\[|AI_PROPPATH_FILENAME_PERBUILD_UIAutomationTypes.resources.dll_9]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_WeifenLuo.WinFormsUI.Docking.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_WeifenLuo.WinFormsUI.Docking.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_WeifenLuo.WinFormsUI.Docking.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_WindowsBase.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_WindowsBase.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_WindowsBase.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_WindowsBase.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_WindowsBase.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_WindowsBase.resources.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_WindowsBase.resources.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_WindowsBase.resources.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_WindowsBase.resources.dll_1]" Type="2" Content="0"/>
@@ -3137,6 +3361,14 @@
     <ROW Name="AI_APPPATH_PERBUILD_sni.dll_2" Path="[|AI_PROPPATH_DIR_PERBUILD_sni.dll_2]\[|AI_PROPPATH_FILENAME_PERBUILD_sni.dll_2]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_vcruntime140_cor3.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_vcruntime140_cor3.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_vcruntime140_cor3.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_wpfgfx_cor3.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_wpfgfx_cor3.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_wpfgfx_cor3.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_xunit.abstractions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_xunit.abstractions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_xunit.abstractions.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_xunit.runner.visualstudio.testadapter.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_xunit.runner.visualstudio.testadapter.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_xunit.runner.visualstudio.testadapter.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_xunit.v3.assert.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_xunit.v3.assert.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.assert.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_xunit.v3.common.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_xunit.v3.common.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.common.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_xunit.v3.core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_xunit.v3.core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.core.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_xunit.v3.mtpv1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_xunit.v3.mtpv1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.mtpv1.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_xunit.v3.runner.common.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_xunit.v3.runner.common.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.runner.common.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_xunit.v3.runner.inproc.console.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_xunit.v3.runner.inproc.console.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_xunit.v3.runner.inproc.console.dll]" Type="2" Content="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
     <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" Languages="en" InstallationType="4" UseLargeSchema="true"/>
@@ -3288,6 +3520,10 @@
     <ROW Feature_="MainFeature" Component_="FenixServerS7_PublishOutput_runtimes_win_lib_netcoreapp2.1"/>
     <ROW Feature_="MainFeature" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe"/>
     <ROW Feature_="MainFeature" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Testing.Extensions.Telem_4_etry.resources.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="FenixServerS7.exe" SourcePath="..\FenixServerS7\HttpServer.ico" Index="0"/>
@@ -3960,8 +4196,6 @@
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="System.Data.SQLite.dll"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="System.Data.SQLite.EF6.dll"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="System.IO.Ports.dll_1"/>
-    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="WeifenLuo.WinFormsUI.Docking.dll"/>
-    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.reso_13_urces.dll"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.CSharp.Scri_13_pting.resources.dll"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.CodeAnalysis.resources.dll_13"/>
@@ -4077,5 +4311,64 @@
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Swashbuckle.AspNetCore.Swagger.dll"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Swashbuckle.AspNetCore.SwaggerGen.dll"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Swashbuckle.AspNetCore.SwaggerUI.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="FenixServer.Web.deps.json"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="FenixServer.Web.exe"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="FenixServer.Web.runtimeconfig.json"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.ApplicationInsights.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Bcl.AsyncInterfaces.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBuild.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telemetry.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.TrxReport.Abstractions.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="ProjectDataLib.Test.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="ProjectDataLib.Test.exe"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="ProjectDataLib.Test.runtimeconfig.json"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="xunit.abstractions.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="xunit.runner.visualstudio.testadapter.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="xunit.v3.assert.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="xunit.v3.common.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="xunit.v3.core.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="xunit.v3.mtpv1.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="xunit.v3.runner.common.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="xunit.v3.runner.inproc.console.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBuild.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telemetry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_1_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_1_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_1_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_2_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_2_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_2_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_3_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_3_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_3_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_4_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_4_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_4_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_5_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_5_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_5_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_6_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_6_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_6_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_7_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_7_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_7_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_8_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_8_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_8_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_9_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_9_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_9_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_10_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_10_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_10_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_11_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_11_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_11_es.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.MSBui_12_ld.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Extensions.Telem_12_etry.resources.dll"/>
+    <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServerS7" OutputGroup="PublishOutput" OutputFile="Microsoft.Testing.Platform.resourc_12_es.dll"/>
   </COMPONENT>
 </DOCUMENT>

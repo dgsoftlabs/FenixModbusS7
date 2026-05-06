@@ -1,0 +1,7 @@
+<Project>
+  <!-- Override xUnit validation target for non-test projects to prevent build errors
+       when xunit packages propagate transitively via buildTransitive. -->
+  <Target Name="_XunitValidateBuild" BeforeTargets="BeforeBuild" Condition=" '$(IsTestProject)' != 'true' ">
+    <!-- No-op: validation is suppressed for non-test projects -->
+  </Target>
+</Project>

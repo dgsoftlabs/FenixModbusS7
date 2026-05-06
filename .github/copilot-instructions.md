@@ -9,7 +9,15 @@
 - Force migration execution; proceed aggressively without pausing.
 - Replace anything incompatible with a compatible alternative during migration.
 - Use the same libraries pattern for FenixServer as FenixModbusS7 where possible.
+- Convert FenixServerS7 to WPF while keeping the same project references/libraries pattern and ensuring it implements the same functionality as the previous WinForms version.
+- Switch FenixServer to WPF and adopt the same library pattern as FenixModbusS7, ensuring it maintains the same functionality as the previous WinForms version.
+- Replace all WinForms controls with full WPF controls.
 - Adopt a new ASP.NET Core server-hosted approach in this application.
+- Perform a clean WPF migration incrementally, replacing parts one by one.
+- Replace .png assets with emoji in the UI.
+- Prefer code-based endpoint handling over script evaluation. 
+- Ensure all server endpoint data access is code-based and remove script-based access paths.
+- Use only the existing old endpoint model; do not introduce or label separate new/legacy endpoint variants.
 
 ## Code Style
 - Style definitions should only be placed in the style file (Themes/Default.xaml), not inline in views.

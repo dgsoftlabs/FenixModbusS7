@@ -6,7 +6,6 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <Platforms>x86</Platforms>
     <OutputType>WinExe</OutputType>
-    <StartupObject>FenixServer.Program</StartupObject>
     <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
     <RootNamespace>FenixServer</RootNamespace>
     <AssemblyName>FenixServerS7</AssemblyName>
@@ -27,9 +26,12 @@
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <Configurations>All;Debug;Release</Configurations>
+    <StartupObject>FenixServer.App</StartupObject>
+    <IsTestProject>false</IsTestProject>
+    <GenerateXunitEntryPoint>false</GenerateXunitEntryPoint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <UseVSHostingProcess>true</UseVSHostingProcess>
@@ -55,6 +57,7 @@
   <PropertyGroup>
     <ApplicationIcon>HttpServer.ico</ApplicationIcon>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\ModbusMasterASCII\ModbusMasterASCII.csproj" />
     <ProjectReference Include="..\ModbusMasterRTU\ModbusMasterRTU.csproj" />
@@ -64,8 +67,6 @@
     <ProjectReference Include="..\FenixServer.Web\FenixServer.Web.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DockPanelSuite" Version="3.1.1" />
-    <PackageReference Include="DockPanelSuite.ThemeVS2015" Version="3.1.1" />
     <PackageReference Include="EntityFramework" Version="6.5.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="System.Data.SQLite" Version="2.0.3" />

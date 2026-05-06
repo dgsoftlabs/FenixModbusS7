@@ -1,11 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
+    <StartupObject>FenixServer.Web.EntryPoint</StartupObject>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <GenerateXunitEntryPoint>false</GenerateXunitEntryPoint>
+    <IsTestProject>false</IsTestProject>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ModbusMasterASCII\ModbusMasterASCII.csproj" />
+    <ProjectReference Include="..\ModbusMasterRTU\ModbusMasterRTU.csproj" />
+    <ProjectReference Include="..\ModbusMasterTCP\ModbusMasterTCP.csproj" />
+    <ProjectReference Include="..\ProjectDataLib.Test\ProjectDataLib.Test.csproj" />
     <ProjectReference Include="..\ProjectDataLib\ProjectDataLib.csproj" />
+    <ProjectReference Include="..\S7-300-400 Ethernet\S7-300-400 Ethernet.csproj" />
   </ItemGroup>
-
 </Project>

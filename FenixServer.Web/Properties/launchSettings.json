@@ -2,11 +2,11 @@
   "profiles": {
     "FenixServer.Web": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
+      "commandLineArgs": "--port 8080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:12186;http://localhost:12187"
+      }
     }
   }
 }

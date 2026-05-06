@@ -1,43 +1,24 @@
-﻿using System;
+using System;
 using System.Threading;
-using System.Windows.Forms;
+using System.Windows;
 
 namespace FenixServer
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main(string[] args)
+        public static Mutex CreateSingleInstanceMutex(out bool instanceCountOne)
         {
-            try
-            {
-                bool instanceCountOne = false;
-                using (Mutex mtex = new Mutex(true, "FenixServer", out instanceCountOne))
-                {
-                    if (instanceCountOne)
-                    {
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new ManagerView(args));
-                        mtex.ReleaseMutex();
-                    }
-                    else
-                    {
-                        MessageBox.Show("An FenixServer instance is already running");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Fenix Server failed to start:\n" + ex,
-                    "Fenix Server",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            return new Mutex(true, "FenixServer", out instanceCountOne);
+        }
+
+        public static string BuildStartupErrorMessage(Exception ex)
+        {
+            return "Fenix Server failed to start:\n" + ex;
+        }
+
+        public static void ShowSingleInstanceMessage()
+        {
+            MessageBox.Show("An FenixServer instance is already running", "Fenix Server", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
