@@ -172,16 +172,6 @@ AutoTest.Net/
 # Installshield output folder
 [Ee]xpress/
 
-# DocProject is a documentation generator add-in
-DocProject/buildhelp/
-DocProject/Help/*.HxT
-DocProject/Help/*.HxC
-DocProject/Help/*.hhc
-DocProject/Help/*.hhk
-DocProject/Help/*.hhp
-DocProject/Help/Html2
-DocProject/Help/html
-
 # Click-Once directory
 publish/
 
@@ -398,18 +388,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-# SQLite Interop DLL
-SQLite/x64/SQLite.Interop.dll
-SQLite/x86/SQLite.Interop.dll
-
 FenixSetup/FenixSetup-cache
 FenixSetup/FenixSetup-SetupFiles
 FenixModbusS7Setup/FenixModbusS7Setup-cache/
 
 *-cache/
 /FenixModbusS7/REMARKS.md
-#*.snk
-
-# Since there are multiple workflows, uncomment next line to ignore bower_components
-# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
-#bower_components/

@@ -1359,7 +1359,7 @@
     <ROW Component="ProductInformation" Value="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_Feni_1_xServer.Web.exe_1" ComponentId="{4C131217-218B-4741-9C1A-6CC50B6EAB68}" Directory_="FenixServer.Web_Dir" Attributes="256" KeyPath="FenixServer.Web.exe_1"/>
+    <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_Feni_1_xServer.Web.exe_1" ComponentId="{16E31371-E5C7-4FD2-82AA-82CDC0433C5C}" Directory_="FenixServer.Web_Dir" Attributes="256" KeyPath="FenixServer.Web.exe_1"/>
     <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe" ComponentId="{D16F1C67-0837-4018-BDCE-CB13459D5440}" Directory_="FenixModbusS7_Dir" Attributes="256" KeyPath="FenixModbusS7.exe"/>
     <ROW Component="AI_PROPPATH_FILENAME_PERBUILD_FenixServerS7.exe" ComponentId="{10579F1F-0000-4C71-BC81-A1436110788E}" Directory_="FenixServerS7_Dir" Attributes="256" KeyPath="FenixServerS7.exe"/>
     <ROW Component="APPDIR" ComponentId="{B87DF860-8CBC-468C-B43B-8F9B149F2E38}" Directory_="APPDIR" Attributes="0"/>
