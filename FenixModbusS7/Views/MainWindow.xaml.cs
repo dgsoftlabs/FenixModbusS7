@@ -110,6 +110,37 @@ namespace Fenix
 
                     CheckAccessForNodes();
                 }
+                else if (Pr == null)
+                {
+                    TryLoadLastProjectFromRegistry();
+                }
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
+        private void TryLoadLastProjectFromRegistry()
+        {
+            try
+            {
+                string startupPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                string defaultProjectPath = Path.Combine(startupPath, "Project.pse");
+                string lastPath = Registry.GetValue(PrCon.RegUserRoot, PrCon.LastPathKey, defaultProjectPath) as string;
+
+                if (string.IsNullOrWhiteSpace(lastPath) || !File.Exists(lastPath))
+                    return;
+
+                if (PrCon.openProjects(lastPath))
+                {
+                    Pr = PrCon.projectList.FirstOrDefault();
+                    if (Pr != null)
+                    {
+                        Registry.SetValue(PrCon.RegUserRoot, PrCon.LastPathKey, Pr.path);
+                        CheckAccessForNodes();
+                    }
+                }
             }
             catch (Exception Ex)
             {
