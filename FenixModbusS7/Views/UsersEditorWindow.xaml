@@ -1,0 +1,39 @@
+<Window x:Class="Fenix.UsersEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit Users"
+        Width="520"
+        Height="360"
+        MinWidth="420"
+        MinHeight="260"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize">
+    <DockPanel Style="{StaticResource Th.DialogRootDockPanel}">
+        <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource Th.DialogBottomActionsPanel}">
+            <Button Content="OK"
+                    IsDefault="True"
+                    Style="{StaticResource Th.DialogBottomPrimaryActionButton}"
+                    Click="OkButton_Click" />
+            <Button Content="Cancel"
+                    IsCancel="True"
+                    Style="{StaticResource Th.DialogBottomActionButton}" />
+        </StackPanel>
+
+        <DataGrid x:Name="UsersGrid"
+                  ItemsSource="{Binding Users}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="True"
+                  CanUserDeleteRows="False"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="Horizontal">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User Name"
+                                    Width="*"
+                                    Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Password"
+                                    Width="*"
+                                    Binding="{Binding Pass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>

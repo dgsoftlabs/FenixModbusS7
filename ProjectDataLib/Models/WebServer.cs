@@ -16,6 +16,7 @@ namespace ProjectDataLib
     public class WebServer : IDisposable, ITreeViewModel, INotifyPropertyChanged
     {
         private const int MaxConcurrentRequests = 32;
+        private const string DefaultPrefix = "http://+:80/";
 
         [field: NonSerialized]
         [XmlIgnore]
@@ -249,21 +250,35 @@ namespace ProjectDataLib
             set { }
         }
 
+        private void InitializeRuntimeState()
+        {
+            ObjId_ = new Guid("11111111-1111-1111-1111-111111111111");
+
+            _listener = new HttpListener();
+            _requestGate = new SemaphoreSlim(MaxConcurrentRequests, MaxConcurrentRequests);
+            _runCts = null;
+            _Children ??= new ObservableCollection<object>();
+
+            if (Prefixes_ == null)
+                Prefixes_ = new List<string>();
+
+            if (Prefixes_.Count == 0)
+                Prefixes_.Add(DefaultPrefix);
+
+            foreach (string s in Prefixes_.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct())
+                _listener.Prefixes.Add(s);
+
+            _listener.AuthenticationSchemes = Auth_ == 0 ? AuthenticationSchemes.Anonymous : Auth_;
+            Auth_ = _listener.AuthenticationSchemes;
+        }
+
         public WebServer(Func<HttpListenerContext, byte[]> method)
         {
             if (!HttpListener.IsSupported)
                 throw new NotSupportedException(
                     "WebServer.Coinstr  - Needs Windows XP SP2, Server 2003 or later.");
 
-            ObjId_ = new Guid("11111111-1111-1111-1111-111111111111");
-
-            _listener = new HttpListener();
-            Prefixes_.Add("http://+:80/");
-            _listener.Prefixes.Add("http://+:80/");
-
-            Auth = AuthenticationSchemes.Anonymous;
-
-            _Children = new ObservableCollection<object>();
+            InitializeRuntimeState();
 
             if (method != null)
                 _responderMethod = method;
@@ -271,6 +286,11 @@ namespace ProjectDataLib
 
         public WebServer()
         {
+            if (!HttpListener.IsSupported)
+                throw new NotSupportedException(
+                    "WebServer.Coinstr  - Needs Windows XP SP2, Server 2003 or later.");
+
+            InitializeRuntimeState();
         }
 
         public void Run()
@@ -360,34 +380,7 @@ namespace ProjectDataLib
                 throw new NotSupportedException(
                     "WebServer.Coinstr  - Needs Windows XP SP2, Server 2003 or later.");
 
-            ObjId_ = new Guid("11111111-1111-1111-1111-111111111111");
-
-            _listener = new HttpListener();
-
-            _listener.AuthenticationSchemes = Auth_;
-
-            if (Prefixes_ == null)
-            {
-                Prefixes_ = new List<string>();
-                Prefixes_.Add("http://+:80/");
-                _listener.Prefixes.Add("http://+:80/");
-            }
-            else
-            {
-                if (Prefixes_.Count == 0)
-                {
-                    Prefixes_.Add("http://+:80/");
-                    _listener.Prefixes.Add("http://+:80/");
-                }
-                else
-                {
-                    foreach (string s in Prefixes_)
-                        _listener.Prefixes.Add(s);
-                }
-            }
-
-            _requestGate = new SemaphoreSlim(MaxConcurrentRequests, MaxConcurrentRequests);
-            _runCts = null;
+            InitializeRuntimeState();
         }
 
         #region IDisposable Support

@@ -170,6 +170,14 @@ namespace Fenix
             }
         }
 
+        private void CollectionEditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is FrameworkElement element && element.DataContext is PropertyRow row)
+            {
+                row.EditCollection(Window.GetWindow(this));
+            }
+        }
+
         private void ScheduleAdjustColumns()
         {
             Dispatcher.BeginInvoke(new Action(AdjustColumns), DispatcherPriority.ContextIdle);
@@ -248,6 +256,10 @@ namespace Fenix
             private readonly bool _useClearableTextEditor;
             private bool _isEnabled;
 
+            private bool IsSupportedCollectionType =>
+                _property.PropertyType == typeof(List<CustomTimer>) ||
+                _property.PropertyType == typeof(List<UserClass>);
+
             public PropertyRow(object target, PropertyDescriptor property, bool enabled, string nameOverride = null)
             {
                 _target = target;
@@ -299,7 +311,7 @@ namespace Fenix
                 _valueType == typeof(System.Drawing.Color) ||
                 _valueType.FullName == "System.Windows.Media.Color";
 
-            public bool IsCollectionEditorVisible => _property.PropertyType == typeof(List<CustomTimer>);
+            public bool IsCollectionEditorVisible => IsSupportedCollectionType;
 
             public string CollectionSummary
             {
@@ -519,7 +531,26 @@ namespace Fenix
 
             public void EditCollection(Window owner)
             {
-                return;
+                if (!IsEditable)
+                    return;
+
+                if (_property.GetValue(_target) is not IList list)
+                    return;
+
+                if (_property.PropertyType == typeof(List<UserClass>))
+                {
+                    var dialog = new UsersEditorWindow(list.Cast<UserClass>())
+                    {
+                        Owner = owner
+                    };
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        dialog.ApplyTo(list);
+                        OnPropertyChanged(nameof(CollectionSummary));
+                        OnPropertyChanged(nameof(ValueText));
+                    }
+                }
             }
 
             public void UpdateEnabledState(bool enabled)
