@@ -23,7 +23,9 @@
                   ItemsSource="{Binding Users}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="True"
-                  CanUserDeleteRows="False"
+                  CanUserDeleteRows="True"
+                  MinRowHeight="25"
+                  
                   HeadersVisibility="Column"
                   GridLinesVisibility="Horizontal">
             <DataGrid.Columns>
