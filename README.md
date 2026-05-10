@@ -1,107 +1,166 @@
-# Fenix Modbus
+# Fenix Modbus S7
 
-Wiki: https://github.com/DanielSan1000/Fenix-Modbus/wiki
+> Industrial protocol communication suite for Modbus and SIEMENS S7-300/400 devices
 
-DGSoft - Author Site : https://dgsoftlabs.com
+[![GitHub Release](https://img.shields.io/github/v/release/dgsoftlabs/FenixModbusS7?style=flat-square)](https://github.com/dgsoftlabs/FenixModbusS7/releases)
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?style=flat-square)](https://dotnet.microsoft.com/)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-# About FenixModbusS7
+**Links:**
+- 📖 [Wiki](https://github.com/DanielSan1000/Fenix-Modbus/wiki)
+- 🌐 [DGSoft Labs](https://dgsoftlabs.com)
 
+---
 
+## 📁 Projects Overview
 
-# History Summary
-Version	Nature of Changes
-v3.3.0 → v3.3.1	Cleanup and documentation
-v3.3.2	UI refactoring (async), database, layout serialization
-v3.3.3.0	CI/CD pipeline (GitHub Actions, Advanced Installer)
-v3.3.4.0	Testing, NuGet, CI/CD improvements
-v3.4.0.0	⚡ .NET 10 Upgrade, WPF styles, cleaning legacy code
-v4.0.1.0	Bug fixes (database, CSV, installer)
-v4.0.2.0	Bug fixes, testing
-v4.0.3.0	🎯 Multi-axis, timers, shortcuts, many new features
-v4.0.4.0	Stabilization, refactoring, chart and table improvements
+This repository contains multiple interconnected applications and libraries for industrial protocol communication:
 
-# 📋 Change History — Fenix
+### 🖥️ Applications
 
-## v4.0.4.0
-Category	Description of Changes
-📈 Trends	Protection against lack of points on the chart
-📋 TableView	Fixes problems with TableView
-🏷️ Properties	Locking root names for nested parameters
-🔧 Initialization	Fixing several initialization issues
-🧹 Refactoring	Moving converters, removing InFile references, correcting names, - - moving classes to appropriate locations
+| Project | Type | Purpose |
+|---------|------|---------|
+| **FenixModbusS7** | WPF Desktop App | Primary application for Modbus and S7 communication with real-time visualization, trend charts, database storage, and device management. Supports TCP, RTU, and ASCII protocols. |
+| **FenixServerS7** | WPF Server App | Server-hosted S7 communication application with ASP.NET Core integration for enterprise deployments. |
+| **FenixServer.Web** | ASP.NET Core | RESTful Web API backend for remote device communication and distributed endpoint data access. |
 
-## v4.0.3.0 
-📈 Charts — Multi-axis	Adding multi-axis functionality in trends
-🎚️ Charts — Axis tier	Adding axis tier functionality
-🔍 Charts — Zoom	Adding a clear text field for axis limits and zoom reset
-⏱️ Timers	Managing timers from the tree, adding timer persistence
-⌨️ Keyboard Shortcuts	Adding keyboard shortcuts
-📡 Communication View	Adding an index, refactoring converters, improving button labels
-📝 Scripts	Fixing CRUD management of script files, improved error messages
-🏷️ Properties	Fixing column width change behavior, fixing bugs
-🔌 Connections	Refactoring models and connections
-📋 Output	Adding copy from output
-🏷️ InTag	Fixing name change after click
-📊 Tables	Fixing problems with charts and tables
-Feature-rich version — many new features, especially in the chart area.
+### 📚 Libraries
 
-## v4.0.2.0
-🧪 Testing	Generating tests
-🐛 Bugs	Fixing several bugs in the application, fixing bugs in CommunicationView
-🧹 Cleanup	Ignoring FenixModbusS7 cache
+| Project | Purpose |
+|---------|---------|
+| **ProjectDataLib** | Core data models, serialization, and utilities. Supports .pse project format with legacy .psx conversion. |
+| **ProjectDataLib.Test** | Comprehensive test suite for data library validation. |
+| **ModbusMasterTCP** | TCP Modbus protocol implementation with socket management. |
+| **ModbusMasterRTU** | RTU serial Modbus protocol with CRC validation. |
+| **ModbusMasterASCII** | ASCII Modbus protocol implementation with LRC checksum. |
+| **S7-300-400 Ethernet** | SIEMENS S7 PLC Ethernet driver for industrial communications. |
 
-## v4.0.1.0
-🗄️ Database	Fixing "show files" option, activating database access after project creation
-📤 CSV Export	Adding pivot in the table when exporting CSV
-🔌 Connections	Fixing layout in AddConnection
-🔧 Installer	Correcting installation path
-🔢 Version	Updating version to 4.0.1.0
+---
 
-## v3.4.0.0 
-🚀 .NET 10	Upgrade application to .NET 10
-🗑️ Removals	Removing WebServer node, old HTTP/web resources, App.config
-🎨 UI — WPF	Adding implicit WPF styles, centralizing UI theming, changing icons to emojis
-📊 Database	Adding snapshot saving and pivoted DataGrid in DBTableView, database migration
-📝 Scripts	Refactoring script management, expanding code editor
-⚙️ Properties	Refactoring PropertyGrid, centralizing access control
-📂 Projects	Handling only .pse files, improved installer (EN fixes)
-🏗️ CI/CD	Updating pipeline, new FenixModbusS7 installer
-This is a groundbreaking version — migration to .NET 10, cleaning legacy code, major UI modernization.
+## ⚙️ Technology Stack
 
-## v3.3.4.0
-🧪 Testing	Adding new test project, asynchronous version control
-📦 NuGet	Updating NuGet packages and binding redirects
-🏗️ CI/CD	Adding aiproj-demo job to GitHub Actions, improving path compatibility (Windows/cross-platform)
-🔧 Refactoring	Removing FenixInstall project, refactoring FenixManager
-🎨 UI	Refactoring project properties, updating icons
-🔢 Version	Bump to 3.3.4, adding "Version" project with version.xml
+- **.NET 10.0** (LTS) - Latest framework targeting
+- **WPF** - Modern Windows Presentation Foundation UI
+- **ASP.NET Core** - RESTful web services
+- **MVVM Architecture** - Separation of concerns design pattern
+- **SQLite** - Local data storage
+- **Entity Framework** - ORM for database operations
 
-## v3.3.3.0
-🏗️ CI/CD — GitHub Actions	Full implementation of CI/CD pipeline — creating dotnet.yml, configuring MSBuild, NuGet, Visual Studio 2022, Advanced Installer, artifact upload
-📦 SQLite	Adding SQLite.Interop.dll, SQLite components in FenixSetup
-🔧 Building	Dynamic location finding of devenv.com, Out-of-Proc Build configuration, path and syntax improvements
-📝 Documentation	Updating README.md, .gitignore
-🔢 Version	Bumping version to 3.3.3.0
-Note: This version was mainly about automating the build and CI/CD process.
+---
 
-## v3.3.2
-🔄 UI Refactoring	Asynchronous data retrieval, refactoring ChartView for async/await, improving interaction handling
-🗄️ Database	Expanding database interaction functionality
-📐 Layout	Adding layout serialization, improving handling
-🖥️ TreeViewManager	Expanding TreeViewManager, updating color and status text
-🎨 UI	Updating icons, refactoring converters, removing DataGridExtensions
-🔧 Configuration	Removing app.config from multiple projects, updating paths in ModbusMaster
-📝 Documentation	Improving documentation, naming, error handling, adding XML documentation
-➕ New driver	Adding new driver
-🧹 Cleanup	Library cleanup, merging all projects, updating .gitignore
-🔧 Setup	Updating installer project
+## 🚀 Quick Start
 
-## v3.3.1
-🧹 Organization	Removing old/unnecessary files and unused libraries
-📂 Reorganization	Reorganizing project structure
-📚 Documentation	Adding Wiki link, updating help links
-🔢 Version	Updating version number, adding new version
-🧹 Code	Removing redundant comments
+### Requirements
+- Windows 7 or later
+- .NET 10.0 Runtime
+- Visual Studio 2022 (for development)
 
-## v3.3.0 (Initial Release)
-Starting point for the project history.
+### Building
+```bash
+dotnet build
+dotnet build --configuration Release
+```
+
+### Running
+```bash
+# Main application
+dotnet run --project FenixModbusS7
+
+# Web API
+dotnet run --project FenixServer.Web
+```
+
+---
+
+## 📋 Version History
+
+### v4.0.4.0
+| Feature | Details |
+|---------|---------|
+| 📈 Trends | Protection against lack of points on the chart |
+| 📋 TableView | Fixes for TableView problems |
+| 🏷️ Properties | Locking root names for nested parameters |
+| 🔧 Initialization | Several initialization fixes |
+| 🧹 Refactoring | Code organization and cleanup |
+
+### v4.0.3.0
+| Feature | Details |
+|---------|---------|
+| 📈 Charts | Multi-axis functionality in trends |
+| 🎚️ Axis | Tier functionality for better visualization |
+| 🔍 Zoom | Clear text field and zoom reset controls |
+| ⏱️ Timers | Tree-based timer management with persistence |
+| ⌨️ Shortcuts | Keyboard shortcuts for improved workflow |
+| 📡 Communication | Enhanced view with indexing and converters |
+| 📝 Scripts | CRUD management improvements |
+| 🏷️ Properties | Column width behavior and bug fixes |
+| 🔌 Connections | Model and connection refactoring |
+| 📊 Tables | Chart and table compatibility improvements |
+
+### v4.0.2.0
+| Category | Details |
+|----------|---------|
+| 🧪 Testing | Test suite generation |
+| 🐛 Bugs | Bug fixes in application and CommunicationView |
+| 🧹 Cleanup | Cache management improvements |
+
+### v4.0.1.0
+| Category | Details |
+|----------|---------|
+| 🗄️ Database | File management and access activation |
+| 📤 Export | Pivot support for CSV exports |
+| 🔌 Connections | Layout improvements |
+| 🔧 Installer | Installation path corrections |
+
+### v3.4.0.0 - Major Release
+| Category | Details |
+|----------|---------|
+| 🚀 Framework | Upgraded to .NET 10 |
+| 🎨 UI | WPF styles and emoji icons |
+| 📊 Database | Snapshot saving and pivoted DataGrid |
+| 📝 Scripts | Enhanced script management |
+| ⚙️ Properties | Centralized PropertyGrid refactoring |
+| 📂 Projects | .pse format support (legacy .psx migration) |
+
+### v3.3.4.0
+- 🧪 Testing: New test project
+- 📦 NuGet: Package updates and binding redirects
+- 🏗️ CI/CD: GitHub Actions pipeline
+- 🎨 UI: Property refinements
+
+### v3.3.3.0
+- 🏗️ GitHub Actions: Full CI/CD implementation
+- 📦 SQLite: Interop integration
+- 🔧 Build: Dynamic toolchain configuration
+
+### v3.3.2
+- 🔄 UI: Async/await refactoring
+- 🗄️ Database: Enhanced interactions
+- 📐 Layout: Serialization support
+- 🎨 UI: Icon and converter updates
+
+### v3.3.1
+- 🧹 Code cleanup and organization
+- 📚 Documentation improvements
+- 🔢 Version updates
+
+### v3.3.0
+- ✨ Initial release with core functionality
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit Pull Requests.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## ✉️ Support
+
+For issues, questions, or suggestions, please open an [issue](https://github.com/dgsoftlabs/FenixModbusS7/issues) on GitHub.
+
+---
+
+**Made with ❤️ by DGSoft Labs**
