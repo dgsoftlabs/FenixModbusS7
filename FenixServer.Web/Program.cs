@@ -23,10 +23,10 @@ namespace FenixServer.Web
             _app.UseCors();
 
             ConfigureStaticFiles(_app, project, projectContainer);
+            _app.UseRouting();
             _app.MapFenixEndpoints();
         }
 
-        // Keep existing overload for callers that don't pass port
         public static void ConfigureWebHost(Project project, ProjectContainer projectContainer)
             => ConfigureWebHost(project, projectContainer, 80);
 

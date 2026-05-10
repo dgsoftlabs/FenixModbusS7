@@ -1,38 +1,39 @@
 using ProjectDataLib;
 using System.Collections.Concurrent;
 using System.Globalization;
-using System.Linq;
 
 namespace FenixServer.Web
 {
     public static class EndpointMappings
     {
-        private const string PlainTextContentType = "text/plain";
-        private const string JsonContentType = "application/json";
-        private const string ErrorResponse = "Error";
-        private const string AllKey = "all";
-        private const string BufforName = "Buffor";
-        private const int MaxEventsCount = 1000;
+        internal const string PlainTextContentType = "text/plain";
+        internal const string JsonContentType = "application/json";
+        internal const string ErrorResponse = "Error";
+        internal const string AllKey = "all";
+        internal const string BufforName = "Buffor";
+        internal const int MaxEventsCount = 1000;
 
-        private static int _probeCounter = 100;
-        private static readonly object _graphSync = new object();
-        private static readonly ConcurrentDictionary<string, List<object[]>> _graphData = new();
-        private static readonly ConcurrentQueue<EventEntry> _events = new();
+        // API Versioning
+        internal const string ApiV1Prefix = "/api/v1";
+        internal const string ApiCurrentVersion = "1.0";
+        internal const int ApiMajorVersion = 1;
+        internal const int ApiMinorVersion = 0;
 
-        private readonly record struct EndpointRequest(string ObjectKey, string NameKey, string ParamKey, string ValueKey);
-        private readonly record struct EventEntry(DateTimeOffset Tm, string Mess);
+        internal static int ProbeCounter = 100;
+        internal static readonly object GraphSync = new object();
+        internal static readonly ConcurrentDictionary<string, List<object[]>> GraphData = new();
+        internal static readonly ConcurrentQueue<EventEntry> Events = new();
+
+        internal readonly record struct EndpointRequest(string ObjectKey, string NameKey, string ParamKey, string ValueKey);
+        internal readonly record struct EventEntry(DateTimeOffset Tm, string Mess);
 
         public static void PublishEvent(string? message, DateTimeOffset? timestamp = null)
         {
             if (string.IsNullOrWhiteSpace(message))
-            {
                 return;
-            }
 
-            _events.Enqueue(new EventEntry(timestamp ?? DateTimeOffset.Now, message.Trim()));
-            while (_events.Count > MaxEventsCount && _events.TryDequeue(out _))
-            {
-            }
+            Events.Enqueue(new EventEntry(timestamp ?? DateTimeOffset.Now, message.Trim()));
+            while (Events.Count > MaxEventsCount && Events.TryDequeue(out _)) { }
         }
 
         public static void MapRootEndpoint(this WebApplication app)
@@ -47,233 +48,68 @@ namespace FenixServer.Web
 
         public static void MapFenixEndpoints(this WebApplication app)
         {
-            MapHealthEndpoint(app);
-            MapRequestEndpoints(app);
-        }
-
-        private static void MapHealthEndpoint(WebApplication app)
-        {
             app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
-        }
-
-        private static void MapRequestEndpoints(WebApplication app)
-        {
-            app.MapPost("/{obj}/{name}/{param}",
-                    (string obj, string name, string? param, HttpContext context) => HandleRequestWithParam(obj, name, param, context))
-                .WithName("CodeRequest");
-
-            app.MapPost("/{obj}/{name}",
-                    (string obj, string name, HttpContext context) => HandleRequestWithoutParam(obj, name, context))
-                .WithName("CodeRequestNoParam");
-
-            app.MapGet("/{obj}/{name}/{param}",
-                    (string obj, string name, string? param, HttpContext context) => HandleRequestWithParam(obj, name, param, context))
-                .WithName("CodeRequestGet");
-
-            app.MapGet("/{obj}/{name}",
-                    (string obj, string name, HttpContext context) => HandleRequestWithoutParam(obj, name, context))
-                .WithName("CodeRequestNoParamGet");
-
-            app.MapPost("/{obj}/{name}/{param}/{value}", HandleRequestWithValue)
-                .WithName("CodeRequestWithValue");
-
-            app.MapGet("/{obj}/{name}/{param}/{value}", HandleRequestWithValue)
-                .WithName("CodeRequestWithValueGet");
-        }
-
-        private static Project GetProjectFromServices(IServiceProvider services)
-        {
-            return services.GetRequiredService<Project>()
-                ?? throw new InvalidOperationException("Project not properly initialized");
-        }
-
-        private static IResult HandleRequestWithValue(
-            string obj,
-            string name,
-            string? param,
-            string? value,
-            HttpContext context)
-        {
-            return HandleRequestCore(obj, name, param, value, context);
-        }
-
-        private static IResult HandleRequestWithParam(
-            string obj,
-            string name,
-            string? param,
-            HttpContext context)
-        {
-            return HandleRequestCore(obj, name, param, null, context);
-        }
-
-        private static IResult HandleRequestWithoutParam(
-            string obj,
-            string name,
-            HttpContext context)
-        {
-            return HandleRequestCore(obj, name, null, null, context);
-        }
-
-        private static IResult HandleRequestCore(
-            string obj,
-            string name,
-            string? param,
-            string? value,
-            HttpContext context)
-        {
-            try
+            app.MapGet("/api/version", () => Results.Ok(new
             {
-                var project = GetProjectFromServices(context.RequestServices);
-                var request = CreateRequest(obj, name, param, value, context);
-                return DispatchRequest(project, request);
-            }
-            catch
+                version = ApiCurrentVersion,
+                majorVersion = ApiMajorVersion,
+                minorVersion = ApiMinorVersion
+            }));
+            LegacyEndpointMappings.MapLegacyEndpoints(app);
+            ApiEndpointMappings.MapApiEndpoints(app);
+            ApiEndpointMappings.MapApiV1Endpoints(app);
+        }
+
+        internal static IResult ErrorResult()
+            => Results.Text(ErrorResponse, PlainTextContentType);
+
+        internal static Project GetProjectFromServices(IServiceProvider services)
+            => services.GetRequiredService<Project>()
+               ?? throw new InvalidOperationException("Project not properly initialized");
+
+        internal static bool TryFindTag(Project project, string tagName, out ITag? tag)
+        {
+            tag = null;
+            if (project?.PrCon == null || string.IsNullOrWhiteSpace(tagName))
+                return false;
+
+            var allTags = project.PrCon.GetAllITags(project.objId, project.objId, false, false);
+            if (allTags == null || allTags.Count == 0)
+                return false;
+
+            var normalized = tagName.Trim();
+            tag = allTags.FirstOrDefault(t =>
+                t != null &&
+                !string.IsNullOrWhiteSpace(t.Name) &&
+                string.Equals(t.Name.Trim(), normalized, StringComparison.OrdinalIgnoreCase));
+
+            return tag != null;
+        }
+
+        internal static string SafeGetFormattedValue(ITag? tag)
+        {
+            if (tag == null) return string.Empty;
+            try { return tag.GetFormatedValue(); }
+            catch { return tag.Value?.ToString() ?? string.Empty; }
+        }
+
+        internal static object BuildGraphResponse(Project project)
+        {
+            var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            var tags = project.PrCon.GetAllITags(project.objId, project.objId, false, true) ?? new List<ITag>();
+
+            lock (GraphSync)
             {
-                return ErrorResult();
+                foreach (var tag in tags)
+                    AppendGraphPoint(tag, timestamp);
+
+                return BuildGraphSeriesResponse(tags);
             }
         }
 
-        private static IResult DispatchRequest(Project project, EndpointRequest request)
+        internal static object[] BuildEventsResponse()
         {
-            return request.ObjectKey switch
-            {
-                "server" => HandleServerRequest(request),
-                "tag" or "tags" => HandleTagRequest(project, request),
-                "graph" => HandleGraphRequest(project, request),
-                "connection" or "connections" => HandleConnectionRequest(project, request),
-                "event" or "events" => HandleEventRequest(request),
-                "timer" => Results.Text(project.GetTimerValue(request.NameKey), PlainTextContentType),
-                "user" => Results.Text(project.GetUserValue(request.NameKey), PlainTextContentType),
-                "machine" => Results.Text(project.GetMachineValue(request.NameKey), PlainTextContentType),
-                _ => ErrorResult()
-            };
-        }
-
-        private static EndpointRequest CreateRequest(
-            string obj,
-            string name,
-            string? param,
-            string? value,
-            HttpContext context)
-        {
-            var objectKey = NormalizeFirstToken(obj);
-            var nameKey = DecodeRouteValue(name);
-            var paramKey = NormalizeParameter(param);
-            var valueKey = GetValueKey(value, context);
-
-            return new EndpointRequest(objectKey, nameKey, paramKey, valueKey);
-        }
-
-        private static string GetValueKey(string? value, HttpContext context)
-        {
-            var valueKey = DecodeRouteValue(value);
-            if (!string.IsNullOrWhiteSpace(valueKey))
-            {
-                return valueKey;
-            }
-
-            return context.Request.RouteValues["value"]?.ToString() ?? string.Empty;
-        }
-
-        private static string NormalizeFirstToken(string? rawValue)
-        {
-            return (rawValue ?? string.Empty)
-                .Trim()
-                .Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                .FirstOrDefault()?
-                .Trim()
-                .ToLowerInvariant() ?? string.Empty;
-        }
-
-        private static string NormalizeParameter(string? rawValue)
-        {
-            var parameter = NormalizeFirstToken(rawValue);
-            var querySeparatorIndex = parameter.IndexOf('?');
-            return querySeparatorIndex >= 0
-                ? parameter[..querySeparatorIndex]
-                : parameter;
-        }
-
-        private static string DecodeRouteValue(string? rawValue)
-        {
-            var normalized = (rawValue ?? string.Empty).Trim().Replace('+', ' ');
-            return Uri.UnescapeDataString(normalized);
-        }
-
-        private static bool IsAllRequest(EndpointRequest request)
-        {
-            return request.NameKey.Equals(AllKey, StringComparison.OrdinalIgnoreCase) && request.ParamKey == AllKey;
-        }
-
-        private static IResult HandleServerRequest(EndpointRequest request)
-        {
-            if (!request.NameKey.Equals(BufforName, StringComparison.OrdinalIgnoreCase))
-            {
-                return ErrorResult();
-            }
-
-            if (request.ParamKey == "get")
-            {
-                return ProbeCounterResult();
-            }
-
-            if (request.ParamKey == "set")
-            {
-                if (int.TryParse(request.ValueKey, NumberStyles.Integer, CultureInfo.InvariantCulture, out var parsed))
-                {
-                    _probeCounter = Math.Max(1, parsed);
-                }
-
-                return ProbeCounterResult();
-            }
-
-            return ErrorResult();
-        }
-
-        private static IResult ProbeCounterResult()
-        {
-            return Results.Text(_probeCounter.ToString(CultureInfo.InvariantCulture), PlainTextContentType);
-        }
-
-        private static IResult HandleTagRequest(Project project, EndpointRequest request)
-        {
-            if (IsAllRequest(request))
-            {
-                return GetAllTagsResult(project);
-            }
-
-            if (request.ParamKey == "value" && !string.IsNullOrWhiteSpace(request.ValueKey))
-            {
-                return SetTagValue(project, request.NameKey, request.ValueKey);
-            }
-
-            return GetTagValue(project, request.NameKey);
-        }
-
-        private static IResult HandleGraphRequest(Project project, EndpointRequest request)
-        {
-            return IsAllRequest(request)
-                ? Results.Json(BuildGraphResponse(project))
-                : ErrorResult();
-        }
-
-        private static IResult HandleConnectionRequest(Project project, EndpointRequest request)
-        {
-            return IsAllRequest(request)
-                ? Results.Text(project.GetConnectionsAll(AllKey), JsonContentType)
-                : ErrorResult();
-        }
-
-        private static IResult HandleEventRequest(EndpointRequest request)
-        {
-            return IsAllRequest(request)
-                ? Results.Json(BuildEventsResponse())
-                : ErrorResult();
-        }
-
-        private static object[] BuildEventsResponse()
-        {
-            return _events
+            return Events
                 .Select(e => new
                 {
                     Tm = e.Tm,
@@ -284,150 +120,60 @@ namespace FenixServer.Web
                 .ToArray();
         }
 
-        private static object BuildGraphResponse(Project project)
-        {
-            var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            var tags = project.PrCon.GetAllITags(project.objId, project.objId, false, true) ?? new List<ITag>();
-
-            lock (_graphSync)
-            {
-                foreach (var tag in tags)
-                {
-                    AppendGraphPoint(tag, timestamp);
-                }
-
-                return BuildGraphSeriesResponse(tags);
-            }
-        }
-
         private static void AppendGraphPoint(ITag? tag, long timestamp)
         {
             try
             {
-                if (tag == null)
-                {
-                    return;
-                }
-
+                if (tag == null) return;
                 var key = tag.Name ?? string.Empty;
-                var series = _graphData.GetOrAdd(key, _ => new List<object[]>());
+                var series = GraphData.GetOrAdd(key, _ => new List<object[]>());
 
                 if (tag.TypeData_ == TypeData.BIT)
-                {
                     AppendBitGraphPoint(series, tag, timestamp);
-                }
                 else
-                {
                     AppendNumericGraphPoint(series, tag, timestamp);
-                }
 
                 TrimSeries(series);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         private static void AppendBitGraphPoint(List<object[]> series, ITag tag, long timestamp)
         {
             var currentPoint = SafeGetBitPoint(tag.Value);
-
-            if (series.Count < 1)
-            {
-                series.Add(new object[] { timestamp, currentPoint });
-                return;
-            }
-
+            if (series.Count < 1) { series.Add(new object[] { timestamp, currentPoint }); return; }
             var lastPoint = SafeGetDouble(series[^1][1]);
             if (!lastPoint.Equals(currentPoint))
-            {
                 series.Add(new object[] { timestamp, lastPoint });
-            }
-
             series.Add(new object[] { timestamp, currentPoint });
         }
 
         private static void AppendNumericGraphPoint(List<object[]> series, ITag tag, long timestamp)
         {
             var point = SafeGetDouble(tag.Value);
-
             if (point == 0d)
             {
                 var raw = tag.GetFormatedValue();
                 if (!double.TryParse(raw, NumberStyles.Any, CultureInfo.CurrentCulture, out point)
                     && !double.TryParse(raw, NumberStyles.Any, CultureInfo.InvariantCulture, out point))
-                {
                     point = 0d;
-                }
             }
-
             series.Add(new object[] { timestamp, point });
         }
 
         private static object[] BuildGraphSeriesResponse(List<ITag> tags)
         {
             return tags
-                .Where(tag => tag != null)
-                .Select(tag => new
+                .Where(t => t != null)
+                .Select(t => new
                 {
-                    label = tag.Name,
-                    data = _graphData.TryGetValue(tag.Name ?? string.Empty, out var series)
+                    label = t.Name,
+                    data = GraphData.TryGetValue(t.Name ?? string.Empty, out var series)
                         ? series
                         : new List<object[]>()
                 })
                 .Cast<object>()
                 .ToArray();
-        }
-
-        private static double SafeGetBitPoint(object? value)
-        {
-            if (value is bool booleanValue)
-            {
-                return booleanValue ? 1d : 0d;
-            }
-
-            if (value is string stringValue)
-            {
-                if (bool.TryParse(stringValue, out var parsedBool))
-                {
-                    return parsedBool ? 1d : 0d;
-                }
-
-                if (double.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var parsedNumber))
-                {
-                    return parsedNumber != 0d ? 1d : 0d;
-                }
-            }
-
-            return SafeGetDouble(value) != 0d ? 1d : 0d;
-        }
-
-        private static double SafeGetDouble(object? value)
-        {
-            if (value == null)
-            {
-                return 0d;
-            }
-
-            if (value is double doubleValue)
-            {
-                return doubleValue;
-            }
-
-            if (value is IConvertible)
-            {
-                try
-                {
-                    return Convert.ToDouble(value, CultureInfo.InvariantCulture);
-                }
-                catch
-                {
-                }
-            }
-
-            return double.TryParse(value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out var parsed)
-                ? parsed
-                : 0d;
         }
 
         private static void TrimSeries(List<object[]> series)
@@ -436,114 +182,32 @@ namespace FenixServer.Web
             {
                 var min = Convert.ToInt64(series[0][0]);
                 var diff = DateTime.UtcNow - DateTimeOffset.FromUnixTimeMilliseconds(min).UtcDateTime;
-                if (diff <= TimeSpan.FromSeconds(_probeCounter))
-                {
-                    break;
-                }
-
+                if (diff <= TimeSpan.FromSeconds(ProbeCounter)) break;
                 series.RemoveAt(0);
             }
         }
 
-        private static IResult ErrorResult()
+        internal static double SafeGetBitPoint(object? value)
         {
-            return Results.Text(ErrorResponse, PlainTextContentType);
+            if (value is bool b) return b ? 1d : 0d;
+            if (value is string s)
+            {
+                if (bool.TryParse(s, out var pb)) return pb ? 1d : 0d;
+                if (double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out var pn)) return pn != 0d ? 1d : 0d;
+            }
+            return SafeGetDouble(value) != 0d ? 1d : 0d;
         }
 
-        private static IResult GetTagValue(Project project, string tagName)
+        internal static double SafeGetDouble(object? value)
         {
-            if (TryFindTag(project, tagName, out var tag))
+            if (value == null) return 0d;
+            if (value is double d) return d;
+            if (value is IConvertible)
             {
-                return Results.Text(tag?.Value?.ToString() ?? string.Empty, PlainTextContentType);
+                try { return Convert.ToDouble(value, CultureInfo.InvariantCulture); }
+                catch { }
             }
-
-            return ErrorResult();
-        }
-
-        private static IResult SetTagValue(Project project, string tagName, string value)
-        {
-            if (!TryFindTag(project, tagName, out var tag) || tag == null)
-            {
-                return ErrorResult();
-            }
-
-            try
-            {
-                tag.SetValue(value);
-                return Results.Text(tag.Value?.ToString() ?? string.Empty, PlainTextContentType);
-            }
-            catch
-            {
-                return ErrorResult();
-            }
-        }
-
-        private static bool TryFindTag(Project project, string tagName, out ITag? tag)
-        {
-            tag = null;
-
-            if (project?.PrCon == null || string.IsNullOrWhiteSpace(tagName))
-            {
-                return false;
-            }
-
-            var allTags = project.PrCon.GetAllITags(project.objId, project.objId, false, false);
-            if (allTags == null || allTags.Count == 0)
-            {
-                return false;
-            }
-
-            var normalizedTagName = tagName.Trim();
-            tag = allTags.FirstOrDefault(t =>
-                t != null &&
-                !string.IsNullOrWhiteSpace(t.Name) &&
-                string.Equals(t.Name.Trim(), normalizedTagName, StringComparison.OrdinalIgnoreCase));
-
-            return tag != null;
-        }
-
-        private static IResult GetAllTagsResult(Project project)
-        {
-            var legacyJson = project.GetTagsAll(AllKey);
-            if (!string.IsNullOrWhiteSpace(legacyJson)
-                && !legacyJson.Equals("Empty", StringComparison.OrdinalIgnoreCase)
-                && (legacyJson.Contains("\"value\"", StringComparison.OrdinalIgnoreCase)
-                    || legacyJson.Contains("\"Value\"", StringComparison.OrdinalIgnoreCase)))
-            {
-                return Results.Text(legacyJson, JsonContentType);
-            }
-
-            var tags = project.PrCon.GetAllITags(project.objId, project.objId, false, false) ?? new List<ITag>();
-            var payload = tags
-                .Where(tag => tag != null)
-                .Select(tag => new
-                {
-                    Name = tag.Name,
-                    Value = tag.Value,
-                    value = tag.Value,
-                    FormattedValue = SafeGetFormattedValue(tag),
-                    TypeData = tag.TypeData_.ToString()
-                })
-                .ToArray();
-
-            return Results.Json(payload);
-        }
-
-        private static string SafeGetFormattedValue(ITag? tag)
-        {
-            if (tag == null)
-            {
-                return string.Empty;
-            }
-
-            try
-            {
-                return tag.GetFormatedValue();
-            }
-            catch
-            {
-                return tag.Value?.ToString() ?? string.Empty;
-            }
+            return double.TryParse(value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out var parsed) ? parsed : 0d;
         }
     }
 }
