@@ -34,11 +34,11 @@ namespace Fenix
         {
             if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
             {
-                Dispatcher.Invoke(() => lbInfo.Content = "No Internet connection.");
+                Dispatcher.Invoke(() => lbInfo.Text = "No Internet connection.");
                 return;
             }
 
-            Dispatcher.Invoke(() => lbInfo.Content = "Checking update for software...");
+            Dispatcher.Invoke(() => lbInfo.Text = "Checking update for software...");
 
             try
             {
@@ -49,7 +49,7 @@ namespace Fenix
                     var url = ProjectContainer.ParseUrlFromContent(result);
 
                     CheckVersion(newVer, url, (bool)sender);
-                    Dispatcher.Invoke(() => lbInfo.Content = "Completed");
+                    Dispatcher.Invoke(() => lbInfo.Text = "Completed");
                 }
             }
             catch (Exception)

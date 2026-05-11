@@ -92,6 +92,7 @@ namespace ProjectDataLib
         private List<string> Prefixes_ = new List<string>();
 
         [Browsable(true), Category("03 Adresses"), DisplayName("Prefixes"), Description("Allowed Adress")]
+        [TypeConverter(typeof(EmptyConverter))]
         public string[] Prefixes
         {
             get

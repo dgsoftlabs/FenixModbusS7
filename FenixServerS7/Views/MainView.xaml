@@ -20,10 +20,30 @@
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="0" Width="120" Content="Open" Command="{Binding OpenProjectCommand}" />
-        <Button Grid.Column="1" Width="90" Content="Start" Command="{Binding StartCommand}" />
-        <Button Grid.Column="2" Width="90" Margin="0" Content="Stop" Command="{Binding StopCommand}" />
-        <Button Grid.Column="3" Width="90" Margin="0" Content="Browser" Command="{Binding OpenInBrowserCommand}" />
+        <Button Grid.Column="0" Width="135" Command="{Binding OpenProjectCommand}">
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="&#xE838;" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0" VerticalAlignment="Center"/>
+            <TextBlock Text="Open Project" VerticalAlignment="Center"/>
+          </StackPanel>
+        </Button>
+        <Button Grid.Column="1" Width="100" Command="{Binding StartCommand}" Style="{StaticResource ButtonPrimary}">
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="&#xE768;" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0" VerticalAlignment="Center"/>
+            <TextBlock Text="Start" VerticalAlignment="Center"/>
+          </StackPanel>
+        </Button>
+        <Button Grid.Column="2" Width="100" Command="{Binding StopCommand}">
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="&#xE71A;" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0" VerticalAlignment="Center"/>
+            <TextBlock Text="Stop" VerticalAlignment="Center"/>
+          </StackPanel>
+        </Button>
+        <Button Grid.Column="3" Width="110" Command="{Binding OpenInBrowserCommand}">
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="&#xE774;" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0" VerticalAlignment="Center"/>
+            <TextBlock Text="Browser" VerticalAlignment="Center"/>
+          </StackPanel>
+        </Button>
 
         <StackPanel Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Center">
           <TextBlock Text="Project:" FontWeight="SemiBold" Margin="0,0,6,0" />
@@ -73,7 +93,12 @@
 
     <GroupBox Grid.Row="2" Header="Events" Margin="0,0,0,10">
       <DockPanel>
-        <Button DockPanel.Dock="Top" Width="120" HorizontalAlignment="Left" Margin="0,0,0,8" Content="Clear" Command="{Binding ClearEventsCommand}" />
+        <Button DockPanel.Dock="Top" Width="100" HorizontalAlignment="Left" Margin="0,0,0,8" Command="{Binding ClearEventsCommand}">
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0" VerticalAlignment="Center"/>
+            <TextBlock Text="Clear" VerticalAlignment="Center"/>
+          </StackPanel>
+        </Button>
         <ListView ItemsSource="{Binding Events}">
           <ListView.View>
             <GridView>

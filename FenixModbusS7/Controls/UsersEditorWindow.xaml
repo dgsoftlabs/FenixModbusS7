@@ -1,0 +1,63 @@
+<Window x:Class="Fenix.UsersEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit Users"
+        Width="520"
+        Height="360"
+        MinWidth="420"
+        MinHeight="260"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize">
+    <DockPanel Style="{StaticResource Th.DialogRootDockPanel}">
+        <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource Th.DialogBottomActionsPanel}">
+            <Button IsDefault="True"
+                    Style="{StaticResource Th.DialogBottomPrimaryActionButton}"
+                    Click="OkButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE73E;" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0" VerticalAlignment="Center" FontSize="14" />
+                    <TextBlock Text="OK" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+            <Button IsCancel="True"
+                    Style="{StaticResource Th.DialogBottomActionButton}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE711;" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0" VerticalAlignment="Center" FontSize="14" />
+                    <TextBlock Text="Cancel" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                <TextBlock Text="&#xE716;" FontFamily="Segoe MDL2 Assets" FontSize="28" Foreground="{StaticResource Th.AccentBrush}" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="User Accounts" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource Th.TextBrush}" />
+                    <TextBlock Text="Manage user credentials and access" Foreground="{StaticResource Th.TextSecBrush}" FontSize="12" Margin="0,2,0,0" />
+                </StackPanel>
+            </StackPanel>
+            <Border BorderBrush="{StaticResource Th.BorderBrush}" BorderThickness="0,0,0,1" />
+        </StackPanel>
+
+        <DataGrid x:Name="UsersGrid"
+                  ItemsSource="{Binding Users}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="True"
+                  CanUserDeleteRows="True"
+                  MinRowHeight="30"
+                  RowHeaderWidth="0"
+                  BorderThickness="1"
+                  BorderBrush="{StaticResource Th.BorderBrush}"
+                  Background="{StaticResource Th.SurfaceBrush}"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="Horizontal">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User Name"
+                                    Width="1.5*"
+                                    Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Password"
+                                    Width="*"
+                                    Binding="{Binding Pass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>

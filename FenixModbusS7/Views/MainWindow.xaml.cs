@@ -86,7 +86,7 @@ namespace Fenix
             {
                 SaveLayout();
 
-                lbPathProject.Content = string.Empty;
+                lbPathProject.Text = string.Empty;
                 Pr = null;
             }
             catch (Exception Ex)
