@@ -1,18 +1,19 @@
 using Microsoft.Win32;
 using ProjectDataLib;
 using System.IO;
+using System.Runtime.Loader;
 
 namespace FenixServer.Web
 {
     /// <summary>
     /// Standalone console entry point.
-    /// Usage: FenixServer.Web.exe [project.pse] [--port 8080]
+    /// Usage: FenixServer.Web.exe [project.pse]
     /// </summary>
     internal static class EntryPoint
     {
         public static async Task Main(string[] args)
         {
-            ParseArgs(args, out var projectPath, out var port);
+            ParseArgs(args, out var projectPath);
 
             Project? project = null;
             var container = new ProjectContainer();
@@ -53,71 +54,119 @@ namespace FenixServer.Web
             if (project == null)
             {
                 Console.WriteLine("No project file specified. Running without a project.");
-                Console.WriteLine($"Usage: FenixServer.Web.exe <project.pse> [--port {port}]");
-                Console.WriteLine($"Starting on port {port} with empty project...");
+                Console.WriteLine("Usage: FenixServer.Web.exe <project.pse>");
+                Console.WriteLine("Starting with empty project...");
                 project = new Project();
             }
 
-            AttachDriverEvents(project, container);
-            StartAllDrivers(project, container);
-
             using var cts = new CancellationTokenSource();
+            var shutdownStarted = 0;
+
+            void EnsureShutdown(string reason)
+            {
+                if (Interlocked.Exchange(ref shutdownStarted, 1) != 0)
+                    return;
+
+                try
+                {
+                    Console.WriteLine($"Stopping... ({reason})");
+                }
+                catch
+                {
+                }
+
+                try
+                {
+                    StopAllDrivers(project);
+                }
+                catch
+                {
+                }
+
+                try
+                {
+                    Program.StopAsync().GetAwaiter().GetResult();
+                }
+                catch
+                {
+                }
+            }
+
             Console.CancelKeyPress += (_, e) =>
             {
                 e.Cancel = true;
                 cts.Cancel();
+                EnsureShutdown("Ctrl+C");
             };
+
+            AppDomain.CurrentDomain.ProcessExit += (_, __) => EnsureShutdown("ProcessExit");
+            AssemblyLoadContext.Default.Unloading += _ => EnsureShutdown("Unloading");
 
             try
             {
-                Program.ConfigureWebHost(project, container, port);
-                Console.WriteLine($"FenixServer.Web starting on http://localhost:{port} ...");
+                int activePort;
+                string startupMessage;
+
+                var configuredPort = GetPortFromProjectPrefix(project);
+                Program.ConfigureWebHost(project, container, configuredPort);
+                startupMessage = $"FenixServer.Web starting from project setup on http://localhost:{configuredPort} ...";
+                activePort = configuredPort;
+
+                PrintStartupBanner();
+                PrintStartupDocumentation(project, activePort);
+                Console.WriteLine(startupMessage);
+                Console.WriteLine($"Project path: {project.path}");
+                Console.WriteLine();
+
+                AttachDriverEvents(project, container);
+                StartAllDrivers(project, container);
+
                 await Program.StartAsync(cts.Token);
                 Console.WriteLine("Server running. Press Ctrl+C to stop.");
             }
             catch (Exception ex) when (!cts.IsCancellationRequested)
             {
                 Console.Error.WriteLine($"[SERVER][ERROR] Failed to start: {ex.Message}");
-                StopAllDrivers(project);
-                await Program.StopAsync();
+                EnsureShutdown("StartError");
                 Environment.Exit(3);
             }
 
             try { await Task.Delay(Timeout.Infinite, cts.Token); }
             catch (TaskCanceledException) { }
 
-            Console.WriteLine("Stopping...");
-            StopAllDrivers(project);
-            await Program.StopAsync();
+            EnsureShutdown("Cancellation");
             Environment.Exit(0);
         }
 
-        private static void ParseArgs(string[] args, out string? projectPath, out int port)
+        private static void PrintStartupBanner()
         {
-            port = 8080;
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("   F E N I X   S E R V E R   W E B");
+            Console.WriteLine("========================================");
+            Console.WriteLine();
+        }
+
+        private static void PrintStartupDocumentation(Project project, int port)
+        {
+            Console.WriteLine("Run parameters:");
+            Console.WriteLine("- <project.pse>      Optional path to project file");
+            Console.WriteLine("- No project path:   Loads the last project from registry and starts it");
+            Console.WriteLine();
+            Console.WriteLine("Examples:");
+            Console.WriteLine("  FenixServer.Web.exe");
+            Console.WriteLine("  FenixServer.Web.exe demo.pse");
+            Console.WriteLine("  FenixServer.Web.exe .\\p\\demo.pse");
+            Console.WriteLine();
+        }
+
+        private static void ParseArgs(string[] args, out string? projectPath)
+        {
             projectPath = null;
 
             for (int i = 0; i < args.Length; i++)
             {
                 var arg = args[i];
-
-                if (string.Equals(arg, "--port", StringComparison.OrdinalIgnoreCase))
-                {
-                    if (i + 1 < args.Length && int.TryParse(args[i + 1], out var parsedPort))
-                        port = parsedPort;
-
-                    i++;
-                    continue;
-                }
-
-                if (arg.StartsWith("--port=", StringComparison.OrdinalIgnoreCase))
-                {
-                    var value = arg.Substring("--port=".Length);
-                    if (int.TryParse(value, out var parsedPort))
-                        port = parsedPort;
-
-                    continue;
-                }
 
                 if (arg.StartsWith("--", StringComparison.Ordinal))
                     continue;
@@ -125,6 +174,19 @@ namespace FenixServer.Web
                 if (string.IsNullOrWhiteSpace(projectPath))
                     projectPath = arg;
             }
+        }
+
+        private static int GetPortFromProjectPrefix(Project project)
+        {
+            var rawPrefix = project?.WebServer1?.Prefixes?.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p));
+            if (string.IsNullOrWhiteSpace(rawPrefix))
+                return 80;
+
+            var normalized = rawPrefix.Trim().Replace("+", "localhost").Replace("*", "localhost");
+            if (Uri.TryCreate(normalized, UriKind.Absolute, out var uri) && uri.Port > 0)
+                return uri.Port;
+
+            return 80;
         }
 
         private static string? GetLastProjectPathFromRegistry(ProjectContainer container)
@@ -212,6 +274,7 @@ namespace FenixServer.Web
                 var started = scriptDrv.activateCycle(new List<ITag>());
                 Console.WriteLine($"[DRIVER] [Scripts] started: {started}");
             }
+            Console.WriteLine();
         }
 
         private static void StopAllDrivers(Project project)

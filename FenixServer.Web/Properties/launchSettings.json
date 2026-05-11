@@ -3,8 +3,6 @@
     "FenixServer.Web": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:8080",
-      "commandLineArgs": "--port 8080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

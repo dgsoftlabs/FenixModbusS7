@@ -29,6 +29,17 @@ namespace FenixServer
                     DataContext = _mainViewModel
                 };
 
+                window.Closing += (_, _) =>
+                {
+                    try
+                    {
+                        _mainViewModel?.ShutdownAsync().GetAwaiter().GetResult();
+                    }
+                    catch
+                    {
+                    }
+                };
+
                 MainWindow = window;
                 window.Show();
 

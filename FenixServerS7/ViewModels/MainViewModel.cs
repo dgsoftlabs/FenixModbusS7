@@ -240,7 +240,46 @@ namespace FenixServer.ViewModels
 
         public async Task ShutdownAsync()
         {
-            await StopAsync();
+            try
+            {
+                await FenixServer.Web.WebHostExtensions.StopWebHostAsync();
+            }
+            catch
+            {
+            }
+
+            if (CurrentProject != null)
+            {
+                foreach (var connection in CurrentProject.connectionList)
+                {
+                    try
+                    {
+                        ((IDriverModel)connection).deactivateCycle();
+                    }
+                    catch
+                    {
+                    }
+                }
+
+                try
+                {
+                    ((IDriverModel)CurrentProject.ScriptEng).deactivateCycle();
+                }
+                catch
+                {
+                }
+
+                try
+                {
+                    ((IDriverModel)CurrentProject.InternalTagsDrv).deactivateCycle();
+                }
+                catch
+                {
+                }
+            }
+
+            IsRunning = false;
+            RefreshConnections();
         }
 
         public void AddEvent(AlarmEvent alarmEvent)
@@ -552,13 +591,16 @@ namespace FenixServer.ViewModels
 
             if (string.Equals(SelectedConnection.Kind, "Server", StringComparison.OrdinalIgnoreCase))
             {
-                var prefix = CurrentProject.WebServer1?.Prefixes?.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p));
+                var webServer = CurrentProject.WebServer1;
+                var prefix = webServer?.Prefixes?.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p));
                 if (string.IsNullOrWhiteSpace(prefix))
                 {
                     return;
                 }
 
                 Properties.Add(new PropertyRow { Name = "Address", Value = prefix });
+                Properties.Add(new PropertyRow { Name = "Authentication", Value = webServer.Auth.ToString() });
+                Properties.Add(new PropertyRow { Name = "Users", Value = (webServer.Users?.Count ?? 0).ToString() });
 
                 if (Uri.TryCreate(prefix, UriKind.Absolute, out var uri))
                 {
