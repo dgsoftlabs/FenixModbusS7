@@ -61,6 +61,11 @@ namespace Fenix
                         currentProject.Db.OnDeserializedXML();
                         projectContainer.addProject(currentProject);
 
+                        string projectDirectoryRoot = io.Path.GetDirectoryName(currentProject.path);
+                        string projectHttpDirectory = projectDirectoryRoot + projectContainer.HttpCatalog;
+                        if (!io.Directory.Exists(projectHttpDirectory))
+                            io.Directory.CreateDirectory(projectHttpDirectory);
+
                         string[] files1 = io.Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + projectContainer.TemplateCatalog);
                         foreach (string f in files1)
                         {
@@ -82,6 +87,27 @@ namespace Fenix
                             {
                                 if (firstTimer is not null && string.IsNullOrEmpty(scrFile.TimerName))
                                     scrFile.TimerName = firstTimer.Name;
+                            }
+                        }
+
+                        if (chAddWebTemplate.IsChecked == true)
+                        {
+                            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                            string sourceHttpDirectory = baseDirectory + projectContainer.HttpCatalog;
+                            string sourceIndexPath = io.Path.Combine(sourceHttpDirectory, "index.html");
+
+                            if (io.File.Exists(sourceIndexPath))
+                            {
+                                string targetIndexPath = io.Path.Combine(projectHttpDirectory, "index.html");
+                                io.File.Copy(sourceIndexPath, targetIndexPath, true);
+
+                                var webChildren = ((ITreeViewModel)currentProject.WebServer1).Children;
+                                if (webChildren != null)
+                                {
+                                    var existing = webChildren.OfType<CusFile>().Any(x => string.Equals(x.FullName, targetIndexPath, StringComparison.OrdinalIgnoreCase));
+                                    if (!existing)
+                                        webChildren.Add(new CusFile(new io.FileInfo(targetIndexPath)));
+                                }
                             }
                         }
 

@@ -4,7 +4,7 @@ namespace Fenix.ViewModels
 {
     public class MainWindowViewModel : FenixManagerStateViewModel
     {
-        public bool CheckAccessForNodes(object selectedItem, object selectedObject, ElementKind srcType, bool anyCommunication, bool currentPropertiesEnabled)
+        public bool CheckAccessForNodes(object selectedItem, object selectedObject, ElementKind srcType, bool anyCommunication, bool currentPropertiesEnabled, bool hasOpenProject)
         {
             bool propertiesEnabled = currentPropertiesEnabled;
 
@@ -99,6 +99,126 @@ namespace Fenix.ViewModels
                 mChart = true;
                 mCommView = true;
                 mEditor = false;
+
+                mDriversSt = true;
+                mStart = false;
+                mStop = false;
+                mStartAll = true;
+                mStopAll = true;
+
+                mTools = true;
+                mBlock = false;
+                mUnBlock = false;
+                mShowLoc = true;
+                mSimulate = false;
+                mDrivers = true;
+
+                mDatabase = true;
+                mDbShowFile = true;
+                mDbReset = true;
+                mShowDb = true;
+                mShowTrendDb = true;
+                mSaveCSV = true;
+
+                mHelp = true;
+                mAbout = true;
+                mUpdates = true;
+                mViewHelp = true;
+            }
+
+            if (selectedItem is WebServer)
+            {
+                mFile = true;
+                mNew = true;
+                mOpen = true;
+                mAdd = true;
+                mConnection = false;
+                mDevice = false;
+                mTag = false;
+                mIntTag = false;
+                mScriptFile = false;
+                mFolder = true;
+                mInFile = true;
+                mClosePr = true;
+                mSave = true;
+                mSaveAs = true;
+                mExit = true;
+
+                mEdit = false;
+                mCut = false;
+                mCopy = false;
+                mPaste = srcType == ElementKind.InFile;
+                mDelete = false;
+
+                mView = true;
+                mSolution = true;
+                mProperties = true;
+                mOutput = true;
+                mTable = false;
+                mChart = false;
+                mCommView = false;
+                mEditor = false;
+
+                mDriversSt = true;
+                mStart = false;
+                mStop = false;
+                mStartAll = true;
+                mStopAll = true;
+
+                mTools = true;
+                mBlock = false;
+                mUnBlock = false;
+                mShowLoc = true;
+                mSimulate = false;
+                mDrivers = true;
+
+                mDatabase = true;
+                mDbShowFile = true;
+                mDbReset = true;
+                mShowDb = true;
+                mShowTrendDb = true;
+                mSaveCSV = true;
+
+                mHelp = true;
+                mAbout = true;
+                mUpdates = true;
+                mViewHelp = true;
+            }
+
+            if (selectedItem is CusFile)
+            {
+                bool isFile = ((CusFile)selectedItem).IsFile;
+
+                mFile = true;
+                mNew = true;
+                mOpen = true;
+                mAdd = true;
+                mConnection = false;
+                mDevice = false;
+                mTag = false;
+                mIntTag = false;
+                mScriptFile = false;
+                mFolder = !isFile;
+                mInFile = !isFile;
+                mClosePr = true;
+                mSave = true;
+                mSaveAs = true;
+                mExit = true;
+
+                mEdit = false;
+                mCut = true;
+                mCopy = true;
+                mPaste = srcType == ElementKind.InFile;
+                mDelete = true;
+
+                mView = true;
+                mSolution = true;
+                mProperties = true;
+                mOutput = true;
+                mTable = false;
+                mChart = false;
+                mCommView = false;
+                mEditor = isFile;
 
                 mDriversSt = true;
                 mStart = false;
@@ -659,6 +779,9 @@ namespace Fenix.ViewModels
                 mUpdates = false;
                 mViewHelp = true;
             }
+
+            if (hasOpenProject)
+                mNew = false;
 
             return propertiesEnabled;
         }

@@ -139,7 +139,7 @@ namespace Fenix
                 TreeViewItem PrNode = FindTviFromObjectRecursive(tvMain.View, pr);
                 if (PrNode != null) PrNode.IsSelected = true;
 
-                lbPathProject.Content = Pr.path;
+                lbPathProject.Text = Pr.path;
                 Registry.SetValue(PrCon.RegUserRoot, PrCon.LastPathKey, Pr.path);
 
                 CheckAccessForNodes();

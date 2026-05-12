@@ -170,6 +170,14 @@ namespace Fenix
             }
         }
 
+        private void CollectionEditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is FrameworkElement element && element.DataContext is PropertyRow row)
+            {
+                row.EditCollection(Window.GetWindow(this));
+            }
+        }
+
         private void ScheduleAdjustColumns()
         {
             Dispatcher.BeginInvoke(new Action(AdjustColumns), DispatcherPriority.ContextIdle);
@@ -248,6 +256,10 @@ namespace Fenix
             private readonly bool _useClearableTextEditor;
             private bool _isEnabled;
 
+            private bool IsSupportedCollectionType =>
+                _property.PropertyType == typeof(List<CustomTimer>) ||
+                _property.PropertyType == typeof(List<UserClass>);
+
             public PropertyRow(object target, PropertyDescriptor property, bool enabled, string nameOverride = null)
             {
                 _target = target;
@@ -262,7 +274,7 @@ namespace Fenix
                 if (_valueType.IsEnum)
                     EnumValues = Enum.GetValues(_valueType).Cast<object>().ToList();
 
-                if (!_valueType.IsEnum && _valueType != typeof(bool) && _converter != null)
+                if (_valueType != typeof(bool) && _converter != null)
                 {
                     try
                     {
@@ -293,13 +305,13 @@ namespace Fenix
 
             public bool IsBoolEditorVisible => _valueType == typeof(bool);
 
-            public bool IsEnumEditorVisible => _valueType.IsEnum;
+            public bool IsEnumEditorVisible => _valueType.IsEnum && !IsStandardValuesEditorVisible;
 
             private bool IsColorType =>
                 _valueType == typeof(System.Drawing.Color) ||
                 _valueType.FullName == "System.Windows.Media.Color";
 
-            public bool IsCollectionEditorVisible => _property.PropertyType == typeof(List<CustomTimer>);
+            public bool IsCollectionEditorVisible => IsSupportedCollectionType;
 
             public string CollectionSummary
             {
@@ -359,13 +371,55 @@ namespace Fenix
 
             public object StandardValue
             {
-                get => _property.GetValue(_target);
+                get
+                {
+                    var currentValue = _property.GetValue(_target);
+
+                    if (currentValue != null && StandardValues != null && StandardValues.Count > 0)
+                    {
+                        var firstStandard = StandardValues.Cast<object>().FirstOrDefault();
+                        if (firstStandard is string && _converter != null)
+                        {
+                            try
+                            {
+                                return _converter.ConvertTo(_converterContext, CultureInfo.InvariantCulture, currentValue, typeof(string)) as string ?? currentValue.ToString();
+                            }
+                            catch
+                            {
+                            }
+                        }
+                    }
+
+                    return currentValue;
+                }
                 set
                 {
                     if (!IsEditable)
                         return;
 
-                    _property.SetValue(_target, value);
+                    object parsed = value;
+
+                    if (value != null && !_valueType.IsInstanceOfType(value))
+                    {
+                        if (_converter != null && _converter.CanConvertFrom(_converterContext, value.GetType()))
+                        {
+                            try
+                            {
+                                parsed = _converter.ConvertFrom(_converterContext, CultureInfo.InvariantCulture, value);
+                            }
+                            catch
+                            {
+                                if (_converter.CanConvertFrom(_converterContext, typeof(string)))
+                                    parsed = _converter.ConvertFrom(_converterContext, CultureInfo.InvariantCulture, value.ToString());
+                            }
+                        }
+                        else if (_converter != null && _converter.CanConvertFrom(_converterContext, typeof(string)))
+                        {
+                            parsed = _converter.ConvertFrom(_converterContext, CultureInfo.InvariantCulture, value.ToString());
+                        }
+                    }
+
+                    _property.SetValue(_target, parsed);
                     OnPropertyChanged(nameof(StandardValue));
                     OnPropertyChanged(nameof(ValueText));
                     OnPropertyChanged(nameof(ColorPreviewBrush));
@@ -449,6 +503,15 @@ namespace Fenix
                     if (value == null)
                         return string.Empty;
 
+                    if (_valueType == typeof(string[]))
+                    {
+                        var values = value as string[];
+                        if (values == null || values.Length == 0)
+                            return string.Empty;
+
+                        return string.Join("; ", values.Where(x => !string.IsNullOrWhiteSpace(x)));
+                    }
+
                     if (value is double d && double.IsNaN(d))
                         return string.Empty;
 
@@ -483,6 +546,16 @@ namespace Fenix
                         if (_valueType == typeof(string))
                         {
                             parsed = value;
+                        }
+                        else if (_valueType == typeof(string[]))
+                        {
+                            parsed = string.IsNullOrWhiteSpace(value)
+                                ? Array.Empty<string>()
+                                : value
+                                    .Split(new[] { ';', ',', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                                    .Select(x => x.Trim())
+                                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                                    .ToArray();
                         }
                         else if (string.IsNullOrWhiteSpace(value) && _valueType == typeof(double))
                         {
@@ -519,7 +592,26 @@ namespace Fenix
 
             public void EditCollection(Window owner)
             {
-                return;
+                if (!IsEditable)
+                    return;
+
+                if (_property.GetValue(_target) is not IList list)
+                    return;
+
+                if (_property.PropertyType == typeof(List<UserClass>))
+                {
+                    var dialog = new UsersEditorWindow(list.Cast<UserClass>())
+                    {
+                        Owner = owner
+                    };
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        dialog.ApplyTo(list);
+                        OnPropertyChanged(nameof(CollectionSummary));
+                        OnPropertyChanged(nameof(ValueText));
+                    }
+                }
             }
 
             public void UpdateEnabledState(bool enabled)

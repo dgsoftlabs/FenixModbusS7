@@ -222,10 +222,13 @@ namespace ProjectDataLib
                     return false;
 
                 var extension = Path.GetExtension(path);
-                if (!string.Equals(extension, ".pse", StringComparison.OrdinalIgnoreCase))
+                bool isModernFormat = string.Equals(extension, ".pse", StringComparison.OrdinalIgnoreCase);
+                bool isLegacyConvertibleFormat = string.Equals(extension, ".psx", StringComparison.OrdinalIgnoreCase);
+
+                if (!isModernFormat && !isLegacyConvertibleFormat)
                 {
                     throw new NotSupportedException(
-                        $"Unsupported project format '{extension}'. Only '.pse' is supported in .NET 10.");
+                        $"Unsupported project format '{extension}'. Supported open formats: '.pse' and legacy '.psx' (conversion on save).");
                 }
 
                 Project buff;
@@ -235,7 +238,11 @@ namespace ProjectDataLib
                     buff = (Project)xmlSer.Deserialize(fsream);
                 }
 
-                buff.path = path;
+                // Legacy .psx projects are opened in compatibility mode and mapped to modern .pse path for subsequent saves.
+                buff.path = isLegacyConvertibleFormat
+                    ? Path.ChangeExtension(path, ".pse")
+                    : path;
+
                 buff.PrCon = this;
 
                 buff.OnDeserializedXML();
@@ -432,6 +439,7 @@ namespace ProjectDataLib
                         ((ITreeViewModel)conn).Children.Clear();
 
                     ((ITreeViewModel)proj.ScriptEng).Children.Clear();
+                    ((ITreeViewModel)proj.WebServer1).Children.Clear();
 
                     ((ITreeViewModel)proj).Children.Clear();
 
@@ -650,6 +658,9 @@ namespace ProjectDataLib
                 if (proj == name)
                     return pr;
 
+                if (name == ServerGuid)
+                    return pr.WebServer1;
+
                 if (name == ScriptGuid)
                     return pr.ScriptEng;
 
@@ -695,6 +706,9 @@ namespace ProjectDataLib
 
                     if (pr.objId == name)
                         return pr;
+
+                    if (name == ServerGuid)
+                        return pr.WebServer1;
 
                     if (name == ScriptGuid)
                         return pr.ScriptEng;
@@ -1455,6 +1469,66 @@ namespace ProjectDataLib
         }
 
         #endregion ITag
+
+        #region InFile
+
+        public Boolean AddInFile(Guid projId, InFile file)
+        {
+            try
+            {
+                Project pr = getProject(projId);
+                ((ITreeViewModel)pr.WebServer1).Children.Add(file);
+                pr.FileList.Add(file);
+
+                if (addInFileEv != null)
+                    addInFileEv(pr, new ProjectEventArgs(file));
+
+                return true;
+            }
+            catch (Exception Ex)
+            {
+                ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+                return false;
+            }
+        }
+
+        public Boolean RemoveInFile(Guid projId, Guid file)
+        {
+            try
+            {
+                Project pr = getProject(projId);
+
+                ((ITreeViewModel)pr.WebServer1).Children.Remove(GetInFile(projId, file));
+
+                pr.FileList.RemoveAll(x => x.objId == file);
+
+                if (removeInFileEv != null)
+                    removeInFileEv(pr, new ProjectEventArgs(file));
+
+                return true;
+            }
+            catch (Exception Ex)
+            {
+                ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+                return false;
+            }
+        }
+
+        public InFile GetInFile(Guid projId, Guid file)
+        {
+            try
+            {
+                Project pr = getProject(projId);
+                return pr.FileList.Find(x => x.objId == file);
+            }
+            catch (Exception Ex)
+            {
+                ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+                return null;
+            }
+        }
+
+        #endregion InFile
 
         #region ScriptFile
 

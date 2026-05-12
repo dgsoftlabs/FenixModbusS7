@@ -11,162 +11,334 @@
         FontFamily="Segoe UI"
         FontSize="{StaticResource Th.FontMd}"
         Loaded="Window_Loaded"
-        Closed="MainWindow_Closed">
+        Closed="MainWindow_Closed" d:DesignHeight="600" d:DesignWidth="600">
 
     <Window.Resources>
 
         <ContextMenu x:Key="CtxProject">
-            <MenuItem Header="Add Connection" Click="ConnectionAdd_Click" IsEnabled="{Binding mConnection}" />
+            <MenuItem Header="Add Connection" Click="ConnectionAdd_Click" IsEnabled="{Binding mConnection}">
+                <MenuItem.Icon><TextBlock Text="&#xE167;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Table View"  Click="TableViewShow_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Table View (Read Only)"  Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Chart View"  Click="ChartViewShow_Click" IsEnabled="{Binding mChart }" />
-            <MenuItem Header="Communication View"  Click="CommViewShow_Click" IsEnabled="{Binding mCommView }" />
+            <MenuItem Header="Table View" Click="TableViewShow_Click" IsEnabled="{Binding mTable}">
+                <MenuItem.Icon><TextBlock Text="&#xE8A9;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Table View (Read Only)" Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable}">
+                <MenuItem.Icon><TextBlock Text="&#xE8D6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Chart View" Click="ChartViewShow_Click" IsEnabled="{Binding mChart}">
+                <MenuItem.Icon><TextBlock Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Communication View" Click="CommViewShow_Click" IsEnabled="{Binding mCommView}">
+                <MenuItem.Icon><TextBlock Text="&#xE704;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Start All" Click="AllDriverCommunicationStart_Click" IsEnabled="{Binding mStartAll }" />
-            <MenuItem Header="Stop All"  Click="AllDriverCommunicationStop_Click" IsEnabled="{Binding mStopAll }" />
+            <MenuItem Header="Start All" Click="AllDriverCommunicationStart_Click" IsEnabled="{Binding mStartAll}">
+                <MenuItem.Icon><TextBlock Text="&#xE102;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Stop All" Click="AllDriverCommunicationStop_Click" IsEnabled="{Binding mStopAll}">
+                <MenuItem.Icon><TextBlock Text="&#xE103;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc }" />
+            <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc}">
+                <MenuItem.Icon><TextBlock Text="&#xE81D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}">
+                <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxHttpServer">
-            <MenuItem Header="Folder"  Click="FolderAdd_Click" IsEnabled="{Binding mFolder}" />
+            <MenuItem Header="Folder" Click="FolderAdd_Click" IsEnabled="{Binding mFolder}">
+                <MenuItem.Icon><TextBlock Text="&#xE8B7;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Files" Click="FileAdd_Click" IsEnabled="{Binding mInFile}">
+                <MenuItem.Icon><TextBlock Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc }" />
+            <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc}">
+                <MenuItem.Icon><TextBlock Text="&#xE81D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}">
+                <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxInFile">
-            <MenuItem Header="Open"  Click="EditorShow_Click" IsEnabled="{Binding mEditor }" />
+            <MenuItem Header="Open" Click="EditorShow_Click" IsEnabled="{Binding mEditor}">
+                <MenuItem.Icon><TextBlock Text="&#xE8A7;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}">
+                <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxScripts">
-            <MenuItem Header="Add New Script" Click="ScriptFileAdd_Click" IsEnabled="{Binding mScriptFile}" />
-            <MenuItem Header="Add Existing Script" Click="ScriptFileExistingAdd_Click" IsEnabled="{Binding mScriptFile}" />
+            <MenuItem Header="Add New Script" Click="ScriptFileAdd_Click" IsEnabled="{Binding mScriptFile}">
+                <MenuItem.Icon><TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Add Existing Script" Click="ScriptFileExistingAdd_Click" IsEnabled="{Binding mScriptFile}">
+                <MenuItem.Icon><TextBlock Text="&#xE8B5;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc }" />
+            <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc}">
+                <MenuItem.Icon><TextBlock Text="&#xE81D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Start"  Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart }" />
-            <MenuItem Header="Stop"  Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop }" />
+            <MenuItem Header="Start" Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart}">
+                <MenuItem.Icon><TextBlock Text="&#xE102;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Stop" Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop}">
+                <MenuItem.Icon><TextBlock Text="&#xE103;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}">
+                <MenuItem.Icon><TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}">
+                <MenuItem.Icon><TextBlock Text="&#xE785;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}">
+                <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxScriptFile">
-
-            <MenuItem Header="Open"  Click="EditorShow_Click" IsEnabled="{Binding mEditor }" />
+            <MenuItem Header="Open" Click="EditorShow_Click" IsEnabled="{Binding mEditor}">
+                <MenuItem.Icon><TextBlock Text="&#xE8A7;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}">
+                <MenuItem.Icon><TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}">
+                <MenuItem.Icon><TextBlock Text="&#xE785;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}">
+                <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxInternalTags">
-            <MenuItem Header="Add Internal Tag" Click="IntTagAdd_Click" IsEnabled="{Binding mIntTag}" />
+            <MenuItem Header="Add Internal Tag" Click="IntTagAdd_Click" IsEnabled="{Binding mIntTag}">
+                <MenuItem.Icon><TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Start"  Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart }" />
-            <MenuItem Header="Stop"  Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop }" />
+            <MenuItem Header="Start" Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart}">
+                <MenuItem.Icon><TextBlock Text="&#xE102;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Stop" Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop}">
+                <MenuItem.Icon><TextBlock Text="&#xE103;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}">
+                <MenuItem.Icon><TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}">
+                <MenuItem.Icon><TextBlock Text="&#xE785;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxTimers">
-            <MenuItem Header="Add Timer" Click="TimerAdd_Click" />
+            <MenuItem Header="Add Timer" Click="TimerAdd_Click">
+                <MenuItem.Icon><TextBlock Text="&#xE916;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxTimer">
-            <MenuItem Header="Delete" Click="TimerDelete_Click" />
+            <MenuItem Header="Delete" Click="TimerDelete_Click">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxDatabse">
-            <MenuItem Header="Show File" IsEnabled="{Binding mDbShowFile}" Click="DatabaseExplorerShow_Click" />
-            <MenuItem Header="Show Table" IsEnabled="{Binding mShowDb}" Click="DatabseTableViewShow_Click" />
-            <MenuItem Header="Show Trend" IsEnabled="{Binding mShowTrendDb}" Click="DatabaseTrendViewShow_Click" />
+            <MenuItem Header="Show File" IsEnabled="{Binding mDbShowFile}" Click="DatabaseExplorerShow_Click">
+                <MenuItem.Icon><TextBlock Text="&#xE8A7;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Show Table" IsEnabled="{Binding mShowDb}" Click="DatabseTableViewShow_Click">
+                <MenuItem.Icon><TextBlock Text="&#xE8A9;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Show Trend" IsEnabled="{Binding mShowTrendDb}" Click="DatabaseTrendViewShow_Click">
+                <MenuItem.Icon><TextBlock Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Export All Data to CSV" IsEnabled="{Binding mSaveCSV}" Click="DatabeCSVExport_Click" />
+            <MenuItem Header="Export All Data to CSV" IsEnabled="{Binding mSaveCSV}" Click="DatabeCSVExport_Click">
+                <MenuItem.Icon><TextBlock Text="&#xEDE1;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Database Reset" IsEnabled="{Binding mDbReset}" Click="DatabaseReset_Click" />
+            <MenuItem Header="Database Reset" IsEnabled="{Binding mDbReset}" Click="DatabaseReset_Click">
+                <MenuItem.Icon><TextBlock Text="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxChartConfig">
-            <MenuItem Header="Add Axis" Click="ChartAddAxisY_Click" />
+            <MenuItem Header="Add Axis" Click="ChartAddAxisY_Click">
+                <MenuItem.Icon><TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxChartAxis">
-            <MenuItem Header="Remove Axis" Click="ChartRemoveAxisY_Click" />
+            <MenuItem Header="Remove Axis" Click="ChartRemoveAxisY_Click">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxIntTag">
-            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}">
+                <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxConnection">
-            <MenuItem Header="Add Device" Click="DeviceAdd_Click" IsEnabled="{Binding mDevice}" />
+            <MenuItem Header="Add Device" Click="DeviceAdd_Click" IsEnabled="{Binding mDevice}">
+                <MenuItem.Icon><TextBlock Text="&#xE7F8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Table View"  Click="TableViewShow_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Table View (Read Only)"  Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Chart View"  Click="ChartViewShow_Click" IsEnabled="{Binding mChart }" />
-            <MenuItem Header="Communication View"  Click="CommViewShow_Click" IsEnabled="{Binding mCommView }" />
+            <MenuItem Header="Table View" Click="TableViewShow_Click" IsEnabled="{Binding mTable}">
+                <MenuItem.Icon><TextBlock Text="&#xE8A9;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Table View (Read Only)" Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable}">
+                <MenuItem.Icon><TextBlock Text="&#xE8D6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Chart View" Click="ChartViewShow_Click" IsEnabled="{Binding mChart}">
+                <MenuItem.Icon><TextBlock Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Communication View" Click="CommViewShow_Click" IsEnabled="{Binding mCommView}">
+                <MenuItem.Icon><TextBlock Text="&#xE704;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Start"  Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart }" />
-            <MenuItem Header="Stop"  Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop }" />
+            <MenuItem Header="Start" Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart}">
+                <MenuItem.Icon><TextBlock Text="&#xE102;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Stop" Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop}">
+                <MenuItem.Icon><TextBlock Text="&#xE103;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}" />
-            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}" />
+            <MenuItem Header="Block" Click="DriverBlock_Click" IsEnabled="{Binding mBlock}">
+                <MenuItem.Icon><TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Unblock" Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock}">
+                <MenuItem.Icon><TextBlock Text="&#xE785;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}">
+                <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxDevice">
-            <MenuItem Header="Add Tag" Click="TagAdd_Click" IsEnabled="{Binding mTag}" />
+            <MenuItem Header="Add Tag" Click="TagAdd_Click" IsEnabled="{Binding mTag}">
+                <MenuItem.Icon><TextBlock Text="&#xEA37;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Table View"  Click="TableViewShow_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Table View (Read Only)"  Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable }" />
-            <MenuItem Header="Chart View"  Click="ChartViewShow_Click" IsEnabled="{Binding mChart }" />
-            <MenuItem Header="Communication View"  Click="CommViewShow_Click" IsEnabled="{Binding mCommView }" />
+            <MenuItem Header="Table View" Click="TableViewShow_Click" IsEnabled="{Binding mTable}">
+                <MenuItem.Icon><TextBlock Text="&#xE8A9;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Table View (Read Only)" Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable}">
+                <MenuItem.Icon><TextBlock Text="&#xE8D6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Chart View" Click="ChartViewShow_Click" IsEnabled="{Binding mChart}">
+                <MenuItem.Icon><TextBlock Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Communication View" Click="CommViewShow_Click" IsEnabled="{Binding mCommView}">
+                <MenuItem.Icon><TextBlock Text="&#xE704;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}">
+                <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
 
         <ContextMenu x:Key="CtxTag">
-            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}" />
-            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" />
-            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" />
-            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" />
+            <MenuItem Header="Cut" Click="ElementCut_Click" IsEnabled="{Binding mCut}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Click="ElementCopy_Click" IsEnabled="{Binding mCopy}">
+                <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Click="ElementPaste_Click" IsEnabled="{Binding mPaste}">
+                <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="ElementDelete_Click" IsEnabled="{Binding mDelete}">
+                <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
     </Window.Resources>
 
@@ -179,255 +351,256 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0">
+        <Menu Grid.Row="0" Margin="0,2,0,2">
             <MenuItem Header="_File" IsEnabled="{Binding mFile}">
                 <MenuItem Header="_New" Click="NewProject_Click" IsEnabled="{Binding mNew}" InputGestureText="Ctrl+N">
-                    <MenuItem.Icon><TextBlock Text="📄" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE7C3;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.AccentBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Open..." Click="OpenProject_Click" IsEnabled="{Binding mOpen}" InputGestureText="Ctrl+O">
-                    <MenuItem.Icon><TextBlock Text="📂" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE838;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="_Add" Name="Add0" IsEnabled="{Binding mAdd}">
-                    <MenuItem.Icon><TextBlock Text="➕" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                     <MenuItem Header="Connection" Click="ConnectionAdd_Click" IsEnabled="{Binding mConnection}">
-                        <MenuItem.Icon><TextBlock Text="🔗" FontSize="12" /></MenuItem.Icon>
+                        <MenuItem.Icon><TextBlock Text="&#xE167;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Device"  Click="DeviceAdd_Click" IsEnabled="{Binding mDevice}">
-                        <MenuItem.Icon><TextBlock Text="🖥️" FontSize="12" /></MenuItem.Icon>
+                        <MenuItem.Icon><TextBlock Text="&#xE7F8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Tag"  Click="TagAdd_Click" IsEnabled="{Binding mTag}">
-                        <MenuItem.Icon><TextBlock Text="🏷️" FontSize="12" /></MenuItem.Icon>
+                        <MenuItem.Icon><TextBlock Text="&#xE8CB;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Internal Tag"  Click="IntTagAdd_Click" IsEnabled="{Binding mIntTag}">
-                        <MenuItem.Icon><TextBlock Text="🔖" FontSize="12" /></MenuItem.Icon>
+                        <MenuItem.Icon><TextBlock Text="&#xE8A4;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Folder"  Click="FolderAdd_Click" IsEnabled="{Binding mFolder}">
                         <MenuItem.Icon>
-                            <TextBlock Text="📁" FontSize="12" />
+                            <TextBlock Text="&#xE8b7;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="_Close Project" Click="ProjectClose_Click" IsEnabled="{Binding mClosePr}">
-                    <MenuItem.Icon><TextBlock Text="❎" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE711;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="_Save"  Click="ProjectSave_Click" IsEnabled="{Binding mSave}" InputGestureText="Ctrl+S">
-                    <MenuItem.Icon><TextBlock Text="💾" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE105;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.AccentBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="E_xit" Click="MainWindowExit_Click" IsEnabled="{Binding mExit}" InputGestureText="Alt+F4">
-                    <MenuItem.Icon><TextBlock Text="🚪" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE7E8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Edit" IsEnabled="{Binding mEdit}">
                 <MenuItem Header="Cu_t"  Click="ElementCut_Click" IsEnabled="{Binding mCut}" InputGestureText="Ctrl+X">
-                    <MenuItem.Icon><TextBlock Text="✂️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE8C6;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Copy"  Click="ElementCopy_Click" IsEnabled="{Binding mCopy}" InputGestureText="Ctrl+C">
-                    <MenuItem.Icon><TextBlock Text="📋" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Paste"  Click="ElementPaste_Click" IsEnabled="{Binding mPaste}" InputGestureText="Ctrl+V">
-                    <MenuItem.Icon><TextBlock Text="📌" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE77F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Delete"  Click="ElementDelete_Click" IsEnabled="{Binding mDelete}" InputGestureText="Del">
-                    <MenuItem.Icon><TextBlock Text="🗑️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_View" IsEnabled="{Binding mView}">
                 <MenuItem Header="_Solution Explorer"  Click="SolutionShow_Click" IsEnabled="{Binding mSolution }">
-                    <MenuItem.Icon><TextBlock Text="🗂️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE8b7;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Properties Panel"  Click="PropertiesShow_Click" IsEnabled="{Binding mProperties}">
-                    <MenuItem.Icon><TextBlock Text="⚙️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Output"  Click="OutputShow_Click" IsEnabled="{Binding mOutput }">
-                    <MenuItem.Icon><TextBlock Text="📋" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="_Table View"  Click="TableViewShow_Click" IsEnabled="{Binding mTable }">
-                    <MenuItem.Icon><TextBlock Text="📊" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE1A3;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Table View (Read Only)"  Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable }">
-                    <MenuItem.Icon><TextBlock Text="📋" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE1A3;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Chart View"  Click="ChartViewShow_Click" IsEnabled="{Binding mChart }">
-                    <MenuItem.Icon><TextBlock Text="📈" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Co_mmunication View"  Click="CommViewShow_Click" IsEnabled="{Binding mCommView }">
-                    <MenuItem.Icon><TextBlock Text="📡" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE8BB;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Editor"  Click="EditorShow_Click" IsEnabled="{Binding mEditor }">
-                    <MenuItem.Icon><TextBlock Text="✏️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Drivers" IsEnabled="{Binding mDriversSt }">
                 <MenuItem Header="_Start"  Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart }" InputGestureText="F5">
-                    <MenuItem.Icon><TextBlock Text="▶️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.AccentBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="St_op"  Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop }" InputGestureText="Shift+F5">
-                    <MenuItem.Icon><TextBlock Text="⏹️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE71A;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Start _All" Click="AllDriverCommunicationStart_Click" IsEnabled="{Binding mStartAll }">
-                    <MenuItem.Icon><TextBlock Text="⏩" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE89D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.AccentBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Stop A_ll"  Click="AllDriverCommunicationStop_Click" IsEnabled="{Binding mStopAll }">
-                    <MenuItem.Icon><TextBlock Text="⏸️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE769;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Tools" IsEnabled="{Binding mTools }">
                 <MenuItem Header="_Block"  Click="DriverBlock_Click" IsEnabled="{Binding mBlock }">
-                    <MenuItem.Icon><TextBlock Text="🔒" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Unblock"   Click="DriverUnblock_Click" IsEnabled="{Binding mUnBlock }">
                     <MenuItem.Icon>
-                        <TextBlock Text="🔓" FontSize="12" />
+                        <TextBlock Text="&#xE785;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Show _Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc }">
-                    <MenuItem.Icon><TextBlock Text="📍" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE81D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Driver _Configuration"  Click="DriversConfigurationShow_Click" IsEnabled="{Binding mDrivers }">
-                    <MenuItem.Icon><TextBlock Text="🔧" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE7A7;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Data_base" IsEnabled="{Binding mDatabase}">
                 <MenuItem Header="Show _File" IsEnabled="{Binding mDbShowFile}" Click="DatabaseExplorerShow_Click">
-                    <MenuItem.Icon><TextBlock Text="📄" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE7C3;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Show _Table" IsEnabled="{Binding mShowDb}" Click="DatabseTableViewShow_Click">
-                    <MenuItem.Icon><TextBlock Text="🗄️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE1DC;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Show _Trend" IsEnabled="{Binding mShowTrendDb}" Click="DatabaseTrendViewShow_Click">
-                    <MenuItem.Icon><TextBlock Text="📉" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="_Export All Data to CSV" IsEnabled="{Binding mSaveCSV}" Click="DatabeCSVExport_Click">
-                    <MenuItem.Icon><TextBlock Text="📤" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE78C;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="_Reset Database" IsEnabled="{Binding mDbReset}" Click="DatabaseReset_Click">
-                    <MenuItem.Icon><TextBlock Text="♻️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE8F3;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Help" IsEnabled="{Binding mHelp }">
                 <MenuItem Header="Check for _Updates"  Click="UpdatesShow_Click" IsEnabled="{Binding mUpdates }">
-                    <MenuItem.Icon><TextBlock Text="🔄" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE895;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Documentation"  Click="HelpShow_Click" IsEnabled="{Binding mViewHelp }" InputGestureText="F1">
-                    <MenuItem.Icon><TextBlock Text="📖" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE8F1;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="_About FenixModbusS7" Click="AboutShow_Click" IsEnabled="{Binding mAbout}">
-                    <MenuItem.Icon><TextBlock Text="ℹ️" FontSize="12" /></MenuItem.Icon>
+                    <MenuItem.Icon><TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
         </Menu>
 
         <ToolBar Grid.Row="1"
                  Background="{StaticResource Th.SurfaceBrush}"
-                 Foreground="{StaticResource Th.TextBrush}">
-            <Button Click="NewProject_Click" IsEnabled="{Binding mNew}" ToolTip="New Project (Ctrl+N)">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="📄" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="New" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+                 Foreground="{StaticResource Th.TextBrush}"
+                 Padding="4">
+            <Button Click="NewProject_Click" IsEnabled="{Binding mNew}" ToolTip="New Project (Ctrl+N)" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE7C3;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.AccentBrush}"/>
+                    <TextBlock Text="New" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="OpenProject_Click" IsEnabled="{Binding mOpen}" ToolTip="Open Project (Ctrl+O)">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="📂" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Open" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Button Click="OpenProject_Click" IsEnabled="{Binding mOpen}" ToolTip="Open Project (Ctrl+O)" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE838;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="Open" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="ProjectSave_Click" IsEnabled="{Binding mSave}" ToolTip="Save Project (Ctrl+S)">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="💾" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Save" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Button Click="ProjectSave_Click" IsEnabled="{Binding mSave}" ToolTip="Save Project (Ctrl+S)" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE105;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.AccentBrush}"/>
+                    <TextBlock Text="Save" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Separator />
-            <Button Click="TableViewShow_Click" IsEnabled="{Binding mTable}" ToolTip="Table View">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="📊" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Table" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Separator Margin="8,4" />
+            <Button Click="TableViewShow_Click" IsEnabled="{Binding mTable}" ToolTip="Table View" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE1A3;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="Table" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable}" ToolTip="Table View (Read Only)">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="📋" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Table RO" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Button Click="TableViewReadOnlyShow_Click" IsEnabled="{Binding mTable}" ToolTip="Table View (Read Only)" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE1A3;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="Table RO" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="ChartViewShow_Click" IsEnabled="{Binding mChart}" ToolTip="Chart View">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="📈" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Chart" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Button Click="ChartViewShow_Click" IsEnabled="{Binding mChart}" ToolTip="Chart View" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="Chart" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="CommViewShow_Click" IsEnabled="{Binding mCommView}" ToolTip="Communication View">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="📡" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Comm" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Button Click="CommViewShow_Click" IsEnabled="{Binding mCommView}" ToolTip="Communication View" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE8BB;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="Comm" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="EditorShow_Click" IsEnabled="{Binding mEditor}" ToolTip="Script Editor">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="✏️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Editor" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Button Click="EditorShow_Click" IsEnabled="{Binding mEditor}" ToolTip="Script Editor" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE70F;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="Editor" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Separator />
-            <Button Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart}" ToolTip="Start Selected Driver (F5)">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="▶️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Start" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Separator Margin="8,4" />
+            <Button Click="DriverCommunicationStart_Click" IsEnabled="{Binding mStart}" ToolTip="Start Selected Driver (F5)" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.AccentBrush}"/>
+                    <TextBlock Text="Start" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop}" ToolTip="Stop Selected Driver (Shift+F5)">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="⏹️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Stop" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Button Click="DriverCommnicationStop_Click" IsEnabled="{Binding mStop}" ToolTip="Stop Selected Driver (Shift+F5)" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE71A;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="Stop" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Separator />
-            <Button Click="AllDriverCommunicationStart_Click" IsEnabled="{Binding mStartAll}" ToolTip="Start All Drivers">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="⏩" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Start All" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Separator Margin="8,4" />
+            <Button Click="AllDriverCommunicationStart_Click" IsEnabled="{Binding mStartAll}" ToolTip="Start All Drivers" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE89D;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.AccentBrush}"/>
+                    <TextBlock Text="Start All" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="AllDriverCommunicationStop_Click" IsEnabled="{Binding mStopAll}" ToolTip="Stop All Drivers">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="⏸️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Stop All" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Button Click="AllDriverCommunicationStop_Click" IsEnabled="{Binding mStopAll}" ToolTip="Stop All Drivers" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE769;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="Stop All" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Separator />
-            <Button Click="HelpShow_Click" IsEnabled="{Binding mViewHelp}" ToolTip="Documentation (F1)">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="📖" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="Docs" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Separator Margin="8,4" />
+            <Button Click="HelpShow_Click" IsEnabled="{Binding mViewHelp}" ToolTip="Documentation (F1)" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE8F1;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="Docs" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="AboutShow_Click" IsEnabled="{Binding mAbout}" ToolTip="About FenixModbusS7">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="2,1">
-                    <TextBlock Text="ℹ️" FontSize="{StaticResource Th.FontLg}" HorizontalAlignment="Center" />
-                    <TextBlock Text="About" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}" />
+            <Button Click="AboutShow_Click" IsEnabled="{Binding mAbout}" ToolTip="About FenixModbusS7" Margin="2,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
+                    <TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
+                    <TextBlock Text="About" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
         </ToolBar>
 
-        <ad:DockingManager x:Name="dockManager" Grid.Row="2" AllowMixedOrientation="True" Background="{StaticResource Th.Surface2Brush}">
+        <ad:DockingManager x:Name="dockManager" Grid.Row="2" AllowMixedOrientation="True" Margin="0,2,0,0" Background="{StaticResource Th.Surface2Brush}">
             <ad:DockingManager.Resources>
             </ad:DockingManager.Resources>
             <adl:LayoutRoot>
@@ -451,13 +624,19 @@
             </adl:LayoutRoot>
         </ad:DockingManager>
 
-        <StatusBar Grid.Row="3" Background="{StaticResource Th.Surface2Brush}" Foreground="{StaticResource Th.TextBrush}">
-            <StatusBarItem Name="lbPathProject" FontWeight="Bold" FontSize="{StaticResource Th.FontMd}">
-                -
+        <StatusBar Grid.Row="3" Background="{StaticResource Th.Surface2Brush}" Foreground="{StaticResource Th.TextSecBrush}" Padding="4,2">
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal" Margin="4,0">
+                    <TextBlock Text="&#xE81E;" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                    <TextBlock Name="lbPathProject" FontWeight="Medium" FontSize="{StaticResource Th.FontSm}" Text="Ready" VerticalAlignment="Center"/>
+                </StackPanel>
             </StatusBarItem>
-            <Separator />
-            <StatusBarItem Name="lbInfo" FontSize="{StaticResource Th.FontMd}">
-                -
+            <Separator Margin="8,0" Background="{StaticResource Th.BorderBrush}" />
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal" Margin="4,0">
+                    <TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                    <TextBlock Name="lbInfo" FontSize="{StaticResource Th.FontSm}" Text="No specific info" VerticalAlignment="Center"/>
+                </StackPanel>
             </StatusBarItem>
         </StatusBar>
     </Grid>

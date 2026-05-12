@@ -494,6 +494,29 @@ namespace ProjectDataLib.Test.Models
         {
             // Arrange
             var container = new ProjectContainer();
+            string tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".psf");
+            File.WriteAllText(tempPath, "<Project></Project>");
+
+            try
+            {
+                // Act
+                var result = container.openProjects(tempPath);
+
+                // Assert
+                Assert.False(result);
+            }
+            finally
+            {
+                if (File.Exists(tempPath))
+                    File.Delete(tempPath);
+            }
+        }
+
+        [Fact]
+        public void OpenProjects_WithLegacyPsxWithoutProjectPayload_ReturnsFalse()
+        {
+            // Arrange
+            var container = new ProjectContainer();
             string tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".psx");
             File.WriteAllText(tempPath, "<Project></Project>");
 
@@ -503,6 +526,7 @@ namespace ProjectDataLib.Test.Models
                 var result = container.openProjects(tempPath);
 
                 // Assert
+                // .psx is accepted as legacy input format; malformed payload should still fail safely.
                 Assert.False(result);
             }
             finally
