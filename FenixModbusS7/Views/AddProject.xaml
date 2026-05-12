@@ -28,6 +28,8 @@
 
             <TextBlock Text="Description" Style="{StaticResource Th.DialogSectionTitle}" />
             <TextBox Text="{Binding describe}" />
+
+            <CheckBox x:Name="chAddWebTemplate" Content="Add Web Template" Margin="0,12,0,0" IsChecked="True" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Style="{StaticResource Th.DialogBottomActionsPanel}">

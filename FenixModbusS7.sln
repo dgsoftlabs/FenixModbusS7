@@ -33,6 +33,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixServerS7", "FenixServe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixServer.Web", "FenixServer.Web\FenixServer.Web.csproj", "{C1CAEF8E-C8ED-136F-6C17-B6B43287488B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{43AEA7C2-3CFC-4720-BB58-020B82FE798C}"
+	ProjectSection(SolutionItems) = preProject
+		Http\index.html = Http\index.html
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|Any CPU = All|Any CPU
