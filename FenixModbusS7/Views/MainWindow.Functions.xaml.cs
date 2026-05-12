@@ -21,7 +21,8 @@ namespace Fenix
                     SelObj,
                     PrCon.SrcType,
                     PrCon.anyCommunication(),
-                    propManag.Enabled);
+                    propManag.Enabled,
+                    PrCon.projectList.Count > 0);
             }
             catch (Exception Ex)
             {

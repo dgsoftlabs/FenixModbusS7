@@ -4,7 +4,7 @@ namespace Fenix.ViewModels
 {
     public class MainWindowViewModel : FenixManagerStateViewModel
     {
-        public bool CheckAccessForNodes(object selectedItem, object selectedObject, ElementKind srcType, bool anyCommunication, bool currentPropertiesEnabled)
+        public bool CheckAccessForNodes(object selectedItem, object selectedObject, ElementKind srcType, bool anyCommunication, bool currentPropertiesEnabled, bool hasOpenProject)
         {
             bool propertiesEnabled = currentPropertiesEnabled;
 
@@ -779,6 +779,9 @@ namespace Fenix.ViewModels
                 mUpdates = false;
                 mViewHelp = true;
             }
+
+            if (hasOpenProject)
+                mNew = false;
 
             return propertiesEnabled;
         }
