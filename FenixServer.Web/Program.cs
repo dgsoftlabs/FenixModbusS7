@@ -81,11 +81,11 @@ namespace FenixServer.Web
                 });
         }
 
-        private static void ConfigureAuthentication(WebApplication app, Project project)
+        private static void ConfigureAuthentication(WebApplication app, Project? project)
         {
             var auth = project?.WebServer1?.Auth ?? AuthenticationSchemes.Anonymous;
             var isBasicEnabled = (auth & AuthenticationSchemes.Basic) == AuthenticationSchemes.Basic;
-            if (!isBasicEnabled)
+            if (!isBasicEnabled || project is null)
             {
                 return;
             }
