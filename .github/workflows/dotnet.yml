@@ -2,9 +2,7 @@
 
 on:
   push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
 
 jobs:
   build:
@@ -32,25 +30,13 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore FenixModbusS7.sln
 
-      - name: Publish FenixModbusS7
-        run: dotnet publish FenixModbusS7\FenixModbusS7.csproj -c Release -p:PublishProfile=Properties\PublishProfiles\FolderProfile.pubxml
+      - name: Build FenixModbusS7
+        run: dotnet build FenixModbusS7\FenixModbusS7.csproj -c Release
 
-      - name: Build FenixServer.Web
-        run: msbuild FenixServer.Web\FenixServer.Web.csproj /p:Configuration=Release /p:Platform="Any CPU"
-
-      - name: Publish FenixServer.Web
-        run: dotnet publish FenixServer.Web\FenixServer.Web.csproj -c Release -p:PublishProfile=Properties\PublishProfiles\FolderProfile.pubxml
-
-      - name: Build FenixServerS7
-        run: msbuild FenixServerS7\FenixServerS7.csproj /p:Configuration=Release /p:Platform=x86
-
-      - name: Publish FenixServerS7
-        run: dotnet publish FenixServerS7\FenixServerS7.csproj -c Release -p:Platform=x86 -p:PublishProfile=Properties\PublishProfiles\FolderProfile.pubxml
-
-      - name: Build Advanced Installer setup
-        run: msbuild FenixModbusS7Setup\FenixModbusS7Setup.aiproj /p:Configuration=Release /p:BuildProjectReferences=false
+        # Only when to Master
 
       - name: Read version
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         id: version
         shell: pwsh
         run: |
@@ -58,6 +44,7 @@ jobs:
           echo "value=$($xml.Fenix.version)" >> $env:GITHUB_OUTPUT
 
       - name: Upload installer artifact
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: FenixModbusS7Setup-v${{ steps.version.outputs.value }}
