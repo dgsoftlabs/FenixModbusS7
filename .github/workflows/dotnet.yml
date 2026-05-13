@@ -28,6 +28,9 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore FenixModbusS7.sln
 
+      - name: Run tests
+        run: dotnet test ProjectDataLib.Test\ProjectDataLib.Test.csproj -c Release --verbosity normal
+
       - name: Publish FenixModbusS7
         run: dotnet publish FenixModbusS7\FenixModbusS7.csproj -c Release /p:PublishProfile=FolderProfile
 
