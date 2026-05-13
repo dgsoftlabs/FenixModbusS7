@@ -30,8 +30,8 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore FenixModbusS7.sln
 
-      - name: Build FenixModbusS7
-        run: dotnet build FenixModbusS7\FenixModbusS7.csproj -c Release
+      - name: Publish FenixServerS7
+        run: dotnet publish FenixServerS7\FenixServerS7.csproj -c Release /p:PublishProfile=FolderProfile
 
       - name: Build installer
         run: msbuild FenixModbusS7Setup\FenixModbusS7Setup.aiproj /t:Build /p:Configuration=DefaultBuild
