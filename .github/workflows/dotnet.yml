@@ -46,7 +46,7 @@ jobs:
         run: dotnet publish ${{ github.workspace }}\FenixServerS7\FenixServerS7.csproj -c Release -p:Platform=x86 /p:PublishProfile=Properties\PublishProfiles\FolderProfile.pubxml
 
       - name: Build app for release
-        run: msbuild ${{ github.workspace }}\FenixModbusS7.sln -p:Configuration=Release -p:Platform="Mixed Platforms"
+        run: msbuild ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup.aiproj -p:Configuration=Release
 
       - name: Get software version from XML
         id: get_version
