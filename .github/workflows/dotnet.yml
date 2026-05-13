@@ -18,23 +18,35 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
-
       - name: Setup Advanced Installer
         uses: caphyon/advinst-github-action@main
         with:
           advinst-version: '23.6'
+          advinst-enable-automation: 'true'
           # advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
 
       - name: Restore NuGet packages
         run: nuget restore FenixModbusS7.sln
 
+      - name: Publish FenixModbusS7
+        run: dotnet publish FenixModbusS7\FenixModbusS7.csproj -c Release /p:PublishProfile=FolderProfile
+
       - name: Publish FenixServerS7
         run: dotnet publish FenixServerS7\FenixServerS7.csproj -c Release /p:PublishProfile=FolderProfile
 
+      - name: Publish FenixServer.Web
+        run: dotnet publish FenixServer.Web\FenixServer.Web.csproj -c Release /p:PublishProfile=FolderProfile
+
       - name: Build installer
-        run: msbuild FenixModbusS7Setup\FenixModbusS7Setup.aiproj /t:Build /p:Configuration=DefaultBuild
+        uses: caphyon/advinst-github-action@main
+        with:
+          advinst-version: '23.6'
+          advinst-enable-automation: 'true'
+          # advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
+          aip-path: ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup.aip
+          aip-build-name: DefaultBuild
+          aip-package-name: FenixModbusS7Setup.msi
+          aip-output-dir: ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles
 
         # Only when to Master
 
