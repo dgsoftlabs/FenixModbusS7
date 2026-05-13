@@ -40,13 +40,13 @@ jobs:
         run: dotnet publish ${{ github.workspace }}\FenixModbusS7\FenixModbusS7.csproj -c Release /p:PublishProfile=Properties\PublishProfiles\FolderProfile.pubxml
 
       - name: Build FenixServer.Web
-        run: dotnet build ${{ github.workspace }}\FenixServer.Web\FenixServer.Web.csproj -c Release
+        run: msbuild ${{ github.workspace }}\FenixServer.Web\FenixServer.Web.csproj -p:Configuration=Release -p:Platform="Any CPU"
 
       - name: Publish FenixServer.Web
         run: dotnet publish ${{ github.workspace }}\FenixServer.Web\FenixServer.Web.csproj -c Release /p:PublishProfile=Properties\PublishProfiles\FolderProfile.pubxml
 
       - name: Build FenixServerS7
-        run: dotnet build ${{ github.workspace }}\FenixServerS7\FenixServerS7.csproj -c Release -p:Platform=x86
+        run: msbuild ${{ github.workspace }}\FenixServerS7\FenixServerS7.csproj -p:Configuration=Release -p:Platform=x86
 
       - name: Publish FenixServerS7
         run: dotnet publish ${{ github.workspace }}\FenixServerS7\FenixServerS7.csproj -c Release -p:Platform=x86 /p:PublishProfile=Properties\PublishProfiles\FolderProfile.pubxml
