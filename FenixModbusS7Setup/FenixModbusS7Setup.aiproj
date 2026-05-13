@@ -27,7 +27,13 @@
       <Name>FenixModbusS7</Name>
       <Project>{82c72fc5-fed5-c6e9-30f8-8b99a363a883}</Project>
       <Private>True</Private>
-      <OutputsToImport>PublishOutput#FolderProfile#bin\Release\net10.0-windows\publish\###FileSystem##win-x64#true###</OutputsToImport>
+      <OutputsToImport>PublishOutput#FolderProfile#bin\Release\net10.0-windows\publish\###FileSystem######</OutputsToImport>
+    </ProjectReference>
+    <ProjectReference Include="..\FenixServer.Web\FenixServer.Web.csproj">
+      <Name>FenixServer.Web</Name>
+      <Project>{c1caef8e-c8ed-136f-6c17-b6b43287488b}</Project>
+      <Private>True</Private>
+      <OutputsToImport>PublishOutput#FolderProfile#bin\Release\net10.0-windows\publish\###FileSystem######</OutputsToImport>
     </ProjectReference>
     <ProjectReference Include="..\FenixServerS7\FenixServerS7.csproj">
       <Name>FenixServerS7</Name>

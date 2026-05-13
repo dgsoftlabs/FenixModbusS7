@@ -1,19 +1,13 @@
-﻿name: Build & Release
+﻿name: Build and Release
 
 on:
   push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
-
-env:
-  CONFIGURATION: Release
 
 jobs:
   build:
-    name: Build installer
+    name: Build and package
     runs-on: windows-2022
-    if: github.ref == 'refs/heads/master'
 
     steps:
       - name: Checkout
@@ -22,54 +16,62 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
-
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+          dotnet-version: 10.0.x
 
       - name: Setup Advanced Installer
         uses: caphyon/advinst-github-action@main
         with:
           advinst-version: '23.6'
+          advinst-enable-automation: 'true'
           # advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
 
-      - name: Restore packages
+      - name: Restore NuGet packages
         run: dotnet restore FenixModbusS7.sln
 
-      - name: Build & publish FenixModbusS7
-        run: dotnet publish FenixModbusS7/FenixModbusS7.csproj -c ${{ env.CONFIGURATION }} -p:PublishProfile=Properties/PublishProfiles/FolderProfile.pubxml --no-restore
+      - name: Run tests
+        run: dotnet test ProjectDataLib.Test\ProjectDataLib.Test.csproj -c Release --verbosity normal
 
-      - name: Build FenixServer.Web
-        run: msbuild FenixServer.Web/FenixServer.Web.csproj -p:Configuration=${{ env.CONFIGURATION }} -p:Platform="Any CPU" -m
-
-      - name: Publish FenixServer.Web
-        run: dotnet publish FenixServer.Web/FenixServer.Web.csproj -c ${{ env.CONFIGURATION }} -p:PublishProfile=Properties/PublishProfiles/FolderProfile.pubxml --no-restore
-
-      - name: Build FenixServerS7
-        run: msbuild FenixServerS7/FenixServerS7.csproj -p:Configuration=${{ env.CONFIGURATION }} -p:Platform=x86 -m
+      - name: Publish FenixModbusS7
+        run: dotnet publish FenixModbusS7\FenixModbusS7.csproj -c Release /p:PublishProfile=FolderProfile
 
       - name: Publish FenixServerS7
-        run: dotnet publish FenixServerS7/FenixServerS7.csproj -c ${{ env.CONFIGURATION }} -p:Platform=x86 -p:PublishProfile=Properties/PublishProfiles/FolderProfile.pubxml --no-restore
+        run: dotnet publish FenixServerS7\FenixServerS7.csproj -c Release /p:PublishProfile=FolderProfile
 
-      - name: Build MSI installer
-        run: msbuild FenixModbusS7Setup/FenixModbusS7Setup.aiproj -p:Configuration=${{ env.CONFIGURATION }} -p:BuildProjectReferences=false -m
+      - name: Publish FenixServer.Web
+        run: dotnet publish FenixServer.Web\FenixServer.Web.csproj -c Release /p:PublishProfile=FolderProfile
+
+      - name: Build installer
+        uses: caphyon/advinst-github-action@main
+        with:
+          advinst-version: '23.6'
+          advinst-enable-automation: 'true'
+          # advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
+          aip-path: ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup.aip
+          aip-build-name: DefaultBuild
+          aip-package-name: FenixModbusS7Setup.msi
+          aip-output-dir: ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles
+
+        # Only when to Master
 
       - name: Read version
         id: version
+        shell: pwsh
         run: |
           [xml]$xml = Get-Content version.xml
           echo "value=$($xml.Fenix.version)" >> $env:GITHUB_OUTPUT
 
-      - name: Upload MSI artifact
+      - name: Upload installer artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FenixModbusS7-installer-v${{ steps.version.outputs.value }}
-          path: FenixModbusS7Setup/FenixModbusS7Setup-SetupFiles/FenixModbusS7Setup.msi
+          name: FenixModbusS7Setup-v${{ steps.version.outputs.value }}
+          path: FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\*.msi
+          retention-days: 1
 
       - name: Create GitHub Release
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.value }}
           name: Release v${{ steps.version.outputs.value }}
-          files: FenixModbusS7Setup/FenixModbusS7Setup-SetupFiles/FenixModbusS7Setup.msi
+          files: FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\*.msi
           token: ${{ secrets.GITHUB_TOKEN }}
