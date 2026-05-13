@@ -36,7 +36,6 @@ jobs:
         # Only when to Master
 
       - name: Read version
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         id: version
         shell: pwsh
         run: |
@@ -44,11 +43,11 @@ jobs:
           echo "value=$($xml.Fenix.version)" >> $env:GITHUB_OUTPUT
 
       - name: Upload installer artifact
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: FenixModbusS7Setup-v${{ steps.version.outputs.value }}
           path: FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\FenixModbusS7Setup.msi
+          retention-days: 1
 
       - name: Create GitHub Release
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
