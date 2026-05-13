@@ -33,6 +33,9 @@ jobs:
       - name: Build FenixModbusS7
         run: dotnet build FenixModbusS7\FenixModbusS7.csproj -c Release
 
+      - name: Build installer
+        run: msbuild FenixModbusS7Setup\FenixModbusS7Setup.aiproj /t:Build /p:Configuration=DefaultBuild
+
         # Only when to Master
 
       - name: Read version
