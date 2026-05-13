@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: FenixModbusS7Setup-v${{ steps.version.outputs.value }}
-          path: FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\FenixModbusS7Setup.msi
+          path: FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\*.msi
           retention-days: 1
 
       - name: Create GitHub Release
@@ -55,5 +55,5 @@ jobs:
         with:
           tag_name: v${{ steps.version.outputs.value }}
           name: Release v${{ steps.version.outputs.value }}
-          files: FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\FenixModbusS7Setup.msi
+          files: FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\*.msi
           token: ${{ secrets.GITHUB_TOKEN }}
