@@ -1,5 +1,5 @@
 ﻿namespace ProjectDataLib
 {
     public enum BytesOrder
-    { BADC, ABCD, DCBA };
+    { BADC, ABCD, DCBA, CDAB };
 }
