@@ -58,6 +58,9 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
+    <HotReloadEnabled>false</HotReloadEnabled>
+  </PropertyGroup>
+  <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
