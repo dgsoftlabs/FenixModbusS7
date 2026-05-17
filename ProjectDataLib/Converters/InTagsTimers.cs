@@ -20,7 +20,7 @@ namespace ProjectDataLib
 
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
-            return false;
+            return true;
         }
 
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
