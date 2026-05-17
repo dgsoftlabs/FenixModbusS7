@@ -31,9 +31,7 @@
     <StartupObject>FenixServer.App</StartupObject>
     <IsTestProject>false</IsTestProject>
     <GenerateXunitEntryPoint>false</GenerateXunitEntryPoint>
-    <Version>4.1.0</Version>
-    <AssemblyVersion>4.1.0.0</AssemblyVersion>
-    <FileVersion>4.1.0.0</FileVersion>
+    <Version>4.1.1</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <UseVSHostingProcess>true</UseVSHostingProcess>
