@@ -4,6 +4,10 @@ using System.Globalization;
 
 namespace FenixServer.Web
 {
+    /// <summary>
+    /// Centralized endpoint mappings for the FenixServer web API.
+    /// Provides both modern REST endpoints (/api/) and legacy compatibility endpoints (/Tag/Value, etc.)
+    /// </summary>
     public static class EndpointMappings
     {
         internal const string PlainTextContentType = "text/plain";
@@ -27,6 +31,11 @@ namespace FenixServer.Web
         internal readonly record struct EndpointRequest(string ObjectKey, string NameKey, string ParamKey, string ValueKey);
         internal readonly record struct EventEntry(DateTimeOffset Tm, string Mess);
 
+        /// <summary>
+        /// Publishes an event to the event log queue
+        /// </summary>
+        /// <param name="message">The event message to publish</param>
+        /// <param name="timestamp">Optional timestamp for the event (defaults to current time)</param>
         public static void PublishEvent(string? message, DateTimeOffset? timestamp = null)
         {
             if (string.IsNullOrWhiteSpace(message))
@@ -36,6 +45,10 @@ namespace FenixServer.Web
             while (Events.Count > MaxEventsCount && Events.TryDequeue(out _)) { }
         }
 
+        /// <summary>
+        /// Maps the root endpoint to provide basic application information
+        /// </summary>
+        /// <param name="app">The WebApplication instance</param>
         public static void MapRootEndpoint(this WebApplication app)
         {
             app.MapGet("/", () => Results.Ok(new
@@ -46,6 +59,10 @@ namespace FenixServer.Web
             }));
         }
 
+        /// <summary>
+        /// Maps all Fenix endpoints including health, version, legacy and API endpoints
+        /// </summary>
+        /// <param name="app">The WebApplication instance</param>
         public static void MapFenixEndpoints(this WebApplication app)
         {
             app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
@@ -63,10 +80,22 @@ namespace FenixServer.Web
         internal static IResult ErrorResult()
             => Results.Text(ErrorResponse, PlainTextContentType);
 
+        /// <summary>
+        /// Retrieves the Project instance from service provider
+        /// </summary>
+        /// <param name="services">Service provider to retrieve project from</param>
+        /// <returns>Project instance</returns>
         internal static Project GetProjectFromServices(IServiceProvider services)
             => services.GetRequiredService<Project>()
                ?? throw new InvalidOperationException("Project not properly initialized");
 
+        /// <summary>
+        /// Attempts to find a tag by name in the project
+        /// </summary>
+        /// <param name="project">The project to search</param>
+        /// <param name="tagName">Name of the tag to find</param>
+        /// <param name="tag">Output parameter for found tag</param>
+        /// <returns>True if tag was found, false otherwise</returns>
         internal static bool TryFindTag(Project project, string tagName, out ITag? tag)
         {
             tag = null;
@@ -86,6 +115,11 @@ namespace FenixServer.Web
             return tag != null;
         }
 
+        /// <summary>
+        /// Safely gets formatted value from a tag
+        /// </summary>
+        /// <param name="tag">The tag to get value from</param>
+        /// <returns>Formatted value or empty string if tag is null</returns>
         internal static string SafeGetFormattedValue(ITag? tag)
         {
             if (tag == null) return string.Empty;
@@ -93,6 +127,11 @@ namespace FenixServer.Web
             catch { return tag.Value?.ToString() ?? string.Empty; }
         }
 
+        /// <summary>
+        /// Builds graph response data for all tags in the project
+        /// </summary>
+        /// <param name="project">The project containing tags</param>
+        /// <returns>Graph series data structure</returns>
         internal static object BuildGraphResponse(Project project)
         {
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
@@ -107,6 +146,10 @@ namespace FenixServer.Web
             }
         }
 
+        /// <summary>
+        /// Builds events response data from the event queue
+        /// </summary>
+        /// <returns>Array of event objects with timestamps and formatted dates</returns>
         internal static object[] BuildEventsResponse()
         {
             return Events
@@ -187,6 +230,11 @@ namespace FenixServer.Web
             }
         }
 
+        /// <summary>
+        /// Safely converts a value to bit point (0 or 1)
+        /// </summary>
+        /// <param name="value">Value to convert</param>
+        /// <returns>Double value of 0 or 1</returns>
         internal static double SafeGetBitPoint(object? value)
         {
             if (value is bool b) return b ? 1d : 0d;
@@ -198,6 +246,11 @@ namespace FenixServer.Web
             return SafeGetDouble(value) != 0d ? 1d : 0d;
         }
 
+        /// <summary>
+        /// Safely converts a value to double
+        /// </summary>
+        /// <param name="value">Value to convert</param>
+        /// <returns>Double value or 0 if conversion fails</returns>
         internal static double SafeGetDouble(object? value)
         {
             if (value == null) return 0d;
