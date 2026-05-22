@@ -38,6 +38,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{43AEA7C2-3
 		Http\index.html = Http\index.html
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{9EFAAFDC-7090-4FA0-9A2E-F96BA6721C1B}"
+	ProjectSection(SolutionItems) = preProject
+		docs\ScriptEngine-CallTree.md = docs\ScriptEngine-CallTree.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|Any CPU = All|Any CPU
