@@ -411,6 +411,9 @@ namespace Fenix
 
                 Pr = null;
 
+                lbPathProject.Text = "Ready";
+                lbInfo.Text = string.Empty;
+
                 CheckAccessForNodes();
             }
             catch (Exception Ex)

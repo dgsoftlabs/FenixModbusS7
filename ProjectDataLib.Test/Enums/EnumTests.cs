@@ -28,6 +28,7 @@ namespace ProjectDataLib.Test.Enums
             Assert.True(System.Enum.IsDefined(typeof(BytesOrder), BytesOrder.BADC));
             Assert.True(System.Enum.IsDefined(typeof(BytesOrder), BytesOrder.ABCD));
             Assert.True(System.Enum.IsDefined(typeof(BytesOrder), BytesOrder.DCBA));
+            Assert.True(System.Enum.IsDefined(typeof(BytesOrder), BytesOrder.CDAB));
         }
 
         [Theory]
@@ -49,6 +50,7 @@ namespace ProjectDataLib.Test.Enums
         [InlineData(BytesOrder.ABCD)]
         [InlineData(BytesOrder.BADC)]
         [InlineData(BytesOrder.DCBA)]
+        [InlineData(BytesOrder.CDAB)]
         public void BytesOrder_CanBeCompared(BytesOrder order)
         {
             // Arrange

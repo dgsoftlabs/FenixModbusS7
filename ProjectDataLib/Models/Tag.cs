@@ -1133,6 +1133,23 @@ namespace ProjectDataLib
                         btArr.CopyTo(data, 0);
                         return data;
 
+                    case BytesOrder.CDAB:
+                        if (data.Length > 31)
+                        {
+                            for (int i = 0; i < data.Length; i = i + 32)
+                            {
+                                Boolean[] w1 = data.ToList().GetRange(i, 16).ToArray();
+                                Boolean[] w2 = data.ToList().GetRange(i + 16, 16).ToArray();
+
+                                Array.Copy(w2, 0, data, i, 16);
+                                Array.Copy(w1, 0, data, i + 16, 16);
+                            }
+
+                            return data;
+                        }
+                        else
+                            return data;
+
                     default:
                         return data;
                 }

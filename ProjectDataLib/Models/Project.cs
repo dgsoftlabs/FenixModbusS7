@@ -354,7 +354,7 @@ namespace ProjectDataLib
             set { WebServer1_ = value; }
         }
 
-        #pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
+#pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
         private List<InFile> FileList_;
 
         [Browsable(false)]
@@ -365,7 +365,7 @@ namespace ProjectDataLib
             get { return FileList_; }
             set { FileList_ = value; }
         }
-        #pragma warning restore CS0618
+#pragma warning restore CS0618
 
         private List<ScriptFile> ScriptFileList_;
 
@@ -503,9 +503,9 @@ namespace ProjectDataLib
 
             this.PrCon_ = prcn;
 
-            #pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
+#pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
             FileList_ = new List<InFile>();
-            #pragma warning restore CS0618
+#pragma warning restore CS0618
             ScriptFileList_ = new List<ScriptFile>();
 
             WebServer1_ = new WebServer(null);
@@ -589,9 +589,9 @@ namespace ProjectDataLib
 
             if (FileList_ == null)
             {
-                #pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
+#pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
                 FileList_ = new List<InFile>();
-                #pragma warning restore CS0618
+#pragma warning restore CS0618
             }
 
             if (string.IsNullOrEmpty(longDT))
@@ -682,9 +682,9 @@ namespace ProjectDataLib
 
             if (FileList_ == null)
             {
-                #pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
+#pragma warning disable CS0618 // InFile is obsolete - kept for legacy project compatibility
                 FileList_ = new List<InFile>();
-                #pragma warning restore CS0618
+#pragma warning restore CS0618
             }
 
             if (string.IsNullOrEmpty(longDT))
@@ -1103,8 +1103,9 @@ namespace ProjectDataLib
 
             private object EvalAsCSharp(string expr)
             {
-                if (invalidCsharpExpressions.ContainsKey(expr))
-                    throw new InvalidOperationException("Expression failed CSharp compilation.");
+                // Allow retry for previously failed expressions in case runtime context changed
+                // (for example after app/domain reload or compatibility updates).
+                invalidCsharpExpressions.TryRemove(expr, out _);
 
                 if (!csharpScripts.TryGetValue(expr, out ScriptRunner<object> runner))
                 {
@@ -1113,10 +1114,10 @@ namespace ProjectDataLib
                     {
                         compiledRunner = CSharpScript.Create<object>(expr, scriptOptions, typeof(ScriptGlobals)).CreateDelegate();
                     }
-                    catch (CompilationErrorException)
+                    catch (CompilationErrorException ex)
                     {
                         invalidCsharpExpressions.TryAdd(expr, 0);
-                        throw;
+                        throw new InvalidOperationException(ex.Message, ex);
                     }
 
                     lock (csharpScriptsSync)
@@ -1136,12 +1137,6 @@ namespace ProjectDataLib
                 }
 
                 return runner(new ScriptGlobals { Project = project, Prj = project }).GetAwaiter().GetResult();
-            }
-
-            private class ScriptGlobals
-            {
-                public Project Project { get; set; }
-                public Project Prj { get; set; }
             }
         }
     }

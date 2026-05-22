@@ -33,6 +33,10 @@ namespace FenixServer.Web
             DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never
         };
 
+        /// <summary>
+        /// Maps all legacy endpoints for backward compatibility with original HttpListener WebServer
+        /// </summary>
+        /// <param name="app">The WebApplication instance</param>
         public static void MapLegacyEndpoints(WebApplication app)
         {
             app.MapGet("/{obj}/{name}",                HandleNoParam).WithName("LegacyGet");
@@ -45,15 +49,48 @@ namespace FenixServer.Web
             app.MapPost("/{obj}/{name}/{param}/{value}", HandleWithValue).WithName("LegacyPostValue");
         }
 
+        /// <summary>
+        /// Handles requests without parameters
+        /// </summary>
+        /// <param name="obj">Object type</param>
+        /// <param name="name">Object name</param>
+        /// <param name="ctx">HTTP context</param>
+        /// <returns>Result of the request handling</returns>
         private static IResult HandleNoParam(string obj, string name, HttpContext ctx)
             => Dispatch(obj, name, null, null, ctx);
 
+        /// <summary>
+        /// Handles requests with parameters
+        /// </summary>
+        /// <param name="obj">Object type</param>
+        /// <param name="name">Object name</param>
+        /// <param name="param">Parameter</param>
+        /// <param name="ctx">HTTP context</param>
+        /// <returns>Result of the request handling</returns>
         private static IResult HandleWithParam(string obj, string name, string? param, HttpContext ctx)
             => Dispatch(obj, name, param, null, ctx);
 
+        /// <summary>
+        /// Handles requests with values
+        /// </summary>
+        /// <param name="obj">Object type</param>
+        /// <param name="name">Object name</param>
+        /// <param name="param">Parameter</param>
+        /// <param name="value">Value</param>
+        /// <param name="ctx">HTTP context</param>
+        /// <returns>Result of the request handling</returns>
         private static IResult HandleWithValue(string obj, string name, string? param, string? value, HttpContext ctx)
             => Dispatch(obj, name, param, value, ctx);
 
+        /// <summary>
+        /// Dispatches requests to appropriate handlers based on object type
+        /// </summary>
+        /// <param name="obj">Object type</param>
+        /// <param name="name">Object name</param>
+        /// <param name="param">Parameter</param>
+        /// <param name="value">Value</param>
+        /// <param name="ctx">HTTP context</param>
+        /// <returns>Result of the request handling</returns>
         private static IResult Dispatch(string obj, string name, string? param, string? value, HttpContext ctx)
         {
             try
@@ -68,6 +105,12 @@ namespace FenixServer.Web
             }
         }
 
+        /// <summary>
+        /// Routes requests to appropriate handlers based on object key
+        /// </summary>
+        /// <param name="project">Project instance</param>
+        /// <param name="req">Endpoint request data</param>
+        /// <returns>Result of the routing operation</returns>
         private static IResult Route(Project project, EndpointMappings.EndpointRequest req)
         {
             return req.ObjectKey switch
@@ -87,6 +130,12 @@ namespace FenixServer.Web
         // ── timer / user / machine ─────────────────────────────────────────────────
         // Legacy: /Timer/{name}/Value, /User/{name}/Value, /Machine/{name}/Value
         // Param must be "value" — matches old HttpListener behaviour exactly.
+        /// <summary>
+        /// Handles requests for timer, user, and machine values with value parameter validation
+        /// </summary>
+        /// <param name="req">Endpoint request data</param>
+        /// <param name="result">Result value to return</param>
+        /// <returns>Plain text result with the value</returns>
         private static IResult HandleValueParam(EndpointMappings.EndpointRequest req, string result)
         {
             if (!req.ParamKey.Equals("value", StringComparison.OrdinalIgnoreCase))
@@ -97,6 +146,11 @@ namespace FenixServer.Web
         // ── server/Buffor ──────────────────────────────────────────────────────────
         // /Server/Buffor/Get  → returns counter as plain number
         // /Server/Buffor/Set/{n} → sets counter, returns new value
+        /// <summary>
+        /// Handles server/buffor requests (get/set probe counter)
+        /// </summary>
+        /// <param name="req">Endpoint request data</param>
+        /// <returns>Result of the operation</returns>
         private static IResult HandleServer(EndpointMappings.EndpointRequest req)
         {
             if (!req.NameKey.Equals(EndpointMappings.BufforName, StringComparison.OrdinalIgnoreCase))
@@ -116,6 +170,12 @@ namespace FenixServer.Web
         }
 
         // ── tags ───────────────────────────────────────────────────────────────────
+        /// <summary>
+        /// Handles tag-related requests (get all, get value, set value)
+        /// </summary>
+        /// <param name="project">Project instance</param>
+        /// <param name="req">Endpoint request data</param>
+        /// <returns>Result of the tag operation</returns>
         private static IResult HandleTag(Project project, EndpointMappings.EndpointRequest req)
         {
             if (IsAll(req))
@@ -132,10 +192,10 @@ namespace FenixServer.Web
         }
 
         /// <summary>
-        /// Builds the exact DTO shape the original HttpListener WebServer returned:
-        /// tagName, areaData, startData, deviceAdress, scAdres, value, formattedValue, typeData, description
-        /// No ClrXml — matching real legacy output confirmed from production logs.
+        /// Gets all tags in legacy format
         /// </summary>
+        /// <param name="project">Project instance</param>
+        /// <returns>JSON serialized array of legacy tag DTOs</returns>
         private static IResult GetAllTagsLegacy(Project project)
         {
             var tags = project.PrCon.GetAllITags(project.objId, project.objId, false, false)
@@ -159,6 +219,12 @@ namespace FenixServer.Web
             return PlainText(JsonSerializer.Serialize(payload, _jsonOptions));
         }
 
+        /// <summary>
+        /// Gets a single tag value in legacy format
+        /// </summary>
+        /// <param name="project">Project instance</param>
+        /// <param name="tagName">Name of the tag to get</param>
+        /// <returns>Plain text tag value or error result</returns>
         private static IResult GetTagValueLegacy(Project project, string tagName)
         {
             if (EndpointMappings.TryFindTag(project, tagName, out var tag))
@@ -167,6 +233,13 @@ namespace FenixServer.Web
             return EndpointMappings.ErrorResult();
         }
 
+        /// <summary>
+        /// Sets a tag value in legacy format
+        /// </summary>
+        /// <param name="project">Project instance</param>
+        /// <param name="tagName">Name of the tag to set</param>
+        /// <param name="value">Value to set</param>
+        /// <returns>Plain text new value or error result</returns>
         private static IResult SetTagValueLegacy(Project project, string tagName, string value)
         {
             if (!EndpointMappings.TryFindTag(project, tagName, out var tag) || tag == null)
@@ -185,6 +258,12 @@ namespace FenixServer.Web
 
         // ── graph ──────────────────────────────────────────────────────────────────
         // /Graph/All/All → [{label, data:[[ts,val],...]}]
+        /// <summary>
+        /// Handles graph data requests in legacy format
+        /// </summary>
+        /// <param name="project">Project instance</param>
+        /// <param name="req">Endpoint request data</param>
+        /// <returns>JSON serialized graph data or error result</returns>
         private static IResult HandleGraph(Project project, EndpointMappings.EndpointRequest req)
         {
             if (!IsAll(req)) return EndpointMappings.ErrorResult();
@@ -194,6 +273,12 @@ namespace FenixServer.Web
         // ── connections ────────────────────────────────────────────────────────────
         // /Connections/All/All → [{Parameters,connectionName,DriverName,IsBlocked,isLive}]
         // GetConnectionsAll already returns Newtonsoft-serialized JSON string — pass through.
+        /// <summary>
+        /// Handles connection requests in legacy format
+        /// </summary>
+        /// <param name="project">Project instance</param>
+        /// <param name="req">Endpoint request data</param>
+        /// <returns>JSON serialized connections or error result</returns>
         private static IResult HandleConnection(Project project, EndpointMappings.EndpointRequest req)
         {
             if (!IsAll(req)) return EndpointMappings.ErrorResult();
@@ -201,7 +286,11 @@ namespace FenixServer.Web
         }
 
         // ── events ─────────────────────────────────────────────────────────────────
-        // /Events/All/All → [{Tm,Mess,frDateTime}]
+        /// <summary>
+        /// Handles event requests in legacy format
+        /// </summary>
+        /// <param name="req">Endpoint request data</param>
+        /// <returns>JSON serialized events or error result</returns>
         private static IResult HandleEvent(EndpointMappings.EndpointRequest req)
         {
             if (!IsAll(req)) return EndpointMappings.ErrorResult();
@@ -209,7 +298,9 @@ namespace FenixServer.Web
         }
 
         // ── DTO ────────────────────────────────────────────────────────────────────
-        // Sealed record keeps field order and names identical to original legacy output.
+        /// <summary>
+        /// Sealed record keeps field order and names identical to original legacy output.
+        /// </summary>
         private sealed record LegacyTagDto(
             string?  tagName,
             string   areaData,
@@ -222,13 +313,32 @@ namespace FenixServer.Web
             string?  description);
 
         // ── helpers ────────────────────────────────────────────────────────────────
+        /// <summary>
+        /// Checks if request is for "all" items
+        /// </summary>
+        /// <param name="req">Endpoint request data</param>
+        /// <returns>True if all, false otherwise</returns>
         private static bool IsAll(EndpointMappings.EndpointRequest req)
             => req.NameKey.Equals(EndpointMappings.AllKey, StringComparison.OrdinalIgnoreCase)
             && req.ParamKey.Equals(EndpointMappings.AllKey, StringComparison.OrdinalIgnoreCase);
 
+        /// <summary>
+        /// Returns plain text result with specified content
+        /// </summary>
+        /// <param name="text">Text to return</param>
+        /// <returns>Plain text result</returns>
         private static IResult PlainText(string text)
             => Results.Text(text, EndpointMappings.PlainTextContentType);
 
+        /// <summary>
+        /// Builds endpoint request data from raw URL components
+        /// </summary>
+        /// <param name="obj">Object type</param>
+        /// <param name="name">Object name</param>
+        /// <param name="param">Parameter</param>
+        /// <param name="value">Value</param>
+        /// <param name="ctx">HTTP context</param>
+        /// <returns>Endpoint request data structure</returns>
         private static EndpointMappings.EndpointRequest BuildRequest(
             string obj, string name, string? param, string? value, HttpContext ctx)
         {
@@ -242,14 +352,29 @@ namespace FenixServer.Web
             return new EndpointMappings.EndpointRequest(objectKey, nameKey, paramKey, valueKey);
         }
 
+        /// <summary>
+        /// Normalizes input string by trimming and converting to lowercase
+        /// </summary>
+        /// <param name="raw">Raw input string</param>
+        /// <returns>Normalized string</returns>
         private static string Normalize(string? raw)
             => (raw ?? string.Empty).Trim()
                 .Split(' ', StringSplitOptions.RemoveEmptyEntries)
                 .FirstOrDefault()?.Trim().ToLowerInvariant() ?? string.Empty;
 
+        /// <summary>
+        /// Decodes URL-encoded string
+        /// </summary>
+        /// <param name="raw">Raw input string</param>
+        /// <returns>Decoded string</returns>
         private static string Decode(string? raw)
             => Uri.UnescapeDataString((raw ?? string.Empty).Trim().Replace('+', ' '));
 
+        /// <summary>
+        /// Strips query parameters from string
+        /// </summary>
+        /// <param name="s">Input string</param>
+        /// <returns>String without query parameters</returns>
         private static string StripQuery(string s)
         {
             var i = s.IndexOf('?');

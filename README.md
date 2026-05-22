@@ -74,6 +74,18 @@ dotnet run --project FenixServer.Web
 
 ## 📋 Version History
 
+### v4.1.0
+| Feature | Details |
+|---------|---------|
+| 🚀 .NET 10.0 | Full migration from .NET Framework to .NET 10.0 LTS |
+| 🎨 WPF Migration | Complete conversion of FenixServerS7 from WinForms to WPF with consistent styling |
+| 🌐 ASP.NET Core Server | New server-hosted approach with improved web API functionality and isolation |
+| 📡 Endpoint Refactoring | Better endpoint implementation and legacy endpoint compatibility management |
+| 📂 Project Format | Support for .pse project format; legacy .psx files can be opened for conversion but only save in new format |
+| 🧪 Testing Framework | Added comprehensive xUnit test suite and ProjectDataLib unit tests |
+| 🔧 Build Pipeline | Enhanced CI/CD workflow with .NET 10 toolchain and automated MSI installer generation |
+| 📊 UI Refinements | Property editor constraints and improved user feedback on project state |
+
 ### v4.0.4.0
 | Feature | Details |
 |---------|---------|

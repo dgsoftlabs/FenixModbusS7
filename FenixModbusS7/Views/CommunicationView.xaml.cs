@@ -121,6 +121,11 @@ namespace Fenix
             //Drivery
             foreach (IDriverModel idrv in DriverList)
             {
+                idrv.dataRecived -= new EventHandler(idrv_reciveLogInfo);
+                idrv.dataSent -= new EventHandler(idrv_sendLogInfo);
+                idrv.error -= new EventHandler(idrv_errorRecived);
+                idrv.information -= new EventHandler(idrv_informationRecived);
+
                 idrv.dataRecived += new EventHandler(idrv_reciveLogInfo);
                 idrv.dataSent += new EventHandler(idrv_sendLogInfo);
                 idrv.error += new EventHandler(idrv_errorRecived);
@@ -161,6 +166,11 @@ namespace Fenix
                 else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
                 {
                     IDriverModel idrv = ((IDriverModel)e.NewItems[0]);
+                    idrv.dataRecived -= new EventHandler(idrv_reciveLogInfo);
+                    idrv.dataSent -= new EventHandler(idrv_sendLogInfo);
+                    idrv.error -= new EventHandler(idrv_errorRecived);
+                    idrv.information -= new EventHandler(idrv_informationRecived);
+
                     idrv.dataRecived += new EventHandler(idrv_reciveLogInfo);
                     idrv.dataSent += new EventHandler(idrv_sendLogInfo);
                     idrv.error += new EventHandler(idrv_errorRecived);
@@ -255,6 +265,14 @@ namespace Fenix
                 }
 
                 DriverList.CollectionChanged -= DriverList_CollectionChanged;
+
+                foreach (IDriverModel idrv in DriverList)
+                {
+                    idrv.dataRecived -= new EventHandler(idrv_reciveLogInfo);
+                    idrv.dataSent -= new EventHandler(idrv_sendLogInfo);
+                    idrv.error -= new EventHandler(idrv_errorRecived);
+                    idrv.information -= new EventHandler(idrv_informationRecived);
+                }
 
                 //Informacja o stanie okna
                 projectContainer.winManagment.RemoveAll(x => x.index == index);

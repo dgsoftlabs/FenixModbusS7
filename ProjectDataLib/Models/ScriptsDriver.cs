@@ -45,7 +45,7 @@ namespace ProjectDataLib
             set
             {
                 objId_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(objId)));
+                OnPropertyChanged(nameof(objId));
             }
         }
 
@@ -60,7 +60,7 @@ namespace ProjectDataLib
             set
             {
                 Proj_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Proj)));
+                OnPropertyChanged(nameof(Proj));
             }
         }
 
@@ -73,7 +73,7 @@ namespace ProjectDataLib
             set
             {
                 isExpand_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(isExpand)));
+                OnPropertyChanged(nameof(isExpand));
             }
         }
 
@@ -102,7 +102,7 @@ namespace ProjectDataLib
             set
             {
                 Enable_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Enable)));
+                OnPropertyChanged(nameof(Enable));
             }
         }
 
@@ -115,7 +115,7 @@ namespace ProjectDataLib
             set
             {
                 IsBlocked_ = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBlocked)));
+                OnPropertyChanged(nameof(IsBlocked));
 
                 if (_Children != null)
                     foreach (ITreeViewModel itv in _Children)
@@ -125,25 +125,24 @@ namespace ProjectDataLib
 
         public ScriptsDriver(Project pr)
         {
-            this.Proj_ = pr;
-            this.objId_ = new Guid("33333333-3333-3333-3333-333333333333");
+            Proj_ = pr;
+            objId_ = new Guid("33333333-3333-3333-3333-333333333333");
 
-            Timers_ = new List<CustomTimer>();
-            Timers_.Add(new CustomTimer());
+            Timers_ = [new CustomTimer()];
 
             Enable_ = true;
         }
 
         private dynamic CompileAndLoadScript(string code, string scriptPath = null)
         {
-            var references = new List<MetadataReference>
-            {
+            List<MetadataReference> references =
+            [
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ProjectDataLib.Project).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(System.Windows.Forms.MessageBox).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(System.Linq.Enumerable).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(System.Collections.Generic.List<>).Assembly.Location),
-            };
+            ];
 
             foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
             {
@@ -207,6 +206,12 @@ namespace ProjectDataLib
         {
         }
 
+        private void OnPropertyChanged(string propertyName) => propChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        private void SendInfo(string message) => sendInfoEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, message));
+
+        private void SendError(Exception ex) => errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, ex.Message, ex));
+
         [field: NonSerialized]
         private List<InTag> TagList_;
 
@@ -219,7 +224,7 @@ namespace ProjectDataLib
         }
 
         [field: NonSerialized]
-        private List<System.Threading.Timer> BckTimers = new List<System.Threading.Timer>();
+        private List<System.Threading.Timer> BckTimers = [];
 
         [field: NonSerialized]
         private EventHandler sendInfoEv;
@@ -242,7 +247,7 @@ namespace ProjectDataLib
         private Boolean isLive;
 
         [field: NonSerialized]
-        private List<dynamic> scripts = new List<dynamic>();
+        private List<dynamic> scripts = [];
 
         string IDriverModel.driverName
         {
@@ -270,28 +275,29 @@ namespace ProjectDataLib
 
                 scripts.Clear();
                 BckTimers.Clear();
+
                 foreach (ScriptFile f in Proj_.ScriptFileList)
                 {
-                    if (f.Enable && !string.IsNullOrEmpty(f.TimerName))
-                    {
-                        string code = File.ReadAllText(f.FilePath);
-                        var script = CompileAndLoadScript(code, f.FilePath);
-                        if (script != null)
-                        {
-                            scripts.Add(script);
-                            scripts.Last().Init(Proj_, f.Name);
-                            scripts.Last().Start();
+                    if (!f.Enable || string.IsNullOrEmpty(f.TimerName))
+                        continue;
 
-                            CustomTimer ti = Proj_.ScriptEng.Timers.Find(x => x.Name == f.TimerName);
-                            if (ti == null)
-                            {
-                                if (sendInfoEv != null)
-                                    sendInfoEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, $"ScriptDriver.activateCycle: Timer '{f.TimerName}' not found for script '{f.Name}'."));
-                                continue;
-                            }
-                            BckTimers.Add(new System.Threading.Timer(TimerTask, (object)scripts.Last(), ti.Delay, ti.Time));
-                        }
+                    string code = File.ReadAllText(f.FilePath);
+                    dynamic script = CompileAndLoadScript(code, f.FilePath);
+                    if (script == null)
+                        continue;
+
+                    scripts.Add(script);
+                    script.Init(Proj_, f.Name);
+                    script.Start();
+
+                    CustomTimer ti = Proj_.ScriptEng.Timers.Find(x => x.Name == f.TimerName);
+                    if (ti == null)
+                    {
+                        SendInfo($"ScriptDriver.activateCycle: Timer '{f.TimerName}' not found for script '{f.Name}'.");
+                        continue;
                     }
+
+                    BckTimers.Add(new System.Threading.Timer(TimerTask, (object)script, ti.Delay, ti.Time));
                 }
 
                 isLive = true;
@@ -299,8 +305,7 @@ namespace ProjectDataLib
             }
             catch (Exception Ex)
             {
-                if (sendInfoEv != null)
-                    sendInfoEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ScriptDriver.activateCycle: " + Ex.Message));
+                SendInfo("ScriptDriver.activateCycle: " + Ex.Message);
                 return false;
             }
         }
@@ -313,9 +318,7 @@ namespace ProjectDataLib
             }
             catch (Exception Ex)
             {
-                if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, Ex.Message, Ex));
-
+                SendError(Ex);
                 return false;
             }
         }
@@ -328,9 +331,7 @@ namespace ProjectDataLib
             }
             catch (Exception Ex)
             {
-                if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, Ex.Message, Ex));
-
+                SendError(Ex);
                 return false;
             }
         }
@@ -343,9 +344,7 @@ namespace ProjectDataLib
             }
             catch (Exception Ex)
             {
-                if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, Ex.Message, Ex));
-
+                SendError(Ex);
                 return false;
             }
         }
@@ -361,9 +360,7 @@ namespace ProjectDataLib
                     tm.Dispose();
 
                 foreach (dynamic sc in scripts)
-                {
                     sc.Stop();
-                }
 
                 BckTimers.Clear();
                 scripts.Clear();
@@ -372,9 +369,7 @@ namespace ProjectDataLib
             }
             catch (Exception Ex)
             {
-                if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, Ex.Message, Ex));
-
+                SendError(Ex);
                 return false;
             }
         }
@@ -389,8 +384,7 @@ namespace ProjectDataLib
             }
             catch (Exception Ex)
             {
-                if (sendInfoEv != null)
-                    sendInfoEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ScriptDriver.TimerTask: " + Ex.Message));
+                SendInfo("ScriptDriver.TimerTask: " + Ex.Message);
             }
         }
 
@@ -451,7 +445,7 @@ namespace ProjectDataLib
             set
             {
                 isLive = value;
-                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IDriverModel.isAlive)));
+                OnPropertyChanged(nameof(IDriverModel.isAlive));
             }
         }
 
@@ -481,8 +475,8 @@ namespace ProjectDataLib
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            BckTimers = new List<System.Threading.Timer>();
-            scripts = new List<dynamic>();
+            BckTimers = [];
+            scripts = [];
             isLive = false;
         }
 
@@ -542,7 +536,7 @@ namespace ProjectDataLib
             }
             set
             {
-                propChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ITreeViewModel.IsLive)));
+                OnPropertyChanged(nameof(ITreeViewModel.IsLive));
             }
         }
 
