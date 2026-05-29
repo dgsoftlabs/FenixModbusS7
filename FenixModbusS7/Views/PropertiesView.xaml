@@ -211,6 +211,23 @@
                                             <Style TargetType="StackPanel">
                                                 <Setter Property="Visibility" Value="Collapsed" />
                                                 <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsScalingEditorVisible}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+                                        <TextBlock Text="{Binding ScalingSummary}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                                        <Button Content="Edit"
+                                                IsEnabled="{Binding IsEditable}"
+                                                Click="ScalingEditButton_Click" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="4,0,0,0">
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
                                                     <DataTrigger Binding="{Binding IsCollectionEditorVisible}" Value="True">
                                                         <Setter Property="Visibility" Value="Visible" />
                                                     </DataTrigger>

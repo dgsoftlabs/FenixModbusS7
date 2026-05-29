@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -323,28 +322,14 @@ namespace ProjectDataLib
             }
         }
 
-        private string ReadScript_;
+        private ScalingConfig scaling_ = new ScalingConfig();
 
-        [CusEventProperty]
-        [Category("04 Script"), DisplayName("Execute After Read"), Browsable(true)]
-        [Editor(typeof(ScEditor), typeof(UITypeEditor))]
-        [JsonIgnore]
-        public string ReadScript
+        [Category("04 Scaling"), DisplayName("Scaling"), Browsable(true)]
+        [Description("Linear scaling applied on read (PLC→App) and write (App→PLC).")]
+        public ScalingConfig Scaling
         {
-            get { return ReadScript_; }
-            set { ReadScript_ = value; }
-        }
-
-        private string WriteScript_;
-
-        [CusEventProperty]
-        [Category("04 Script"), DisplayName("Execute Before Write"), Browsable(true)]
-        [Editor(typeof(ScEditor), typeof(UITypeEditor))]
-        [JsonIgnore]
-        public string WriteScript
-        {
-            get { return WriteScript_; }
-            set { WriteScript_ = value; }
+            get { return scaling_ ??= new ScalingConfig(); }
+            set { scaling_ = value ?? new ScalingConfig(); }
         }
 
         private Boolean[] coreData_;
@@ -543,12 +528,14 @@ namespace ProjectDataLib
                 btAr.CopyTo(arrByte, 0);
 
                 Boolean ScriptMark = false;
-                if (!String.IsNullOrEmpty(ReadScript_))
+                if (!String.IsNullOrEmpty(""))
                 {
                     ScriptMark = true;
                 }
                 else
                     ScriptMark = false;
+
+                bool scalingEnabled = Scaling?.IsEnabled == true;
 
                 switch (this.TypeData_)
                 {
@@ -557,31 +544,13 @@ namespace ProjectDataLib
                         break;
 
                     case ProjectDataLib.TypeData.BYTE:
-
-                        if (!ScriptMark)
-                        {
-                            value = arrByte[scAdres_];
-                        }
-                        else
-                        {
-                            value = arrByte[scAdres_];
-                            string code = ReadScript_.Replace("x", String.Format("{0:0}", value)).Replace(',', '.');
-                            value = (byte)Proj_.ScriptCon.Eval(code);
-                        }
-
+                        value = arrByte[scAdres_];
+                        if (scalingEnabled) value = (byte)Scaling.ToApp(Convert.ToDouble(value));
                         break;
 
                     case ProjectDataLib.TypeData.SBYTE:
-                        if (!ScriptMark)
-                        {
-                            value = (sbyte)arrByte[scAdres_];
-                        }
-                        else
-                        {
-                            value = (sbyte)arrByte[scAdres_];
-                            string code = ReadScript_.Replace("x", String.Format("{0:0}", value)).Replace(',', '.');
-                            value = (sbyte)Proj_.ScriptCon.Eval(code);
-                        }
+                        value = (sbyte)arrByte[scAdres_];
+                        if (scalingEnabled) value = (sbyte)Scaling.ToApp(Convert.ToDouble(value));
                         break;
 
                     case ProjectDataLib.TypeData.CHAR:
@@ -589,108 +558,39 @@ namespace ProjectDataLib
                         break;
 
                     case ProjectDataLib.TypeData.SHORT:
-
-                        if (!ScriptMark)
-                        {
-                            value = BitConverter.ToInt16(arrByte, 0);
-                        }
-                        else
-                        {
-                            value = BitConverter.ToInt16(arrByte, 0);
-                            string code = ReadScript_.Replace("x", String.Format("{0:0}", value)).Replace(',', '.');
-                            value = (short)Proj_.ScriptCon.Eval(code);
-                        }
+                        value = BitConverter.ToInt16(arrByte, 0);
+                        if (scalingEnabled) value = (short)Scaling.ToApp(Convert.ToDouble(value));
                         break;
 
                     case ProjectDataLib.TypeData.USHORT:
-
-                        if (!ScriptMark)
-                        {
-                            value = BitConverter.ToUInt16(arrByte, 0);
-                        }
-                        else
-                        {
-                            value = BitConverter.ToUInt16(arrByte, 0);
-                            string code = ReadScript_.Replace("x", String.Format("{0:0}", value)).Replace(',', '.');
-                            value = (ushort)Proj_.ScriptCon.Eval(code);
-                        }
-
+                        value = BitConverter.ToUInt16(arrByte, 0);
+                        if (scalingEnabled) value = (ushort)Scaling.ToApp(Convert.ToDouble(value));
                         break;
 
                     case ProjectDataLib.TypeData.INT:
-
-                        if (!ScriptMark)
-                        {
-                            value = BitConverter.ToInt32(arrByte, 0);
-                        }
-                        else
-                        {
-                            value = BitConverter.ToInt32(arrByte, 0);
-                            string code = ReadScript_.Replace("x", String.Format("{0:0}", value)).Replace(',', '.');
-                            value = (int)Proj_.ScriptCon.Eval(code);
-                        }
+                        value = BitConverter.ToInt32(arrByte, 0);
+                        if (scalingEnabled) value = (int)Scaling.ToApp(Convert.ToDouble(value));
                         break;
 
                     case ProjectDataLib.TypeData.UINT:
-
-                        if (!ScriptMark)
-                        {
-                            value = BitConverter.ToUInt32(arrByte, 0);
-                        }
-                        else
-                        {
-                            value = BitConverter.ToUInt32(arrByte, 0);
-                            string code = ReadScript_.Replace("x", String.Format("{0:0}", value)).Replace(',', '.');
-                            value = (uint)Proj_.ScriptCon.Eval(code);
-                        }
+                        value = BitConverter.ToUInt32(arrByte, 0);
+                        if (scalingEnabled) value = (uint)Scaling.ToApp(Convert.ToDouble(value));
                         break;
 
                     case ProjectDataLib.TypeData.FLOAT:
-
-                        if (!ScriptMark)
-                        {
-                            value = BitConverter.ToSingle(arrByte, 0);
-                        }
-                        else
-                        {
-                            value = BitConverter.ToSingle(arrByte, 0);
-                            string code = ReadScript_.Replace("x", String.Format("{0:0.000000}", value)).Replace(',', '.');
-                            value = Convert.ToSingle(Proj_.ScriptCon.Eval(code));
-                            break;
-                        }
+                        value = BitConverter.ToSingle(arrByte, 0);
+                        if (scalingEnabled) value = Convert.ToSingle(Scaling.ToApp(Convert.ToDouble(value)));
                         break;
 
                     case ProjectDataLib.TypeData.DOUBLE:
-
-                        if (!ScriptMark)
-                        {
-                            value = BitConverter.ToDouble(arrByte, 0);
-                        }
-                        else
-                        {
-                            value = BitConverter.ToDouble(arrByte, 0);
-                            string code = ReadScript_.Replace("x", String.Format("{0:0.000000}", value)).Replace(',', '.');
-                            value = (double)Proj_.ScriptCon.Eval(code);
-                        }
-
+                        value = BitConverter.ToDouble(arrByte, 0);
+                        if (scalingEnabled) value = Scaling.ToApp(Convert.ToDouble(value));
                         break;
 
                     case ProjectDataLib.TypeData.ShortToReal:
-
-                        if (!ScriptMark)
-                        {
-                            value = BitConverter.ToInt16(arrByte, 0);
-                            value = double.Parse(value.ToString());
-                            break;
-                        }
-                        else
-                        {
-                            value = BitConverter.ToInt16(arrByte, 0);
-                            value = float.Parse(value.ToString());
-                            string code = ReadScript_.Replace("x", String.Format("{0:0.000000}", value)).Replace(',', '.');
-                            value_ = Convert.ToSingle(Proj_.ScriptCon.Eval(code));
-                        }
-
+                        value = BitConverter.ToInt16(arrByte, 0);
+                        value = double.Parse(value.ToString());
+                        if (scalingEnabled) value = Scaling.ToApp(Convert.ToDouble(value));
                         break;
                 }
             }
@@ -713,7 +613,8 @@ namespace ProjectDataLib
                 BitArray biArr;
                 byte[] btArr;
 
-                Boolean ScriptMark = !String.IsNullOrEmpty(WriteScript_);
+                Boolean ScriptMark = false;
+                bool scalingEnabled = Scaling?.IsEnabled == true;
 
                 switch (TypeData_)
                 {
@@ -734,147 +635,86 @@ namespace ProjectDataLib
                     case ProjectDataLib.TypeData.BYTE:
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToByte(obj);
-
-                        if (ScriptMark)
-                        {
-                            string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = (byte)Proj_.ScriptCon.Eval(code);
-                        }
-
+                        if (scalingEnabled) obj = (byte)Scaling.ToPlc(Convert.ToDouble(obj));
                         biArr = new BitArray(coreDataSend_);
                         btArr = new byte[biArr.Length / 8];
                         biArr.CopyTo(btArr, 0);
-
                         btArr[scAdres_] = (byte)obj;
                         biArr = new BitArray(btArr);
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
                     case ProjectDataLib.TypeData.SBYTE:
-
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToSByte(obj);
-
-                        if (ScriptMark)
-                        {
-                            string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = (sbyte)Proj_.ScriptCon.Eval(code);
-                        }
-
+                        if (scalingEnabled) obj = (sbyte)Scaling.ToPlc(Convert.ToDouble(obj));
                         biArr = new BitArray(coreDataSend_);
                         btArr = new byte[biArr.Length / 8];
                         biArr.CopyTo(btArr, 0);
-
                         Buffer.BlockCopy(new sbyte[] { (sbyte)obj }, 0, btArr, scAdres_, 1);
-
                         biArr = new BitArray(btArr);
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
                     case ProjectDataLib.TypeData.CHAR:
-
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToChar(obj);
-
                         biArr = new BitArray(BitConverter.GetBytes((Char)obj));
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
                     case ProjectDataLib.TypeData.DOUBLE:
-
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToDouble(obj);
-
-                        if (ScriptMark)
-                        {
-                            string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = (double)Proj_.ScriptCon.Eval(code);
-                        }
+                        if (scalingEnabled) obj = Scaling.ToPlc(Convert.ToDouble(obj));
                         biArr = new BitArray(BitConverter.GetBytes((Double)obj));
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
                     case ProjectDataLib.TypeData.FLOAT:
-
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToSingle(obj);
-
-                        if (ScriptMark)
-                        {
-                            string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = Convert.ToSingle(Proj_.ScriptCon.Eval(code));
-                        }
-
+                        if (scalingEnabled) obj = Convert.ToSingle(Scaling.ToPlc(Convert.ToDouble(obj)));
                         biArr = new BitArray(BitConverter.GetBytes(Convert.ToSingle(obj)));
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
                     case ProjectDataLib.TypeData.INT:
-
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToInt32(obj);
-
-                        if (ScriptMark)
-                        {
-                            string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = (int)Proj_.ScriptCon.Eval(code);
-                        }
+                        if (scalingEnabled) obj = (int)Scaling.ToPlc(Convert.ToDouble(obj));
                         biArr = new BitArray(BitConverter.GetBytes((Int32)obj));
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
                     case ProjectDataLib.TypeData.UINT:
-
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToUInt32(obj);
-
-                        if (ScriptMark)
-                        {
-                            string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = (uint)Proj_.ScriptCon.Eval(code);
-                        }
+                        if (scalingEnabled) obj = (uint)Scaling.ToPlc(Convert.ToDouble(obj));
                         biArr = new BitArray(BitConverter.GetBytes((UInt32)obj));
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
                     case ProjectDataLib.TypeData.SHORT:
-
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToInt16(obj);
-
-                        if (ScriptMark)
-                        {
-                            string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = (short)Proj_.ScriptCon.Eval(code);
-                        }
+                        if (scalingEnabled) obj = (short)Scaling.ToPlc(Convert.ToDouble(obj));
                         biArr = new BitArray(BitConverter.GetBytes((short)obj));
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
                     case ProjectDataLib.TypeData.USHORT:
-
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToUInt16(obj);
-
-                        if (ScriptMark)
-                        {
-                            string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = (ushort)Proj_.ScriptCon.Eval(code);
-                        }
+                        if (scalingEnabled) obj = (ushort)Scaling.ToPlc(Convert.ToDouble(obj));
                         biArr = new BitArray(BitConverter.GetBytes((ushort)obj));
                         biArr.CopyTo(coreDataSend_, 0);
                         break;
 
                     case ProjectDataLib.TypeData.ShortToReal:
-
                         if (obj.GetType() == typeof(string))
                             obj = Convert.ToDouble(obj);
-
-                        if (ScriptMark)
-                        {
-                            string code = WriteScript_.Replace("x", String.Format("{0:0}", obj)).Replace(',', '.');
-                            obj = (double)Proj_.ScriptCon.Eval(code);
-                        }
+                        if (scalingEnabled) obj = (double)Scaling.ToPlc(Convert.ToDouble(obj));
                         short buff = Convert.ToInt16(obj);
                         biArr = new BitArray(BitConverter.GetBytes(buff));
                         biArr.CopyTo(coreDataSend_, 0);

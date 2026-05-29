@@ -181,7 +181,7 @@ namespace ProjectDataLib
         private Boolean Active_;
 
         [Browsable(false)]
-        public Boolean Acitve
+        public Boolean Active
         {
             get { return Active_; }
         }
@@ -276,7 +276,7 @@ namespace ProjectDataLib
         {
             if (!HttpListener.IsSupported)
                 throw new NotSupportedException(
-                    "WebServer.Coinstr  - Needs Windows XP SP2, Server 2003 or later.");
+                    "WebServer.Constructor - Needs Windows XP SP2, Server 2003 or later.");
 
             InitializeRuntimeState();
 
@@ -288,7 +288,7 @@ namespace ProjectDataLib
         {
             if (!HttpListener.IsSupported)
                 throw new NotSupportedException(
-                    "WebServer.Coinstr  - Needs Windows XP SP2, Server 2003 or later.");
+                    "WebServer.Constructor - Needs Windows XP SP2, Server 2003 or later.");
 
             InitializeRuntimeState();
         }
