@@ -178,6 +178,14 @@ namespace Fenix
             }
         }
 
+        private void ScalingEditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is FrameworkElement element && element.DataContext is PropertyRow row)
+            {
+                row.EditScaling(Window.GetWindow(this));
+            }
+        }
+
         private void ScheduleAdjustColumns()
         {
             Dispatcher.BeginInvoke(new Action(AdjustColumns), DispatcherPriority.ContextIdle);
@@ -313,6 +321,17 @@ namespace Fenix
 
             public bool IsCollectionEditorVisible => IsSupportedCollectionType;
 
+            public bool IsScalingEditorVisible => _valueType == typeof(ScalingConfig);
+
+            public string ScalingSummary
+            {
+                get
+                {
+                    var v = _property.GetValue(_target) as ScalingConfig;
+                    return v?.ToString() ?? "None";
+                }
+            }
+
             public string CollectionSummary
             {
                 get
@@ -324,7 +343,7 @@ namespace Fenix
                 }
             }
 
-            public bool IsTextEditorVisible => !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible && !IsColorPickerVisible && !IsClearableTextEditorVisible;
+            public bool IsTextEditorVisible => !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible && !IsColorPickerVisible && !IsClearableTextEditorVisible && !IsScalingEditorVisible;
 
             public bool IsClearableTextEditorVisible => _useClearableTextEditor && !IsBoolEditorVisible && !IsEnumEditorVisible && !IsStandardValuesEditorVisible && !IsCollectionEditorVisible && !IsColorPickerVisible;
 
@@ -614,6 +633,22 @@ namespace Fenix
                 }
             }
 
+            public void EditScaling(Window owner)
+            {
+                if (!IsEditable || _valueType != typeof(ScalingConfig))
+                    return;
+
+                var current = _property.GetValue(_target) as ScalingConfig ?? new ScalingConfig();
+                var dialog = new ScalingEditorDialog(current) { Owner = owner };
+
+                if (dialog.ShowDialog() == true)
+                {
+                    _property.SetValue(_target, dialog.Result);
+                    OnPropertyChanged(nameof(ScalingSummary));
+                    OnPropertyChanged(nameof(ValueText));
+                }
+            }
+
             public void UpdateEnabledState(bool enabled)
             {
                 _isEnabled = enabled;
@@ -658,6 +693,173 @@ namespace Fenix
                 {
                 }
             }
+        }
+    }
+
+    internal sealed class ScalingEditorDialog : Window
+    {
+        private readonly TextBox _appMinBox;
+        private readonly TextBox _appMaxBox;
+        private readonly TextBox _plcMinBox;
+        private readonly TextBox _plcMaxBox;
+        private readonly TextBlock _previewBlock;
+        private readonly TextBlock _formulaReadBlock;
+        private readonly TextBlock _formulaWriteBlock;
+
+        public ScalingConfig Result { get; private set; }
+
+        public ScalingEditorDialog(ScalingConfig current)
+        {
+            Title = "Scaling Editor";
+            Width = 480;
+            Height = 420;
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            ResizeMode = ResizeMode.NoResize;
+            WindowStyle = WindowStyle.SingleBorderWindow;
+            ShowInTaskbar = false;
+
+            var grid = new Grid { Margin = new Thickness(20) };
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(140) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(140) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
+            // Headers
+            var appHeader = new TextBlock { Text = "App Range", FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 6) };
+            Grid.SetRow(appHeader, 0); Grid.SetColumn(appHeader, 0); Grid.SetColumnSpan(appHeader, 2);
+            grid.Children.Add(appHeader);
+
+            var plcHeader = new TextBlock { Text = "PLC Range", FontWeight = FontWeights.SemiBold, Margin = new Thickness(12, 0, 0, 6) };
+            Grid.SetRow(plcHeader, 0); Grid.SetColumn(plcHeader, 2); Grid.SetColumnSpan(plcHeader, 2);
+            grid.Children.Add(plcHeader);
+
+            // Input fields
+            _appMinBox = MakeField("Min", current.AppMin);
+            _appMaxBox = MakeField("Max", current.AppMax);
+            _plcMinBox = MakeField("Min", current.PlcMin);
+            _plcMaxBox = MakeField("Max", current.PlcMax);
+
+            var appPanel = new StackPanel { Margin = new Thickness(0, 0, 12, 0) };
+            appPanel.Children.Add(MakeLabel("Min"));
+            appPanel.Children.Add(_appMinBox);
+            appPanel.Children.Add(MakeLabel("Max"));
+            appPanel.Children.Add(_appMaxBox);
+            Grid.SetRow(appPanel, 1); Grid.SetColumn(appPanel, 0); Grid.SetColumnSpan(appPanel, 2);
+            grid.Children.Add(appPanel);
+
+            var plcPanel = new StackPanel { Margin = new Thickness(12, 0, 0, 0) };
+            plcPanel.Children.Add(MakeLabel("Min"));
+            plcPanel.Children.Add(_plcMinBox);
+            plcPanel.Children.Add(MakeLabel("Max"));
+            plcPanel.Children.Add(_plcMaxBox);
+            Grid.SetRow(plcPanel, 1); Grid.SetColumn(plcPanel, 2); Grid.SetColumnSpan(plcPanel, 2);
+            grid.Children.Add(plcPanel);
+
+            // Preview panel
+            var previewBorder = new Border
+            {
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(4),
+                Padding = new Thickness(12),
+                Margin = new Thickness(0, 16, 0, 0)
+            };
+            previewBorder.SetResourceReference(Border.BorderBrushProperty, "Th.BorderBrush");
+            previewBorder.SetResourceReference(Border.BackgroundProperty, "Th.SurfaceBrush");
+
+            var previewGrid = new Grid();
+            previewGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            previewGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            previewGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            previewGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+
+            var previewTitle = new TextBlock { Text = "Live Preview", FontWeight = FontWeights.SemiBold, Margin = new Thickness(0, 0, 0, 8) };
+            Grid.SetRow(previewTitle, 0);
+            previewGrid.Children.Add(previewTitle);
+
+            _formulaReadBlock  = new TextBlock { FontFamily = new System.Windows.Media.FontFamily("Consolas"), FontSize = 11, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 4) };
+            _formulaWriteBlock = new TextBlock { FontFamily = new System.Windows.Media.FontFamily("Consolas"), FontSize = 11, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 8) };
+            _previewBlock      = new TextBlock { FontSize = 12, TextWrapping = TextWrapping.Wrap };
+            Grid.SetRow(_formulaReadBlock,  1); previewGrid.Children.Add(_formulaReadBlock);
+            Grid.SetRow(_formulaWriteBlock, 2); previewGrid.Children.Add(_formulaWriteBlock);
+            Grid.SetRow(_previewBlock,      3); previewGrid.Children.Add(_previewBlock);
+
+            previewBorder.Child = previewGrid;
+            Grid.SetRow(previewBorder, 2); Grid.SetColumnSpan(previewBorder, 4);
+            grid.Children.Add(previewBorder);
+
+            // Buttons
+            var okButton = new Button { Content = "OK", Width = 90, Height = 28, Margin = new Thickness(0, 0, 8, 0), IsDefault = true };
+            okButton.Click += OkButton_Click;
+            var cancelButton = new Button { Content = "Cancel", Width = 90, Height = 28, IsCancel = true };
+            var clearButton  = new Button { Content = "Clear Scaling", Width = 110, Height = 28, HorizontalAlignment = HorizontalAlignment.Left };
+            clearButton.Click += (_, _) => { _appMinBox.Text = _appMaxBox.Text = _plcMinBox.Text = _plcMaxBox.Text = "0"; UpdatePreview(); };
+
+            var btnRow = new Grid { Margin = new Thickness(0, 16, 0, 0) };
+            btnRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            btnRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            btnRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            btnRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            Grid.SetColumn(clearButton,  0); btnRow.Children.Add(clearButton);
+            Grid.SetColumn(okButton,     2); btnRow.Children.Add(okButton);
+            Grid.SetColumn(cancelButton, 3); btnRow.Children.Add(cancelButton);
+            Grid.SetRow(btnRow, 3); Grid.SetColumnSpan(btnRow, 4);
+            grid.Children.Add(btnRow);
+
+            Content = grid;
+
+            foreach (var tb in new[] { _appMinBox, _appMaxBox, _plcMinBox, _plcMaxBox })
+                tb.TextChanged += (_, _) => UpdatePreview();
+
+            UpdatePreview();
+        }
+
+        private static TextBlock MakeLabel(string text) =>
+            new TextBlock { Text = text, Margin = new Thickness(0, 8, 0, 2), FontSize = 11 };
+
+        private static TextBox MakeField(string placeholder, double value) =>
+            new TextBox
+            {
+                Text = value.ToString("G"),
+                Height = 28,
+                Padding = new Thickness(4, 4, 4, 4),
+                FontFamily = new System.Windows.Media.FontFamily("Consolas")
+            };
+
+        private void UpdatePreview()
+        {
+            var cfg = BuildConfig();
+            if (cfg.IsEnabled)
+            {
+                _formulaReadBlock.Text  = $"Read : plcValue → appValue = (plcValue - {cfg.PlcMin}) / ({cfg.PlcMax} - {cfg.PlcMin}) × ({cfg.AppMax} - {cfg.AppMin}) + {cfg.AppMin}";
+                _formulaWriteBlock.Text = $"Write: appValue → plcValue = (appValue - {cfg.AppMin}) / ({cfg.AppMax} - {cfg.AppMin}) × ({cfg.PlcMax} - {cfg.PlcMin}) + {cfg.PlcMin}";
+                _previewBlock.Text = $"Example:  PLC {cfg.PlcMin} → App {cfg.ToApp(cfg.PlcMin):G}   |   PLC {cfg.PlcMax} → App {cfg.ToApp(cfg.PlcMax):G}";
+            }
+            else
+            {
+                _formulaReadBlock.Text  = "";
+                _formulaWriteBlock.Text = "";
+                _previewBlock.Text = "No scaling — values passed through unchanged.";
+            }
+        }
+
+        private ScalingConfig BuildConfig()
+        {
+            double.TryParse(_appMinBox?.Text, out double appMin);
+            double.TryParse(_appMaxBox?.Text, out double appMax);
+            double.TryParse(_plcMinBox?.Text, out double plcMin);
+            double.TryParse(_plcMaxBox?.Text, out double plcMax);
+            return new ScalingConfig { AppMin = appMin, AppMax = appMax, PlcMin = plcMin, PlcMax = plcMax };
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Result = BuildConfig();
+            DialogResult = true;
+            Close();
         }
     }
 }

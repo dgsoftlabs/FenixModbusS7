@@ -21,7 +21,7 @@ jobs:
       - name: Setup Advanced Installer
         uses: caphyon/advinst-github-action@main
         with:
-          advinst-version: '23.6'
+          advinst-version: '23.7'
           advinst-enable-automation: 'true'
           # advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
 

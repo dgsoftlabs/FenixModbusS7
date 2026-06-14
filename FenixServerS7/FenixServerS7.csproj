@@ -1,63 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
+    <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <NoWarn>$(NoWarn);CA1416</NoWarn>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <Platforms>x86</Platforms>
     <OutputType>WinExe</OutputType>
-    <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
     <RootNamespace>FenixServer</RootNamespace>
     <AssemblyName>FenixServerS7</AssemblyName>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>false</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <Configurations>All;Debug;Release</Configurations>
     <StartupObject>FenixServer.App</StartupObject>
-    <IsTestProject>false</IsTestProject>
-    <GenerateXunitEntryPoint>false</GenerateXunitEntryPoint>
-    <Version>4.1.1</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>HttpServer.ico</ApplicationIcon>
+    <Version>4.1.2</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>D6E107C64472318082452F9A212345CCAC07D3DD</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>FenixServer_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>false</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TargetZone>LocalIntranet</TargetZone>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>HttpServer.ico</ApplicationIcon>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ModbusMasterASCII\ModbusMasterASCII.csproj" />
     <ProjectReference Include="..\ModbusMasterRTU\ModbusMasterRTU.csproj" />
@@ -74,3 +31,4 @@
     <PackageReference Include="TaskScheduler" Version="2.12.2" />
   </ItemGroup>
 </Project>
+
