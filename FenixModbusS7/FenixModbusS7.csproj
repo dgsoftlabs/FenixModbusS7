@@ -9,7 +9,7 @@
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <Configurations>All;Debug;Release</Configurations>
-    <Version>4.1.2</Version>
+    <Version>4.2.0</Version>
     <LangVersion>latest</LangVersion>
     <ApplicationIcon>soft.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
