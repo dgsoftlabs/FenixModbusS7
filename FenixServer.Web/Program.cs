@@ -69,8 +69,9 @@ namespace FenixServer.Web
         {
             builder.Services
                 .AddSingleton(project)
-                .AddSingleton(projectContainer)
-                .AddCors(options =>
+                                .AddSingleton(projectContainer)
+                                .AddHostedService<ReconnectionService>()
+                                .AddCors(options =>
                 {
                     options.AddDefaultPolicy(policy =>
                     {
