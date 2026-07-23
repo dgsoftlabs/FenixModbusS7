@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace ProjectDataLib
@@ -11,11 +11,18 @@ namespace ProjectDataLib
     {
         public List<String> assmemblyPath = new List<string>();
 
+        /// <summary>
+        /// Gets or sets the base path used to locate configuration and driver files.
+        /// Defaults to the current AppDomain base directory if not set.
+        /// </summary>
+        public string BasePath { get; set; }
+
         public GlobalConfiguration()
         {
+            BasePath = AppDomain.CurrentDomain.BaseDirectory;
             try
             {
-                OpenData(Application.StartupPath + "\\GlobalConfiguration.xml");
+                OpenData(Path.Combine(BasePath, "GlobalConfiguration.xml"));
             }
             catch (Exception)
             {
@@ -76,7 +83,7 @@ namespace ProjectDataLib
             }
             catch (Exception)
             {
-                throw; ;
+                throw;
             }
         }
 
@@ -101,18 +108,18 @@ namespace ProjectDataLib
 
                 if (!CheckAssembly(asm))
                 {
-                    MessageBox.Show("Library isn't appropriate!");
+                    Debug.WriteLine("[GlobalConfiguration] Library isn't appropriate: " + path);
                     return;
                 }
                 else
                 {
                     assmemblyPath.Add(path);
-                    SaveData("GlobalConfiguration.xml");
+                    SaveData(Path.Combine(BasePath, "GlobalConfiguration.xml"));
                 }
             }
             else
             {
-                MessageBox.Show("Path to Driver is empty!");
+                Debug.WriteLine("[GlobalConfiguration] Path to Driver is empty!");
             }
         }
 
@@ -121,17 +128,17 @@ namespace ProjectDataLib
             try
             {
                 assmemblyPath.Remove(path);
-                SaveData(Application.StartupPath + "\\GlobalConfiguration.xml");
+                SaveData(Path.Combine(BasePath, "GlobalConfiguration.xml"));
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("GlobalConfiguration.removeDrv :" + Ex.Message);
+                Debug.WriteLine("[GlobalConfiguration] removeDrv: " + Ex.Message);
             }
         }
 
         public void autoSearchDrv()
         {
-            DirectoryInfo dInfo = new DirectoryInfo(Application.StartupPath);
+            DirectoryInfo dInfo = new DirectoryInfo(BasePath);
             FileInfo[] paths = dInfo.GetFiles("*.dll");
 
             assmemblyPath.Clear();
@@ -164,7 +171,7 @@ namespace ProjectDataLib
 
                         if (!CheckAssembly(asm))
                         {
-                            MessageBox.Show("Assembly: " + asm.FullName + " Isn't appropriate!");
+                            Debug.WriteLine("[GlobalConfiguration] Assembly: " + asm.FullName + " Isn't appropriate!");
                             return null;
                         }
                         else
@@ -195,7 +202,7 @@ namespace ProjectDataLib
 
                         if (!CheckAssembly(asm))
                         {
-                            MessageBox.Show("Assembly: " + asm.FullName + " Isn't appropriate!");
+                            Debug.WriteLine("[GlobalConfiguration] Assembly: " + asm.FullName + " Isn't appropriate!");
                             return null;
                         }
                         else
@@ -230,13 +237,13 @@ namespace ProjectDataLib
                 }
                 else
                 {
-                    MessageBox.Show("Please Install Driver: " + name);
+                    Debug.WriteLine("[GlobalConfiguration] Please Install Driver: " + name);
                     return null;
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Problem with loading driver: " + name);
+                Debug.WriteLine("[GlobalConfiguration] Problem with loading driver: " + name);
                 return null;
             }
         }

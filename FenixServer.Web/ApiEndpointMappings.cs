@@ -205,60 +205,33 @@ namespace FenixServer.Web
         }
 
         // ── V1 API Endpoints ───────────────────────────────────────────────────────
+        // Reuses the same handlers as the non-versioned /api/ endpoints.
         public static void MapApiV1Endpoints(this WebApplication app)
         {
             const string v1 = EndpointMappings.ApiV1Prefix;
 
             // Tags
-            app.MapGet($"{v1}/tags",                     GetAllTagsV1).WithName("ApiV1GetAllTags");
-            app.MapGet($"{v1}/tags/{{name}}",            GetTagV1).WithName("ApiV1GetTag");
-            app.MapPut($"{v1}/tags/{{name}}",            SetTagV1).WithName("ApiV1SetTag");
+            app.MapGet($"{v1}/tags",                     GetAllTags).WithName("ApiV1GetAllTags");
+            app.MapGet($"{v1}/tags/{{name}}",            GetTag).WithName("ApiV1GetTag");
+            app.MapPut($"{v1}/tags/{{name}}",            SetTag).WithName("ApiV1SetTag");
 
             // Connections
-            app.MapGet($"{v1}/connections",              GetAllConnectionsV1).WithName("ApiV1GetAllConnections");
+            app.MapGet($"{v1}/connections",              GetAllConnections).WithName("ApiV1GetAllConnections");
 
             // Graph
-            app.MapGet($"{v1}/graph",                    GetGraphV1).WithName("ApiV1GetGraph");
+            app.MapGet($"{v1}/graph",                    GetGraph).WithName("ApiV1GetGraph");
 
             // Events
-            app.MapGet($"{v1}/events",                   GetEventsV1).WithName("ApiV1GetEvents");
+            app.MapGet($"{v1}/events",                   GetEvents).WithName("ApiV1GetEvents");
 
             // Server / Buffor
-            app.MapGet($"{v1}/server/buffor",            GetBufforV1).WithName("ApiV1GetBuffor");
-            app.MapPut($"{v1}/server/buffor/{{seconds}}", SetBufforV1).WithName("ApiV1SetBuffor");
+            app.MapGet($"{v1}/server/buffor",            GetBuffor).WithName("ApiV1GetBuffor");
+            app.MapPut($"{v1}/server/buffor/{{seconds}}", SetBuffor).WithName("ApiV1SetBuffor");
 
             // Misc
-            app.MapGet($"{v1}/timer/{{name}}",           GetTimerV1).WithName("ApiV1GetTimer");
-            app.MapGet($"{v1}/user/{{name}}",            GetUserV1).WithName("ApiV1GetUser");
-            app.MapGet($"{v1}/machine/{{name}}",         GetMachineV1).WithName("ApiV1GetMachine");
+            app.MapGet($"{v1}/timer/{{name}}",           GetTimer).WithName("ApiV1GetTimer");
+            app.MapGet($"{v1}/user/{{name}}",            GetUser).WithName("ApiV1GetUser");
+            app.MapGet($"{v1}/machine/{{name}}",         GetMachine).WithName("ApiV1GetMachine");
         }
-
-        // ── V1: tags ───────────────────────────────────────────────────────────────
-        private static IResult GetAllTagsV1(HttpContext ctx) => GetAllTags(ctx);
-
-        private static IResult GetTagV1(string name, HttpContext ctx) => GetTag(name, ctx);
-
-        private static IResult SetTagV1(string name, HttpContext ctx) => SetTag(name, ctx);
-
-        // ── V1: connections ────────────────────────────────────────────────────────
-        private static IResult GetAllConnectionsV1(HttpContext ctx) => GetAllConnections(ctx);
-
-        // ── V1: graph ──────────────────────────────────────────────────────────────
-        private static IResult GetGraphV1(HttpContext ctx) => GetGraph(ctx);
-
-        // ── V1: events ─────────────────────────────────────────────────────────────
-        private static IResult GetEventsV1(HttpContext ctx) => GetEvents(ctx);
-
-        // ── V1: server / buffor ────────────────────────────────────────────────────
-        private static IResult GetBufforV1() => GetBuffor();
-
-        private static IResult SetBufforV1(int seconds) => SetBuffor(seconds);
-
-        // ── V1: misc ───────────────────────────────────────────────────────────────
-        private static IResult GetTimerV1(string name, HttpContext ctx) => GetTimer(name, ctx);
-
-        private static IResult GetUserV1(string name, HttpContext ctx) => GetUser(name, ctx);
-
-        private static IResult GetMachineV1(string name, HttpContext ctx) => GetMachine(name, ctx);
     }
 }

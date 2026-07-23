@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -561,7 +560,7 @@ namespace ProjectDataLib
 
                         if (Tgg0.idrv.MemoryAreaInf[0].Name != idvTar.MemoryAreaInf[0].Name)
                         {
-                            MessageBox.Show("You cant copy Tags between different drivers!!!");
+                            ApplicationError?.Invoke(this, new ProjectEventArgs(new InvalidOperationException("Cannot copy Tags between different drivers!")));
                             return false;
                         }
 

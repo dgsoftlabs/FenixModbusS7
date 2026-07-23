@@ -1102,6 +1102,11 @@ namespace Fenix
         {
             try
             {
+                Pr.Db.ConfirmationCallback = (message, caption) =>
+                {
+                    var result = MessageBox.Show(message, caption, MessageBoxButton.OKCancel);
+                    return result == MessageBoxResult.OK;
+                };
                 Pr.Db.Reset();
             }
             catch (Exception Ex)
@@ -1187,7 +1192,7 @@ namespace Fenix
 
                 var tagNames = tags.Select(t => t.Name).Distinct().ToList();
 
-                // Group by second precision — same logic as DBTableView pivot table
+                // Group by second precision ï¿½ same logic as DBTableView pivot table
                 var groups = tags
                     .GroupBy(t => new DateTime(t.Stamp.Year, t.Stamp.Month, t.Stamp.Day,
                                                t.Stamp.Hour, t.Stamp.Minute, t.Stamp.Second))
@@ -1201,7 +1206,7 @@ namespace Fenix
                     sb.Append($",{name}");
                 sb.AppendLine();
 
-                // Data rows — one row per timestamp group
+                // Data rows ï¿½ one row per timestamp group
                 foreach (var group in groups)
                 {
                     sb.Append(group.Key.ToString("yyyy-MM-dd HH:mm:ss"));

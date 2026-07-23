@@ -186,7 +186,7 @@ namespace FenixServer.Web
             return Path.Combine(projectDirectory, httpFolder);
         }
 
-        private static int GetConfiguredPort(Project project)
+        internal static int GetConfiguredPort(Project project)
         {
             var rawPrefix = project?.WebServer1?.Prefixes?.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p));
             if (string.IsNullOrWhiteSpace(rawPrefix))

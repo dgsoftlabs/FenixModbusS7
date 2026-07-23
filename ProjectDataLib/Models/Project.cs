@@ -12,15 +12,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
 namespace ProjectDataLib
 {
     [Serializable]
-    [System.Runtime.InteropServices.ComVisible(true)]
     public class Project : IDisposable, ITreeViewModel, INotifyPropertyChanged, ITableView, IDriversMagazine
     {
         [field: NonSerialized]
@@ -96,7 +93,6 @@ namespace ProjectDataLib
         private Guid objId_;
 
         [Browsable(false)]
-        [ComVisible(false)]
         [XmlElement(ElementName = "Id")]
         public Guid objId
         {
@@ -116,8 +112,7 @@ namespace ProjectDataLib
         private string projectName_;
 
         [Category("01 Design"), DisplayName("Project Name"), Description("Current project name")]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "Name")]
+                [XmlElement(ElementName = "Name")]
         public string projectName
         {
             get
@@ -136,8 +131,7 @@ namespace ProjectDataLib
         private Version fileVer_;
 
         [Category("02 Header"), DisplayName("Version"), Description("Version of files.")]
-        [ComVisible(false)]
-        [XmlIgnore]
+                [XmlIgnore]
         public Version fileVer
         {
             get { return fileVer_; }
@@ -160,8 +154,7 @@ namespace ProjectDataLib
         private string autor_;
 
         [Category("03 Information"), DisplayName("Autor")]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "Autor")]
+                [XmlElement(ElementName = "Autor")]
         public string autor
         {
             get { return autor_; }
@@ -176,8 +169,7 @@ namespace ProjectDataLib
         private string company_;
 
         [Category("03 Information"), DisplayName("Company")]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "Company")]
+                [XmlElement(ElementName = "Company")]
         public string company
         {
             get { return company_; }
@@ -192,8 +184,7 @@ namespace ProjectDataLib
         private string describe_;
 
         [Category("05 Misc"), DisplayName("Description")]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "Description")]
+                [XmlElement(ElementName = "Description")]
         public string describe
         {
             get { return describe_; }
@@ -208,8 +199,7 @@ namespace ProjectDataLib
         private DateTime createTime_;
 
         [Category("04 Time"), DisplayName("Create Time"), ReadOnly(true)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "Created")]
+                [XmlElement(ElementName = "Created")]
         public DateTime createTime
         {
             get { return createTime_; }
@@ -219,8 +209,7 @@ namespace ProjectDataLib
         private DateTime modifeTime_;
 
         [Category("04 Time"), ReadOnly(true), DisplayName("Modification Time")]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "LastModification")]
+                [XmlElement(ElementName = "LastModification")]
         public DateTime modifeTime
         {
             get { return modifeTime_; }
@@ -234,8 +223,7 @@ namespace ProjectDataLib
         private Boolean modMarks_;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlIgnore]
+                [XmlIgnore]
         public Boolean modMarks
         {
             get { return modMarks_; }
@@ -249,8 +237,7 @@ namespace ProjectDataLib
         private string path_ = string.Empty;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "ProjectPath")]
+                [XmlElement(ElementName = "ProjectPath")]
         public string path
         {
             get { return path_; }
@@ -264,8 +251,7 @@ namespace ProjectDataLib
         private ChartViewConf ChartConf_;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "EditorsConfiguration")]
+                [XmlElement(ElementName = "EditorsConfiguration")]
         public ChartViewConf ChartConf
         {
             get { return ChartConf_; }
@@ -275,8 +261,7 @@ namespace ProjectDataLib
         private TableViewConf TableConf_;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "TableConfiguration")]
+                [XmlElement(ElementName = "TableConfiguration")]
         public TableViewConf TableConf
         {
             get { return TableConf_; }
@@ -286,8 +271,7 @@ namespace ProjectDataLib
         private CommViewConf CommConf_;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "CommViewConfiguration")]
+                [XmlElement(ElementName = "CommViewConfiguration")]
         public CommViewConf CommConf
         {
             get { return CommConf_; }
@@ -306,8 +290,7 @@ namespace ProjectDataLib
         private Boolean IsExpand_;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        public Boolean IsExpand
+                public Boolean IsExpand
         {
             get { return IsExpand_; }
             set
@@ -333,8 +316,7 @@ namespace ProjectDataLib
         private LegacyScriptCompat scriptCon_;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlIgnore]
+                [XmlIgnore]
         public dynamic ScriptCon
         {
             get
@@ -358,8 +340,7 @@ namespace ProjectDataLib
         private List<InFile> FileList_;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "FileList", Type = typeof(List<InFile>))]
+                [XmlElement(ElementName = "FileList", Type = typeof(List<InFile>))]
         public List<InFile> FileList
         {
             get { return FileList_; }
@@ -370,8 +351,7 @@ namespace ProjectDataLib
         private List<ScriptFile> ScriptFileList_;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "ScriptFileList", Type = typeof(List<ScriptFile>))]
+                [XmlElement(ElementName = "ScriptFileList", Type = typeof(List<ScriptFile>))]
         public List<ScriptFile> ScriptFileList
         {
             get { return ScriptFileList_; }
@@ -381,8 +361,7 @@ namespace ProjectDataLib
         private List<Connection> connectionList_ = new List<Connection>();
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "ConnectionList", Type = typeof(List<Connection>))]
+                [XmlElement(ElementName = "ConnectionList", Type = typeof(List<Connection>))]
         public List<Connection> connectionList
         {
             get { return connectionList_; }
@@ -397,8 +376,7 @@ namespace ProjectDataLib
         private List<Device> DevicesList_ = new List<Device>();
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "DeviceList", Type = typeof(List<Device>))]
+                [XmlElement(ElementName = "DeviceList", Type = typeof(List<Device>))]
         public List<Device> DevicesList
         {
             get { return DevicesList_; }
@@ -412,8 +390,7 @@ namespace ProjectDataLib
         private List<Tag> tagsList_ = new List<Tag>();
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "TagList", Type = typeof(List<Tag>))]
+                [XmlElement(ElementName = "TagList", Type = typeof(List<Tag>))]
         public List<Tag> tagsList
         {
             get { return tagsList_; }
@@ -423,8 +400,7 @@ namespace ProjectDataLib
         private List<InTag> InTagsList_ = new List<InTag>();
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "InternalTagList", Type = typeof(List<InTag>))]
+                [XmlElement(ElementName = "InternalTagList", Type = typeof(List<InTag>))]
         public List<InTag> InTagsList
         {
             get { return InTagsList_; }
@@ -444,8 +420,7 @@ namespace ProjectDataLib
         private InternalTagsDriver InternalTags_;
 
         [Browsable(false)]
-        [ComVisible(false)]
-        [XmlElement(ElementName = "IntTagsEngine")]
+                [XmlElement(ElementName = "IntTagsEngine")]
         public InternalTagsDriver InternalTagsDrv
         {
             get { return InternalTags_; }
@@ -568,15 +543,13 @@ namespace ProjectDataLib
             modificationApear();
         }
 
-        [ComVisible(false)]
-        private void modificationApear()
+                private void modificationApear()
         {
             modifeTime = DateTime.Now;
             modMarks = true;
         }
 
-        [ComVisible(false)]
-        [OnDeserialized]
+                [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
             InternalTags_.Proj = this;
@@ -763,17 +736,9 @@ namespace ProjectDataLib
             TagChildren = new ObservableCollection<ITag>(query);
         }
 
-        [ComVisible(false)]
-        public object Clone()
+                public object Clone()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(ms, this);
-            ms.Position = 0;
-
-            Project Pr1 = (Project)bf.Deserialize(ms);
-            ms.Close();
-
+            Project Pr1 = ObjectCloner.DeepClone(this);
             Pr1.objId_ = Guid.NewGuid();
             Pr1.connectionList_.Clear();
             Pr1.DevicesList_.Clear();
@@ -789,8 +754,7 @@ namespace ProjectDataLib
             return Pr1;
         }
 
-        [ComVisible(true)]
-        public object GetTag(string s)
+                public object GetTag(string s)
         {
             try
             {
@@ -815,8 +779,7 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)]
-        public ITag GetITag(string s)
+                public ITag GetITag(string s)
         {
             try
             {
@@ -841,8 +804,7 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)]
-        public Object SetTag(string s, object val)
+                public Object SetTag(string s, object val)
         {
             try
             {
@@ -879,8 +841,7 @@ namespace ProjectDataLib
 
         #region Scripts for Web
 
-        [ComVisible(true)]
-        public string SetTagValue(string s, object val)
+                public string SetTagValue(string s, object val)
         {
             try
             {
@@ -911,8 +872,7 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)]
-        public string GetTagValue(string s)
+                public string GetTagValue(string s)
         {
             try
             {
@@ -940,8 +900,7 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)]
-        public string GetTimerValue(string s)
+                public string GetTimerValue(string s)
         {
             try
             {
@@ -956,8 +915,7 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)]
-        public string GetUserValue(string s)
+                public string GetUserValue(string s)
         {
             try
             {
@@ -972,8 +930,7 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)]
-        public string GetMachineValue(string s)
+                public string GetMachineValue(string s)
         {
             try
             {
@@ -988,8 +945,7 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)]
-        public string GetTagsAll(string name)
+                public string GetTagsAll(string name)
         {
             try
             {
@@ -1004,8 +960,7 @@ namespace ProjectDataLib
             }
         }
 
-        [ComVisible(true)]
-        public string GetConnectionsAll(string name)
+                public string GetConnectionsAll(string name)
         {
             try
             {

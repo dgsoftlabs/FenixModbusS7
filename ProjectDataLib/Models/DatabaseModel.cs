@@ -9,7 +9,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace ProjectDataLib
@@ -216,16 +215,23 @@ namespace ProjectDataLib
             }
         }
 
+        /// <summary>
+        /// Raised when a confirmation is needed from the user.
+        /// The caller should set this delegate to show a dialog and return true/false.
+        /// If unset, defaults to auto-confirm (true).
+        /// </summary>
+        [field: NonSerialized]
+        [XmlIgnore, JsonIgnore]
+        public Func<string, string, bool> ConfirmationCallback { get; set; }
+
         public void Reset()
         {
             if (_repository != null)
             {
-                if (MessageBox.Show("Do you want to remove all records from database?",
-                                    "Database",
-                                      MessageBoxButtons.OKCancel) == DialogResult.OK)
+                bool confirmed = ConfirmationCallback?.Invoke("Do you want to remove all records from database?", "Database") ?? true;
+                if (confirmed)
                 {
                     ResetDatabaseAsync().GetAwaiter().GetResult();
-                    MessageBox.Show("All records removed!");
                 }
             }
         }

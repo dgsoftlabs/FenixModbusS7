@@ -17,47 +17,21 @@ namespace FenixServer.Web
 
             Project? project = null;
             var container = new ProjectContainer();
-            container.ApplicationError += (_, e) =>
-            {
-                if (e is not ProjectEventArgs pe)
-                    return;
-
-                var error = pe.element as Exception
-                    ?? pe.element2 as Exception;
-
-                if (error != null)
-                    Console.Error.WriteLine($"[APP][ERROR] {error.Message}");
-            };
+            container.ApplicationError += RegisterAppError;
 
             if (string.IsNullOrWhiteSpace(projectPath))
+            {
                 projectPath = GetLastProjectPathFromRegistry(container);
-
-            if (!string.IsNullOrWhiteSpace(projectPath))
-            {
-                if (!File.Exists(projectPath))
-                {
-                    Console.Error.WriteLine($"Project file not found: {projectPath}");
-                    Console.ReadKey();
-                    Environment.Exit(1);
-                }
-
-                if (!container.openProjects(projectPath))
-                {
-                    Console.Error.WriteLine($"Failed to load project: {projectPath}");
-                    Console.ReadKey();
-                    Environment.Exit(2);
-                }
-
-                project = container.projectList.FirstOrDefault();
             }
 
-            if (project == null)
+            if (!container.openProjects(projectPath))
             {
-                Console.WriteLine("No project file specified. Running without a project.");
-                Console.WriteLine("Usage: FenixServer.Web.exe <project.pse>");
-                Console.WriteLine("Starting with empty project...");
-                project = new Project();
+                Console.Error.WriteLine($"Failed to load project: {projectPath}");
+                Console.ReadKey();
+                Environment.Exit(2);
             }
+
+            project = container?.projectList?.FirstOrDefault() ?? new Project();
 
             using var cts = new CancellationTokenSource();
             var shutdownStarted = 0;
@@ -107,7 +81,7 @@ namespace FenixServer.Web
                 int activePort;
                 string startupMessage;
 
-                var configuredPort = GetPortFromProjectPrefix(project);
+                var configuredPort = Program.GetConfiguredPort(project);
                 Program.ConfigureWebHost(project, container, configuredPort);
                 startupMessage = $"FenixServer.Web starting from project setup on http://localhost:{configuredPort} ...";
                 activePort = configuredPort;
@@ -118,7 +92,7 @@ namespace FenixServer.Web
                 Console.WriteLine($"Project path: {project.path}");
                 Console.WriteLine();
 
-                AttachDriverEvents(project, container);
+                AttachDriverEvents(project);
                 StartAllDrivers(project, container);
 
                 await Program.StartAsync(cts.Token);
@@ -136,6 +110,18 @@ namespace FenixServer.Web
 
             EnsureShutdown("Cancellation");
             Environment.Exit(0);
+        }
+
+        private static void RegisterAppError(object? o, EventArgs e)
+        {
+            if (e is not ProjectEventArgs pe)
+                return;
+
+            var error = pe.element as Exception
+                ?? pe.element2 as Exception;
+
+            if (error != null)
+                Console.Error.WriteLine($"[APP][ERROR] {error.Message}");
         }
 
         private static void PrintStartupBanner()
@@ -176,19 +162,6 @@ namespace FenixServer.Web
             }
         }
 
-        private static int GetPortFromProjectPrefix(Project project)
-        {
-            var rawPrefix = project?.WebServer1?.Prefixes?.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p));
-            if (string.IsNullOrWhiteSpace(rawPrefix))
-                return 80;
-
-            var normalized = rawPrefix.Trim().Replace("+", "localhost").Replace("*", "localhost");
-            if (Uri.TryCreate(normalized, UriKind.Absolute, out var uri) && uri.Port > 0)
-                return uri.Port;
-
-            return 80;
-        }
-
         private static string? GetLastProjectPathFromRegistry(ProjectContainer container)
         {
             try
@@ -204,7 +177,7 @@ namespace FenixServer.Web
             }
         }
 
-        private static void AttachDriverEvents(Project project, ProjectContainer container)
+        private static void AttachDriverEvents(Project project)
         {
             foreach (var connection in project.connectionList)
             {
