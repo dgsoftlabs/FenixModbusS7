@@ -208,8 +208,8 @@ namespace Fenix
                 }},
                 new ScriptFunctionCategory { Name = "Dialogs", Functions = new List<ScriptFunctionEntry>
                 {
-                    new ScriptFunctionEntry { Name = "MessageBox.Show",               Signature = "MessageBox.Show(text)",                       Description = "Displays a message dialog. Requires: using System.Windows.Forms;",              InsertSnippet = "MessageBox.Show(\"message\")" },
-                    new ScriptFunctionEntry { Name = "MessageBox.Show (caption+btn)", Signature = "MessageBox.Show(text, caption, buttons)",     Description = "Message dialog with title and buttons. Requires: using System.Windows.Forms;", InsertSnippet = "MessageBox.Show(\"message\", \"Title\", MessageBoxButtons.OK)" },
+                    new ScriptFunctionEntry { Name = "MessageBox.Show",               Signature = "MessageBox.Show(text)",                       Description = "Displays a message dialog. Requires: using System.Windows;",                InsertSnippet = "MessageBox.Show(\"message\")" },
+                    new ScriptFunctionEntry { Name = "MessageBox.Show (caption+btn)", Signature = "MessageBox.Show(text, caption, buttons)",     Description = "Message dialog with title and buttons. Requires: using System.Windows;",       InsertSnippet = "MessageBox.Show(\"message\", \"Title\", MessageBoxButton.OK)" },
                 }},
                 new ScriptFunctionCategory { Name = "Conversion", Functions = new List<ScriptFunctionEntry>
                 {
