@@ -103,6 +103,16 @@ namespace FenixServer.Web
 
         private async Task ReconnectDeadConnectionsAsync(CancellationToken cancellationToken)
         {
+            // Re-subscribe on every pass so drivers that were created or replaced
+            // after startup (e.g. after a DriverName change) are also monitored.
+            SubscribeToDriverErrors();
+
+            // Proactively mark connections whose driver is not running. This covers
+            // the case where the PLC/device was unreachable when the server started:
+            // the startup error event is raised before this service subscribes, so it
+            // would otherwise be missed and no retry would ever happen.
+            DetectDeadConnections();
+
             if (_deadConnections.IsEmpty)
                 return;
 
@@ -139,6 +149,10 @@ namespace FenixServer.Web
                     // Full restart cycle: stop then start
                     driver.deactivateCycle();
 
+                    // Wait for the driver's background worker to drain so activateCycle
+                    // is not rejected just because the previous worker was still busy.
+                    await WaitForDriverIdleAsync(driver, cancellationToken);
+
                     var tags = _container.GetAllITagsForDriver(
                         _project.objId,
                         driver.ObjId) ?? new List<ITag>();
@@ -171,6 +185,52 @@ namespace FenixServer.Web
             }
 
             await Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Marks any connection whose driver is not currently running (failed to start,
+        /// dropped, or crashed) as dead so it gets retried by the reconnection loop.
+        /// The web server starts every connection at startup and has no per-driver
+        /// stop endpoint, so a non-alive driver always means the cycle is broken.
+        /// </summary>
+        private void DetectDeadConnections()
+        {
+            foreach (var connection in _project.connectionList)
+            {
+                var driver = connection.Idrv;
+                if (driver == null || connection.IsBlocked)
+                    continue;
+
+                if (!driver.isAlive &&
+                    _deadConnections.TryAdd(connection.objId, connection.connectionName))
+                {
+                    _logger.LogWarning(
+                        "[{Name}] Driver is not running. Connection marked for reconnection.",
+                        connection.connectionName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Waits a short, bounded window for the driver's background worker to finish
+        /// after deactivateCycle, so the subsequent activateCycle is not rejected
+        /// because the worker is still busy. Proceeds anyway after the window.
+        /// </summary>
+        private async Task WaitForDriverIdleAsync(IDriverModel driver, CancellationToken cancellationToken)
+        {
+            var deadline = DateTime.UtcNow.AddSeconds(4);
+
+            try
+            {
+                while (driver.isBusy && !cancellationToken.IsCancellationRequested && DateTime.UtcNow < deadline)
+                {
+                    await Task.Delay(100, cancellationToken);
+                }
+            }
+            catch (Exception)
+            {
+                // If the driver state cannot be inspected, just proceed with the retry.
+            }
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)

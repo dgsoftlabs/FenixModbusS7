@@ -31,8 +31,10 @@ namespace nmDriver
 
         private S7DriverParam DriverParam_;
         private Boolean isLive = false;
-        private static readonly S7Client dc = new S7Client();
-        private static readonly object commLock = new object();
+        // Each driver instance must own its own client/lock - a shared static client
+        // makes reconnecting one connection break every other S7 connection.
+        private readonly S7Client dc = new S7Client();
+        private readonly object commLock = new object();
 
         private List<Tag> tagList = new List<Tag>();
         private List<PO> MPoints = new List<PO>();
@@ -346,7 +348,10 @@ namespace nmDriver
                     dc.Disconnect();
 
                 int timeout = DriverParam_.Timeout < 1 ? 1 : DriverParam_.Timeout;
-                dc.ConnTimeout = timeout;
+                // Cap the TCP connect timeout so a dead PLC cannot block the worker
+                // and the reconnection retry for a very long time (the configured
+                // default of 1,000,000 ms would otherwise hang the retry loop).
+                dc.ConnTimeout = Math.Min(timeout, 10000);
                 dc.RecvTimeout = timeout;
                 dc.SendTimeout = timeout;
 

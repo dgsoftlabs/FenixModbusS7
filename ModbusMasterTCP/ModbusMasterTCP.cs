@@ -71,6 +71,14 @@ namespace nmDriver
         private TcpClient tcpClient = new TcpClient();
 
         /// <summary>
+        /// Client captured by the worker cycle currently in flight; used to clean up
+        /// exactly the connection a finished worker used, even if tcpClient has since
+        /// been replaced by deactivateCycle/activateCycle.
+        /// </summary>
+        [field: NonSerialized]
+        private TcpClient activeClient;
+
+        /// <summary>
         /// Parametry Transmisji
         /// </summary>
         private TcpDriverParam DriverParam_;
@@ -227,6 +235,11 @@ namespace nmDriver
             foreach (IDriverModel it in this.tagList)
                 it.isAlive = false;
 
+            //Abort in-flight socket I/O so the worker thread drains quickly and
+            //activateCycle is not rejected because the worker is still busy.
+            SafeCloseClient(tcpClient);
+            activeClient = null;
+
             return true;
         }
 
@@ -358,9 +371,25 @@ namespace nmDriver
         /// <param name="e"></param>
         private void bWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            //Remember which client this cycle operates on for later cleanup
+            activeClient = tcpClient;
+
             //Sprawdz cy klient jest poloczony
-            if (!tcpClient.Connected)
+            try
+            {
+                if (!tcpClient.Connected)
+                {
+                    //Report the broken link as an error so the reconnection
+                    //service can act on it (TcpClient.Connected is stale here).
+                    errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterTCP: TCP connection is not established."));
+                    return;
+                }
+            }
+            catch (Exception Ex)
+            {
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterTCP.bWorker_DoWork :" + Ex.Message, Ex));
                 return;
+            }
 
             if (mainFrames.Count > 0)
             {
@@ -376,7 +405,7 @@ namespace nmDriver
                 catch (Exception Ex)
                 {
                     if (errorSendEv != null)
-                        errorSendEv(this, new ProjectEventArgs(mainFrames, DateTime.Now, "ModbusMasterRTU.bWorker_DoWork :" + Ex.Message, Ex));
+                        errorSendEv(this, new ProjectEventArgs(mainFrames, DateTime.Now, "ModbusMasterTCP.bWorker_DoWork :" + Ex.Message, Ex));
                 }
             }
 
@@ -499,8 +528,11 @@ namespace nmDriver
                 }
                 else
                 {
-                    tcpClient.GetStream().Close();
-                    tcpClient.Close();
+                    //Cleanup of the connection this finished worker used. The client may
+                    //already have been closed by deactivateCycle - that is expected during
+                    //reconnection and must not surface as an error.
+                    SafeCloseClient(activeClient);
+                    activeClient = null;
                 }
             }
             catch (Exception Ex)
@@ -508,6 +540,19 @@ namespace nmDriver
                 if (errorSendEv != null)
                     errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterTCP.bWorker_RunWorkerCompleted :" + Ex.Message, Ex));
             }
+        }
+
+        /// <summary>
+        /// Best-effort close that never throws - used so connection teardown during
+        /// reconnection/shutdown is silent and idempotent.
+        /// </summary>
+        private static void SafeCloseClient(TcpClient client)
+        {
+            if (client == null)
+                return;
+
+            try { client.GetStream().Close(); } catch { }
+            try { client.Close(); } catch { }
         }
 
         /// <summary>
@@ -575,9 +620,11 @@ namespace nmDriver
             }
             else
             {
-                //OverTime
+                //OverTime - report as an error too so the reconnection service can act on it
                 if (sendInfoEv != null)
                     sendInfoEv(this, new ProjectEventArgs(frRequest, DateTime.Now, "Device not respond. " + getAreaFromFrame(frRequest) + "- Timeout"));
+
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "Device not respond. " + getAreaFromFrame(frRequest) + "- Timeout"));
 
                 return false;
             }
@@ -771,7 +818,7 @@ namespace nmDriver
             catch (Exception Ex)
             {
                 if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterRTU.configSingleDevice.CO :" + Ex.Message, Ex));
+                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterTCP.configSingleDevice.CO :" + Ex.Message, Ex));
             }
 
             try
@@ -845,7 +892,7 @@ namespace nmDriver
             catch (Exception Ex)
             {
                 if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterRTU.configSingleDevice.DI :" + Ex.Message, Ex));
+                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterTCP.configSingleDevice.DI :" + Ex.Message, Ex));
             }
 
             try
@@ -917,7 +964,7 @@ namespace nmDriver
             catch (Exception Ex)
             {
                 if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterRTU.configSingleDevice.IR :" + Ex.Message, Ex));
+                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterTCP.configSingleDevice.IR :" + Ex.Message, Ex));
             }
 
             try
@@ -990,7 +1037,7 @@ namespace nmDriver
             catch (Exception Ex)
             {
                 if (errorSendEv != null)
-                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterRTU.configSingleDevice.HR :" + Ex.Message, Ex));
+                    errorSendEv(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterTCP.configSingleDevice.HR :" + Ex.Message, Ex));
             }
 
             return buffFrames;

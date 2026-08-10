@@ -1,4 +1,5 @@
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Logging.Console;
 using ProjectDataLib;
 using System.IO;
 using System.Net;
@@ -67,6 +68,15 @@ namespace FenixServer.Web
 
         private static void ConfigureServices(WebApplicationBuilder builder, Project project, ProjectContainer projectContainer)
         {
+            // Single-line, timestamped console logging for a cleaner server console.
+            builder.Logging.ClearProviders();
+            builder.Logging.AddSimpleConsole(options =>
+            {
+                options.TimestampFormat = "HH:mm:ss ";
+                options.SingleLine = true;
+                options.ColorBehavior = LoggerColorBehavior.Enabled;
+            });
+
             builder.Services
                 .AddSingleton(project)
                                 .AddSingleton(projectContainer)
