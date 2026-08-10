@@ -6,10 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -675,14 +673,7 @@ namespace ProjectDataLib
 
         public object Clone()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(ms, this);
-            ms.Position = 0;
-            InTag Tg1 = (InTag)bf.Deserialize(ms);
-            ms.Close();
-
-            return Tg1;
+            return ObjectCloner.DeepClone(this);
         }
 
         Guid ITag.Id

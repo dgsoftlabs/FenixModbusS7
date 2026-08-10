@@ -6,10 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
 namespace ProjectDataLib
@@ -330,25 +328,14 @@ namespace ProjectDataLib
 
         public object Clone()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(ms, this);
-            ms.Position = 0;
-            Connection Cn1 = (Connection)bf.Deserialize(ms);
-            ms.Close();
-
+            Connection Cn1 = ObjectCloner.DeepClone(this);
             Cn1.objId_ = Guid.NewGuid();
-
             Cn1.parentId_ = Guid.Empty;
-
             Cn1.PrCon = PrCon;
-
             Cn1.Idrv_ = null;
-
             Cn1.TreeViewChildren = new ObservableCollection<object>();
             Cn1.TagChildren = new ObservableCollection<ITag>();
             Cn1.DriverChildren = new ObservableCollection<IDriverModel>();
-
             return Cn1;
         }
 

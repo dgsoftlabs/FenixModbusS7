@@ -1,4 +1,5 @@
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Logging.Console;
 using ProjectDataLib;
 using System.IO;
 using System.Net;
@@ -67,10 +68,20 @@ namespace FenixServer.Web
 
         private static void ConfigureServices(WebApplicationBuilder builder, Project project, ProjectContainer projectContainer)
         {
+            // Single-line, timestamped console logging for a cleaner server console.
+            builder.Logging.ClearProviders();
+            builder.Logging.AddSimpleConsole(options =>
+            {
+                options.TimestampFormat = "HH:mm:ss ";
+                options.SingleLine = true;
+                options.ColorBehavior = LoggerColorBehavior.Enabled;
+            });
+
             builder.Services
                 .AddSingleton(project)
-                .AddSingleton(projectContainer)
-                .AddCors(options =>
+                                .AddSingleton(projectContainer)
+                                .AddHostedService<ReconnectionService>()
+                                .AddCors(options =>
                 {
                     options.AddDefaultPolicy(policy =>
                     {
@@ -185,7 +196,7 @@ namespace FenixServer.Web
             return Path.Combine(projectDirectory, httpFolder);
         }
 
-        private static int GetConfiguredPort(Project project)
+        internal static int GetConfiguredPort(Project project)
         {
             var rawPrefix = project?.WebServer1?.Prefixes?.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p));
             if (string.IsNullOrWhiteSpace(rawPrefix))

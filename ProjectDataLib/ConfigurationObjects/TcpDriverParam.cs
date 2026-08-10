@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Net;
-using System.Windows.Forms;
 
 namespace ProjectDataLib
 {
@@ -18,7 +18,7 @@ namespace ProjectDataLib
             set
             {
                 try { Ip_ = IPAddress.Parse(value); }
-                catch (Exception Ex) { MessageBox.Show(Ex.Message); }
+                catch (Exception Ex) { Debug.WriteLine("[TcpDriverParam] Invalid IP: " + Ex.Message); }
             }
         }
 

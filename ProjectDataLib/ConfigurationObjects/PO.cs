@@ -26,6 +26,10 @@
             set { BlockNum_ = value; }
         }
 
+        public PO()
+        {
+        }
+
         public PO(int x, int y)
         {
             this.X_ = x;

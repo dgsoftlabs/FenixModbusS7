@@ -239,6 +239,14 @@ namespace nmDriver
             foreach (IDriverModel it in this.tagList)
                 it.isAlive = false;
 
+            //Abort in-flight port I/O so the worker thread drains quickly and
+            //activateCycle is not rejected because the worker is still busy.
+            var oldPort = sPort;
+            if (oldPort != null && oldPort.IsOpen)
+            {
+                try { oldPort.Close(); } catch { }
+            }
+
             return true;
         }
 
@@ -368,8 +376,12 @@ namespace nmDriver
         private void bWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             //Sprawdz cy klient jest poloczony
-            if (!sPort.IsOpen)
+            if (sPort == null || !sPort.IsOpen)
+            {
+                //Report the broken link as an error so the reconnection service can act on it
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "ModbusMasterRTU: serial port is not open."));
                 return;
+            }
 
             //Wysalnie zapytan
             if (mainFrames.Count > 0)
@@ -595,9 +607,11 @@ namespace nmDriver
             }
             else
             {
-                //OverTime
+                //OverTime - report as an error too so the reconnection service can act on it
                 if (sendInfoEv != null)
                     sendInfoEv(this, new ProjectEventArgs(frRequest, DateTime.Now, "Device not respond. " + getAreaFromFrame(frRequest) + "- Timeout"));
+
+                errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now, "Device not respond. " + getAreaFromFrame(frRequest) + "- Timeout"));
 
                 return false;
             }

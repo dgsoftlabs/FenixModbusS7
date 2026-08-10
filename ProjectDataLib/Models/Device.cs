@@ -5,10 +5,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
 namespace ProjectDataLib
@@ -272,14 +270,7 @@ namespace ProjectDataLib
 
         public object Clone()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(ms, this);
-            ms.Position = 0;
-
-            Device Dv1 = (Device)bf.Deserialize(ms);
-            ms.Close();
-
+            Device Dv1 = ObjectCloner.DeepClone(this);
             Dv1.objId_ = Guid.NewGuid();
             Dv1.projId_ = Guid.Empty;
             Dv1.parentId_ = Guid.Empty;
@@ -287,7 +278,6 @@ namespace ProjectDataLib
             Dv1._Children = new ObservableCollection<object>();
             Dv1.ChildrenTags = new ObservableCollection<ITag>();
             Dv1.Children_ = new ObservableCollection<IDriverModel>();
-
             return Dv1;
         }
 

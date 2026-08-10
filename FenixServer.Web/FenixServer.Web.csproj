@@ -6,13 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <OutputType>Exe</OutputType>
     <StartupObject>FenixServer.Web.EntryPoint</StartupObject>
-    <Version>4.1.2</Version>
+    <Version>4.2.0</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.7" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ModbusMasterASCII\ModbusMasterASCII.csproj" />
