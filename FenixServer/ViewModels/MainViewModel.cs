@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace FenixServer.ViewModels
 {
@@ -26,6 +27,10 @@ namespace FenixServer.ViewModels
         private PropertyRow _selectedProperty;
         private ConnectionRow _selectedConnection;
         private Project _currentProject;
+
+        // UI status monitoring (reconnection itself is handled by the
+        // ReconnectionService hosted inside the web server that FenixServer starts).
+        private DispatcherTimer _statusTimer;
 
         public MainViewModel(string[] startupArgs)
         {
@@ -246,7 +251,13 @@ namespace FenixServer.ViewModels
                 // .GetAwaiter().GetResult() from the UI thread during app exit, so
                 // continuations must not be posted back to the UI dispatcher (that
                 // would deadlock while the UI thread is blocked in GetResult()).
-                await FenixServer.Api.WebHostExtensions.StopWebHostAsync().ConfigureAwait(false);
+                StopStatusMonitoring();
+
+                // Bound the web host stop (Kestrel can wait up to 30s for in-flight
+                // requests) so closing the window never freezes the UI.
+                await Task.WhenAny(
+                    FenixServer.Api.WebHostExtensions.StopWebHostAsync(),
+                    Task.Delay(TimeSpan.FromSeconds(3))).ConfigureAwait(false);
             }
             catch
             {
@@ -490,10 +501,12 @@ namespace FenixServer.ViewModels
                     ((IDriverModel)project.InternalTagsDrv).activateCycle(allInternalTags);
                 });
 
-                // 4) Start HTTP host
+                // 4) Start HTTP host (it hosts the ReconnectionService that keeps
+                //    connections alive; this app monitors status for the UI)
                 await FenixServer.Api.WebHostExtensions.InitializeAndStartWebHostAsync(project, projectContainer);
 
                 IsRunning = true;
+                StartStatusMonitoring();
                 AddEvent(new AlarmEvent("Communication started."));
                 RefreshConnections();
             }
@@ -514,8 +527,13 @@ namespace FenixServer.ViewModels
 
             try
             {
-                // 1) Stop HTTP host
-                await FenixServer.Api.WebHostExtensions.StopWebHostAsync();
+                StopStatusMonitoring();
+
+                // 1) Stop HTTP host with a bounded wait so Kestrel's graceful
+                //    shutdown (up to 30s default) cannot freeze the UI.
+                await Task.WhenAny(
+                    FenixServer.Api.WebHostExtensions.StopWebHostAsync(),
+                    Task.Delay(TimeSpan.FromSeconds(3)));
 
                 // 2) Stop drivers off the UI thread (deactivateCycle may briefly
                 //    block while aborting in-flight socket/serial I/O).
@@ -539,6 +557,142 @@ namespace FenixServer.ViewModels
             catch (Exception ex)
             {
                 AddEvent(new AlarmEvent("Stop error: " + ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// Starts lightweight UI monitoring. Reconnection itself is performed by the
+        /// ReconnectionService hosted inside the web server that FenixServer starts;
+        /// this method only subscribes to driver errors and periodically refreshes
+        /// connection statuses so that activity is visible in the UI.
+        /// </summary>
+        private void StartStatusMonitoring()
+        {
+            SubscribeToDriverErrors();
+
+            if (_statusTimer == null)
+            {
+                _statusTimer = new DispatcherTimer
+                {
+                    Interval = TimeSpan.FromSeconds(5)
+                };
+                _statusTimer.Tick += (_, _) =>
+                {
+                    SubscribeToDriverErrors();
+                    RefreshConnectionStatuses();
+                };
+            }
+
+            _statusTimer.Start();
+        }
+
+        private void StopStatusMonitoring()
+        {
+            if (_statusTimer != null)
+            {
+                _statusTimer.Stop();
+            }
+
+            UnsubscribeFromDriverErrors();
+        }
+
+        private void SubscribeToDriverErrors()
+        {
+            if (CurrentProject == null)
+            {
+                return;
+            }
+
+            // Re-subscribe every pass so drivers created or replaced after startup
+            // (e.g. after a DriverName change) are also monitored.
+            foreach (var connection in CurrentProject.connectionList)
+            {
+                var driver = connection.Idrv;
+                if (driver == null)
+                {
+                    continue;
+                }
+
+                driver.error -= OnDriverError;
+                driver.error += OnDriverError;
+            }
+        }
+
+        private void UnsubscribeFromDriverErrors()
+        {
+            if (CurrentProject == null)
+            {
+                return;
+            }
+
+            foreach (var connection in CurrentProject.connectionList)
+            {
+                var driver = connection.Idrv;
+                if (driver != null)
+                {
+                    driver.error -= OnDriverError;
+                }
+            }
+        }
+
+        private void OnDriverError(object sender, EventArgs e)
+        {
+            if (sender is not IDriverModel drv || CurrentProject == null)
+            {
+                return;
+            }
+
+            var connection = CurrentProject.connectionList
+                .FirstOrDefault(c => c.Idrv?.ObjId == drv.ObjId);
+            if (connection == null || connection.IsBlocked)
+            {
+                return;
+            }
+
+            AddEvent(new AlarmEvent($"Connection error reported: {connection.connectionName} ({connection.DriverName})"));
+            ExecuteOnUiThread(RefreshConnectionStatuses);
+        }
+
+        /// <summary>
+        /// Refreshes the Status of existing connection rows without rebuilding the
+        /// collection (keeps the current selection), reflecting reconnection activity
+        /// performed by the hosted ReconnectionService.
+        /// </summary>
+        private void RefreshConnectionStatuses()
+        {
+            if (CurrentProject == null)
+            {
+                return;
+            }
+
+            foreach (var row in Connections)
+            {
+                string newStatus;
+
+                if (string.Equals(row.Kind, "Server", StringComparison.OrdinalIgnoreCase))
+                {
+                    newStatus = IsRunning ? "Running" : "Stopped";
+                }
+                else if (string.Equals(row.Name, "Scripts", StringComparison.OrdinalIgnoreCase))
+                {
+                    newStatus = ((IDriverModel)CurrentProject.ScriptEng).isAlive ? "Running" : "Stopped";
+                }
+                else if (string.Equals(row.Name, "InternalTags", StringComparison.OrdinalIgnoreCase))
+                {
+                    newStatus = ((IDriverModel)CurrentProject.InternalTagsDrv).isAlive ? "Running" : "Stopped";
+                }
+                else
+                {
+                    var connection = CurrentProject.connectionList.FirstOrDefault(c => c.objId == row.SourceId);
+                    newStatus = connection?.Idrv == null
+                        ? "Driver Missing"
+                        : (connection.Idrv.isAlive ? "Running" : "Stopped");
+                }
+
+                if (row.Status != newStatus)
+                {
+                    row.Status = newStatus;
+                }
             }
         }
 
