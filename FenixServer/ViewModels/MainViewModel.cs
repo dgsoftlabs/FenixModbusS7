@@ -242,7 +242,11 @@ namespace FenixServer.ViewModels
         {
             try
             {
-                await FenixServer.Api.WebHostExtensions.StopWebHostAsync();
+                // ConfigureAwait(false): this method is invoked with
+                // .GetAwaiter().GetResult() from the UI thread during app exit, so
+                // continuations must not be posted back to the UI dispatcher (that
+                // would deadlock while the UI thread is blocked in GetResult()).
+                await FenixServer.Api.WebHostExtensions.StopWebHostAsync().ConfigureAwait(false);
             }
             catch
             {
@@ -250,36 +254,57 @@ namespace FenixServer.ViewModels
 
             if (CurrentProject != null)
             {
-                foreach (var connection in CurrentProject.connectionList)
+                var project = CurrentProject;
+                var connectionList = project.connectionList.ToList();
+
+                // deactivateCycle may briefly block while aborting in-flight
+                // socket/serial I/O; run it off the UI thread.
+                await Task.Run(() =>
                 {
+                    foreach (var connection in connectionList)
+                    {
+                        try
+                        {
+                            ((IDriverModel)connection).deactivateCycle();
+                        }
+                        catch
+                        {
+                        }
+                    }
+
                     try
                     {
-                        ((IDriverModel)connection).deactivateCycle();
+                        ((IDriverModel)project.ScriptEng).deactivateCycle();
                     }
                     catch
                     {
                     }
-                }
 
-                try
-                {
-                    ((IDriverModel)CurrentProject.ScriptEng).deactivateCycle();
-                }
-                catch
-                {
-                }
-
-                try
-                {
-                    ((IDriverModel)CurrentProject.InternalTagsDrv).deactivateCycle();
-                }
-                catch
-                {
-                }
+                    try
+                    {
+                        ((IDriverModel)project.InternalTagsDrv).deactivateCycle();
+                    }
+                    catch
+                    {
+                    }
+                }).ConfigureAwait(false);
             }
 
-            IsRunning = false;
-            RefreshConnections();
+            // UI-touching updates must still run on the UI thread; post them via
+            // ExecuteOnUiThread (fire-and-forget, so no deadlock when the UI thread
+            // is blocked by GetAwaiter().GetResult() during shutdown).
+            if (Application.Current?.Dispatcher != null && !Application.Current.Dispatcher.HasShutdownStarted)
+            {
+                ExecuteOnUiThread(() =>
+                {
+                    IsRunning = false;
+                    RefreshConnections();
+                });
+            }
+            else
+            {
+                IsRunning = false;
+            }
         }
 
         public void AddEvent(AlarmEvent alarmEvent)
@@ -416,46 +441,57 @@ namespace FenixServer.ViewModels
                 return;
             }
 
+            var project = CurrentProject;
+            var projectContainer = _projectContainer;
+
+            var missingDrivers = project.connectionList
+                .Where(c => c.Idrv == null)
+                .Select(c => $"{c.connectionName} ({c.DriverName})")
+                .ToList();
+
+            if (missingDrivers.Count > 0)
+            {
+                AddEvent(new AlarmEvent("Communication not started. Missing driver(s): " + string.Join(", ", missingDrivers)));
+                RefreshConnections();
+                return;
+            }
+
             try
             {
-                var missingDrivers = CurrentProject.connectionList
-                    .Where(c => c.Idrv == null)
-                    .Select(c => $"{c.connectionName} ({c.DriverName})")
-                    .ToList();
-
-                if (missingDrivers.Count > 0)
+                // Driver activation performs blocking connect I/O (TCP connect, S7
+                // connect) that can take many seconds when the target device is
+                // unreachable. Running it on the UI thread would freeze the whole
+                // window, so it is executed on the thread pool instead.
+                var connectionList = project.connectionList.ToList();
+                await Task.Run(() =>
                 {
-                    AddEvent(new AlarmEvent("Communication not started. Missing driver(s): " + string.Join(", ", missingDrivers)));
-                    RefreshConnections();
-                    return;
-                }
-
-                // 1) Start external connection drivers
-                foreach (var connection in CurrentProject.connectionList)
-                {
-                    var driver = (IDriverModel)connection;
-                    var driverId = connection.Idrv.ObjId;
-                    var tags = _projectContainer.GetAllITagsForDriver(CurrentProject.objId, driverId) ?? new List<ITag>();
-                    var started = driver.activateCycle(tags);
-                    if (!started)
+                    // 1) Start external connection drivers
+                    foreach (var connection in connectionList)
                     {
-                        AddEvent(new AlarmEvent($"Driver did not start: {connection.connectionName} ({connection.DriverName})"));
+                        var driver = (IDriverModel)connection;
+                        var driverId = connection.Idrv.ObjId;
+                        var tags = projectContainer.GetAllITagsForDriver(project.objId, driverId) ?? new List<ITag>();
+                        var started = driver.activateCycle(tags);
+                        if (!started)
+                        {
+                            AddEvent(new AlarmEvent($"Driver did not start: {connection.connectionName} ({connection.DriverName})"));
+                        }
+                        else if (tags.Count == 0)
+                        {
+                            AddEvent(new AlarmEvent($"Driver started without tags: {connection.connectionName} ({connection.DriverName})"));
+                        }
                     }
-                    else if (tags.Count == 0)
-                    {
-                        AddEvent(new AlarmEvent($"Driver started without tags: {connection.connectionName} ({connection.DriverName})"));
-                    }
-                }
 
-                // 2) Start Scripts driver
-                ((IDriverModel)CurrentProject.ScriptEng).activateCycle(new List<ITag>());
+                    // 2) Start Scripts driver
+                    ((IDriverModel)project.ScriptEng).activateCycle(new List<ITag>());
 
-                // 3) Start InternalTags driver
-                var allInternalTags = CurrentProject.InTagsList.Cast<ITag>().ToList();
-                ((IDriverModel)CurrentProject.InternalTagsDrv).activateCycle(allInternalTags);
+                    // 3) Start InternalTags driver
+                    var allInternalTags = project.InTagsList.Cast<ITag>().ToList();
+                    ((IDriverModel)project.InternalTagsDrv).activateCycle(allInternalTags);
+                });
 
                 // 4) Start HTTP host
-                await FenixServer.Api.WebHostExtensions.InitializeAndStartWebHostAsync(CurrentProject, _projectContainer);
+                await FenixServer.Api.WebHostExtensions.InitializeAndStartWebHostAsync(project, projectContainer);
 
                 IsRunning = true;
                 AddEvent(new AlarmEvent("Communication started."));
@@ -474,20 +510,27 @@ namespace FenixServer.ViewModels
                 return;
             }
 
+            var project = CurrentProject;
+
             try
             {
                 // 1) Stop HTTP host
                 await FenixServer.Api.WebHostExtensions.StopWebHostAsync();
 
-                // 2) Stop external connection drivers
-                foreach (var connection in CurrentProject.connectionList)
+                // 2) Stop drivers off the UI thread (deactivateCycle may briefly
+                //    block while aborting in-flight socket/serial I/O).
+                var connectionList = project.connectionList.ToList();
+                await Task.Run(() =>
                 {
-                    ((IDriverModel)connection).deactivateCycle();
-                }
+                    foreach (var connection in connectionList)
+                    {
+                        ((IDriverModel)connection).deactivateCycle();
+                    }
 
-                // 3) Stop Scripts + InternalTags drivers
-                ((IDriverModel)CurrentProject.ScriptEng).deactivateCycle();
-                ((IDriverModel)CurrentProject.InternalTagsDrv).deactivateCycle();
+                    // 3) Stop Scripts + InternalTags drivers
+                    ((IDriverModel)project.ScriptEng).deactivateCycle();
+                    ((IDriverModel)project.InternalTagsDrv).deactivateCycle();
+                });
 
                 IsRunning = false;
                 AddEvent(new AlarmEvent("Communication stopped."));

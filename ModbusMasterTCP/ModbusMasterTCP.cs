@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace nmDriver
 {
@@ -124,7 +125,21 @@ namespace nmDriver
 
                 //Nowy client
                 tcpClient = new TcpClient();
-                tcpClient.Connect(DriverParam_.Ip, DriverParam_.Port);
+
+                // Bounded connect: an unreachable device must not block the caller for
+                // the OS default (which can be 20s+). The configured timeout is used as
+                // the connection budget (clamped to a sane range); on timeout the socket
+                // is closed and activation fails cleanly instead of hanging.
+                int connectTimeoutMs = DriverParam_.Timeout > 0 ? DriverParam_.Timeout : 1000;
+                connectTimeoutMs = Math.Clamp(connectTimeoutMs, 3000, 10000);
+                var connectTask = tcpClient.ConnectAsync(DriverParam_.Ip, DriverParam_.Port);
+                if (!connectTask.Wait(connectTimeoutMs))
+                {
+                    tcpClient.Close();
+                    errorSendEv?.Invoke(this, new ProjectEventArgs(new byte[] { 0 }, DateTime.Now,
+                        $"Connection timeout after {connectTimeoutMs} ms to {DriverParam_.Ip}:{DriverParam_.Port}"));
+                    return false;
+                }
 
                 //Worker
                 bWorker.RunWorkerAsync();
