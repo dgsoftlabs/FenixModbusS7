@@ -76,14 +76,14 @@
                 <ControlTemplate TargetType="GroupBox">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0" Margin="0,0,0,8">
-                            <ContentPresenter ContentSource="Header" RecognizesAccessKey="True"/>
+                            <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" />
                         </Border>
                         <Border Grid.Row="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
-                            <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                            <ContentPresenter Margin="{TemplateBinding Padding}" />
                         </Border>
                     </Grid>
                 </ControlTemplate>
@@ -119,7 +119,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="DataGridCell">
                     <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter VerticalAlignment="Center"/>
+                        <ContentPresenter VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

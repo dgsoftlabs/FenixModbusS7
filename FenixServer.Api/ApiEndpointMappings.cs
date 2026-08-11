@@ -1,5 +1,4 @@
 using ProjectDataLib;
-using System.Globalization;
 
 namespace FenixServer.Api
 {
@@ -13,27 +12,27 @@ namespace FenixServer.Api
         public static void MapApiEndpoints(WebApplication app)
         {
             // Tags
-            app.MapGet("/api/tags",                     GetAllTags).WithName("ApiGetAllTags");
-            app.MapGet("/api/tags/{name}",              GetTag).WithName("ApiGetTag");
-            app.MapPut("/api/tags/{name}",              SetTag).WithName("ApiSetTag");
+            app.MapGet("/api/tags", GetAllTags).WithName("ApiGetAllTags");
+            app.MapGet("/api/tags/{name}", GetTag).WithName("ApiGetTag");
+            app.MapPut("/api/tags/{name}", SetTag).WithName("ApiSetTag");
 
             // Connections
-            app.MapGet("/api/connections",              GetAllConnections).WithName("ApiGetAllConnections");
+            app.MapGet("/api/connections", GetAllConnections).WithName("ApiGetAllConnections");
 
             // Graph
-            app.MapGet("/api/graph",                    GetGraph).WithName("ApiGetGraph");
+            app.MapGet("/api/graph", GetGraph).WithName("ApiGetGraph");
 
             // Events
-            app.MapGet("/api/events",                   GetEvents).WithName("ApiGetEvents");
+            app.MapGet("/api/events", GetEvents).WithName("ApiGetEvents");
 
             // Server / Buffor
-            app.MapGet("/api/server/buffor",            GetBuffor).WithName("ApiGetBuffor");
-            app.MapPut("/api/server/buffor/{seconds}",  SetBuffor).WithName("ApiSetBuffor");
+            app.MapGet("/api/server/buffor", GetBuffor).WithName("ApiGetBuffor");
+            app.MapPut("/api/server/buffor/{seconds}", SetBuffor).WithName("ApiSetBuffor");
 
             // Misc
-            app.MapGet("/api/timer/{name}",             GetTimer).WithName("ApiGetTimer");
-            app.MapGet("/api/user/{name}",              GetUser).WithName("ApiGetUser");
-            app.MapGet("/api/machine/{name}",           GetMachine).WithName("ApiGetMachine");
+            app.MapGet("/api/timer/{name}", GetTimer).WithName("ApiGetTimer");
+            app.MapGet("/api/user/{name}", GetUser).WithName("ApiGetUser");
+            app.MapGet("/api/machine/{name}", GetMachine).WithName("ApiGetMachine");
         }
 
         // ── tags ───────────────────────────────────────────────────────────────────
@@ -49,16 +48,16 @@ namespace FenixServer.Api
                     .Where(t => t != null)
                     .Select(t => new
                     {
-                        tagName        = t.Name,
-                        areaData       = t is Tag tg ? tg.areaData   : string.Empty,
-                        startData      = t is Tag tg2 ? tg2.startData : 0,
-                        deviceAdress   = t is Tag tg3 ? tg3.deviceAdress : 0,
-                        scAdres        = t is Tag tg4 ? tg4.scAdres  : 0,
-                        value          = t.Value,
-                        ClrXml         = t is Tag tg5 ? (object?)new { Val = tg5.ClrXml?.Val } : null,
+                        tagName = t.Name,
+                        areaData = t is Tag tg ? tg.areaData : string.Empty,
+                        startData = t is Tag tg2 ? tg2.startData : 0,
+                        deviceAdress = t is Tag tg3 ? tg3.deviceAdress : 0,
+                        scAdres = t is Tag tg4 ? tg4.scAdres : 0,
+                        value = t.Value,
+                        ClrXml = t is Tag tg5 ? (object?)new { Val = tg5.ClrXml?.Val } : null,
                         formattedValue = EndpointMappings.SafeGetFormattedValue(t),
-                        typeData       = t.TypeData_.ToString(),
-                        description    = t is Tag tg6 ? tg6.describe : null
+                        typeData = t.TypeData_.ToString(),
+                        description = t is Tag tg6 ? tg6.describe : null
                     })
                     .ToArray();
 
@@ -80,10 +79,10 @@ namespace FenixServer.Api
 
                 return Results.Ok(new
                 {
-                    tagName        = tag.Name,
-                    value          = tag.Value,
+                    tagName = tag.Name,
+                    value = tag.Value,
                     formattedValue = EndpointMappings.SafeGetFormattedValue(tag),
-                    typeData       = tag.TypeData_.ToString()
+                    typeData = tag.TypeData_.ToString()
                 });
             }
             catch
@@ -110,7 +109,7 @@ namespace FenixServer.Api
                 return Results.Ok(new
                 {
                     tagName = tag.Name,
-                    value   = tag.Value
+                    value = tag.Value
                 });
             }
             catch
@@ -211,27 +210,27 @@ namespace FenixServer.Api
             const string v1 = EndpointMappings.ApiV1Prefix;
 
             // Tags
-            app.MapGet($"{v1}/tags",                     GetAllTags).WithName("ApiV1GetAllTags");
-            app.MapGet($"{v1}/tags/{{name}}",            GetTag).WithName("ApiV1GetTag");
-            app.MapPut($"{v1}/tags/{{name}}",            SetTag).WithName("ApiV1SetTag");
+            app.MapGet($"{v1}/tags", GetAllTags).WithName("ApiV1GetAllTags");
+            app.MapGet($"{v1}/tags/{{name}}", GetTag).WithName("ApiV1GetTag");
+            app.MapPut($"{v1}/tags/{{name}}", SetTag).WithName("ApiV1SetTag");
 
             // Connections
-            app.MapGet($"{v1}/connections",              GetAllConnections).WithName("ApiV1GetAllConnections");
+            app.MapGet($"{v1}/connections", GetAllConnections).WithName("ApiV1GetAllConnections");
 
             // Graph
-            app.MapGet($"{v1}/graph",                    GetGraph).WithName("ApiV1GetGraph");
+            app.MapGet($"{v1}/graph", GetGraph).WithName("ApiV1GetGraph");
 
             // Events
-            app.MapGet($"{v1}/events",                   GetEvents).WithName("ApiV1GetEvents");
+            app.MapGet($"{v1}/events", GetEvents).WithName("ApiV1GetEvents");
 
             // Server / Buffor
-            app.MapGet($"{v1}/server/buffor",            GetBuffor).WithName("ApiV1GetBuffor");
+            app.MapGet($"{v1}/server/buffor", GetBuffor).WithName("ApiV1GetBuffor");
             app.MapPut($"{v1}/server/buffor/{{seconds}}", SetBuffor).WithName("ApiV1SetBuffor");
 
             // Misc
-            app.MapGet($"{v1}/timer/{{name}}",           GetTimer).WithName("ApiV1GetTimer");
-            app.MapGet($"{v1}/user/{{name}}",            GetUser).WithName("ApiV1GetUser");
-            app.MapGet($"{v1}/machine/{{name}}",         GetMachine).WithName("ApiV1GetMachine");
+            app.MapGet($"{v1}/timer/{{name}}", GetTimer).WithName("ApiV1GetTimer");
+            app.MapGet($"{v1}/user/{{name}}", GetUser).WithName("ApiV1GetUser");
+            app.MapGet($"{v1}/machine/{{name}}", GetMachine).WithName("ApiV1GetMachine");
         }
     }
 }

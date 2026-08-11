@@ -39,11 +39,11 @@ namespace FenixServer.Api
         /// <param name="app">The WebApplication instance</param>
         public static void MapLegacyEndpoints(WebApplication app)
         {
-            app.MapGet("/{obj}/{name}",                HandleNoParam).WithName("LegacyGet");
-            app.MapPost("/{obj}/{name}",               HandleNoParam).WithName("LegacyPost");
+            app.MapGet("/{obj}/{name}", HandleNoParam).WithName("LegacyGet");
+            app.MapPost("/{obj}/{name}", HandleNoParam).WithName("LegacyPost");
 
-            app.MapGet("/{obj}/{name}/{param}",        HandleWithParam).WithName("LegacyGetParam");
-            app.MapPost("/{obj}/{name}/{param}",       HandleWithParam).WithName("LegacyPostParam");
+            app.MapGet("/{obj}/{name}/{param}", HandleWithParam).WithName("LegacyGetParam");
+            app.MapPost("/{obj}/{name}/{param}", HandleWithParam).WithName("LegacyPostParam");
 
             app.MapGet("/{obj}/{name}/{param}/{value}", HandleWithValue).WithName("LegacyGetValue");
             app.MapPost("/{obj}/{name}/{param}/{value}", HandleWithValue).WithName("LegacyPostValue");
@@ -115,15 +115,15 @@ namespace FenixServer.Api
         {
             return req.ObjectKey switch
             {
-                "server"                      => HandleServer(req),
-                "tag" or "tags"               => HandleTag(project, req),
-                "graph"                       => HandleGraph(project, req),
+                "server" => HandleServer(req),
+                "tag" or "tags" => HandleTag(project, req),
+                "graph" => HandleGraph(project, req),
                 "connection" or "connections" => HandleConnection(project, req),
-                "event" or "events"           => HandleEvent(req),
-                "timer"                       => HandleValueParam(req, project.GetTimerValue(req.NameKey)),
-                "user"                        => HandleValueParam(req, project.GetUserValue(req.NameKey)),
-                "machine"                     => HandleValueParam(req, project.GetMachineValue(req.NameKey)),
-                _                             => EndpointMappings.ErrorResult()
+                "event" or "events" => HandleEvent(req),
+                "timer" => HandleValueParam(req, project.GetTimerValue(req.NameKey)),
+                "user" => HandleValueParam(req, project.GetUserValue(req.NameKey)),
+                "machine" => HandleValueParam(req, project.GetMachineValue(req.NameKey)),
+                _ => EndpointMappings.ErrorResult()
             };
         }
 
@@ -204,15 +204,15 @@ namespace FenixServer.Api
             var payload = tags
                 .Where(t => t != null)
                 .Select(t => new LegacyTagDto(
-                    tagName:        t.Name,
-                    areaData:       t is Tag tg  ? tg.areaData          : string.Empty,
-                    startData:      t is Tag tg2 ? tg2.startData        : 0,
-                    deviceAdress:   t is Tag tg3 ? (int)tg3.deviceAdress : 0,
-                    scAdres:        t is Tag tg4 ? tg4.scAdres          : 0,
-                    value:          t.Value,
+                    tagName: t.Name,
+                    areaData: t is Tag tg ? tg.areaData : string.Empty,
+                    startData: t is Tag tg2 ? tg2.startData : 0,
+                    deviceAdress: t is Tag tg3 ? (int)tg3.deviceAdress : 0,
+                    scAdres: t is Tag tg4 ? tg4.scAdres : 0,
+                    value: t.Value,
                     formattedValue: EndpointMappings.SafeGetFormattedValue(t),
-                    typeData:       t.TypeData_.ToString(),
-                    description:    t is Tag tg5 ? tg5.describe         : null
+                    typeData: t.TypeData_.ToString(),
+                    description: t is Tag tg5 ? tg5.describe : null
                 ))
                 .ToArray();
 
@@ -302,15 +302,15 @@ namespace FenixServer.Api
         /// Sealed record keeps field order and names identical to original legacy output.
         /// </summary>
         private sealed record LegacyTagDto(
-            string?  tagName,
-            string   areaData,
-            int      startData,
-            int      deviceAdress,
-            int      scAdres,
-            object?  value,
-            string   formattedValue,
-            string   typeData,
-            string?  description);
+            string? tagName,
+            string areaData,
+            int startData,
+            int deviceAdress,
+            int scAdres,
+            object? value,
+            string formattedValue,
+            string typeData,
+            string? description);
 
         // ── helpers ────────────────────────────────────────────────────────────────
         /// <summary>
@@ -343,9 +343,9 @@ namespace FenixServer.Api
             string obj, string name, string? param, string? value, HttpContext ctx)
         {
             var objectKey = Normalize(obj);
-            var nameKey   = Decode(name);
-            var paramKey  = StripQuery(Normalize(param));
-            var valueKey  = !string.IsNullOrWhiteSpace(Decode(value))
+            var nameKey = Decode(name);
+            var paramKey = StripQuery(Normalize(param));
+            var valueKey = !string.IsNullOrWhiteSpace(Decode(value))
                 ? Decode(value)
                 : ctx.Request.RouteValues["value"]?.ToString() ?? string.Empty;
 

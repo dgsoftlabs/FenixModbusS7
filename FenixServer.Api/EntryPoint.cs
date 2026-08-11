@@ -1,6 +1,5 @@
 using Microsoft.Win32;
 using ProjectDataLib;
-using System.IO;
 using System.Runtime.Loader;
 
 namespace FenixServer.Api

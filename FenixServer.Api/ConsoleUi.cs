@@ -1,7 +1,3 @@
-using System;
-using System.IO;
-using System.Linq;
-
 namespace FenixServer.Api
 {
     /// <summary>
@@ -10,10 +6,15 @@ namespace FenixServer.Api
     internal static class ConsoleUi
     {
         public static void Title(string text) => WriteLine(text, ConsoleColor.Cyan);
+
         public static void Info(string text) => WriteLine(text, ConsoleColor.Gray);
+
         public static void Ok(string text) => WriteLine(text, ConsoleColor.Green);
+
         public static void Warn(string text) => WriteLine(text, ConsoleColor.Yellow);
+
         public static void Error(string text) => WriteLine(text, ConsoleColor.Red, Console.Error);
+
         public static void App(string text) => WriteLine(text, ConsoleColor.DarkCyan);
 
         /// <summary>

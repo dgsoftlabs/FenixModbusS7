@@ -19,6 +19,7 @@ namespace FenixServer.Api
 
         // API Versioning
         internal const string ApiV1Prefix = "/api/v1";
+
         internal const string ApiCurrentVersion = "1.0";
         internal const int ApiMajorVersion = 1;
         internal const int ApiMinorVersion = 0;

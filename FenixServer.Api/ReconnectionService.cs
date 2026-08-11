@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using ProjectDataLib;
 using System.Collections.Concurrent;
 
