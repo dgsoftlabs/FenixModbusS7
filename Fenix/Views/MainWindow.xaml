@@ -6,7 +6,7 @@
                       xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
                       xmlns:adl="clr-namespace:AvalonDock.Layout;assembly=AvalonDock"
                       mc:Ignorable="d"
-        Title="FenixModbusS7"
+        Title="Fenix"
         Background="{StaticResource Th.BgBrush}"
         FontFamily="Segoe UI"
         FontSize="{StaticResource Th.FontMd}"
@@ -503,7 +503,7 @@
                     <MenuItem.Icon><TextBlock Text="&#xE8F1;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_About FenixModbusS7" Click="AboutShow_Click" IsEnabled="{Binding mAbout}">
+                <MenuItem Header="_About Fenix" Click="AboutShow_Click" IsEnabled="{Binding mAbout}">
                     <MenuItem.Icon><TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -595,7 +595,7 @@
                     <TextBlock Text="Docs" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />
                 </StackPanel>
             </Button>
-            <Button Click="AboutShow_Click" IsEnabled="{Binding mAbout}" ToolTip="About FenixModbusS7" Margin="2,0">
+            <Button Click="AboutShow_Click" IsEnabled="{Binding mAbout}" ToolTip="About Fenix" Margin="2,0">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="6,2">
                     <TextBlock Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="{StaticResource Th.FontXl}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextSecBrush}"/>
                     <TextBlock Text="About" FontSize="{StaticResource Th.FontXs}" HorizontalAlignment="Center" Foreground="{StaticResource Th.TextBrush}" Margin="0,2,0,0" />

@@ -242,7 +242,7 @@ namespace FenixServer.ViewModels
         {
             try
             {
-                await FenixServer.Web.WebHostExtensions.StopWebHostAsync();
+                await FenixServer.Api.WebHostExtensions.StopWebHostAsync();
             }
             catch
             {
@@ -294,7 +294,7 @@ namespace FenixServer.ViewModels
                 Events.Add(alarmEvent);
                 try
                 {
-                    FenixServer.Web.EndpointMappings.PublishEvent(alarmEvent.Mess, new DateTimeOffset(alarmEvent.Tm));
+                    FenixServer.Api.EndpointMappings.PublishEvent(alarmEvent.Mess, new DateTimeOffset(alarmEvent.Tm));
                 }
                 catch
                 {
@@ -455,7 +455,7 @@ namespace FenixServer.ViewModels
                 ((IDriverModel)CurrentProject.InternalTagsDrv).activateCycle(allInternalTags);
 
                 // 4) Start HTTP host
-                await FenixServer.Web.WebHostExtensions.InitializeAndStartWebHostAsync(CurrentProject, _projectContainer);
+                await FenixServer.Api.WebHostExtensions.InitializeAndStartWebHostAsync(CurrentProject, _projectContainer);
 
                 IsRunning = true;
                 AddEvent(new AlarmEvent("Communication started."));
@@ -477,7 +477,7 @@ namespace FenixServer.ViewModels
             try
             {
                 // 1) Stop HTTP host
-                await FenixServer.Web.WebHostExtensions.StopWebHostAsync();
+                await FenixServer.Api.WebHostExtensions.StopWebHostAsync();
 
                 // 2) Stop external connection drivers
                 foreach (var connection in CurrentProject.connectionList)

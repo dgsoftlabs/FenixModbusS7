@@ -3,11 +3,11 @@ using ProjectDataLib;
 using System.IO;
 using System.Runtime.Loader;
 
-namespace FenixServer.Web
+namespace FenixServer.Api
 {
     /// <summary>
     /// Standalone console entry point.
-    /// Usage: FenixServer.Web.exe [project.pse]
+    /// Usage: FenixServer.Api.exe [project.pse]
     /// </summary>
     internal static class EntryPoint
     {
@@ -131,7 +131,7 @@ namespace FenixServer.Web
         private static void PrintStartupBanner(string version)
         {
             Console.WriteLine();
-            ConsoleUi.Banner("F E N I X   S E R V E R   W E B", "version " + version);
+            ConsoleUi.Banner("Fenix Server API", "version " + version);
             Console.WriteLine();
         }
 

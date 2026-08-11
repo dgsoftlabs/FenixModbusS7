@@ -1,7 +1,7 @@
 using ProjectDataLib;
 using System.Globalization;
 
-namespace FenixServer.Web
+namespace FenixServer.Api
 {
     /// <summary>
     /// Modern REST API endpoints under /api/...

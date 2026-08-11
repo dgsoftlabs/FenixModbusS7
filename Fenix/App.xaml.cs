@@ -28,7 +28,7 @@ namespace Fenix
         private async void App_Startup(object sender, StartupEventArgs e)
         {
             bool aIsNewInstance = false;
-            myMutex = new Mutex(true, "FenixModbusS7", out aIsNewInstance);
+            myMutex = new Mutex(true, "Fenix", out aIsNewInstance);
 
             if (!aIsNewInstance)
             {

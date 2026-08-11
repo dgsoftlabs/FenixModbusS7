@@ -2,10 +2,10 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace FenixServer.Web
+namespace FenixServer.Api
 {
     /// <summary>
-    /// Lightweight, colorful console UI helpers used by the FenixServer.Web console host.
+    /// Lightweight, colorful console UI helpers used by the FenixServer.Api console host.
     /// </summary>
     internal static class ConsoleUi
     {

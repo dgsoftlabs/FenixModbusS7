@@ -462,7 +462,7 @@ namespace ProjectDataLib.Test.Models
             var container = new ProjectContainer();
 
             // Act & Assert
-            Assert.Equal("https://github.com/dgsoftlabs/FenixModbusS7/wiki", container.HelpWebSite);
+            Assert.Equal("https://github.com/dgsoftlabs/Fenix/wiki", container.HelpWebSite);
         }
 
         [Fact]

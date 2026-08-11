@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "FenixServer.Web": {
+    "FenixServer.Api": {
       "commandName": "Project",
       "launchBrowser": false,
       "environmentVariables": {

@@ -22,7 +22,7 @@
                    Margin="40,30,40,10" />
 
             <TextBlock Grid.Row="1"
-                       Text="FenixModbusS7"
+                       Text="Fenix"
                        FontSize="20"
                        FontWeight="Bold"
                        Foreground="#E0E0FF"

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using ProjectDataLib;
 using System.Collections.Concurrent;
 
-namespace FenixServer.Web
+namespace FenixServer.Api
 {
     /// <summary>
     /// Background service that listens for driver errors and attempts

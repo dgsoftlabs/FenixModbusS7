@@ -2,7 +2,7 @@ using ProjectDataLib;
 using System.Collections.Concurrent;
 using System.Globalization;
 
-namespace FenixServer.Web
+namespace FenixServer.Api
 {
     /// <summary>
     /// Centralized endpoint mappings for the FenixServer web API.
@@ -53,7 +53,7 @@ namespace FenixServer.Web
         {
             app.MapGet("/", () => Results.Ok(new
             {
-                app = "FenixServer",
+                app = "FenixServer.Api",
                 status = "running",
                 health = "/health"
             }));

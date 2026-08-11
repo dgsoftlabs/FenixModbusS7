@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace FenixServer.Web
+namespace FenixServer.Api
 {
     public static class Program
     {
@@ -110,7 +110,7 @@ namespace FenixServer.Web
                 }
 
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                context.Response.Headers.WWWAuthenticate = "Basic realm=\"FenixServer\"";
+                context.Response.Headers.WWWAuthenticate = "Basic realm=\"FenixServer.Api\"";
             });
         }
 

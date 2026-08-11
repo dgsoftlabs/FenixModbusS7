@@ -2,7 +2,7 @@ using ProjectDataLib;
 using System.Globalization;
 using System.Text.Json;
 
-namespace FenixServer.Web
+namespace FenixServer.Api
 {
     /// <summary>
     /// Legacy endpoint mappings — byte-for-byte compatible with the original HttpListener WebServer.

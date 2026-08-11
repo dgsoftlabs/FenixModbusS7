@@ -52,7 +52,7 @@ namespace Fenix
             frOutput.View.DataContext = exList;
             frOutput.View.ItemsSource = exList;
 
-            Title = "FenixModbusS7 " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Title = "Fenix " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             PrCon.addProjectEv += new EventHandler<ProjectEventArgs>(AddProjectEvent);
 
@@ -1456,7 +1456,7 @@ namespace Fenix
 
         public override string ToString()
         {
-            return "FenixModbusS7";
+            return "Fenix";
         }
     }
 }

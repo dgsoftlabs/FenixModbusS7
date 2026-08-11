@@ -1,6 +1,6 @@
 using ProjectDataLib;
 
-namespace FenixServer.Web
+namespace FenixServer.Api
 {
     /// <summary>
     /// Extension methods for integrating ASP.NET Core web host into WinForms application.

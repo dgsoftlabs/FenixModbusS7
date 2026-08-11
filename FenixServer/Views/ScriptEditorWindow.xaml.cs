@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace FenixServerS7.Views
+namespace FenixServer.Views
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class CusEventPropertyAttribute : Attribute

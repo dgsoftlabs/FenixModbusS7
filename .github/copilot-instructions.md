@@ -8,9 +8,9 @@
 - Upgrade target framework to .NET 10.0 (LTS).
 - Force migration execution; proceed aggressively without pausing.
 - Replace anything incompatible with a compatible alternative during migration.
-- Use the same libraries pattern for FenixServer as FenixModbusS7 where possible.
-- Convert FenixServerS7 to WPF while keeping the same project references/libraries pattern and ensuring it implements the same functionality as the previous WinForms version.
-- Switch FenixServer to WPF and adopt the same library pattern as FenixModbusS7, ensuring it maintains the same functionality as the previous WinForms version.
+- Use the same libraries pattern for FenixServer as Fenix where possible.
+- Convert FenixServer to WPF while keeping the same project references/libraries pattern and ensuring it implements the same functionality as the previous WinForms version.
+- Switch FenixServer to WPF and adopt the same library pattern as Fenix, ensuring it maintains the same functionality as the previous WinForms version.
 - Replace all WinForms controls with full WPF controls.
 - Adopt a new ASP.NET Core server-hosted approach in this application.
 - Perform a clean WPF migration incrementally, replacing parts one by one.

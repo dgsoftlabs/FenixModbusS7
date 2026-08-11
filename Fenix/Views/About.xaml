@@ -19,7 +19,7 @@
             </Border>
 
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="FenixModbusS7" FontSize="{StaticResource Th.FontMd}" FontWeight="SemiBold" Foreground="{StaticResource Th.TextBrush}" Margin="0,0,0,4" />
+                <TextBlock Text="Fenix" FontSize="{StaticResource Th.FontMd}" FontWeight="SemiBold" Foreground="{StaticResource Th.TextBrush}" Margin="0,0,0,4" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Version:" FontWeight="SemiBold" FontSize="{StaticResource Th.FontMd}" Foreground="{StaticResource Th.TextBrush}" Margin="0,0,6,0" />
                     <TextBlock Name="TbVer" FontSize="{StaticResource Th.FontMd}" Foreground="{StaticResource Th.TextSecBrush}" />

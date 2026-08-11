@@ -22,15 +22,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusMasterTCP", "ModbusMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S7-300-400 Ethernet", "S7-300-400 Ethernet\S7-300-400 Ethernet.csproj", "{BA507B12-8562-40EB-9EBB-A3FC4723F175}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixModbusS7", "FenixModbusS7\FenixModbusS7.csproj", "{82C72FC5-FED5-C6E9-30F8-8B99A363A883}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fenix", "Fenix\Fenix.csproj", "{82C72FC5-FED5-C6E9-30F8-8B99A363A883}"
 EndProject
-Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "FenixModbusS7Setup", "FenixModbusS7Setup\FenixModbusS7Setup.aiproj", "{48CB7E62-F8D7-42E4-A236-31AFC024CF0F}"
+Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "FenixSetup", "FenixSetup\FenixSetup.aiproj", "{48CB7E62-F8D7-42E4-A236-31AFC024CF0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectDataLib.Test", "ProjectDataLib.Test\ProjectDataLib.Test.csproj", "{7A6D3F7C-1181-4ABC-AB54-60F320613907}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixServerS7", "FenixServerS7\FenixServerS7.csproj", "{4D5F4CF8-8CBE-0DD4-E3C5-C01A3062B2C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixServer", "FenixServer\FenixServer.csproj", "{4D5F4CF8-8CBE-0DD4-E3C5-C01A3062B2C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixServer.Web", "FenixServer.Web\FenixServer.Web.csproj", "{C1CAEF8E-C8ED-136F-6C17-B6B43287488B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixServer.Api", "FenixServer.Api\FenixServer.Api.csproj", "{C1CAEF8E-C8ED-136F-6C17-B6B43287488B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{43AEA7C2-3CFC-4720-BB58-020B82FE798C}"
 	ProjectSection(SolutionItems) = preProject
