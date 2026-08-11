@@ -355,6 +355,20 @@ namespace Fenix
             }
         }
 
+        private void ScriptFileTemplateAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AddScriptFromTemplate fr = new AddScriptFromTemplate(PrCon, Pr, SelGuid, actualKindElement);
+                fr.Owner = this;
+                fr.Show();
+            }
+            catch (Exception Ex)
+            {
+                PrCon.ApplicationError?.Invoke(this, new ProjectEventArgs(Ex));
+            }
+        }
+
         private void ShowLocation_Click(object sender, RoutedEventArgs e)
         {
             try

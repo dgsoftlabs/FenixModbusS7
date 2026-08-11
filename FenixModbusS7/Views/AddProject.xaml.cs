@@ -66,7 +66,7 @@ namespace Fenix
                         if (!io.Directory.Exists(projectHttpDirectory))
                             io.Directory.CreateDirectory(projectHttpDirectory);
 
-                        string[] files1 = io.Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + projectContainer.TemplateCatalog);
+                        string[] files1 = io.Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + projectContainer.TemplateCatalog, "*.cs");
                         foreach (string f in files1)
                         {
                             string nName = io.Path.GetFileName(f);

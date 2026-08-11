@@ -1333,6 +1333,17 @@
     <ROW Component="FenixServerS7_PublishOutput_zhHant" ComponentId="{769478C5-C4B5-4FDE-B3F7-4C233CEF3D1B}" Directory_="zhHant_2_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_10_urces.dll"/>
     <ROW Component="ProductInformation" ComponentId="{12C0DF60-2B5E-4AA5-BAEF-9CB86B2251B5}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="Script.cs" ComponentId="{9DAA92C9-32FC-4DB8-AF40-AA6FD788FC97}" Directory_="Template_Dir" Attributes="0" KeyPath="Script.cs" Type="0"/>
+    <ROW Component="PID_Controller.cs" ComponentId="{B732DC23-97AF-4CB8-9EF3-19D59F142894}" Directory_="Template_Dir" Attributes="0" KeyPath="PID_Controller.cs" Type="0"/>
+    <ROW Component="AlarmManager.cs" ComponentId="{17206009-E9D7-48C8-BC45-E4EFDEA85408}" Directory_="Template_Dir" Attributes="0" KeyPath="AlarmManager.cs" Type="0"/>
+    <ROW Component="MovingAverageFilter.cs" ComponentId="{6DD8CB3B-3632-4FAD-9ABC-8E2DB9406799}" Directory_="Template_Dir" Attributes="0" KeyPath="MovingAverageFilter.cs" Type="0"/>
+    <ROW Component="FlowTotalizer.cs" ComponentId="{017601B6-9EAD-4385-B38F-CF050922ED65}" Directory_="Template_Dir" Attributes="0" KeyPath="FlowTotalizer.cs" Type="0"/>
+    <ROW Component="SignalGenerator.cs" ComponentId="{15A8C416-8C80-4B9C-B086-5B9E4ED42C81}" Directory_="Template_Dir" Attributes="0" KeyPath="SignalGenerator.cs" Type="0"/>
+    <ROW Component="RateOfChange.cs" ComponentId="{6CB4D2E1-0649-4CF0-A3DE-30D8BEDBB155}" Directory_="Template_Dir" Attributes="0" KeyPath="RateOfChange.cs" Type="0"/>
+    <ROW Component="StateMachine.cs" ComponentId="{478D57A3-EF40-41BF-9674-842100854CE4}" Directory_="Template_Dir" Attributes="0" KeyPath="StateMachine.cs" Type="0"/>
+    <ROW Component="HeartbeatWatchdog.cs" ComponentId="{8F9BC8C5-5B65-4370-A1AA-4DF14B8FB5AE}" Directory_="Template_Dir" Attributes="0" KeyPath="HeartbeatWatchdog.cs" Type="0"/>
+    <ROW Component="DeadbandFilter.cs" ComponentId="{6C75E184-9710-457B-AE02-5F251AD778E5}" Directory_="Template_Dir" Attributes="0" KeyPath="DeadbandFilter.cs" Type="0"/>
+    <ROW Component="DataCollector.cs" ComponentId="{D9D5741A-D5DA-4656-827D-EC3DD0152F89}" Directory_="Template_Dir" Attributes="0" KeyPath="DataCollector.cs" Type="0"/>
+    <ROW Component="README.md" ComponentId="{0CB07C0A-82DC-4479-8962-8865D40CC528}" Directory_="Template_Dir" Attributes="0" KeyPath="README.md" Type="0"/>
     <ROW Component="_" ComponentId="{CC4C29E9-D905-462C-9A4F-A3F5EC3B2E1A}" Directory_="APPDIR" Attributes="4" KeyPath="_"/>
     <ROW Component="__1" ComponentId="{0966780B-833E-415E-B721-23B3351FEC08}" Directory_="APPDIR" Attributes="4" KeyPath="__1"/>
     <ROW Component="__2" ComponentId="{BDAD1853-461A-494B-BE03-EA329B2E02CF}" Directory_="APPDIR" Attributes="4" KeyPath="__2"/>
@@ -1761,6 +1772,17 @@
     <ROW File="System.IO.Ports.dll_8" Component_="FenixServerS7_PublishOutput_runtimes_win_lib_net10.0" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_8]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.IO.Ports.dll_8&gt;" SelfReg="false"/>
     <ROW File="System.Data.SqlClient.dll_2" Component_="FenixServerS7_PublishOutput_runtimes_win_lib_netcoreapp2.1" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SqlClient.dll_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SqlClient.dll_2&gt;" SelfReg="false"/>
     <ROW File="Script.cs" Component_="Script.cs" FileName="Script.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\Script.cs" SelfReg="false"/>
+    <ROW File="PID_Controller.cs" Component_="PID_Controller.cs" FileName="01_PID~1.CSC|01_PID_Controller.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\01_PID_Controller.cs" SelfReg="false"/>
+    <ROW File="AlarmManager.cs" Component_="AlarmManager.cs" FileName="02_ALA~1.CSC|02_AlarmManager.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\02_AlarmManager.cs" SelfReg="false"/>
+    <ROW File="MovingAverageFilter.cs" Component_="MovingAverageFilter.cs" FileName="03_MOV~1.CSC|03_MovingAverageFilter.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\03_MovingAverageFilter.cs" SelfReg="false"/>
+    <ROW File="FlowTotalizer.cs" Component_="FlowTotalizer.cs" FileName="04_FLO~1.CSC|04_FlowTotalizer.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\04_FlowTotalizer.cs" SelfReg="false"/>
+    <ROW File="SignalGenerator.cs" Component_="SignalGenerator.cs" FileName="05_SIG~1.CSC|05_SignalGenerator.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\05_SignalGenerator.cs" SelfReg="false"/>
+    <ROW File="RateOfChange.cs" Component_="RateOfChange.cs" FileName="06_RAT~1.CSC|06_RateOfChange.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\06_RateOfChange.cs" SelfReg="false"/>
+    <ROW File="StateMachine.cs" Component_="StateMachine.cs" FileName="07_STA~1.CSC|07_StateMachine.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\07_StateMachine.cs" SelfReg="false"/>
+    <ROW File="HeartbeatWatchdog.cs" Component_="HeartbeatWatchdog.cs" FileName="08_HEA~1.CSC|08_HeartbeatWatchdog.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\08_HeartbeatWatchdog.cs" SelfReg="false"/>
+    <ROW File="DeadbandFilter.cs" Component_="DeadbandFilter.cs" FileName="09_DEA~1.CSC|09_DeadbandFilter.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\09_DeadbandFilter.cs" SelfReg="false"/>
+    <ROW File="DataCollector.cs" Component_="DataCollector.cs" FileName="10_DAT~1.CSC|10_DataCollector.cs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\10_DataCollector.cs" SelfReg="false"/>
+    <ROW File="README.md" Component_="README.md" FileName="README.md" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Template\README.md" SelfReg="false"/>
     <ROW File="index.html" Component_="index.html" FileName="INDEX~1.HTM|index.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Http\index.html" SelfReg="false"/>
     <ROW File="libe_sqlite3.so_6" Component_="FenixModbusS7_PublishOutput_runtimes_androidarm_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_6]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_6&gt;" SelfReg="false"/>
     <ROW File="libe_sqlite3.so_10" Component_="FenixModbusS7_PublishOutput_runtimes_androidarm64_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_10]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_10&gt;" SelfReg="false"/>
@@ -2459,6 +2481,17 @@
     <ROW Feature_="MainFeature" Component_="FenixServerS7_PublishOutput_runtimes_win_lib_net10.0"/>
     <ROW Feature_="MainFeature" Component_="FenixServerS7_PublishOutput_runtimes_win_lib_netcoreapp2.1"/>
     <ROW Feature_="MainFeature" Component_="Script.cs"/>
+    <ROW Feature_="MainFeature" Component_="PID_Controller.cs"/>
+    <ROW Feature_="MainFeature" Component_="AlarmManager.cs"/>
+    <ROW Feature_="MainFeature" Component_="MovingAverageFilter.cs"/>
+    <ROW Feature_="MainFeature" Component_="FlowTotalizer.cs"/>
+    <ROW Feature_="MainFeature" Component_="SignalGenerator.cs"/>
+    <ROW Feature_="MainFeature" Component_="RateOfChange.cs"/>
+    <ROW Feature_="MainFeature" Component_="StateMachine.cs"/>
+    <ROW Feature_="MainFeature" Component_="HeartbeatWatchdog.cs"/>
+    <ROW Feature_="MainFeature" Component_="DeadbandFilter.cs"/>
+    <ROW Feature_="MainFeature" Component_="DataCollector.cs"/>
+    <ROW Feature_="MainFeature" Component_="README.md"/>
     <ROW Feature_="MainFeature" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixModbusS7.exe"/>
     <ROW Feature_="MainFeature" Component_="index.html"/>
     <ROW Feature_="MainFeature" Component_="AI_PROPPATH_FILENAME_PERBUILD_FenixServer.Web.exe"/>

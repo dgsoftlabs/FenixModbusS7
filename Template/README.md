@@ -1,13 +1,17 @@
-# FenixModbusS7 - Example Scripts
+# FenixModbusS7 - Script Templates
+
+Skrypty w tym folderze są **szablonami** (template). Możesz je dodać do projektu z poziomu aplikacji.
 
 ## Jak używać
 
 1. Otwórz projekt w FenixModbusS7
-2. Skopiuj wybrany plik `.cs` do folderu `Scripts/` obok pliku projektu
-3. W drzewie projektu → **Scripts Engine** → dodaj skrypt przez `Add Script`
+2. W drzewie projektu → **Scripts Engine** → kliknij prawym przyciskiem → **Add Script From Template**
+3. Wybierz szablon z listy i podaj nazwę nowego skryptu
 4. Wybierz Timer (lub utwórz nowy w `Scripts Engine` → `Timers`)
 5. Przypisz Timer do skryptu
 6. Uruchom komunikację - skrypt zacznie działać
+
+> Przy tworzeniu nowego projektu (`Add Project`) szablony z tego folderu są automatycznie kopiowane do katalogu `Scripts/` projektu.
 
 ## API skryptów
 

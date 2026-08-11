@@ -110,6 +110,9 @@
             <MenuItem Header="Add Existing Script" Click="ScriptFileExistingAdd_Click" IsEnabled="{Binding mScriptFile}">
                 <MenuItem.Icon><TextBlock Text="&#xE8B5;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
             </MenuItem>
+            <MenuItem Header="Add Script From Template" Click="ScriptFileTemplateAdd_Click" IsEnabled="{Binding mScriptFile}">
+                <MenuItem.Icon><TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>
+            </MenuItem>
             <Separator />
             <MenuItem Header="Show Location" Click="ShowLocation_Click" IsEnabled="{Binding mShowLoc}">
                 <MenuItem.Icon><TextBlock Text="&#xE81D;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="{StaticResource Th.TextSecBrush}"/></MenuItem.Icon>

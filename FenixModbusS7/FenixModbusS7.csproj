@@ -32,6 +32,9 @@
     <Resource Include="dgsoftlabs.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Template\**\*.cs" Link="Template\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AvalonEdit" Version="6.3.1.120" />
     <PackageReference Include="Dirkster.AvalonDock" Version="4.74.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.142" />

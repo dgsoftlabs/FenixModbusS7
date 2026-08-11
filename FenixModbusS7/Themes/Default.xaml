@@ -203,6 +203,18 @@
         <Setter Property="VerticalContentAlignment"    Value="Top" />
     </Style>
 
+    <!-- DIALOG: selection list -->
+    <Style x:Key="Th.DialogList" TargetType="ListBox">
+        <Setter Property="Background"          Value="{StaticResource Th.SurfaceBrush}" />
+        <Setter Property="Foreground"          Value="{StaticResource Th.TextBrush}" />
+        <Setter Property="BorderBrush"         Value="{StaticResource Th.BorderBrush}" />
+        <Setter Property="BorderThickness"     Value="1" />
+        <Setter Property="Padding"             Value="4" />
+        <Setter Property="FontSize"            Value="{StaticResource Th.FontMd}" />
+        <Setter Property="Margin"              Value="0,0,0,6" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    </Style>
+
     <!-- DIALOG: bottom actions panel -->
     <Style x:Key="Th.DialogBottomActionsPanel" TargetType="StackPanel">
         <Setter Property="Orientation"         Value="Horizontal" />
