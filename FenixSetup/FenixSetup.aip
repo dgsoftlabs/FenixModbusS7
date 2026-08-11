@@ -2,6 +2,17 @@
 <DOCUMENT Type="Advanced Installer" CreateVersion="22.4" version="23.9" Modules="simple" RootPath="." Language="en" Id="{18B9E293-60CC-4D60-B764-2966A559A180}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Alarm" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_DataC" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Deadb" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_FlowT" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Heart" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Movin" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_PID_C" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_RateO" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Scrip" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Signa" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_State" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_AlarmManager.cs" Value="..\Fenix\bin\Release\net10.0-windows\publish\Template"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.dll" Value="..\Fenix\bin\Release\net10.0-windows\publish"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll" Value="..\Fenix\bin\Release\net10.0-windows\publish\ca-ES"/>
@@ -445,6 +456,17 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_sni.dll_1" Value="..\FenixServer\bin\Release\Publish\runtimes\win-x64\native"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_sni.dll_2" Value="..\FenixServer\bin\Release\Publish\runtimes\win-x86\native"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_web.config" Value="..\FenixServer.Api\bin\Release\net10.0-windows\publish"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Alarm" Value="02_AlarmManager.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_DataC" Value="10_DataCollector.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Deadb" Value="09_DeadbandFilter.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_FlowT" Value="04_FlowTotalizer.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Heart" Value="08_HeartbeatWatchdog.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Movin" Value="03_MovingAverageFilter.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_PID_C" Value="01_PID_Controller.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_RateO" Value="06_RateOfChange.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Scrip" Value="Script.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Signa" Value="05_SignalGenerator.cs"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_State" Value="07_StateMachine.cs"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AlarmManager.cs" Value="02_AlarmManager.cs"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll" Value="AvalonDock.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll" Value="AvalonDock.resources.dll"/>
@@ -1300,7 +1322,7 @@
     <ROW Component="FenixServer_PublishOutput_zhHant" ComponentId="{769478C5-C4B5-4FDE-B3F7-4C233CEF3D1B}" Directory_="zhHant_2_Dir" Attributes="0" KeyPath="Microsoft.Win32.TaskScheduler.reso_10_urces.dll"/>
     <ROW Component="Fenix_PrimaryOutput" ComponentId="{70A5976D-9849-42FA-B824-DC3ED06509E1}" Directory_="Fenix_Dir" Attributes="0" KeyPath="Fenix.dll"/>
     <ROW Component="Fenix_PublishOutput" ComponentId="{DABBD30F-692E-4629-AD96-F47B45EE9051}" Directory_="Fenix_Dir" Attributes="0" KeyPath="System.IO.Ports.dll"/>
-    <ROW Component="Fenix_PublishOutput_Template" ComponentId="{B732DC23-97AF-4CB8-9EF3-19D59F142894}" Directory_="Template_Dir" Attributes="0" KeyPath="AI_PROPPATH_FILENAME_PERBUILD_PID_C" Type="0"/>
+    <ROW Component="Fenix_PublishOutput_Template" ComponentId="{B732DC23-97AF-4CB8-9EF3-19D59F142894}" Directory_="Template_Dir" Attributes="0" KeyPath="AI_PROPPATH_FILENAME_PERBUILD_AI_PR" Type="0"/>
     <ROW Component="Fenix_PublishOutput_caES" ComponentId="{C04A4CB0-1D23-463C-A78B-1821BA483465}" Directory_="caES_Dir" Attributes="0" KeyPath="AvalonDock.resources.dll"/>
     <ROW Component="Fenix_PublishOutput_cs" ComponentId="{B63A251A-57EA-47F3-9A1E-E0042FBF2816}" Directory_="cs_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.resources.dll"/>
     <ROW Component="Fenix_PublishOutput_csCZ" ComponentId="{599C8EF5-1450-4E09-8D3F-5495A466DEE6}" Directory_="csCZ_Dir" Attributes="0" KeyPath="AvalonDock.resources.dll_1"/>
@@ -1782,17 +1804,17 @@
     <ROW File="System.Data.SqlClient.dll_1" Component_="FenixServer_PublishOutput_runtimes_unix_lib_netcoreapp2.1" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SqlClient.dll_1]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SqlClient.dll_1&gt;" SelfReg="false"/>
     <ROW File="System.IO.Ports.dll_8" Component_="FenixServer_PublishOutput_runtimes_win_lib_net10.0" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.IO.Ports.dll_8]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.IO.Ports.dll_8&gt;" SelfReg="false"/>
     <ROW File="System.Data.SqlClient.dll_2" Component_="FenixServer_PublishOutput_runtimes_win_lib_netcoreapp2.1" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.SqlClient.dll_2]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.SqlClient.dll_2&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_Scrip" Component_="Fenix_PublishOutput_Template" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Script.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Script.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_PID_C" Component_="Fenix_PublishOutput_Template" FileName="01_PID~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_PID_Controller.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_PID_Controller.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_Alarm" Component_="Fenix_PublishOutput_Template" FileName="02_ALA~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AlarmManager.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AlarmManager.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_Movin" Component_="Fenix_PublishOutput_Template" FileName="03_MOV~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_MovingAverageFilter.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_MovingAverageFilter.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_FlowT" Component_="Fenix_PublishOutput_Template" FileName="04_FLO~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_FlowTotalizer.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_FlowTotalizer.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_Signa" Component_="Fenix_PublishOutput_Template" FileName="05_SIG~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_SignalGenerator.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_SignalGenerator.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_RateO" Component_="Fenix_PublishOutput_Template" FileName="06_RAT~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_RateOfChange.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_RateOfChange.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_State" Component_="Fenix_PublishOutput_Template" FileName="07_STA~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_StateMachine.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_StateMachine.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_Heart" Component_="Fenix_PublishOutput_Template" FileName="08_HEA~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_HeartbeatWatchdog.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_HeartbeatWatchdog.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_Deadb" Component_="Fenix_PublishOutput_Template" FileName="09_DEA~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_DeadbandFilter.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DeadbandFilter.cs&gt;" SelfReg="false"/>
-    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_DataC" Component_="Fenix_PublishOutput_Template" FileName="10_DAT~1.CS|[|AI_PROPPATH_FILENAME_PERBUILD_DataCollector.cs]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DataCollector.cs&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI_10" Component_="Fenix_PublishOutput_Template" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Scrip]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Scrip&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI_PR" Component_="Fenix_PublishOutput_Template" FileName="01_PID~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_PID_C]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_PID_C&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI__1" Component_="Fenix_PublishOutput_Template" FileName="02_ALA~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Alarm]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Alarm&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI__2" Component_="Fenix_PublishOutput_Template" FileName="03_MOV~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Movin]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Movin&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI__3" Component_="Fenix_PublishOutput_Template" FileName="04_FLO~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_FlowT]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_FlowT&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI__4" Component_="Fenix_PublishOutput_Template" FileName="05_SIG~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Signa]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Signa&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI__5" Component_="Fenix_PublishOutput_Template" FileName="06_RAT~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_RateO]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_RateO&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI__6" Component_="Fenix_PublishOutput_Template" FileName="07_STA~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_State]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_State&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI__7" Component_="Fenix_PublishOutput_Template" FileName="08_HEA~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Heart]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Heart&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI__8" Component_="Fenix_PublishOutput_Template" FileName="09_DEA~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Deadb]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Deadb&gt;" SelfReg="false"/>
+    <ROW File="AI_PROPPATH_FILENAME_PERBUILD_AI__9" Component_="Fenix_PublishOutput_Template" FileName="10_DAT~2.CS|[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_DataC]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_DataC&gt;" SelfReg="false"/>
     <ROW File="index.html" Component_="index.html" FileName="INDEX~1.HTM|index.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="..\Http\index.html" SelfReg="false"/>
     <ROW File="libe_sqlite3.so_6" Component_="Fenix_PublishOutput_runtimes_androidarm_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_6]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_6&gt;" SelfReg="false"/>
     <ROW File="libe_sqlite3.so_10" Component_="Fenix_PublishOutput_runtimes_androidarm64_native" FileName="LIBE_S~2.SO|[|AI_PROPPATH_FILENAME_PERBUILD_libe_sqlite3.so_10]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_libe_sqlite3.so_10&gt;" SelfReg="false"/>
@@ -1823,6 +1845,17 @@
     <ROW File="e_sqlite3.a_17" Component_="FenixServer_PublishOutput_runtimes_iossimulatorx86_native" FileName="E_SQLI~2.A|[|AI_PROPPATH_FILENAME_PERBUILD_e_sqlite3.a_17]" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_e_sqlite3.a_17&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Alarm" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Alarm]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Alarm]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_DataC" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_DataC]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_DataC]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Deadb" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Deadb]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Deadb]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_FlowT" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_FlowT]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_FlowT]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Heart" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Heart]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Heart]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Movin" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Movin]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Movin]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_PID_C" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_PID_C]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_PID_C]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_RateO" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_RateO]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_RateO]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Scrip" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Scrip]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Scrip]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Signa" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Signa]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_Signa]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_State" Path="[|AI_PROPPATH_DIR_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_State]\[|AI_PROPPATH_FILENAME_PERBUILD_AI_PROPPATH_FILENAME_PERBUILD_State]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_AlarmManager.cs" Path="[|AI_PROPPATH_DIR_PERBUILD_AlarmManager.cs]\[|AI_PROPPATH_FILENAME_PERBUILD_AlarmManager.cs]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_AvalonDock.resources.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AvalonDock.resources.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AvalonDock.resources.dll]" Type="2" Content="0"/>
@@ -3027,16 +3060,16 @@
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServer" OutputGroup="PublishOutput" OutputFile="e_sqlite3.a_15"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServer" OutputGroup="PublishOutput" OutputFile="e_sqlite3.a_16"/>
     <ROW ProjectId="{4d5f4cf8-8cbe-0dd4-e3c5-c01a3062b2c1}" ProjectName="FenixServer" OutputGroup="PublishOutput" OutputFile="e_sqlite3.a_17"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_PID_C"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_Alarm"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_Movin"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_FlowT"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_Signa"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_RateO"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_State"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_Heart"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_Deadb"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_DataC"/>
-    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_Scrip"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI_PR"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI__1"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI__2"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI__3"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI__4"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI__5"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI__6"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI__7"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI__8"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI__9"/>
+    <ROW ProjectId="{82c72fc5-fed5-c6e9-30f8-8b99a363a883}" ProjectName="Fenix" OutputGroup="PublishOutput" OutputFile="AI_PROPPATH_FILENAME_PERBUILD_AI_10"/>
   </COMPONENT>
 </DOCUMENT>
