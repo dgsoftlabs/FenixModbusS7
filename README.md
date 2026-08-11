@@ -77,6 +77,35 @@ dotnet run --project FenixServer.Api
 
 ## 📋 Version History
 
+### v4.2.0
+| Feature | Details |
+|---------|---------|
+| 🖥️ Console UI | Lightweight console UI helpers for the server with banners, boxes, colored timestamped output, and clickable links |
+| 🔄 Reconnection | Proactive dead-connection detection and automatic reconnection via error events, timeouts, and stale-cycle monitoring |
+| 🧵 Modbus Drivers | Proper cleanup of in-flight I/O operations during reconnection (TCP/RTU/ASCII) |
+| 🔌 S7 Driver | Instance-specific client and lock for reliable multi-connection management |
+| 🧹 Modernization | .NET 10 modernization, WinForms dependency removed, dialogs refactored |
+| 🗄️ Data Library | Serialization refactoring (BinaryFormatter removed, JSON-based cloning), XML fixes, and legacy interop cleanup |
+| 📝 Logging | Single-line timestamped console logging for cleaner server output |
+| 🧪 Script Templates | Added example scripts for common control, monitoring, and alarm scenarios |
+| 🔧 Build | Advanced Installer 23.9 update and code structure improvements |
+
+### v4.1.2
+| Feature | Details |
+|---------|---------|
+| ⚙️ Scaling | Script-based scaling replaced with dedicated ScalingConfig |
+| 🏗️ Build | Build configurations updated to use Any CPU instead of x86 |
+
+### v4.1.1
+| Feature | Details |
+|---------|---------|
+| 📝 Scripts | ScriptsDriver refactoring, InFile handling, script evaluation, and ScriptGlobals improvements |
+| 📄 Docs | XML documentation for endpoint mapping and legacy handlers |
+| 🎨 UI | Start/Stop icons replaced with emoji; property editor restricted to standard values |
+| 🔌 Connections | Duplicate event subscriptions prevented in DriverList |
+| 🏷️ Tags | CDAB BytesOrder enum and handling with tests |
+| 🧹 Refactoring | Code organization, UI labels, and project cleanup |
+
 ### v4.1.0
 | Feature | Details |
 |---------|---------|
