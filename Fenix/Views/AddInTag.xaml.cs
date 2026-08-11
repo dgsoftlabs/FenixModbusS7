@@ -1,5 +1,7 @@
 using ProjectDataLib;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace Fenix
@@ -12,6 +14,19 @@ namespace Fenix
         private Project currentProject { get; set; }
         private ProjectContainer projectContainer { get; set; }
         private InTag currentInTag { get; set; }
+
+        /// <summary>
+        /// Gets the list of available timers (including an empty "no timer" option).
+        /// </summary>
+        public List<string> TimerList
+        {
+            get
+            {
+                return new[] { string.Empty }
+                    .Concat(currentInTag.Proj.InternalTagsDrv.Timers.Select(x => x.Name))
+                    .ToList();
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddInTag"/> class.

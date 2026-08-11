@@ -7,7 +7,7 @@
          xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Fenix"
         mc:Ignorable="d"
-        Title="Add InTag" Height="460" Width="330" WindowStartupLocation="CenterOwner"
+        Title="Add InTag" Height="505" Width="330" WindowStartupLocation="CenterOwner"
         Background="{StaticResource Th.SurfaceBrush}">
     <Window.Resources>
 
@@ -45,6 +45,10 @@
                     </MultiBinding>
                 </TextBox.Text>
             </TextBox>
+
+            <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Trigger" />
+            <ComboBox ItemsSource="{Binding TimerList, RelativeSource={RelativeSource AncestorType=Window}}"
+                      SelectedItem="{Binding TimerName, Mode=TwoWay}" />
 
             <TextBlock Style="{StaticResource Th.DialogSectionTitle}" Text="Description" Margin="0,0,0,2" />
             <TextBox Style="{StaticResource Th.DialogMultilineTextBox}" Height="100" Text="{Binding describe , Mode=TwoWay}" />

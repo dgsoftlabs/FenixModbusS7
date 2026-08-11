@@ -45,7 +45,7 @@ namespace ProjectDataLib
 
         public string TaskName = "FenixServer";
 
-        public string HelpWebSite = "https://github.com/dgsoftlabs/Fenix/wiki";
+        public string HelpWebSite = "https://github.com/dgsoftlabs/FenixModbusS7/wiki";
 
         public string LayoutFile = "Layout_.xml";
 
