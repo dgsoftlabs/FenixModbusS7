@@ -81,7 +81,7 @@ namespace FenixServer.Web
 
             try
             {
-                var appVersion = typeof(Program).Assembly.GetName().Version?.ToString(3) ?? "4.2.0";
+                var appVersion = typeof(Program).Assembly.GetName().Version?.ToString(3) ?? "unknown";
                 PrintStartupBanner(appVersion);
 
                 var configuredPort = Program.GetConfiguredPort(project);

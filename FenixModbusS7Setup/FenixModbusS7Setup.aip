@@ -874,7 +874,7 @@
     <ROW Property="ProductCode" Value="1033:{EBE1DDF8-08F2-4DD8-B81C-381E9A299894} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="FenixModbusS7"/>
-    <ROW Property="ProductVersion" Value="4.2.0" Options="32"/>
+    <ROW Property="ProductVersion" Value="4.2.1" Options="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{288A4594-D6A7-4215-BB19-EB4A8DB3AA54}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>

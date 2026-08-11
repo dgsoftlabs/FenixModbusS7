@@ -10,7 +10,7 @@
     <StartupObject>FenixServer.App</StartupObject>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>HttpServer.ico</ApplicationIcon>
-    <Version>4.2.0</Version>
+    <Version>4.2.1</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <UseVSHostingProcess>true</UseVSHostingProcess>
