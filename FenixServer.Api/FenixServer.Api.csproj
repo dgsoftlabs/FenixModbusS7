@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <OutputType>Exe</OutputType>
+    <ApplicationIcon>FenixServer.Api.ico</ApplicationIcon>
     <StartupObject>FenixServer.Api.EntryPoint</StartupObject>
     <Version>4.2.1</Version>
   </PropertyGroup>
