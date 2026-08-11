@@ -29,7 +29,7 @@
 
         <StackPanel DockPanel.Dock="Top" Margin="0,0,0,16">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                <TextBlock Text="&#xE716;" FontFamily="Segoe MDL2 Assets" FontSize="28" Foreground="{StaticResource Th.AccentBrush}" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                <TextBlock Text="&#xE716;" FontFamily="Segoe MDL2 Assets" FontSize="28" Foreground="{StaticResource Th.AccentBrush}" Margin="0,0,12,0" VerticalAlignment="Center" />
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="User Accounts" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource Th.TextBrush}" />
                     <TextBlock Text="Manage user credentials and access" Foreground="{StaticResource Th.TextSecBrush}" FontSize="12" Margin="0,2,0,0" />

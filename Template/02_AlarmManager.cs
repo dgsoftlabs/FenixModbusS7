@@ -69,9 +69,9 @@ public class AlarmManager : ScriptModel
         {
             // Read alarm limits (allows runtime modification)
             double tempHigh = Convert.ToDouble(GetTag("Alarm_Temperature_High"));
-            double tempLow  = Convert.ToDouble(GetTag("Alarm_Temperature_Low"));
+            double tempLow = Convert.ToDouble(GetTag("Alarm_Temperature_Low"));
             double pressHigh = Convert.ToDouble(GetTag("Alarm_Pressure_High"));
-            double pressLow  = Convert.ToDouble(GetTag("Alarm_Pressure_Low"));
+            double pressLow = Convert.ToDouble(GetTag("Alarm_Pressure_Low"));
 
             // Update limits
             alarms[0] = UpdateLimit(alarms[0], tempHigh);

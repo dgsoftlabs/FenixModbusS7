@@ -112,7 +112,7 @@ namespace ProjectDataLib
         private string projectName_;
 
         [Category("01 Design"), DisplayName("Project Name"), Description("Current project name")]
-                [XmlElement(ElementName = "Name")]
+        [XmlElement(ElementName = "Name")]
         public string projectName
         {
             get
@@ -131,7 +131,7 @@ namespace ProjectDataLib
         private Version fileVer_;
 
         [Category("02 Header"), DisplayName("Version"), Description("Version of files.")]
-                [XmlIgnore]
+        [XmlIgnore]
         public Version fileVer
         {
             get { return fileVer_; }
@@ -154,7 +154,7 @@ namespace ProjectDataLib
         private string autor_;
 
         [Category("03 Information"), DisplayName("Autor")]
-                [XmlElement(ElementName = "Autor")]
+        [XmlElement(ElementName = "Autor")]
         public string autor
         {
             get { return autor_; }
@@ -169,7 +169,7 @@ namespace ProjectDataLib
         private string company_;
 
         [Category("03 Information"), DisplayName("Company")]
-                [XmlElement(ElementName = "Company")]
+        [XmlElement(ElementName = "Company")]
         public string company
         {
             get { return company_; }
@@ -184,7 +184,7 @@ namespace ProjectDataLib
         private string describe_;
 
         [Category("05 Misc"), DisplayName("Description")]
-                [XmlElement(ElementName = "Description")]
+        [XmlElement(ElementName = "Description")]
         public string describe
         {
             get { return describe_; }
@@ -199,7 +199,7 @@ namespace ProjectDataLib
         private DateTime createTime_;
 
         [Category("04 Time"), DisplayName("Create Time"), ReadOnly(true)]
-                [XmlElement(ElementName = "Created")]
+        [XmlElement(ElementName = "Created")]
         public DateTime createTime
         {
             get { return createTime_; }
@@ -209,7 +209,7 @@ namespace ProjectDataLib
         private DateTime modifeTime_;
 
         [Category("04 Time"), ReadOnly(true), DisplayName("Modification Time")]
-                [XmlElement(ElementName = "LastModification")]
+        [XmlElement(ElementName = "LastModification")]
         public DateTime modifeTime
         {
             get { return modifeTime_; }
@@ -223,7 +223,7 @@ namespace ProjectDataLib
         private Boolean modMarks_;
 
         [Browsable(false)]
-                [XmlIgnore]
+        [XmlIgnore]
         public Boolean modMarks
         {
             get { return modMarks_; }
@@ -237,7 +237,7 @@ namespace ProjectDataLib
         private string path_ = string.Empty;
 
         [Browsable(false)]
-                [XmlElement(ElementName = "ProjectPath")]
+        [XmlElement(ElementName = "ProjectPath")]
         public string path
         {
             get { return path_; }
@@ -251,7 +251,7 @@ namespace ProjectDataLib
         private ChartViewConf ChartConf_;
 
         [Browsable(false)]
-                [XmlElement(ElementName = "EditorsConfiguration")]
+        [XmlElement(ElementName = "EditorsConfiguration")]
         public ChartViewConf ChartConf
         {
             get { return ChartConf_; }
@@ -261,7 +261,7 @@ namespace ProjectDataLib
         private TableViewConf TableConf_;
 
         [Browsable(false)]
-                [XmlElement(ElementName = "TableConfiguration")]
+        [XmlElement(ElementName = "TableConfiguration")]
         public TableViewConf TableConf
         {
             get { return TableConf_; }
@@ -271,7 +271,7 @@ namespace ProjectDataLib
         private CommViewConf CommConf_;
 
         [Browsable(false)]
-                [XmlElement(ElementName = "CommViewConfiguration")]
+        [XmlElement(ElementName = "CommViewConfiguration")]
         public CommViewConf CommConf
         {
             get { return CommConf_; }
@@ -290,7 +290,7 @@ namespace ProjectDataLib
         private Boolean IsExpand_;
 
         [Browsable(false)]
-                public Boolean IsExpand
+        public Boolean IsExpand
         {
             get { return IsExpand_; }
             set
@@ -316,7 +316,7 @@ namespace ProjectDataLib
         private LegacyScriptCompat scriptCon_;
 
         [Browsable(false)]
-                [XmlIgnore]
+        [XmlIgnore]
         public dynamic ScriptCon
         {
             get
@@ -340,18 +340,19 @@ namespace ProjectDataLib
         private List<InFile> FileList_;
 
         [Browsable(false)]
-                [XmlElement(ElementName = "FileList", Type = typeof(List<InFile>))]
+        [XmlElement(ElementName = "FileList", Type = typeof(List<InFile>))]
         public List<InFile> FileList
         {
             get { return FileList_; }
             set { FileList_ = value; }
         }
+
 #pragma warning restore CS0618
 
         private List<ScriptFile> ScriptFileList_;
 
         [Browsable(false)]
-                [XmlElement(ElementName = "ScriptFileList", Type = typeof(List<ScriptFile>))]
+        [XmlElement(ElementName = "ScriptFileList", Type = typeof(List<ScriptFile>))]
         public List<ScriptFile> ScriptFileList
         {
             get { return ScriptFileList_; }
@@ -361,7 +362,7 @@ namespace ProjectDataLib
         private List<Connection> connectionList_ = new List<Connection>();
 
         [Browsable(false)]
-                [XmlElement(ElementName = "ConnectionList", Type = typeof(List<Connection>))]
+        [XmlElement(ElementName = "ConnectionList", Type = typeof(List<Connection>))]
         public List<Connection> connectionList
         {
             get { return connectionList_; }
@@ -376,7 +377,7 @@ namespace ProjectDataLib
         private List<Device> DevicesList_ = new List<Device>();
 
         [Browsable(false)]
-                [XmlElement(ElementName = "DeviceList", Type = typeof(List<Device>))]
+        [XmlElement(ElementName = "DeviceList", Type = typeof(List<Device>))]
         public List<Device> DevicesList
         {
             get { return DevicesList_; }
@@ -390,7 +391,7 @@ namespace ProjectDataLib
         private List<Tag> tagsList_ = new List<Tag>();
 
         [Browsable(false)]
-                [XmlElement(ElementName = "TagList", Type = typeof(List<Tag>))]
+        [XmlElement(ElementName = "TagList", Type = typeof(List<Tag>))]
         public List<Tag> tagsList
         {
             get { return tagsList_; }
@@ -400,7 +401,7 @@ namespace ProjectDataLib
         private List<InTag> InTagsList_ = new List<InTag>();
 
         [Browsable(false)]
-                [XmlElement(ElementName = "InternalTagList", Type = typeof(List<InTag>))]
+        [XmlElement(ElementName = "InternalTagList", Type = typeof(List<InTag>))]
         public List<InTag> InTagsList
         {
             get { return InTagsList_; }
@@ -420,7 +421,7 @@ namespace ProjectDataLib
         private InternalTagsDriver InternalTags_;
 
         [Browsable(false)]
-                [XmlElement(ElementName = "IntTagsEngine")]
+        [XmlElement(ElementName = "IntTagsEngine")]
         public InternalTagsDriver InternalTagsDrv
         {
             get { return InternalTags_; }
@@ -543,13 +544,13 @@ namespace ProjectDataLib
             modificationApear();
         }
 
-                private void modificationApear()
+        private void modificationApear()
         {
             modifeTime = DateTime.Now;
             modMarks = true;
         }
 
-                [OnDeserialized]
+        [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
             InternalTags_.Proj = this;
@@ -736,7 +737,7 @@ namespace ProjectDataLib
             TagChildren = new ObservableCollection<ITag>(query);
         }
 
-                public object Clone()
+        public object Clone()
         {
             Project Pr1 = ObjectCloner.DeepClone(this);
             Pr1.objId_ = Guid.NewGuid();
@@ -754,7 +755,7 @@ namespace ProjectDataLib
             return Pr1;
         }
 
-                public object GetTag(string s)
+        public object GetTag(string s)
         {
             try
             {
@@ -779,7 +780,7 @@ namespace ProjectDataLib
             }
         }
 
-                public ITag GetITag(string s)
+        public ITag GetITag(string s)
         {
             try
             {
@@ -804,7 +805,7 @@ namespace ProjectDataLib
             }
         }
 
-                public Object SetTag(string s, object val)
+        public Object SetTag(string s, object val)
         {
             try
             {
@@ -841,7 +842,7 @@ namespace ProjectDataLib
 
         #region Scripts for Web
 
-                public string SetTagValue(string s, object val)
+        public string SetTagValue(string s, object val)
         {
             try
             {
@@ -872,7 +873,7 @@ namespace ProjectDataLib
             }
         }
 
-                public string GetTagValue(string s)
+        public string GetTagValue(string s)
         {
             try
             {
@@ -900,7 +901,7 @@ namespace ProjectDataLib
             }
         }
 
-                public string GetTimerValue(string s)
+        public string GetTimerValue(string s)
         {
             try
             {
@@ -915,7 +916,7 @@ namespace ProjectDataLib
             }
         }
 
-                public string GetUserValue(string s)
+        public string GetUserValue(string s)
         {
             try
             {
@@ -930,7 +931,7 @@ namespace ProjectDataLib
             }
         }
 
-                public string GetMachineValue(string s)
+        public string GetMachineValue(string s)
         {
             try
             {
@@ -945,7 +946,7 @@ namespace ProjectDataLib
             }
         }
 
-                public string GetTagsAll(string name)
+        public string GetTagsAll(string name)
         {
             try
             {
@@ -960,7 +961,7 @@ namespace ProjectDataLib
             }
         }
 
-                public string GetConnectionsAll(string name)
+        public string GetConnectionsAll(string name)
         {
             try
             {

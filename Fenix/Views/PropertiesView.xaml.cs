@@ -780,12 +780,12 @@ namespace Fenix
             Grid.SetRow(previewTitle, 0);
             previewGrid.Children.Add(previewTitle);
 
-            _formulaReadBlock  = new TextBlock { FontFamily = new System.Windows.Media.FontFamily("Consolas"), FontSize = 11, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 4) };
+            _formulaReadBlock = new TextBlock { FontFamily = new System.Windows.Media.FontFamily("Consolas"), FontSize = 11, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 4) };
             _formulaWriteBlock = new TextBlock { FontFamily = new System.Windows.Media.FontFamily("Consolas"), FontSize = 11, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 8) };
-            _previewBlock      = new TextBlock { FontSize = 12, TextWrapping = TextWrapping.Wrap };
-            Grid.SetRow(_formulaReadBlock,  1); previewGrid.Children.Add(_formulaReadBlock);
+            _previewBlock = new TextBlock { FontSize = 12, TextWrapping = TextWrapping.Wrap };
+            Grid.SetRow(_formulaReadBlock, 1); previewGrid.Children.Add(_formulaReadBlock);
             Grid.SetRow(_formulaWriteBlock, 2); previewGrid.Children.Add(_formulaWriteBlock);
-            Grid.SetRow(_previewBlock,      3); previewGrid.Children.Add(_previewBlock);
+            Grid.SetRow(_previewBlock, 3); previewGrid.Children.Add(_previewBlock);
 
             previewBorder.Child = previewGrid;
             Grid.SetRow(previewBorder, 2); Grid.SetColumnSpan(previewBorder, 4);
@@ -795,7 +795,7 @@ namespace Fenix
             var okButton = new Button { Content = "OK", Width = 90, Height = 28, Margin = new Thickness(0, 0, 8, 0), IsDefault = true };
             okButton.Click += OkButton_Click;
             var cancelButton = new Button { Content = "Cancel", Width = 90, Height = 28, IsCancel = true };
-            var clearButton  = new Button { Content = "Clear Scaling", Width = 110, Height = 28, HorizontalAlignment = HorizontalAlignment.Left };
+            var clearButton = new Button { Content = "Clear Scaling", Width = 110, Height = 28, HorizontalAlignment = HorizontalAlignment.Left };
             clearButton.Click += (_, _) => { _appMinBox.Text = _appMaxBox.Text = _plcMinBox.Text = _plcMaxBox.Text = "0"; UpdatePreview(); };
 
             var btnRow = new Grid { Margin = new Thickness(0, 16, 0, 0) };
@@ -803,8 +803,8 @@ namespace Fenix
             btnRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             btnRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             btnRow.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            Grid.SetColumn(clearButton,  0); btnRow.Children.Add(clearButton);
-            Grid.SetColumn(okButton,     2); btnRow.Children.Add(okButton);
+            Grid.SetColumn(clearButton, 0); btnRow.Children.Add(clearButton);
+            Grid.SetColumn(okButton, 2); btnRow.Children.Add(okButton);
             Grid.SetColumn(cancelButton, 3); btnRow.Children.Add(cancelButton);
             Grid.SetRow(btnRow, 3); Grid.SetColumnSpan(btnRow, 4);
             grid.Children.Add(btnRow);
@@ -834,13 +834,13 @@ namespace Fenix
             var cfg = BuildConfig();
             if (cfg.IsEnabled)
             {
-                _formulaReadBlock.Text  = $"Read : plcValue → appValue = (plcValue - {cfg.PlcMin}) / ({cfg.PlcMax} - {cfg.PlcMin}) × ({cfg.AppMax} - {cfg.AppMin}) + {cfg.AppMin}";
+                _formulaReadBlock.Text = $"Read : plcValue → appValue = (plcValue - {cfg.PlcMin}) / ({cfg.PlcMax} - {cfg.PlcMin}) × ({cfg.AppMax} - {cfg.AppMin}) + {cfg.AppMin}";
                 _formulaWriteBlock.Text = $"Write: appValue → plcValue = (appValue - {cfg.AppMin}) / ({cfg.AppMax} - {cfg.AppMin}) × ({cfg.PlcMax} - {cfg.PlcMin}) + {cfg.PlcMin}";
                 _previewBlock.Text = $"Example:  PLC {cfg.PlcMin} → App {cfg.ToApp(cfg.PlcMin):G}   |   PLC {cfg.PlcMax} → App {cfg.ToApp(cfg.PlcMax):G}";
             }
             else
             {
-                _formulaReadBlock.Text  = "";
+                _formulaReadBlock.Text = "";
                 _formulaWriteBlock.Text = "";
                 _previewBlock.Text = "No scaling — values passed through unchanged.";
             }
