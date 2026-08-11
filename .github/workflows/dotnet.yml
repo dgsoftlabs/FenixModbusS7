@@ -43,7 +43,7 @@ jobs:
       - name: Build installer
         uses: caphyon/advinst-github-action@main
         with:
-          advinst-version: '23.6'
+          advinst-version: '23.9'
           advinst-enable-automation: 'true'
           # advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
           aip-path: ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup.aip
