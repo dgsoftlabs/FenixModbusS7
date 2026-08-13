@@ -26,30 +26,30 @@ jobs:
           # advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
 
       - name: Restore NuGet packages
-        run: dotnet restore FenixModbusS7.sln
+        run: dotnet restore Fenix.sln
 
       - name: Run tests
         run: dotnet test ProjectDataLib.Test\ProjectDataLib.Test.csproj -c Release --verbosity normal
 
-      - name: Publish FenixModbusS7
-        run: dotnet publish FenixModbusS7\FenixModbusS7.csproj -c Release /p:PublishProfile=FolderProfile
+      - name: Publish Fenix
+        run: dotnet publish Fenix\Fenix.csproj -c Release /p:PublishProfile=FolderProfile
 
-      - name: Publish FenixServerS7
-        run: dotnet publish FenixServerS7\FenixServerS7.csproj -c Release /p:PublishProfile=FolderProfile
+      - name: Publish FenixServer
+        run: dotnet publish FenixServer\FenixServer.csproj -c Release /p:PublishProfile=FolderProfile
 
-      - name: Publish FenixServer.Web
-        run: dotnet publish FenixServer.Web\FenixServer.Web.csproj -c Release /p:PublishProfile=FolderProfile
+      - name: Publish FenixServer.Api
+        run: dotnet publish FenixServer.Api\FenixServer.Api.csproj -c Release /p:PublishProfile=FolderProfile
 
       - name: Build installer
         uses: caphyon/advinst-github-action@main
         with:
-          advinst-version: '23.6'
+          advinst-version: '23.9'
           advinst-enable-automation: 'true'
           # advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
-          aip-path: ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup.aip
+          aip-path: ${{ github.workspace }}\FenixSetup\FenixSetup.aip
           aip-build-name: DefaultBuild
-          aip-package-name: FenixModbusS7Setup.msi
-          aip-output-dir: ${{ github.workspace }}\FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles
+          aip-package-name: FenixSetup.msi
+          aip-output-dir: ${{ github.workspace }}\FenixSetup\FenixSetup-SetupFiles
 
         # Only when to Master
 
@@ -63,8 +63,8 @@ jobs:
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FenixModbusS7Setup-v${{ steps.version.outputs.value }}
-          path: FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\*.msi
+          name: FenixSetup-v${{ steps.version.outputs.value }}
+          path: FenixSetup\FenixSetup-SetupFiles\*.msi
           retention-days: 1
 
       - name: Create GitHub Release
@@ -73,5 +73,5 @@ jobs:
         with:
           tag_name: v${{ steps.version.outputs.value }}
           name: Release v${{ steps.version.outputs.value }}
-          files: FenixModbusS7Setup\FenixModbusS7Setup-SetupFiles\*.msi
+          files: FenixSetup\FenixSetup-SetupFiles\*.msi
           token: ${{ secrets.GITHUB_TOKEN }}

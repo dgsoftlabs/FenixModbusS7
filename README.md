@@ -2,7 +2,7 @@
 
 > Industrial protocol communication suite for Modbus and SIEMENS S7-300/400 devices
 
-[![GitHub Release](https://img.shields.io/github/v/release/dgsoftlabs/FenixModbusS7?style=flat-square)](https://github.com/dgsoftlabs/FenixModbusS7/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/dgsoftlabs/Fenix?style=flat-square)](https://github.com/dgsoftlabs/Fenix/releases)
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?style=flat-square)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
@@ -20,9 +20,9 @@ This repository contains multiple interconnected applications and libraries for 
 
 | Project | Type | Purpose |
 |---------|------|---------|
-| **FenixModbusS7** | WPF Desktop App | Primary application for Modbus and S7 communication with real-time visualization, trend charts, database storage, and device management. Supports TCP, RTU, and ASCII protocols. |
-| **FenixServerS7** | WPF Server App | Server-hosted S7 communication application with ASP.NET Core integration for enterprise deployments. |
-| **FenixServer.Web** | Console App (ASP.NET Core) | RESTful Web API backend for remote device communication and distributed endpoint data access. Fully console-hosted application. |
+| **Fenix** | WPF Desktop App | Primary application for Modbus and S7 communication with real-time visualization, trend charts, database storage, and device management. Supports TCP, RTU, and ASCII protocols. |
+| **FenixServer** | WPF Server Host App | Desktop host that starts, stops and monitors the Fenix Server API (ASP.NET Core). |
+| **FenixServer.Api** | Console App (ASP.NET Core) | RESTful Web API backend ("Fenix Server API") for remote device communication and distributed endpoint data access. Fully console-hosted application. |
 
 ### 📚 Libraries
 
@@ -64,21 +64,53 @@ dotnet build --configuration Release
 ### Running
 ```bash
 # Main application
-dotnet run --project FenixModbusS7
+dotnet run --project Fenix
+
+# Server host (desktop)
+dotnet run --project FenixServer
 
 # Web API
-dotnet run --project FenixServer.Web
+dotnet run --project FenixServer.Api
 ```
 
 ---
 
 ## 📋 Version History
 
+### v4.2.0
+| Feature | Details |
+|---------|---------|
+| 🖥️ Console UI | Lightweight console UI helpers for the server with banners, boxes, colored timestamped output, and clickable links |
+| 🔄 Reconnection | Proactive dead-connection detection and automatic reconnection via error events, timeouts, and stale-cycle monitoring |
+| 🧵 Modbus Drivers | Proper cleanup of in-flight I/O operations during reconnection (TCP/RTU/ASCII) |
+| 🔌 S7 Driver | Instance-specific client and lock for reliable multi-connection management |
+| 🧹 Modernization | .NET 10 modernization, WinForms dependency removed, dialogs refactored |
+| 🗄️ Data Library | Serialization refactoring (BinaryFormatter removed, JSON-based cloning), XML fixes, and legacy interop cleanup |
+| 📝 Logging | Single-line timestamped console logging for cleaner server output |
+| 🧪 Script Templates | Added example scripts for common control, monitoring, and alarm scenarios |
+| 🔧 Build | Advanced Installer 23.9 update and code structure improvements |
+
+### v4.1.2
+| Feature | Details |
+|---------|---------|
+| ⚙️ Scaling | Script-based scaling replaced with dedicated ScalingConfig |
+| 🏗️ Build | Build configurations updated to use Any CPU instead of x86 |
+
+### v4.1.1
+| Feature | Details |
+|---------|---------|
+| 📝 Scripts | ScriptsDriver refactoring, InFile handling, script evaluation, and ScriptGlobals improvements |
+| 📄 Docs | XML documentation for endpoint mapping and legacy handlers |
+| 🎨 UI | Start/Stop icons replaced with emoji; property editor restricted to standard values |
+| 🔌 Connections | Duplicate event subscriptions prevented in DriverList |
+| 🏷️ Tags | CDAB BytesOrder enum and handling with tests |
+| 🧹 Refactoring | Code organization, UI labels, and project cleanup |
+
 ### v4.1.0
 | Feature | Details |
 |---------|---------|
 | 🚀 .NET 10.0 | Full migration from .NET Framework to .NET 10.0 LTS |
-| 🎨 WPF Migration | Complete conversion of FenixServerS7 from WinForms to WPF with consistent styling |
+| 🎨 WPF Migration | Complete conversion of FenixServer from WinForms to WPF with consistent styling |
 | 🌐 ASP.NET Core Server | New server-hosted approach with improved web API functionality and isolation |
 | 📡 Endpoint Refactoring | Better endpoint implementation and legacy endpoint compatibility management |
 | 📂 Project Format | Support for .pse project format; legacy .psx files can be opened for conversion but only save in new format |
@@ -323,7 +355,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## ✉️ Support
 
-For issues, questions, or suggestions, please open an [issue](https://github.com/dgsoftlabs/FenixModbusS7/issues) on GitHub.
+For issues, questions, or suggestions, please open an [issue](https://github.com/dgsoftlabs/Fenix/issues) on GitHub.
 
 ---
 

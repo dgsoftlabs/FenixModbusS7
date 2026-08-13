@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Fenix</RootNamespace>
+    <AssemblyName>Fenix</AssemblyName>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <Configurations>All;Debug;Release</Configurations>
+    <Version>4.2.1</Version>
+    <LangVersion>latest</LangVersion>
+    <ApplicationIcon>soft.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModbusMasterASCII\ModbusMasterASCII.csproj" />
+    <ProjectReference Include="..\ModbusMasterRTU\ModbusMasterRTU.csproj" />
+    <ProjectReference Include="..\ModbusMasterTCP\ModbusMasterTCP.csproj" />
+    <ProjectReference Include="..\ProjectDataLib\ProjectDataLib.csproj" />
+    <ProjectReference Include="..\S7-300-400 Ethernet\S7-300-400 Ethernet.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="soft.ico" />
+    <Resource Include="dgsoftlabs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Template\**\*.cs" Link="Template\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AvalonEdit" Version="6.3.1.120" />
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.74.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.142" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
+  </ItemGroup>
+</Project>

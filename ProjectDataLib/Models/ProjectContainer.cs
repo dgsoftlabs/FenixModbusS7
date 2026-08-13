@@ -1606,7 +1606,7 @@ namespace ProjectDataLib
 
         public static async Task<string> GetVersionFromGitHub()
         {
-            string fileUrl = "https://raw.githubusercontent.com/dgsoftlabs/FenixModbusS7/master/version.xml";
+            string fileUrl = "https://raw.githubusercontent.com/dgsoftlabs/Fenix/master/version.xml";
 
             using (HttpClient client = new HttpClient())
             {

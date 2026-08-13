@@ -1,0 +1,933 @@
+using Microsoft.Win32;
+using ProjectDataLib;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
+
+namespace FenixServer.ViewModels
+{
+    public class MainViewModel : INotifyPropertyChanged
+    {
+        private readonly ProjectContainer _projectContainer;
+        private string _windowTitle = "Fenix Server";
+        private string _currentProjectPath = string.Empty;
+        private int _alarmCount;
+        private string _lastAlarmMessage = "No alarms";
+        private bool _isRunning;
+        private PropertyRow _selectedProperty;
+        private ConnectionRow _selectedConnection;
+        private Project _currentProject;
+
+        // UI status monitoring (reconnection itself is handled by the
+        // ReconnectionService hosted inside the web server that FenixServer starts).
+        private DispatcherTimer _statusTimer;
+
+        public MainViewModel(string[] startupArgs)
+        {
+            StartupArgs = startupArgs ?? Array.Empty<string>();
+
+            Events = new ObservableCollection<AlarmEvent>();
+            Properties = new ObservableCollection<PropertyRow>();
+            Connections = new ObservableCollection<ConnectionRow>();
+
+            _projectContainer = new ProjectContainer();
+            _projectContainer.ApplicationError += OnApplicationError;
+            _projectContainer.addProjectEv += (_, e) =>
+            {
+                if (e?.element is Project pr)
+                {
+                    _currentProject = pr;
+                    RefreshConnections();
+                }
+            };
+
+            OpenProjectCommand = new RelayCommand(() => _ = OpenProjectInteractiveAsync());
+            OpenInBrowserCommand = new RelayCommand(OpenInBrowser, () => IsRunning && !string.IsNullOrWhiteSpace(GetServerBrowseAddress()));
+            StartCommand = new RelayCommand(() => _ = StartAsync(), () => CurrentProject != null && !IsRunning);
+            StopCommand = new RelayCommand(() => _ = StopAsync(), () => IsRunning);
+            ClearEventsCommand = new RelayCommand(ClearEvents, () => Events.Count > 0);
+
+            AddEvent(new AlarmEvent("WPF shell initialized"));
+            SetWindowTitle(BuildBaseTitle());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string[] StartupArgs { get; }
+
+        public ObservableCollection<AlarmEvent> Events { get; }
+
+        public ObservableCollection<PropertyRow> Properties { get; }
+
+        public ObservableCollection<ConnectionRow> Connections { get; }
+
+        public ICommand OpenProjectCommand { get; }
+
+        public ICommand OpenInBrowserCommand { get; }
+
+        public ICommand StartCommand { get; }
+
+        public ICommand StopCommand { get; }
+
+        public ICommand ClearEventsCommand { get; }
+
+        public string WindowTitle
+        {
+            get => _windowTitle;
+            set
+            {
+                if (_windowTitle == value)
+                {
+                    return;
+                }
+
+                _windowTitle = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CurrentProjectPath
+        {
+            get => _currentProjectPath;
+            private set
+            {
+                if (_currentProjectPath == value)
+                {
+                    return;
+                }
+
+                _currentProjectPath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsRunning
+        {
+            get => _isRunning;
+            private set
+            {
+                if (_isRunning == value)
+                {
+                    return;
+                }
+
+                _isRunning = value;
+                OnPropertyChanged();
+                RaiseCanExecuteChanged();
+            }
+        }
+
+        public Project CurrentProject
+        {
+            get => _currentProject;
+            private set
+            {
+                if (_currentProject == value)
+                {
+                    return;
+                }
+
+                _currentProject = value;
+                OnPropertyChanged();
+                RaiseCanExecuteChanged();
+            }
+        }
+
+        public int AlarmCount
+        {
+            get => _alarmCount;
+            private set
+            {
+                if (_alarmCount == value)
+                {
+                    return;
+                }
+
+                _alarmCount = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LastAlarmMessage
+        {
+            get => _lastAlarmMessage;
+            private set
+            {
+                if (_lastAlarmMessage == value)
+                {
+                    return;
+                }
+
+                _lastAlarmMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public PropertyRow SelectedProperty
+        {
+            get => _selectedProperty;
+            set
+            {
+                if (_selectedProperty == value)
+                {
+                    return;
+                }
+
+                _selectedProperty = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ConnectionRow SelectedConnection
+        {
+            get => _selectedConnection;
+            set
+            {
+                if (_selectedConnection == value)
+                {
+                    return;
+                }
+
+                _selectedConnection = value;
+                OnPropertyChanged();
+                SyncPropertiesFromSelection();
+            }
+        }
+
+        public async Task InitializeAsync()
+        {
+            SetWindowTitle(BuildBaseTitle());
+
+            if (StartupArgs.Length == 0)
+            {
+                return;
+            }
+
+            var mode = StartupArgs[0]?.ToLowerInvariant();
+            if (mode != "-s" && mode != "-r")
+            {
+                return;
+            }
+
+            var path = Registry.GetValue(_projectContainer.RegUserRoot, _projectContainer.LastPathKey, "") as string;
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                AddEvent(new AlarmEvent("No recent project found in registry."));
+                return;
+            }
+
+            if (!OpenProject(path))
+            {
+                return;
+            }
+
+            if (mode == "-s")
+            {
+                SetWindowTitle(BuildBaseTitle("[Simulation Mode]"));
+            }
+            else
+            {
+                SetWindowTitle(BuildBaseTitle("[Autorun]"));
+            }
+
+            await StartAsync();
+        }
+
+        public async Task ShutdownAsync()
+        {
+            try
+            {
+                // ConfigureAwait(false): this method is invoked with
+                // .GetAwaiter().GetResult() from the UI thread during app exit, so
+                // continuations must not be posted back to the UI dispatcher (that
+                // would deadlock while the UI thread is blocked in GetResult()).
+                StopStatusMonitoring();
+
+                // Bound the web host stop (Kestrel can wait up to 30s for in-flight
+                // requests) so closing the window never freezes the UI.
+                await Task.WhenAny(
+                    FenixServer.Api.WebHostExtensions.StopWebHostAsync(),
+                    Task.Delay(TimeSpan.FromSeconds(3))).ConfigureAwait(false);
+            }
+            catch
+            {
+            }
+
+            if (CurrentProject != null)
+            {
+                var project = CurrentProject;
+                var connectionList = project.connectionList.ToList();
+
+                // deactivateCycle may briefly block while aborting in-flight
+                // socket/serial I/O; run it off the UI thread.
+                await Task.Run(() =>
+                {
+                    foreach (var connection in connectionList)
+                    {
+                        try
+                        {
+                            ((IDriverModel)connection).deactivateCycle();
+                        }
+                        catch
+                        {
+                        }
+                    }
+
+                    try
+                    {
+                        ((IDriverModel)project.ScriptEng).deactivateCycle();
+                    }
+                    catch
+                    {
+                    }
+
+                    try
+                    {
+                        ((IDriverModel)project.InternalTagsDrv).deactivateCycle();
+                    }
+                    catch
+                    {
+                    }
+                }).ConfigureAwait(false);
+            }
+
+            // UI-touching updates must still run on the UI thread; post them via
+            // ExecuteOnUiThread (fire-and-forget, so no deadlock when the UI thread
+            // is blocked by GetAwaiter().GetResult() during shutdown).
+            if (Application.Current?.Dispatcher != null && !Application.Current.Dispatcher.HasShutdownStarted)
+            {
+                ExecuteOnUiThread(() =>
+                {
+                    IsRunning = false;
+                    RefreshConnections();
+                });
+            }
+            else
+            {
+                IsRunning = false;
+            }
+        }
+
+        public void AddEvent(AlarmEvent alarmEvent)
+        {
+            if (alarmEvent == null)
+            {
+                return;
+            }
+
+            ExecuteOnUiThread(() =>
+            {
+                Events.Add(alarmEvent);
+                try
+                {
+                    FenixServer.Api.EndpointMappings.PublishEvent(alarmEvent.Mess, new DateTimeOffset(alarmEvent.Tm));
+                }
+                catch
+                {
+                }
+
+                RefreshEventSummary();
+                RaiseCanExecuteChanged();
+            });
+        }
+
+        private async Task OpenProjectInteractiveAsync()
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Fenix Projects (*.pse;*.psx)|*.pse;*.psx|All files (*.*)|*.*",
+                Multiselect = false,
+                CheckFileExists = true
+            };
+
+            if (dialog.ShowDialog() != true)
+            {
+                return;
+            }
+
+            OpenProject(dialog.FileName);
+            await Task.CompletedTask;
+        }
+
+        private bool OpenProject(string path)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
+                {
+                    AddEvent(new AlarmEvent("Project file not found."));
+                    return false;
+                }
+
+                if (_projectContainer.projectList.Count > 0)
+                {
+                    _projectContainer.closeAllProject(false);
+                }
+
+                if (!_projectContainer.openProjects(path))
+                {
+                    AddEvent(new AlarmEvent("Failed to open project."));
+                    return false;
+                }
+
+                CurrentProject = _projectContainer.projectList.FirstOrDefault();
+                CurrentProjectPath = path;
+                Registry.SetValue(_projectContainer.RegUserRoot, _projectContainer.LastPathKey, path);
+
+                if (CurrentProject != null)
+                {
+                    SetWindowTitle(BuildBaseTitle());
+                    AddEvent(new AlarmEvent($"Project loaded: {CurrentProject.projectName}"));
+                }
+
+                RefreshConnections();
+                return CurrentProject != null;
+            }
+            catch (Exception ex)
+            {
+                AddEvent(new AlarmEvent("Open project error: " + ex.Message));
+                return false;
+            }
+        }
+
+        private void OpenInBrowser()
+        {
+            var address = GetServerBrowseAddress();
+            if (string.IsNullOrWhiteSpace(address))
+            {
+                AddEvent(new AlarmEvent("Server address is not configured."));
+                return;
+            }
+
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = address,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                AddEvent(new AlarmEvent("Open browser error: " + ex.Message));
+            }
+        }
+
+        private string GetServerBrowseAddress()
+        {
+            var rawPrefix = CurrentProject?.WebServer1?.Prefixes?.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p));
+            if (string.IsNullOrWhiteSpace(rawPrefix))
+            {
+                return string.Empty;
+            }
+
+            var prefix = rawPrefix.Trim();
+            if (prefix.Contains("+"))
+            {
+                prefix = prefix.Replace("+", "localhost");
+            }
+
+            if (prefix.Contains("*"))
+            {
+                prefix = prefix.Replace("*", "localhost");
+            }
+
+            return prefix;
+        }
+
+        private async Task StartAsync()
+        {
+            if (CurrentProject == null || IsRunning)
+            {
+                return;
+            }
+
+            var project = CurrentProject;
+            var projectContainer = _projectContainer;
+
+            var missingDrivers = project.connectionList
+                .Where(c => c.Idrv == null)
+                .Select(c => $"{c.connectionName} ({c.DriverName})")
+                .ToList();
+
+            if (missingDrivers.Count > 0)
+            {
+                AddEvent(new AlarmEvent("Communication not started. Missing driver(s): " + string.Join(", ", missingDrivers)));
+                RefreshConnections();
+                return;
+            }
+
+            try
+            {
+                // Driver activation performs blocking connect I/O (TCP connect, S7
+                // connect) that can take many seconds when the target device is
+                // unreachable. Running it on the UI thread would freeze the whole
+                // window, so it is executed on the thread pool instead.
+                var connectionList = project.connectionList.ToList();
+                await Task.Run(() =>
+                {
+                    // 1) Start external connection drivers
+                    foreach (var connection in connectionList)
+                    {
+                        var driver = (IDriverModel)connection;
+                        var driverId = connection.Idrv.ObjId;
+                        var tags = projectContainer.GetAllITagsForDriver(project.objId, driverId) ?? new List<ITag>();
+                        var started = driver.activateCycle(tags);
+                        if (!started)
+                        {
+                            AddEvent(new AlarmEvent($"Driver did not start: {connection.connectionName} ({connection.DriverName})"));
+                        }
+                        else if (tags.Count == 0)
+                        {
+                            AddEvent(new AlarmEvent($"Driver started without tags: {connection.connectionName} ({connection.DriverName})"));
+                        }
+                    }
+
+                    // 2) Start Scripts driver
+                    ((IDriverModel)project.ScriptEng).activateCycle(new List<ITag>());
+
+                    // 3) Start InternalTags driver
+                    var allInternalTags = project.InTagsList.Cast<ITag>().ToList();
+                    ((IDriverModel)project.InternalTagsDrv).activateCycle(allInternalTags);
+                });
+
+                // 4) Start HTTP host (it hosts the ReconnectionService that keeps
+                //    connections alive; this app monitors status for the UI)
+                await FenixServer.Api.WebHostExtensions.InitializeAndStartWebHostAsync(project, projectContainer);
+
+                IsRunning = true;
+                StartStatusMonitoring();
+                AddEvent(new AlarmEvent("Communication started."));
+                RefreshConnections();
+            }
+            catch (Exception ex)
+            {
+                AddEvent(new AlarmEvent("Start error: " + ex.Message));
+            }
+        }
+
+        private async Task StopAsync()
+        {
+            if (CurrentProject == null || !IsRunning)
+            {
+                return;
+            }
+
+            var project = CurrentProject;
+
+            try
+            {
+                StopStatusMonitoring();
+
+                // 1) Stop HTTP host with a bounded wait so Kestrel's graceful
+                //    shutdown (up to 30s default) cannot freeze the UI.
+                await Task.WhenAny(
+                    FenixServer.Api.WebHostExtensions.StopWebHostAsync(),
+                    Task.Delay(TimeSpan.FromSeconds(3)));
+
+                // 2) Stop drivers off the UI thread (deactivateCycle may briefly
+                //    block while aborting in-flight socket/serial I/O).
+                var connectionList = project.connectionList.ToList();
+                await Task.Run(() =>
+                {
+                    foreach (var connection in connectionList)
+                    {
+                        ((IDriverModel)connection).deactivateCycle();
+                    }
+
+                    // 3) Stop Scripts + InternalTags drivers
+                    ((IDriverModel)project.ScriptEng).deactivateCycle();
+                    ((IDriverModel)project.InternalTagsDrv).deactivateCycle();
+                });
+
+                IsRunning = false;
+                AddEvent(new AlarmEvent("Communication stopped."));
+                RefreshConnections();
+            }
+            catch (Exception ex)
+            {
+                AddEvent(new AlarmEvent("Stop error: " + ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// Starts lightweight UI monitoring. Reconnection itself is performed by the
+        /// ReconnectionService hosted inside the web server that FenixServer starts;
+        /// this method only subscribes to driver errors and periodically refreshes
+        /// connection statuses so that activity is visible in the UI.
+        /// </summary>
+        private void StartStatusMonitoring()
+        {
+            SubscribeToDriverErrors();
+
+            if (_statusTimer == null)
+            {
+                _statusTimer = new DispatcherTimer
+                {
+                    Interval = TimeSpan.FromSeconds(5)
+                };
+                _statusTimer.Tick += (_, _) =>
+                {
+                    SubscribeToDriverErrors();
+                    RefreshConnectionStatuses();
+                };
+            }
+
+            _statusTimer.Start();
+        }
+
+        private void StopStatusMonitoring()
+        {
+            if (_statusTimer != null)
+            {
+                _statusTimer.Stop();
+            }
+
+            UnsubscribeFromDriverErrors();
+        }
+
+        private void SubscribeToDriverErrors()
+        {
+            if (CurrentProject == null)
+            {
+                return;
+            }
+
+            // Re-subscribe every pass so drivers created or replaced after startup
+            // (e.g. after a DriverName change) are also monitored.
+            foreach (var connection in CurrentProject.connectionList)
+            {
+                var driver = connection.Idrv;
+                if (driver == null)
+                {
+                    continue;
+                }
+
+                driver.error -= OnDriverError;
+                driver.error += OnDriverError;
+            }
+        }
+
+        private void UnsubscribeFromDriverErrors()
+        {
+            if (CurrentProject == null)
+            {
+                return;
+            }
+
+            foreach (var connection in CurrentProject.connectionList)
+            {
+                var driver = connection.Idrv;
+                if (driver != null)
+                {
+                    driver.error -= OnDriverError;
+                }
+            }
+        }
+
+        private void OnDriverError(object sender, EventArgs e)
+        {
+            if (sender is not IDriverModel drv || CurrentProject == null)
+            {
+                return;
+            }
+
+            var connection = CurrentProject.connectionList
+                .FirstOrDefault(c => c.Idrv?.ObjId == drv.ObjId);
+            if (connection == null || connection.IsBlocked)
+            {
+                return;
+            }
+
+            AddEvent(new AlarmEvent($"Connection error reported: {connection.connectionName} ({connection.DriverName})"));
+            ExecuteOnUiThread(RefreshConnectionStatuses);
+        }
+
+        /// <summary>
+        /// Refreshes the Status of existing connection rows without rebuilding the
+        /// collection (keeps the current selection), reflecting reconnection activity
+        /// performed by the hosted ReconnectionService.
+        /// </summary>
+        private void RefreshConnectionStatuses()
+        {
+            if (CurrentProject == null)
+            {
+                return;
+            }
+
+            foreach (var row in Connections)
+            {
+                string newStatus;
+
+                if (string.Equals(row.Kind, "Server", StringComparison.OrdinalIgnoreCase))
+                {
+                    newStatus = IsRunning ? "Running" : "Stopped";
+                }
+                else if (string.Equals(row.Name, "Scripts", StringComparison.OrdinalIgnoreCase))
+                {
+                    newStatus = ((IDriverModel)CurrentProject.ScriptEng).isAlive ? "Running" : "Stopped";
+                }
+                else if (string.Equals(row.Name, "InternalTags", StringComparison.OrdinalIgnoreCase))
+                {
+                    newStatus = ((IDriverModel)CurrentProject.InternalTagsDrv).isAlive ? "Running" : "Stopped";
+                }
+                else
+                {
+                    var connection = CurrentProject.connectionList.FirstOrDefault(c => c.objId == row.SourceId);
+                    newStatus = connection?.Idrv == null
+                        ? "Driver Missing"
+                        : (connection.Idrv.isAlive ? "Running" : "Stopped");
+                }
+
+                if (row.Status != newStatus)
+                {
+                    row.Status = newStatus;
+                }
+            }
+        }
+
+        private void RefreshConnections()
+        {
+            Connections.Clear();
+
+            if (CurrentProject == null)
+            {
+                Properties.Clear();
+                SelectedConnection = null;
+                return;
+            }
+
+            Connections.Add(new ConnectionRow
+            {
+                SourceId = CurrentProject.WebServer1.ObjId,
+                Kind = "Server",
+                Name = "HttpServer",
+                Protocol = "HTTP",
+                Status = IsRunning ? "Running" : "Stopped",
+                Sent = 0,
+                Received = 0
+            });
+
+            Connections.Add(new ConnectionRow
+            {
+                SourceId = _projectContainer.ScriptGuid,
+                Kind = "Driver",
+                Name = "Scripts",
+                Protocol = "Scripts",
+                Status = ((IDriverModel)CurrentProject.ScriptEng).isAlive ? "Running" : "Stopped",
+                Sent = 0,
+                Received = 0
+            });
+
+            Connections.Add(new ConnectionRow
+            {
+                SourceId = _projectContainer.IntTagsGuid,
+                Kind = "Driver",
+                Name = "InternalTags",
+                Protocol = "InternalTags",
+                Status = ((IDriverModel)CurrentProject.InternalTagsDrv).isAlive ? "Running" : "Stopped",
+                Sent = 0,
+                Received = 0
+            });
+
+            foreach (var connection in CurrentProject.connectionList)
+            {
+                var isAlive = connection.Idrv?.isAlive ?? false;
+                var status = connection.Idrv == null
+                    ? "Driver Missing"
+                    : (isAlive ? "Running" : "Stopped");
+
+                Connections.Add(new ConnectionRow
+                {
+                    SourceId = connection.objId,
+                    Kind = "Connection",
+                    Name = connection.connectionName,
+                    Protocol = connection.DriverName,
+                    Status = status,
+                    Sent = 0,
+                    Received = 0
+                });
+            }
+
+            SelectedConnection = Connections.FirstOrDefault();
+        }
+
+        private void SyncPropertiesFromSelection()
+        {
+            Properties.Clear();
+
+            if (SelectedConnection == null)
+            {
+                return;
+            }
+
+            Properties.Add(new PropertyRow { Name = "Kind", Value = SelectedConnection.Kind });
+            Properties.Add(new PropertyRow { Name = "Name", Value = SelectedConnection.Name });
+            Properties.Add(new PropertyRow { Name = "Protocol", Value = SelectedConnection.Protocol });
+            Properties.Add(new PropertyRow { Name = "Status", Value = SelectedConnection.Status });
+
+            AddAddressProperties();
+        }
+
+        private void AddAddressProperties()
+        {
+            if (CurrentProject == null || SelectedConnection == null)
+            {
+                return;
+            }
+
+            if (string.Equals(SelectedConnection.Kind, "Server", StringComparison.OrdinalIgnoreCase))
+            {
+                var webServer = CurrentProject.WebServer1;
+                var prefix = webServer?.Prefixes?.FirstOrDefault(p => !string.IsNullOrWhiteSpace(p));
+                if (string.IsNullOrWhiteSpace(prefix))
+                {
+                    return;
+                }
+
+                Properties.Add(new PropertyRow { Name = "Address", Value = prefix });
+                Properties.Add(new PropertyRow { Name = "Authentication", Value = webServer.Auth.ToString() });
+                Properties.Add(new PropertyRow { Name = "Users", Value = (webServer.Users?.Count ?? 0).ToString() });
+
+                if (Uri.TryCreate(prefix, UriKind.Absolute, out var uri))
+                {
+                    Properties.Add(new PropertyRow { Name = "IP Address", Value = uri.Host });
+                    Properties.Add(new PropertyRow { Name = "Port", Value = uri.Port.ToString() });
+                }
+
+                return;
+            }
+
+            var connection = CurrentProject.connectionList?.FirstOrDefault(c => c.objId == SelectedConnection.SourceId);
+            if (connection == null)
+            {
+                return;
+            }
+
+            switch (connection.Parameters)
+            {
+                case TcpDriverParam tcp:
+                    Properties.Add(new PropertyRow { Name = "IP Address", Value = tcp.Ip });
+                    Properties.Add(new PropertyRow { Name = "Port", Value = tcp.Port.ToString() });
+                    break;
+
+                case S7DriverParam s7:
+                    Properties.Add(new PropertyRow { Name = "IP Address", Value = s7.Ip });
+                    Properties.Add(new PropertyRow { Name = "Port", Value = s7.Port.ToString() });
+                    break;
+
+                case IoDriverParam io:
+                    Properties.Add(new PropertyRow { Name = "Port", Value = io.PortName });
+                    break;
+            }
+        }
+
+        private void OnApplicationError(object sender, EventArgs e)
+        {
+            if (e is ProjectEventArgs args)
+            {
+                if (args.element is Exception ex)
+                {
+                    AddEvent(new AlarmEvent(ex.Message));
+                }
+                else if (args.element != null)
+                {
+                    AddEvent(new AlarmEvent(args.element.ToString()));
+                }
+            }
+        }
+
+        private string BuildBaseTitle(string suffix = null)
+        {
+            var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "";
+            if (string.IsNullOrWhiteSpace(suffix))
+            {
+                return $"Fenix Server {version}".Trim();
+            }
+
+            return $"Fenix Server {version} {suffix}".Trim();
+        }
+
+        public void SetWindowTitle(string title)
+        {
+            WindowTitle = string.IsNullOrWhiteSpace(title) ? "Fenix Server" : title;
+        }
+
+        public void UpdateAlarmInfo(int count, string lastMessage)
+        {
+            AlarmCount = count;
+            LastAlarmMessage = string.IsNullOrWhiteSpace(lastMessage) ? "No alarms" : lastMessage;
+        }
+
+        private void ClearEvents()
+        {
+            ExecuteOnUiThread(() =>
+            {
+                Events.Clear();
+                RefreshEventSummary();
+                RaiseCanExecuteChanged();
+            });
+        }
+
+        private void ExecuteOnUiThread(Action action)
+        {
+            if (action == null)
+            {
+                return;
+            }
+
+            var dispatcher = Application.Current?.Dispatcher;
+            if (dispatcher == null || dispatcher.CheckAccess())
+            {
+                action();
+                return;
+            }
+
+            dispatcher.BeginInvoke(action);
+        }
+
+        private void RefreshEventSummary()
+        {
+            AlarmCount = Events.Count;
+            LastAlarmMessage = Events.Count == 0 ? "No alarms" : Events[^1].Mess;
+        }
+
+        private void RaiseCanExecuteChanged()
+        {
+            if (ClearEventsCommand is RelayCommand clearRelay)
+            {
+                clearRelay.RaiseCanExecuteChanged();
+            }
+
+            if (OpenInBrowserCommand is RelayCommand browserRelay)
+            {
+                browserRelay.RaiseCanExecuteChanged();
+            }
+
+            if (StartCommand is RelayCommand startRelay)
+            {
+                startRelay.RaiseCanExecuteChanged();
+            }
+
+            if (StopCommand is RelayCommand stopRelay)
+            {
+                stopRelay.RaiseCanExecuteChanged();
+            }
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+}

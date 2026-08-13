@@ -31,9 +31,11 @@ namespace nmDriver
 
         private S7DriverParam DriverParam_;
         private Boolean isLive = false;
+
         // Each driver instance must own its own client/lock - a shared static client
         // makes reconnecting one connection break every other S7 connection.
         private readonly S7Client dc = new S7Client();
+
         private readonly object commLock = new object();
 
         private List<Tag> tagList = new List<Tag>();
